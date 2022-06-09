@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FuaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pacientesController;
 
@@ -15,13 +16,21 @@ use App\Http\Controllers\pacientesController;
 */
 
 Route::get('/', function () {
-    return view('main');
+    return view('/mainNefrosur.principal');
 });
-Route::get('/main', function () {
+/*Route::get('/main', function () {
     return view('main');
 });
 
+Route::get('/',function(){
+    return view('principal');
+});*/
+
 Route::resource('pacientes',pacientesController::class);
+
+//Route::get('/pacientes.pacientesForTurno','pacientesController@pacientesPorTurno');
+
+Route::resource('recepcion',FuaController::class);
 
 Route::get('/recepcion', function () {
     return view('recepcion');

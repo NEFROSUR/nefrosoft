@@ -21,6 +21,7 @@ class pacientesController extends Controller
     }
 
     public function create(){
+        
         return view ('pacientes.crearPacientes');
     }
     public function store(Request $request){
@@ -29,8 +30,33 @@ class pacientesController extends Controller
         return view ('pacientes.mostrarPacientes');
         //return response()->json($datosPaciente);
     } 
-    public function show(){
-        $datos['pacientes']=paciente::paginate(5);
+    public function show(Request $request){
+
+        //captura de datos
+        $nombre = $request->get('nombre');
+        $dni = $request->get('dni');
+        $turno = $request->get('turno');
+        $frecuencia = $request->get('frecuencia');
+        
+        //$datos['pacientes']=paciente::where('primerNombre','like','%nombre%')->paginate(5);
+        if($nombre==''&&$dni==''&&$turno==''&&$frecuencia==''){
+            $datos['pacientes']=paciente::orderBy('turno','asc')->paginate(5);
+        }else{
+            if($dni==''&&$turno==''&&$frecuencia==''){
+                $datos['pacientes']=paciente::where('primerNombre','=',$nombre)->paginate(5);
+            }
+            if($nombre==''&&$turno==''&&$frecuencia==''){
+                $datos['pacientes']=paciente::where('dni','=',$dni)->paginate(5);
+            }
+            if($nombre==''&&$dni==''&&$frecuencia==''){
+                $datos['pacientes']=paciente::where('turno','=',$turno)->paginate(5);
+            }
+            /*if($nombre==''&&$dni==''&&$turno==''&&$frecuencia==''){
+                $datos['pacientes']=paciente::where('turno','like',$turno)->paginate(5);
+            }*/
+            //$datos['pacientes']=paciente::where('turno','like',$turno)->paginate(5);
+        }
+        //$datos['pacientes']=paciente::orderBy('turno','asc')->paginate(5);
         return view ('pacientes.mostrarPacientes',$datos);
         //return view ('pacientes.mostrarPacientes');
     }
@@ -53,7 +79,7 @@ class pacientesController extends Controller
         return view('pacientes.editarPacientes', compact('paciente'));
 
     }
-
+    
         /**$request-> validate([
             'dni'=> 'required|min:8',
             'primerNombre'=>'required|min:1',
