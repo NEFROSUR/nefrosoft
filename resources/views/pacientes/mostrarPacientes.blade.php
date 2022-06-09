@@ -1,6 +1,5 @@
 @extends('main')
 @section('content')
-
 <div class="navbar navbar-light float right">
     <h4 class="bg-warning p-2 text-dark bg-opacity-75">BUSQUEDA DE PACIENTE</h4>
     <form class="d-flex" role="search">
@@ -12,7 +11,7 @@
     </form>
     
   </div>
-    <table class="table table-light">
+    <table class="table table-light ">
         <thead class="thead-light">
             <tr>
                 <th>N°</th>
