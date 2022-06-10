@@ -3,6 +3,7 @@
 use App\Http\Controllers\FuaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pacientesController;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,7 @@ use App\Http\Controllers\pacientesController;
 Route::get('/', function () {
     return view('/mainNefrosur.principal');
 });
+//Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
 /*Route::get('/main', function () {
     return view('main');
 });
@@ -25,6 +27,7 @@ Route::get('/', function () {
 Route::get('/',function(){
     return view('principal');
 });*/
+Route::get('/recepcion/fua',[App\Http\Controllers\FuaController::class,'pdf'] )->name('recepcion.fua');
 
 Route::resource('pacientes',pacientesController::class);
 

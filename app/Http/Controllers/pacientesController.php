@@ -27,8 +27,8 @@ class pacientesController extends Controller
     public function store(Request $request){
         $datosPaciente = request()->except('_token');
         paciente::insert($datosPaciente);
-        return view ('pacientes.mostrarPacientes');
-        //return response()->json($datosPaciente);
+
+        return view ('main');
     } 
     public function show(Request $request){
 

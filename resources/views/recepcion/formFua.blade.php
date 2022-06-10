@@ -1,4 +1,3 @@
-<head>
     <style type="text/css">
       html { font-family:Calibri, Arial, Helvetica, sans-serif; font-size:11pt; background-color:white }
       a.comment-indicator:hover + div.comment { background:#ffd; position:absolute; display:block; border:1px solid black; padding:0.5em }
@@ -260,7 +259,6 @@
       table.sheet0 tr.row37 { height:5.25pt }
       table.sheet0 tr.row43 { height:24pt }
     </style>
-</head>
 <body>
     <style>
         @page { margin-left: 0.7in; margin-right: 0.7in; margin-top: 0.75in; margin-bottom: 0.75in; }
