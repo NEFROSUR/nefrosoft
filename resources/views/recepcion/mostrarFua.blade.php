@@ -8,6 +8,7 @@
                 <div class="col">
                     <label for="inputState" class="form-label">Turno</label>
                     <select id="inputState" name="turno" class="form-select p-1 mt-0.5">
+                    <option value=''>Todos</option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -19,8 +20,8 @@
                 </div>
             </div>
             <select multiple class="form-control" name="pacientesEscogidos[]" id="pacientesEscogidos">
-            @foreach ($pacientes as $paciente)
-                <option>{{ $paciente->primerNombre}}</option>
+            @foreach ($lista_pacientes as $item)
+                <option value="{{ $item->id }}">{{ $item->primerNombre}} {{ $item->apellidoPaterno}}</option>
             @endforeach
             </select>
         <div class="form-group">

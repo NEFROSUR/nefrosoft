@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\paciente;
 use Illuminate\Support\Facades\App;
 use PDF;
+
+use function PHPUnit\Framework\isEmpty;
+
 //use Dompdf\Dompdf;
 //use Barryvdh\DomPdf\Facade as PDF;
 
@@ -18,8 +21,10 @@ class FuaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(){
+        /*$pacientesAll = paciente::all(); 
+        $data = array("lista_pacientes" =>$pacientesAll );
+        return view('recepcion/show',$data);*/
         return view('recepcion');
     }
 
@@ -82,16 +87,36 @@ class FuaController extends Controller
     public function show(Request $request){
         $turno = $request->get('turno');
         $fua = new Fua();
+        $correlativoI = $request->get('correlativoI');
+        $correlativoF = $request->get('correlativoF');
+        $pacientesAll = paciente::all();
 
+        if($turno!=''&&$correlativoI==''&&$correlativoF==''){
+            $data['lista_pacientes'] = Paciente::where('turno','=',$turno)->paginate(5);
+            //$pacientesAll=paciente::where('turno','=',$turno);
+            //$data = array("lista_pacientes" =>$dato );
 
-        if($turno==''){
-            $datosPacientes['pacientes']=paciente::orderBy('turno','asc');
+            //$pacientesAll = paciente::all();
+            //$data = array("lista_pacientes" =>$pacientesAll);
+             
         }else{
-                $datosPacientes['pacientes']=paciente::where('turno','=',$turno);
+            if($turno==''){
+
+                //$pacientesAll = paciente::all();
+                $data = array("lista_pacientes" =>$pacientesAll);
+
+                //$pacientesAll=paciente::where('turno','=',$turno);
+                //$data = array("lista_pacientes" =>$pacientesAll );
+                //return view('recepcion.mostrarFua',$dataF);
+            }
+            //return view('recepcion.mostrarFua',$pacientesAll);
+            
         }
+        //$pacientesAll = paciente::all(); 
+        //$data = array("lista_pacientes" =>$pacientesAll );
         //$datosPacientes['pacientes']=paciente::orderBy('turno','asc');
         //$paciente = paciente::pluck('id','primerNombre');
-        return view('recepcion.mostrarFua',$datosPacientes);
+        return view('recepcion.mostrarFua',$data);
     }
 
     /**
