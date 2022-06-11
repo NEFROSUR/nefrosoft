@@ -16,7 +16,7 @@
                     </select>
                 </div>
                 <div class="col">
-                    <button class="btn btn-outline-primary" type="submit">Filtrar</button>
+                    <button class="btn btn-outline-primary" type="submit" id="filtro">Filtrar</button>
                 </div>
             </div>
             <select multiple class="form-control" name="pacientesEscogidos[]" id="pacientesEscogidos">
@@ -40,7 +40,7 @@
                 </div>
             </div>
         <div>
-            <button type="submit" class="btn btn-outline-primary">Guardar</button>
+            <button type="submit" class="btn btn-outline-primary" id="carga">Guardar</button>
         </div>
     </form>
 </div>

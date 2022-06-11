@@ -6,7 +6,10 @@ use App\Models\fua;
 use Illuminate\Http\Request;
 use App\Models\paciente;
 use Illuminate\Support\Facades\App;
+use Nette\Utils\ArrayList;
 use PDF;
+use PhpParser\Node\Expr\Cast\Array_;
+use Sabberworm\CSS\Value\Size;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -44,16 +47,8 @@ class FuaController extends Controller
          *  $table->timestamps();
          *   $table->foreign('paciente_id')->references('id')->on('pacientes');
          */
-        if ($request->input('pacientesEscogidos')!=null)
-        {
-            $pacientesEscogidos = implode(',', $request->input('pacientesEscogidos'));
-            $datosPacientesF['pacientes']=paciente::where('primerNombre','=',$pacientesEscogidos);
-            
-        } 
-        //$fua = new Fua();
-        //$datosPacientes['pacientes']=paciente::orderBy('turno','asc');
-        //$paciente = paciente::pluck('id','primerNombre');
-        return view('recepcion.crearFua',compact('datosPacientesF'));
+
+        return view('recepcion.crearFua');
     }
     public function pdf(){
         $fuas = Fua::paginate();
@@ -85,37 +80,32 @@ class FuaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request){
+        
+        $pacientesEscogidos = $request->get('pacientesEscogidos');
+        
         $turno = $request->get('turno');
         $fua = new Fua();
         $correlativoI = $request->get('correlativoI');
         $correlativoF = $request->get('correlativoF');
         $pacientesAll = paciente::all();
+        
 
         if($turno!=''&&$correlativoI==''&&$correlativoF==''){
             $data['lista_pacientes'] = Paciente::where('turno','=',$turno)->paginate(5);
-            //$pacientesAll=paciente::where('turno','=',$turno);
-            //$data = array("lista_pacientes" =>$dato );
-
-            //$pacientesAll = paciente::all();
-            //$data = array("lista_pacientes" =>$pacientesAll);
-             
         }else{
             if($turno==''){
-
-                //$pacientesAll = paciente::all();
                 $data = array("lista_pacientes" =>$pacientesAll);
-
-                //$pacientesAll=paciente::where('turno','=',$turno);
-                //$data = array("lista_pacientes" =>$pacientesAll );
-                //return view('recepcion.mostrarFua',$dataF);
             }
-            //return view('recepcion.mostrarFua',$pacientesAll);
-            
         }
-        //$pacientesAll = paciente::all(); 
-        //$data = array("lista_pacientes" =>$pacientesAll );
-        //$datosPacientes['pacientes']=paciente::orderBy('turno','asc');
-        //$paciente = paciente::pluck('id','primerNombre');
+
+        if($pacientesEscogidos!=''){
+            
+            //dd($pacientesEscogidos);
+            $fua = new Fua();
+
+            return view('recepcion.crearFua',compact('pacientesEscogidos'));
+        }
+
         return view('recepcion.mostrarFua',$data);
     }
 
