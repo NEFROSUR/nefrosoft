@@ -40,18 +40,25 @@ class FuaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request){
+        $correlativo = $request->get('correlativo');
+        $paciente_id = $request->get('paciente_id');
+        $fuas = fua::where('correlativo', '=' ,$correlativo);
+        $pacientes = paciente::where('id','=',$paciente_id);
 
-        $fuas = request();
-        fua::insert($fuas);
-        return view('recepcion.crearFua');
+        return view ('recepcion.crearFua', $fuas ,$pacientes);
+        //$pdf = \PDF::loadView('recepcion.crearFua', 'fuas');
+        //return $pdf->download('fua.pdf');
+
+        //return view('recepcion.crearFua');
     }
-    public function pdf(){
-        $fuas = Fua::paginate();
-        //$pdf = PDF::loadView('recepcion.fua',['fuas'=>$fuas]);
-        //$pdf->loadHTML('<h1>Test</h1>');
-        //return $pdf->stream();
-        return view('recepcion.formFua',compact('fuas'));
-    } 
+    public function createPDF(){
+        //Recuperar todos los productos de la db
+        /*$fuas = $request->get();
+        view()->share('recepcion.crearFua', $fuas);
+        $pdf = PDF::loadView('recepcion.crearFua', $fuas);
+        return $pdf->download('archivo-pdf.pdf');*/
+        //return view('recepcion.crearFua');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -85,14 +92,19 @@ class FuaController extends Controller
         $pacientesAll = paciente::all();
         
 
-        if($turno!=''&&$correlativoI==''){
-            $data['lista_pacientes'] = Paciente::where('turno','=',$turno)->paginate(5);
+        if($turno==''&&$frecuencia==''){
+            $data = array("lista_pacientes" =>$pacientesAll);
         }else{
-            if($turno==''){
-                $data = array("lista_pacientes" =>$pacientesAll);
+            if($turno==''&&$frecuencia!=''){
+                $data['lista_pacientes'] = Paciente::where('frecuencia','=',$frecuencia)->paginate(5);
+            }
+            if($turno!=''&&$frecuencia==''){
+                $data['lista_pacientes'] = Paciente::where('turno','=',$turno)->paginate(5);
+            }
+            if($turno!=''&&$frecuencia!=''){
+                $data['lista_pacientes'] = Paciente::where('turno','=',$turno)->where('frecuencia','=',$frecuencia)->paginate(5);
             }
         }
-
         if($pacientesEscogidos!=''){
             if($correlativoI!=''){
                 $i = 0;
@@ -113,12 +125,21 @@ class FuaController extends Controller
                 $fua ->  tipoDeConsulta = $tipoDeConsulta;
                 $fua ->  numSesion = $numSesion;
                 $fua ->  paciente_id = $paciente_id;
-                $fua->save();
-                $correlativoI++;
-                $i++;
+                //$fua->save();
+                //$correlativoI++;
+                //$i++;
+                //return view('recepcion/crearFua/pdf',compact('fua'));
+                /*$pdf = \PDF::loadView('recepcion.crearFua', compact('fua'));
+                return $pdf->download('fua.pdf');*/
                 //$pdf = PDF::loadView('recepcion.fua',['fuas'=>$fua]);
                 //$fuas = array("lista_fuas" =>$fua);
+                //$fuas = $fua->toArray();
                 
+                //$fuas['fuas'] = Fua::where('correlativo','=',$correlativo); 
+                return view('recepcion.crearFua');
+                
+                $correlativoI++;
+                $i++;
                 }
             }else{
                 return view('recepcion.mostrarFua',$data);
@@ -126,7 +147,7 @@ class FuaController extends Controller
                         
 
             //return dd($fua);
-            return view('recepcion.crearFua');
+            //return view('recepcion.crearFua');
         }
 
         return view('recepcion.mostrarFua',$data);

@@ -80,7 +80,6 @@
 </div style="float: right">
     <div>
         <div>
-            <!--@include('recepcion.formFua')-->
         </div>
     </div>    
 </div> 

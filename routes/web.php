@@ -27,8 +27,7 @@ Route::get('/', function () {
 Route::get('/',function(){
     return view('principal');
 });*/
-Route::get('/recepcion/fua',[App\Http\Controllers\FuaController::class,'pdf'] )->name('recepcion.fua');
-
+Route::get('/recepcion/pdf', [App\Http\Controllers\FuaController::class, 'createPDF'])->name('fua.pdf');
 Route::resource('pacientes',pacientesController::class);
 
 //Route::get('/pacientes.pacientesForTurno','pacientesController@pacientesPorTurno');
@@ -38,3 +37,8 @@ Route::resource('recepcion',FuaController::class);
 Route::get('/recepcion', function () {
     return view('recepcion');
 });
+
+/*Route::get('/recepcion/crearFua/pdf',function(){
+    return view('recepcion.crearFua');
+});*/
+
