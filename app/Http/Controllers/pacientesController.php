@@ -51,14 +51,11 @@ class pacientesController extends Controller
             if($nombre==''&&$dni==''&&$frecuencia==''){
                 $datos['pacientes']=paciente::where('turno','=',$turno)->paginate(5);
             }
-            /*if($nombre==''&&$dni==''&&$turno==''&&$frecuencia==''){
-                $datos['pacientes']=paciente::where('turno','like',$turno)->paginate(5);
-            }*/
-            //$datos['pacientes']=paciente::where('turno','like',$turno)->paginate(5);
+            if($nombre==''&&$dni==''&&$turno==''){
+                $datos['pacientes']=paciente::where('frecuencia','=',$frecuencia)->paginate(5);
+            };
         }
-        //$datos['pacientes']=paciente::orderBy('turno','asc')->paginate(5);
         return view ('pacientes.mostrarPacientes',$datos);
-        //return view ('pacientes.mostrarPacientes');
     }
     public function destroy($id){
         paciente::destroy($id);
@@ -80,26 +77,4 @@ class pacientesController extends Controller
 
     }
     
-        /**$request-> validate([
-            'dni'=> 'required|min:8',
-            'primerNombre'=>'required|min:1',
-            'otroNombre'=>'required|min:1',
-            'apellidoPaterno'=>'required|min:1',
-            'apellidoMaterno'=>'required|min:1',
-            'direccion'=>'required|min:5',
-            'telefono'=>'required|min:9',
-            'turno'=>'required|min:1',
-
-        ]); 
-        $paciente = new paciente;
-        $paciente-> dni = $request -> dni;
-        $paciente-> primerNombre= $request -> primerNombre;
-        $paciente-> otroNombre= $request -> otroNombre;
-        $paciente->apellidoPaterno= $request -> apellidoPaterno;
-        $paciente->apellidoMaterno= $request -> apellidoMaterno;
-        $paciente->direccion= $request -> direccion;
-        $paciente->telefono= $request -> telefono;
-        $paciente->turno= $request -> turno;
-        $paciente->save();
-        return redirect()->route('crearPaciente')->with('success','Paciente guardado correctamente');*/
 }

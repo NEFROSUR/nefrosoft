@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\fua;
 use Illuminate\Http\Request;
 use App\Models\paciente;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
+
+
 use Nette\Utils\ArrayList;
 use PDF;
 use PhpParser\Node\Expr\Cast\Array_;
 use Sabberworm\CSS\Value\Size;
 
 use function PHPUnit\Framework\isEmpty;
-
+use Carbon\Carbon;
 //use Dompdf\Dompdf;
 //use Barryvdh\DomPdf\Facade as PDF;
 
@@ -37,17 +40,9 @@ class FuaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request){
-        /**
-         *  $table->id('id')->autoincrement();
-         *  $table->integer('correlativo');
-         *  $table->date('fecha');
-         *  $table->char('tipoDeConsulta');
-         *  $table->integer('numSesion');
-         *  $table->unsignedBigInteger('paciente_id');
-         *  $table->timestamps();
-         *   $table->foreign('paciente_id')->references('id')->on('pacientes');
-         */
 
+        $fuas = request();
+        fua::insert($fuas);
         return view('recepcion.crearFua');
     }
     public function pdf(){
@@ -84,13 +79,13 @@ class FuaController extends Controller
         $pacientesEscogidos = $request->get('pacientesEscogidos');
         
         $turno = $request->get('turno');
+        $frecuencia = $request->get('frecuencia');
         $fua = new Fua();
         $correlativoI = $request->get('correlativoI');
-        $correlativoF = $request->get('correlativoF');
         $pacientesAll = paciente::all();
         
 
-        if($turno!=''&&$correlativoI==''&&$correlativoF==''){
+        if($turno!=''&&$correlativoI==''){
             $data['lista_pacientes'] = Paciente::where('turno','=',$turno)->paginate(5);
         }else{
             if($turno==''){
@@ -99,11 +94,39 @@ class FuaController extends Controller
         }
 
         if($pacientesEscogidos!=''){
-            
-            //dd($pacientesEscogidos);
-            $fua = new Fua();
+            if($correlativoI!=''){
+                $i = 0;
+            foreach($pacientesEscogidos as $item){
+                $fua = new Fua();
+                $correlativo = $correlativoI;
+                $fecha = Carbon::now();
+                $fecha = $fecha->format('d-m-Y');
+                $tipoDeConsulta = $request->get('tipoDeConsulta');
+                //$tipoDeConsulta = 'Atencion de Procedimiento Ambulatorios';
+                //$numSesion = fua::where('turno','=',$turno);
+                $numSesion = '1';
+                $paciente_id = $item;
 
-            return view('recepcion.crearFua',compact('pacientesEscogidos'));
+
+                $fua ->  correlativo = $correlativo ;
+                $fua ->  fecha = $fecha;
+                $fua ->  tipoDeConsulta = $tipoDeConsulta;
+                $fua ->  numSesion = $numSesion;
+                $fua ->  paciente_id = $paciente_id;
+                $fua->save();
+                $correlativoI++;
+                $i++;
+                //$pdf = PDF::loadView('recepcion.fua',['fuas'=>$fua]);
+                //$fuas = array("lista_fuas" =>$fua);
+                
+                }
+            }else{
+                return view('recepcion.mostrarFua',$data);
+            }
+                        
+
+            //return dd($fua);
+            return view('recepcion.crearFua');
         }
 
         return view('recepcion.mostrarFua',$data);

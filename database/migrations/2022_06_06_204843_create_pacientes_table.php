@@ -27,6 +27,7 @@ return new class extends Migration
             //$table->string('numHistoria');//numero de historia segun IPRESS
             //$table->enum('regimen',['subsidiado','semicontributivo']);// tipo SIS
             $table->integer('turno'); //turno al que pertenece actualmente
+            $table->string('frecuencia'); //turno al que pertenece actualmente
             $table->timestamps();
         });
     }

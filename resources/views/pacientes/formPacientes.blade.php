@@ -45,14 +45,14 @@
         <option>4</option>
     </select>
     </div>
-    <!--
+    
     <div class="col">
         <label for="inputState" class="form-label">Frecuencia</label>
         <select id="inputState" name="frecuencia" class="form-select p-1 mt-0.5">
         <option value="lmv">Lunes - Miecoles - Viernes</option>
         <option value="mjs">Martes - Jueves - Sabado</option>
     </select>
-    </div>-->
+    </div>
     </div>
 <div class="p-1 mt-4">
 <button type="submit" class="btn btn-primary ">Guardar</button>
