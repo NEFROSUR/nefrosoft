@@ -1,4 +1,3 @@
-@foreach ($fua as $item)
 <style type="text/css">
       html { font-family:Calibri, Arial, Helvetica, sans-serif; font-size:11pt; background-color:white }
       a.comment-indicator:hover + div.comment { background:#ffd; position:absolute; display:block; border:1px solid black; padding:0.5em }
@@ -336,7 +335,7 @@
                 <td class="column18 style15 s style15" colspan="2">22</td>
                 <td class="column20 style16 s">- </td>
                 <!-- CORRELATIVO -->
-                <td class="column21 style17 n style17" colspan="2">{{ $item->correlativo }}</td>
+                <td class="column21 style17 n style17" colspan="2">{{ $correlativo }}</td>
                 <!-- CORRELATIVO -->
                 <td class="column23 style14 null style14" colspan="10"></td>
             </tr>
@@ -671,4 +670,4 @@
             </tbody>
     </table>
 </body>
-@endforeach
+
