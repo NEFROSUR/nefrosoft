@@ -27,7 +27,8 @@ class FuaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index()
+    {
         /*$pacientesAll = paciente::all(); 
         $data = array("lista_pacientes" =>$pacientesAll );
         return view('recepcion/show',$data);*/
@@ -39,19 +40,20 @@ class FuaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         $correlativo = $request->get('correlativo');
         $paciente_id = $request->get('paciente_id');
-        $fuas = fua::where('correlativo', '=' ,$correlativo);
-        $pacientes = paciente::where('id','=',$paciente_id);
 
-        return view ('recepcion.crearFua', $fuas ,$pacientes);
+        return dd($request);
+        //return view ('recepcion.crearFua', $fuas ,$pacientes);
         //$pdf = \PDF::loadView('recepcion.crearFua', 'fuas');
         //return $pdf->download('fua.pdf');
 
         //return view('recepcion.crearFua');
     }
-    public function createPDF(){
+    public function createPDF()
+    {
         //Recuperar todos los productos de la db
         /*$fuas = $request->get();
         view()->share('recepcion.crearFua', $fuas);
@@ -69,10 +71,10 @@ class FuaController extends Controller
     public function store(Request $request)
     {
         $datosFua = request()->except('_token');
-        
+
         fua::insert($datosFua);
 
-        return view ('main');
+        return view('main');
     }
 
     /**
@@ -81,76 +83,96 @@ class FuaController extends Controller
      * @param  \App\Models\fua  $fua
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request){
-        
+    public function show(Request $request)
+    {
+
         $pacientesEscogidos = $request->get('pacientesEscogidos');
-        
+
         $turno = $request->get('turno');
         $frecuencia = $request->get('frecuencia');
-        $fua = new Fua();
+
         $correlativoI = $request->get('correlativoI');
         $pacientesAll = paciente::all();
-        
 
-        if($turno==''&&$frecuencia==''){
-            $data = array("lista_pacientes" =>$pacientesAll);
-        }else{
-            if($turno==''&&$frecuencia!=''){
-                $data['lista_pacientes'] = Paciente::where('frecuencia','=',$frecuencia)->paginate(5);
+
+        if ($turno == '' && $frecuencia == '') {
+            $data = array("lista_pacientes" => $pacientesAll);
+        } else {
+            if ($turno == '' && $frecuencia != '') {
+                $data['lista_pacientes'] = Paciente::where('frecuencia', '=', $frecuencia)->paginate(5);
             }
-            if($turno!=''&&$frecuencia==''){
-                $data['lista_pacientes'] = Paciente::where('turno','=',$turno)->paginate(5);
+            if ($turno != '' && $frecuencia == '') {
+                $data['lista_pacientes'] = Paciente::where('turno', '=', $turno)->paginate(5);
             }
-            if($turno!=''&&$frecuencia!=''){
-                $data['lista_pacientes'] = Paciente::where('turno','=',$turno)->where('frecuencia','=',$frecuencia)->paginate(5);
+            if ($turno != '' && $frecuencia != '') {
+                $data['lista_pacientes'] = Paciente::where('turno', '=', $turno)->where('frecuencia', '=', $frecuencia)->paginate(5);
             }
         }
-        if($pacientesEscogidos!=''){
-            if($correlativoI!=''){
+        if ($pacientesEscogidos != '') {
+            if ($correlativoI != '') {
+                //$fuas=array();
                 $i = 0;
-            foreach($pacientesEscogidos as $item){
-                $fua = new Fua();
-                $correlativo = $correlativoI;
-                $fecha = Carbon::now();
-                $fecha = $fecha->format('d-m-Y');
-                $tipoDeConsulta = $request->get('tipoDeConsulta');
-                //$tipoDeConsulta = 'Atencion de Procedimiento Ambulatorios';
-                //$numSesion = fua::where('turno','=',$turno);
-                $numSesion = '1';
-                $paciente_id = $item;
-
-
-                $fua ->  correlativo = $correlativo ;
-                $fua ->  fecha = $fecha;
-                $fua ->  tipoDeConsulta = $tipoDeConsulta;
-                $fua ->  numSesion = $numSesion;
-                $fua ->  paciente_id = $paciente_id;
-                //$fua->save();
-                //$correlativoI++;
-                //$i++;
-                //return view('recepcion/crearFua/pdf',compact('fua'));
-                /*$pdf = \PDF::loadView('recepcion.crearFua', compact('fua'));
+                foreach ($pacientesEscogidos as $item) {
+                    $fua = new Fua();
+                    $correlativo = $correlativoI;
+                    $fecha = Carbon::now();
+                    $fecha = $fecha->format('d-m-Y');
+                    $tipoDeConsulta = $request->get('tipoDeConsulta');
+                    //$tipoDeConsulta = 'Atencion de Procedimiento Ambulatorios';
+                    //$numSesion = fua::where('turno','=',$turno);
+                    $numSesion = '1';
+                    $paciente_id = $item;
+                    //ingreso de datos
+                    $fua->correlativo = $correlativo;
+                    $fua->fecha = $fecha;
+                    $fua->tipoDeConsulta = $tipoDeConsulta;
+                    $fua->numSesion = $numSesion;
+                    $fua->paciente_id = $paciente_id;
+                    //$fua->save();
+                    //$correlativoI++;
+                    //$i++;
+                    //return view('recepcion/crearFua/pdf',compact('fua'));
+                    /*$pdf = \PDF::loadView('recepcion.crearFua', compact('fua'));
                 return $pdf->download('fua.pdf');*/
-                //$pdf = PDF::loadView('recepcion.fua',['fuas'=>$fua]);
-                //$fuas = array("lista_fuas" =>$fua);
-                //$fuas = $fua->toArray();
-                
-                //$fuas['fuas'] = Fua::where('correlativo','=',$correlativo); 
-                return view('recepcion.crearFua');
-                
-                $correlativoI++;
-                $i++;
+                    //$fuas = array("lista_fuas" =>$fua);
+                    //$fuas = $fua->toArray();
+
+                    //$fuas[$i] = $fua;
+
+                    $datos['paciente']=paciente::where('id','=',$paciente_id)->paginate(5);
+                    
+                    $datos = [
+                        'correlativo' => $correlativo,
+                        'fecha' => $fecha,
+                        'nombre' => $fecha
+                    ];
+                    $pdf = PDF::loadView('recepcion.formFua', $datos);
+                    return $pdf->download('fua.pdf');
+                    $correlativoI++;
+                    $i++;
                 }
-            }else{
-                return view('recepcion.mostrarFua',$data);
+                foreach ($pacientesEscogidos as $item) {
+                    /*$correlativo = $correlativoI;
+                    $pacientes_lista['pacientes_lista'] = Paciente::where('id', '=', $item);
+                    $datosfua['datosfua'] = fua::where('correlativo', '=', $correlativo);
+                    $pdf = PDF::loadView('recepcion.formFua', compact('pacientes_lista', 'datosfua'));
+                    return $pdf->Stream();*/
+
+
+                    //return dd($fua);
+                    //return view('recepcion.crearFua',$fua);
+                    $correlativoI++;
+                }
+            } else {
+                return view('recepcion.mostrarFua', $data);
             }
-                        
+
 
             //return dd($fua);
             //return view('recepcion.crearFua');
         }
 
-        return view('recepcion.mostrarFua',$data);
+        return view('recepcion.mostrarFua', $data);
     }
 
     /**
