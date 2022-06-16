@@ -110,7 +110,7 @@ class FuaController extends Controller
         }
         if ($pacientesEscogidos != '') {
             if ($correlativoI != '') {
-                //$fuas=array();
+                $fuas=array();
                 $i = 0;
                 foreach ($pacientesEscogidos as $item) {
                     $fua = new Fua();
@@ -128,41 +128,27 @@ class FuaController extends Controller
                     $fua->tipoDeConsulta = $tipoDeConsulta;
                     $fua->numSesion = $numSesion;
                     $fua->paciente_id = $paciente_id;
-                    //$fua->save();
-                    //$correlativoI++;
-                    //$i++;
-                    //return view('recepcion/crearFua/pdf',compact('fua'));
-                    /*$pdf = \PDF::loadView('recepcion.crearFua', compact('fua'));
-                return $pdf->download('fua.pdf');*/
-                    //$fuas = array("lista_fuas" =>$fua);
-                    //$fuas = $fua->toArray();
+                    $fua->save();
 
                     //$fuas[$i] = $fua;
-
-                    $datos['paciente']=paciente::where('id','=',$paciente_id)->paginate(5);
+                    
+                    /*$datos['paciente']=paciente::where('id','=',$paciente_id)->paginate(5);
                     
                     $datos = [
                         'correlativo' => $correlativo,
                         'fecha' => $fecha,
                         'nombre' => $fecha
-                    ];
-                    $pdf = PDF::loadView('recepcion.formFua', $datos);
-                    return $pdf->download('fua.pdf');
+                    ];*/
+                    $fua->paciente;
+                    array_push($fuas,$fua);
+                    //$pdf = PDF::loadView('recepcion.formFua', ['fua'=>$fua]);
+                    //return $pdf->download('fua.pdf');
                     $correlativoI++;
                     $i++;
                 }
-                foreach ($pacientesEscogidos as $item) {
-                    /*$correlativo = $correlativoI;
-                    $pacientes_lista['pacientes_lista'] = Paciente::where('id', '=', $item);
-                    $datosfua['datosfua'] = fua::where('correlativo', '=', $correlativo);
-                    $pdf = PDF::loadView('recepcion.formFua', compact('pacientes_lista', 'datosfua'));
-                    return $pdf->Stream();*/
+                $pdf = PDF::loadView('recepcion.formFua', ['fuas'=>$fuas]);
+                return $pdf->download('fua.pdf');
 
-
-                    //return dd($fua);
-                    //return view('recepcion.crearFua',$fua);
-                    $correlativoI++;
-                }
             } else {
                 return view('recepcion.mostrarFua', $data);
             }

@@ -1,4 +1,5 @@
-<style type="text/css">
+
+  <style type="text/css">
       html { font-family:Calibri, Arial, Helvetica, sans-serif; font-size:11pt; background-color:white }
       a.comment-indicator:hover + div.comment { background:#ffd; position:absolute; display:block; border:1px solid black; padding:0.5em }
       a.comment-indicator { background:red; display:inline-block; border:1px solid black; width:0.5em; height:0.5em }
@@ -259,11 +260,15 @@
       table.sheet0 tr.row37 { height:5.25pt }
       table.sheet0 tr.row43 { height:24pt }
     </style>
+
+
+
 <body>
     <style>
-        @page { margin-left: 0.7in; margin-right: 0.7in; margin-top: 0.75in; margin-bottom: 0.75in; }
-        body { margin-left: 0.7in; margin-right: 0.7in; margin-top: 0.75in; margin-bottom: 0.75in; }
+
+
     </style>
+    @foreach ($fuas as $fua)
     <table border="2" cellpadding="0" cellspacing="0" id="sheet0" class="sheet0 gridlines">
             <col class="col0">
             <col class="col1">
@@ -335,7 +340,7 @@
                 <td class="column18 style15 s style15" colspan="2">22</td>
                 <td class="column20 style16 s">- </td>
                 <!-- CORRELATIVO -->
-                <td class="column21 style17 n style17" colspan="2">{{ $correlativo }}</td>
+                <td class="column21 style17 n style17" colspan="2">{{ $fua->correlativo }}</td>
                 <!-- CORRELATIVO -->
                 <td class="column23 style14 null style14" colspan="10"></td>
             </tr>
@@ -386,7 +391,7 @@
                 <td class="column25 style34 s style34" colspan="7">REGIMEN </td>
                 <td class="column32 style25 null"></td>
             </tr>
-            <tr class="row12">
+            <tr class="row12" >
                 <td class="column1 style36 s style36" colspan="2">DIA </td>
                 <td class="column3 style36 s style36" colspan="2">MES </td>
                 <td class="column5 style36 s style36" colspan="4">AÑO </td>
@@ -397,7 +402,7 @@
                 <td class="column16 style38 null style38" colspan="2"></td>
                 <td class="column18 style37 s style37" colspan="4" rowspan="2">N° DOCUMENTO</td>
                 <!-- Numero de DNI del paciente -->
-                <td class="column22 style26 n style26" colspan="3" rowspan="2">0</td>
+                <td class="column22 style26 n style26" colspan="3" rowspan="2">{{$fua->paciente->dni}}</td>
                 <!-- Numero de DNI del paciente -->
                 <td class="column25 style39 s style39" colspan="4">SUBSIDIADO </td>
                 <!-- MARCAR AQUI SI ES SUBSIDIADO -->
@@ -407,16 +412,16 @@
             </tr>
             <tr class="row13">
                 <!-- DIA -->
-                <td class="column1 style41 n">0</td>
-                <td class="column2 style41 n">0</td>
+                <td class="column1 style41 n">{{substr($fua->fecha,-10,1)}}</td>
+                <td class="column2 style41 n">{{substr($fua->fecha,-9,1)}}</td>
                 <!-- MES -->
-                <td class="column3 style41 n">0</td>
-                <td class="column4 style41 f">0</td>
+                <td class="column3 style41 n">{{substr($fua->fecha,-7,1)}}</td>
+                <td class="column4 style41 f">{{substr($fua->fecha,-6,1)}}</td>
                 <!-- AÑO -->
-                <td class="column5 style41 n">2</td>
-                <td class="column6 style41 n">0</td>
-                <td class="column7 style41 n">2</td>
-                <td class="column8 style41 n">2</td>
+                <td class="column5 style41 n">{{substr($fua->fecha,-4,1)}}</td>
+                <td class="column6 style41 n">{{substr($fua->fecha,-3,1)}}</td>
+                <td class="column7 style41 n">{{substr($fua->fecha,-2,1)}}</td>
+                <td class="column8 style41 n">{{substr($fua->fecha,-1,1)}}</td>
                 <td class="column16 style42 n style42" colspan="2">0</td>
                 <td class="column25 style39 s style39" colspan="4">SEMICONTRIBUTIVO </td>
                 <!-- MARCAR AQUI SI ES SEMICONTRIBUTIVO -->
@@ -669,5 +674,8 @@
             </tr>
             </tbody>
     </table>
-</body>
+    @endforeach
+</body>  
+
+
 

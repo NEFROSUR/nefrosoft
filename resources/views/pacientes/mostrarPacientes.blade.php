@@ -70,7 +70,7 @@
                 <td>{{ $paciente->turno}}</td>
                 <td>{{ $paciente->frecuencia}}</td>
                 <td>
-                <a href="{{ url('/pacientes/'.$paciente->id.'/editarPacientes') }}">
+                <a href="{{ url('/pacientes/'.$paciente->id.'/edit') }}">
                     Editar
                 </a>    
                  | 
