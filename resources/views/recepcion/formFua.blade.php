@@ -269,7 +269,7 @@
 
     </style>
     @foreach ($fuas as $fua)
-    <table border="2" cellpadding="0" cellspacing="0" id="sheet0" class="sheet0 gridlines">
+    <table border="2" cellpadding="5" cellspacing="0" id="sheet0" class="sheet0 gridlines">
             <col class="col0">
             <col class="col1">
             <col class="col2">
@@ -349,11 +349,7 @@
                 <td class="column0 style1 s style1" colspan="32">&nbsp;&nbsp;&nbsp;</td>
 
             </tr>
-            <tr>
-                <!-- IMAGEN DE FUA -->
-                <td class="column0 style1 s style1" colspan="0">&nbsp;&nbsp;&nbsp;</td>
-
-            </tr>
+           
             <tr class="row6">
                 <td class="column1 style18 null style18" colspan="12"></td>
                 <td class="column13 style19 null style19" colspan="10"></td>
