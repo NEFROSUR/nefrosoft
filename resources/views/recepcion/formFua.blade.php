@@ -344,12 +344,24 @@
                 <!-- CORRELATIVO -->
                 <td class="column23 style14 null style14" colspan="10"></td>
             </tr>
+            <tr >
+                <!-- IMAGEN DE FUA -->
+                <td class="column0 style1 s style1" colspan="32">&nbsp;&nbsp;&nbsp;</td>
+
+            </tr>
+            <tr>
+                <!-- IMAGEN DE FUA -->
+                <td class="column0 style1 s style1" colspan="0">&nbsp;&nbsp;&nbsp;</td>
+
+            </tr>
             <tr class="row6">
                 <td class="column1 style18 null style18" colspan="12"></td>
                 <td class="column13 style19 null style19" colspan="10"></td>
                 <td class="column23 style20 null style20" colspan="9"></td>
                 <td class="column32 style21 null"></td>
             </tr>
+            
+
             <tr class="row7">
                 <td class="column0 style22 null style22" rowspan="3"></td>
                 <td class="column1 style23 s style23" colspan="9">CODIGO IPRESS </td>
