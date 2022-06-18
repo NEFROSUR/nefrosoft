@@ -77,7 +77,7 @@
                     <form action="{{ url('/pacientes/'.$paciente->id) }}" method="POST">
                         @csrf
                         {{ method_field('DELETE')}}
-                        <input type="submit" onclick="return confirm('Quieres eliminar al paciente?')" value="Borrar">
+                        <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Quieres eliminar al paciente?')" value="Borrar">
 
                     </form>
                 </td>

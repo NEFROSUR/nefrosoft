@@ -4,6 +4,7 @@ use App\Http\Controllers\FuaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pacientesController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\ProfesionalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,17 +30,14 @@ Route::get('/',function(){
 });*/
 Route::get('/recepcion/pdf', [App\Http\Controllers\FuaController::class, 'createPDF'])->name('fua.pdf');
 Route::resource('pacientes',pacientesController::class);
-
+Route::resource('profesionales',ProfesionalController::class);
 //Route::get('/pacientes.pacientesForTurno','pacientesController@pacientesPorTurno');
 
 Route::resource('recepcion',FuaController::class);
 
 
-Route::get('/recepcion/lisFua', [App\Http\Controllers\FuaController::class, 'index'])->name('recepcion.lisFua');
+Route::get('/recepcion', [App\Http\Controllers\FuaController::class, 'index'])->name('recepcion.lisFua');
 
-Route::get('/recepcion', function () {
-    return view('recepcion');
-});
 
 /*Route::get('/recepcion/crearFua/pdf',function(){
     return view('recepcion.crearFua');

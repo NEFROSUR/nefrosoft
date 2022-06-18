@@ -1,5 +1,8 @@
 @extends('main')
 @section('content')
+<div class="text-center">
+<h4 class="bg-warning p-2 text-dark bg-opacity-75">LISTA DE ATENCIONES</h4>
+</div> 
 <div style="float: left; width: 50%">
     <div class="container w-75 border p-2 mt-4">
         <form>

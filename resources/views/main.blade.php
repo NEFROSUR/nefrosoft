@@ -49,10 +49,10 @@
                             Recepcion
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/recepcion">Fua Individual</a>
+                            <a class="dropdown-item" href="/recepcion">Ver Atenciones</a>
                             <a class="dropdown-item" href="/recepcion/show">Crear Formato de Atencion</a>
-                            <a class="dropdown-item" href="/">Hoja de Monitoreo</a>
-                            <a class="dropdown-item" href="/recepcion/lisFua">Mostrar Formatos de Atencion</a>
+                            <a class="dropdown-item" href="/">Crear Hoja de Monitoreo</a>
+                            <a class="dropdown-item" href="/">Crear Multisciplinario</a>
                             </div>
                         </li>        
                         <li class="nav-item">
@@ -66,6 +66,17 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled">Administracion</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" role="navigation" data-toggle="dropdown" aria-expanded="false" aria-label="Toggle navigation">
+                            Recursos Humanos
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/">Registrar Profesional</a>
+                            <a class="dropdown-item" href="/">Ver profesionales</a>
+                            <a class="dropdown-item" href="/">Horarios de Profesionales</a>
+                            <a class="dropdown-item" href="/">...</a>
+                            </div>
                         </li>
                     </ul>
                 
