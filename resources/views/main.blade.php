@@ -52,7 +52,7 @@
                             <a class="dropdown-item" href="/recepcion">Fua Individual</a>
                             <a class="dropdown-item" href="/recepcion/show">Crear Formato de Atencion</a>
                             <a class="dropdown-item" href="/">Hoja de Monitoreo</a>
-                            <a class="dropdown-item" href="/recepcion/crearFua">fuaP</a>
+                            <a class="dropdown-item" href="/recepcion/lisFua">Mostrar Formatos de Atencion</a>
                             </div>
                         </li>        
                         <li class="nav-item">

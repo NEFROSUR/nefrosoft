@@ -32,7 +32,9 @@ class FuaController extends Controller
         /*$pacientesAll = paciente::all(); 
         $data = array("lista_pacientes" =>$pacientesAll );
         return view('recepcion/show',$data);*/
-        return view('recepcion');
+        $totalFuas = fua::all();
+        //$totalFuas->paciente;
+        return view('recepcion/lisFua', ['totalFuas'=>$totalFuas]);
     }
 
     /**
@@ -149,9 +151,7 @@ class FuaController extends Controller
                 $pdf = PDF::loadView('recepcion.formFua', ['fuas'=>$fuas]);
                 return $pdf->download('fua.pdf');
 
-            } else {
-                return view('recepcion.mostrarFua', $data);
-            }
+            } 
 
 
             //return dd($fua);
@@ -190,8 +190,9 @@ class FuaController extends Controller
      * @param  \App\Models\fua  $fua
      * @return \Illuminate\Http\Response
      */
-    public function destroy(fua $fua)
+    public function destroy($id)
     {
-        //
+        fua::destroy($id);
+        return redirect('recepcion');
     }
 }

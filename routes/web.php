@@ -34,6 +34,9 @@ Route::resource('pacientes',pacientesController::class);
 
 Route::resource('recepcion',FuaController::class);
 
+
+Route::get('/recepcion/lisFua', [App\Http\Controllers\FuaController::class, 'index'])->name('recepcion.lisFua');
+
 Route::get('/recepcion', function () {
     return view('recepcion');
 });
