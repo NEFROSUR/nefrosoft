@@ -20,10 +20,13 @@ return new class extends Migration
             $table->char('tipoDeConsulta');
             $table->integer('numSesion');
             $table->unsignedBigInteger('paciente_id');
+            $table->unsignedBigInteger('profesional_id');
             $table->timestamps();
 
             //$table->unsignedBigInteger('paciente_id');
             $table->foreign('paciente_id')->references('id')->on('pacientes');
+
+            $table->foreign('profesional_id')->references('id')->on('profesionals');
         });
     }
 

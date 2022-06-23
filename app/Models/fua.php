@@ -13,4 +13,9 @@ class fua extends Model
     {
         return $this->belongsTo(paciente::class,'paciente_id');
     }
+    public function profesional()
+    {
+        return $this->belongsTo(profesional::class,'profesional_id');
+    }
+
 }

@@ -24,7 +24,7 @@ class ProfesionalController extends Controller
      */
     public function create()
     {
-        //
+        return view('profesionales.crearProfesionales');
     }
 
     /**
@@ -49,7 +49,7 @@ class ProfesionalController extends Controller
      */
     public function show(profesional $profesional)
     {
-        //
+        return view ('profesionales.mostrarProfesionales');
     }
 
     /**

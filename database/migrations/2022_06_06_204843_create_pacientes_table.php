@@ -17,15 +17,15 @@ return new class extends Migration
     {
         Schema::create('pacientes', function (Blueprint $table) {
             $table->id('id')->autoincrement(); //id del paciente
-            $table->integer('dni');//numero de dni
+            $table->char('dni',9);//numero de dni
             $table->char('primerNombre',50);//primer nombre del paciente
-            $table->char('otroNombre',50);//segundo nombre del paciente
+            $table->char('otroNombre',50)->nullable();//segundo nombre del paciente
             $table->char('apellidoPaterno',50);//apellido paterno del paciente
             $table->char('apellidoMaterno',50);//apellido materno del paciente
             $table->string('direccion');//direccion del paciente segun IPRESS
             $table->integer('telefono');//telefono registrado del paciente
-            //$table->string('numHistoria');//numero de historia segun IPRESS
-            //$table->enum('regimen',['subsidiado','semicontributivo']);// tipo SIS
+            $table->char('numHistoria',10);//numero de historia segun IPRESS
+            $table->char('regimen',20);// tipo SIS
             $table->integer('turno'); //turno al que pertenece actualmente
             $table->string('frecuencia'); //turno al que pertenece actualmente
             $table->timestamps();

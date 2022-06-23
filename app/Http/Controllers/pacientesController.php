@@ -66,15 +66,14 @@ class pacientesController extends Controller
 
         $paciente=paciente::findOrFail($id);
 
-        return view('pacientes.editarPacientes', compact('paciente'));
+        return view('pacientes.editarPacientes', ['paciente'=>$paciente]);
     }
     public function update(Request $request, $id){
 
-        $datosPaciente = request()->except(['_token','method']);
+        $datosPaciente = request()->except(['_token','_method']);
         paciente::where('id','=',$id)->update($datosPaciente);
         $paciente=paciente::findOrFail($id);
-        return view('pacientes.editarPacientes', compact('paciente'));
-
+        return view('pacientes', compact('paciente'));
     }
     
 }

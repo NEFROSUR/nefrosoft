@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\fua;
 use Illuminate\Http\Request;
 use App\Models\paciente;
+use App\Models\profesional;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 
@@ -39,7 +40,7 @@ class FuaController extends Controller
             $f2 = $f2->format('d-m-Y');
             $f1 = Carbon::now()->startOfMonth();
             $f1 = $f1->format('d-m-Y');
-            $totalFuas = fua::whereBetween('fecha', [$f1, $f2])->paginate(10);
+            $totalFuas = fua::whereBetween('fecha', [$f1, $f2])->cursorPaginate(5);
         } else {
             if ($turno == '' && $frecuencia == ''&& $correlativo != '' && $documento == '') {
                 $totalFuas = fua::where('correlativo', '=', $correlativo)->paginate(5);
@@ -99,6 +100,7 @@ class FuaController extends Controller
 
         $correlativoI = $request->get('correlativoI');
         $pacientesAll = paciente::all();
+        $medicosAll = profesional::all();
 
 
         if ($turno == '' && $frecuencia == '') {
@@ -124,17 +126,25 @@ class FuaController extends Controller
                     $fecha = Carbon::now();
                     $fecha = $fecha->format('d-m-Y');
                     $tipoDeConsulta = $request->get('tipoDeConsulta');
-
-                    $numSesion = '1';
                     $paciente_id = $item;
+                    $profesional_id = $request->medico;
+
+                    //ingreso de sesion
+                    $sesionAnterior = fua::where('paciente_id', '=', $paciente_id)->where('tipoDeConsulta', '=', 'Atencion de Procedimientos Ambulatorios')->count();
+                    $numSesion = $sesionAnterior +1;
                     //ingreso de datos
                     $fua->correlativo = $correlativo;
                     $fua->fecha = $fecha;
                     $fua->tipoDeConsulta = $tipoDeConsulta;
                     $fua->numSesion = $numSesion;
                     $fua->paciente_id = $paciente_id;
+
+                    $fua->profesional_id=$profesional_id;
+
                     $fua->save();
                     $fua->paciente;
+                    $fua->profesional;
+
                     array_push($fuas,$fua);
                     $correlativoI++;
                     $i++;
@@ -145,7 +155,7 @@ class FuaController extends Controller
             } 
         }
 
-        return view('recepcion.mostrarFua', $data);
+        return view('recepcion.mostrarFua', $data , ['medicos'=>$medicosAll]);
     }
 
     /**
