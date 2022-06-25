@@ -38,7 +38,7 @@ class pacientesController extends Controller
         $turno = $request->get('turno');
         $frecuencia = $request->get('frecuencia');
         
-        //$datos['pacientes']=paciente::where('primerNombre','like','%nombre%')->paginate(5);
+        //$datos['pacientes']=paciente::where('primerNombre','like','%nombre%')
         if($nombre==''&&$dni==''&&$turno==''&&$frecuencia==''){
             $datos['pacientes']=paciente::orderBy('turno','asc')->paginate(5);
         }else{

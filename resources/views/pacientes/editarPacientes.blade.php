@@ -1,5 +1,8 @@
 @extends('main')
 @section('content')
+<div class="text-center">
+    <h4 class="bg-warning p-2 text-dark bg-opacity-75">EDITANDO PACIENTE:  {{$paciente->primerNombre}} {{$paciente->apellidoPaterno}} {{$paciente->apellidoMaterno}}</h4>
+</div>
 <div class="container w-25 border p-4 mt-4">
     <form action="{{ url('/pacientes/'.$paciente->id) }}" method="POST">
         @csrf

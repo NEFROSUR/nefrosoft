@@ -68,6 +68,16 @@ class FuaController extends Controller
     {
 
     }
+    public static function createUnitPDF($id)
+    {
+        //$fuas=fua::findOrFail($id);
+        $fuas = fua::where('id', '=', $id)->first();
+        $paciente = paciente::where('id','=',$fuas->paciente_id)->first();
+        $fuas->paciente;
+        $pdf = PDF::loadView('recepcion.formFua', ['fuas'=>$fuas]);
+        return $pdf->download('fuaunit.pdf');
+        return view('recepcion');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -164,12 +174,9 @@ class FuaController extends Controller
      * @param  \App\Models\fua  $fua
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $id)
+    public function edit($id)
     {
-        $fuas = fua::where('id', '=', $id);
-        $pdf = PDF::loadView('recepcion.formFua', ['fuas'=>$fuas]);
-        return $pdf->download('fua.pdf');
-        return view('recepcion');
+
     }
 
     /**

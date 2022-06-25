@@ -81,11 +81,15 @@
                 <a href="{{ url('/pacientes/'.$paciente->id.'/edit') }}">
                     Editar
                 </a>
-                |
+
                 <form action="{{ url('/pacientes/'.$paciente->id) }}" method="POST">
                     @csrf
                     {{ method_field('DELETE')}}
                     <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Quieres eliminar al paciente?')" value="Borrar">
+
+                </form>
+                <form>
+                    <input class="btn btn-outline-primary" type="submit" value="Detalle">
 
                 </form>
             </td>

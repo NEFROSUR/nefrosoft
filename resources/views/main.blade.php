@@ -53,7 +53,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/recepcion">Ver Atenciones</a>
                     <a class="dropdown-item" href="/recepcion/show">Crear Formato de Atencion</a>
-                    <a class="dropdown-item" href="/">Crear Hoja de Monitoreo</a>
+                    <a class="dropdown-item" href="/historia/create">Crear Hoja de Monitoreo</a>
                     <a class="dropdown-item" href="/">Crear Multisciplinario</a>
                 </div>
             </li>

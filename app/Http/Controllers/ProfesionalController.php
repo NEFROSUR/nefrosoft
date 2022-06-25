@@ -47,9 +47,28 @@ class ProfesionalController extends Controller
      * @param  \App\Models\profesional  $profesional
      * @return \Illuminate\Http\Response
      */
-    public function show(profesional $profesional)
+    public function show(Request $request)
     {
-        return view ('profesionales.mostrarProfesionales');
+        $nombre = $request->get('nombre');
+        $dni = $request->get('dni');
+        $especialidad = $request->get('especialidad');
+
+        if($nombre==''&&$dni==''&&$especialidad==''){
+            $doctoresAll['doctoresAll']=profesional::orderBy('id','asc')->paginate(5);
+        }else{
+            if($dni==''&&$especialidad==''){
+                $doctoresAll['doctoresAll']=profesional::where('primerNombreP','=',$nombre)->paginate(5);
+            }
+            if($nombre==''&&$especialidad==''){
+                $doctoresAll['doctoresAll']=profesional::where('dniP','=',$dni)->paginate(5);
+            }
+            if($nombre==''&&$dni==''){
+                $doctoresAll['doctoresAll']=profesional::where('especialidad','=',$especialidad)->paginate(5);
+            };
+        }
+
+
+        return view ('profesionales.mostrarProfesionales',$doctoresAll);
     }
 
     /**
@@ -81,8 +100,9 @@ class ProfesionalController extends Controller
      * @param  \App\Models\profesional  $profesional
      * @return \Illuminate\Http\Response
      */
-    public function destroy(profesional $profesional)
+    public function destroy($id)
     {
-        //
+        profesional::destroy($id);
+        return redirect('profesional');
     }
 }

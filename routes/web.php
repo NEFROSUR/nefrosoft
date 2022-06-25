@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FuaController;
+use App\Http\Controllers\HistoriaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pacientesController;
 use App\Http\Controllers\PDFController;
@@ -34,7 +35,8 @@ Route::resource('profesionales',ProfesionalController::class);
 //Route::get('/pacientes.pacientesForTurno','pacientesController@pacientesPorTurno');
 
 Route::resource('recepcion',FuaController::class);
-
+Route::resource('historia',HistoriaController::class);
+Route::get('/recepcion/pdfunit', [App\Http\Controllers\FuaController::class, 'createUnitPDF'])->name('fuaunit.pdf');
 
 Route::get('/recepcion', [App\Http\Controllers\FuaController::class, 'index'])->name('recepcion.lisFua');
 

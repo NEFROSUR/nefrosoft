@@ -60,10 +60,12 @@
             <td>{{ $fua->profesional->primerNombreP }} {{ $fua->profesional->otroNombreP }} {{ $fua->profesional->apellidoPaternoP }} {{ $fua->profesional->apellidoMaternoP }}</td>
             <td>{{ $fua->created_at }}</td>
             <td>
-                <form action="{{ url('/recepcion/'.$fua->id.'/edit') }}" method="POST">
-                    <input class="btn btn-outline-primary" type="submit" name="fuaImprimir" id="fuaImprimir" value="Imprimir">
+                <form action="{{ url('/recepcion') }}">
 
+                    <input class="btn btn-outline-success" type="submit" onclick="return confirm('Generar nuevamente este Formato?') " value="Imprimir">
+                    
                 </form>
+
                 <form action="{{ url('/recepcion/'.$fua->id) }}" method="POST">
                     @csrf
                     {{ method_field('DELETE')}}
