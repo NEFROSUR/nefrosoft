@@ -43,7 +43,7 @@
                 <tbody>
                     @foreach ($lista_pacientes as $item)
                     <tr>
-                        <td>{{ $item->primerNombre}} {{ $item->otroNombre}} {{ $item->apellidoPaterno}} {{ $item->apellidoMaterno}}</td>
+                        <td>{{ $item->apellidoPaterno}} {{ $item->apellidoMaterno}}, {{ $item->primerNombre}} {{ $item->otroNombre}}</td>
                         <td>
                             <div class="form-check" method="POST">
                                 <input class="form-check-input" type="checkbox" value="{{$item->id}}" name="pacientesEscogidos[]" id="pacientesEscogidos">
@@ -59,7 +59,7 @@
                 <div class="container col p-2 mt-0.5">
                     <div class="row">
                         <div class="col">
-                            <input name="correlativoI" class="form-control col p-2 mt-0.5" type="text" placeholder="Correlativo Inicial">
+                            <input name="fechaGenerada" class="form-control col p-2 mt-0.5" type="text" placeholder="Fecha">
                         </div>
                         <div class="form-group">
                             <div class="col">

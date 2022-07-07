@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('numSesion');
             $table->unsignedBigInteger('paciente_id');
             $table->unsignedBigInteger('profesional_id');
+            $table->char('estado',8);//OBS_0010
+            $table->string('detalleEstado')->nullable();//OBS_0010
             $table->timestamps();
 
             //$table->unsignedBigInteger('paciente_id');

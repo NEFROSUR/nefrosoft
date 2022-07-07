@@ -1,9 +1,9 @@
 @extends('main')
 @section('content')
 <div class="text-center">
-    <h4 class="bg-warning p-2 text-dark bg-opacity-75">EDITANDO PACIENTE:  {{$paciente->primerNombre}} {{$paciente->apellidoPaterno}} {{$paciente->apellidoMaterno}}</h4>
+    <h4 class="bg-warning p-2 text-dark bg-opacity-75">EDITANDO PACIENTE: {{$paciente->primerNombre}} {{$paciente->apellidoPaterno}} {{$paciente->apellidoMaterno}}</h4>
 </div>
-<div class="container w-25 border p-4 mt-4">
+<div class="container border p-4 mt-4">
     <form action="{{ url('/pacientes/'.$paciente->id) }}" method="POST">
         @csrf
         {{ method_field('PATCH') }}
@@ -40,6 +40,14 @@
                     <input type="text" name="telefono" class="form-control" placeholder="Celular" value="{{$paciente->telefono}}" minlength="9" maxlength="9">
                 </div>
                 <div class="col p-2 mt-0.5">
+                    <label for="tittle" class="form-label">Celular</label>
+                    <input type="text" name="telefono1" class="form-control" placeholder="Celular 1" value="{{$paciente->telefono1}}" minlength="9" maxlength="9">
+                </div>
+                <div class="col p-2 mt-0.5">
+                    <label for="tittle" class="form-label">Celular</label>
+                    <input type="text" name="telefono2" class="form-control" placeholder="Celular 2" value="{{$paciente->telefono2}}" minlength="9" maxlength="9">
+                </div>
+                <div class="col p-2 mt-0.5">
                     <label for="tittle" class="form-label">Historia Clinica</label>
                     <input type="text" name="numHistoria" class="form-control" placeholder="N° Historia" value="{{$paciente->numHistoria}}" required>
                 </div>
@@ -47,6 +55,10 @@
             <label for="tittle" class="form-label">Direccion</label>
             <div class="mb-3 p-2 mt-0.5">
                 <input type="text" name="direccion" class="form-control" placeholder="Direccion Reniec" value="{{$paciente->direccion}}" required>
+            </div>
+            <label for="tittle" class="form-label">Direccion</label>
+            <div class="mb-3 p-2 mt-0.5">
+                <input type="text" name="direccion1" class="form-control" placeholder="Direccion Reniec Opcional" value="{{$paciente->direccion1}}">
             </div>
             <div class="row">
                 <div class="col">

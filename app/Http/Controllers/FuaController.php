@@ -102,13 +102,14 @@ class FuaController extends Controller
      */
     public function show(Request $request)
     {
-
+        $estado = 'activo';
+        $detalleEstado = '';
         $pacientesEscogidos = $request->get('pacientesEscogidos');
 
         $turno = $request->get('turno');
         $frecuencia = $request->get('frecuencia');
 
-        $correlativoI = $request->get('correlativoI');
+        $fechaGenerada = $request->get('fechaGenerada');
         $pacientesAll = paciente::all();
         $medicosAll = profesional::all();
 
@@ -117,24 +118,24 @@ class FuaController extends Controller
             $data = array("lista_pacientes" => $pacientesAll);
         } else {
             if ($turno == '' && $frecuencia != '') {
-                $data['lista_pacientes'] = Paciente::where('frecuencia', '=', $frecuencia)->paginate(5);
+                $data['lista_pacientes'] = Paciente::where('frecuencia', '=', $frecuencia)->where('estado','=','activo')->paginate(5);
             }
             if ($turno != '' && $frecuencia == '') {
-                $data['lista_pacientes'] = Paciente::where('turno', '=', $turno)->paginate(5);
+                $data['lista_pacientes'] = Paciente::where('turno', '=', $turno)->where('estado','=','activo')->paginate(5);
             }
             if ($turno != '' && $frecuencia != '') {
-                $data['lista_pacientes'] = Paciente::where('turno', '=', $turno)->where('frecuencia', '=', $frecuencia)->paginate(5);
+                $data['lista_pacientes'] = Paciente::where('turno', '=', $turno)->where('frecuencia', '=', $frecuencia)->where('estado','=','activo')->paginate(5);
             }
         }
         if ($pacientesEscogidos != '') {
-            if ($correlativoI != '') {
+            if ($fechaGenerada != '') {
                 $fuas=array();
                 $i = 0;
                 foreach ($pacientesEscogidos as $item) {
                     $fua = new Fua();
-                    $correlativo = $correlativoI;
-                    $fecha = Carbon::now();
-                    $fecha = $fecha->format('d-m-Y');
+                    //$correlativo = $correlativoI;
+                    //$fecha = Carbon::now();
+                    //$fecha = $fecha->format('d-m-Y');
                     $tipoDeConsulta = $request->get('tipoDeConsulta');
                     $paciente_id = $item;
                     $profesional_id = $request->medico;
@@ -143,20 +144,22 @@ class FuaController extends Controller
                     $sesionAnterior = fua::where('paciente_id', '=', $paciente_id)->where('tipoDeConsulta', '=', 'Atencion de Procedimientos Ambulatorios')->count();
                     $numSesion = $sesionAnterior +1;
                     //ingreso de datos
-                    $fua->correlativo = $correlativo;
-                    $fua->fecha = $fecha;
+                    //$fua->correlativo = $correlativo;
+                    $fua->correlativo = fua::count() +1+ 32400; //agregar correlativo inicial mediante codigo
+                    $fua->fecha = $fechaGenerada;
                     $fua->tipoDeConsulta = $tipoDeConsulta;
                     $fua->numSesion = $numSesion;
                     $fua->paciente_id = $paciente_id;
 
                     $fua->profesional_id=$profesional_id;
-
+                    $fua->estado = $estado;
+                    $fua->detalleEstado=$detalleEstado;
                     $fua->save();
                     $fua->paciente;
                     $fua->profesional;
 
                     array_push($fuas,$fua);
-                    $correlativoI++;
+                    //$correlativoI++;
                     $i++;
                 }
                 $pdf = PDF::loadView('recepcion.formFua', ['fuas'=>$fuas]);

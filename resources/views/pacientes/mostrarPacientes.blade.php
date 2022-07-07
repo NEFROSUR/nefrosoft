@@ -43,16 +43,16 @@
     <thead class="thead-light">
         <tr>
             <th>N°</th>
-            <th>Primer Nombre</th>
-            <th>Segundo Nombre</th>
-            <th>Apellido Paterno</th>
-            <th>Apellido Materno</th>
             <th>Documento de Identidad</th>
+            <th>Nombre del Paciente</th>
+            <th>Edad</th>
             <th>Direccion</th>
             <th>Telefono de Contacto</th>
-            <th>Turno</th>
             <th>Frecuencia</th>
+            <th>Turno</th>
+
             <th>Regimen</th>
+            <th>N° Afiliacion</th>
             <th>Acciones</th>
 
         </tr>
@@ -61,14 +61,11 @@
         @foreach ($pacientes as $paciente)
         <tr>
             <td>{{ $paciente->id}}</td>
-            <td>{{ $paciente->primerNombre}}</td>
-            <td>{{ $paciente->otroNombre}}</td>
-            <td>{{ $paciente->apellidoPaterno}}</td>
-            <td>{{ $paciente->apellidoMaterno}}</td>
             <td>{{ $paciente->dni}}</td>
-            <td>{{ $paciente->direccion}}</td>
-            <td>{{ $paciente->telefono}}</td>
-            <td>{{ $paciente->turno}}</td>
+            <td>{{ $paciente->apellidoPaterno}} {{ $paciente->apellidoMaterno}}, {{ $paciente->primerNombre}} {{ $paciente->otroNombre}}</td>
+            <td>{{ $paciente->fechaNacimiento}}</td>
+            <td>{{ $paciente->direccion}}<br>{{ $paciente->direccion1}}</td>
+            <td>{{ $paciente->telefono}}<br>{{ $paciente->telefono1}}<br>{{ $paciente->telefono2}}</td>
             <td>
                 @if ($paciente->frecuencia === 'lmv')
                 LUNES - MIECOLES - VIERNES
@@ -76,9 +73,12 @@
                 MARTES - JUEVES - SABADO
                 @endif
             </td>
+            <td>{{ $paciente->turno}}</td>
+
             <td>{{ $paciente->regimen}}</td>
+            <td>N°: {{ $paciente->numAfiliacion}} - Hasta: {{ $paciente->fechaAfiliacion}}</td>
             <td>
-                <a href="{{ url('/pacientes/'.$paciente->id.'/edit') }}">
+                <a class="btn btn-outline-warning" href="{{ url('/pacientes/'.$paciente->id.'/edit') }}">
                     Editar
                 </a>
 

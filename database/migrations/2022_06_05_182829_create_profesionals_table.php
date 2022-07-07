@@ -23,6 +23,8 @@ return new class extends Migration
             $table->char('apellidoMaternoP',50);//apellido materno del profesional
             $table->string('direccionP');//direccion del profesional
             $table->integer('telefonoP');//telefono registrado del profesional
+            //$table->char('estado',8);//OBS_0010
+            //$table->string('detalleEstado')->nullable();//OBS_0010
             $table->char('colegiatura',5);//telefono registrado del profesional
             $table->char('especialidad',25);//telefono registrado del profesional
             $table->date('constanciaHabilidad')->nullable(); //contancia de habilidad
