@@ -441,7 +441,14 @@
   </head>
 
   <body>
-    <table border="0" cellpadding="4" cellspacing="1" id="sheet0" class="sheet0 gridlines">
+	<br></br>
+	<br></br>
+	<br></br>
+ <center> 
+  <img src="https://carnetvacunacion.minsa.gob.pe/assets/LogoMinsa.svg"  width="300" height="50">
+</center>
+<br></br>
+    <table border="0" cellpadding="4" cellspacing="0" id="sheet0" class="sheet0 gridlines">
         <col class="col0">
         <col class="col1">
         <col class="col2">
@@ -472,7 +479,12 @@
         <col class="col27">
         <col class="col28">
         <col class="col29">
+
+
+
         <tbody>
+
+
           <tr class="row0">
             <td class="column0 style24 null"></td>
             <td class="column1 style61 null style61" colspan="22"></td>
@@ -495,7 +507,7 @@
             <td class="column16 style1 s">- </td>
             <td class="column17 style136 s style138" colspan="2">22</td>
             <td class="column19 style1 s">- </td>
-            <td class="column20 style139 n">01234567</td>
+            <td class="column20 style139 n">000{{ $fua->correlativo }}</td>
             <td class="column21 style59 null style91" colspan="9"></td>
           </tr>
           <tr class="row4">
@@ -514,11 +526,11 @@
           </tr>
           <tr class="row6">
             <td class="column1 style119 n style124" colspan="9" rowspan="2">26954</td>
-            <td class="column10 style150 s style153" colspan="13" rowspan="2">CENTRO DE DIÁLISIS NEFROMÉDICA DEL SUR E.I.R.L</td>
+            <td class="column10 style150 s style153" colspan="13" rowspan="2">{{ config('constants.CONST_clinica') }}</td><!--constante nombre clinica-->
             <td class="column23 style96 s style97" colspan="6">N° FORMATO ATENCIÓN PARA RECONSIDERACIÓN </td>
           </tr>
           <tr class="row7">
-            <td class="column23 style140 n style140" colspan="6">0</td>
+            <td class="column23 style140 n style140" colspan="6"></td><!--FORMATO SUB-->
           </tr>
           <tr class="row8">
             <td class="column0 style9 null"></td>
@@ -541,26 +553,36 @@
             <td class="column1 style67 s style76" colspan="2">DIA </td>
             <td class="column3 style67 s style76" colspan="2">MES </td>
             <td class="column5 style67 s style76" colspan="4">AÑO </td>
-            <td class="column10 style119 n style124" colspan="4" rowspan="2">0</td>
+            <td class="column10 style119 n style124" colspan="4" rowspan="2">{{$fua->paciente->numHistoria}}</td>
             <td class="column15 style53 s style54" rowspan="2">TD</td>
-            <td class="column16 style17 null"></td>
+            <td class="column16 style119 s null"rowspan="1" rowspan="2">1</td>
             <td class="column17 style77 s style82" colspan="3" rowspan="2">N° DOCUMENTO</td>
-            <td class="column20 style119 n style123" colspan="3" rowspan="2">0</td>
+            <td class="column20 style119 n style123" colspan="3" rowspan="2">{{$fua->paciente->dni}}</td>
             <td class="column23 style99 s style100" colspan="5">SUBSIDIADO </td>
-            <td class="column28 style155 n">0</td>
+            <td class="column28 style155 n">
+			@if ($fua->paciente->regimen === 'subsidiado') X
+            @elseif ($fua->paciente->regimen === 'semicontributivo')
+            @endif
+			</td>
           </tr>
           <tr class="row11">
-            <td class="column1 style158 n">0</td>
-            <td class="column2 style158 n">0</td>
-            <td class="column3 style158 n">0</td>
-            <td class="column4 style158 n">0</td>
-            <td class="column5 style158 n">2</td>
-            <td class="column6 style158 n">0</td>
-            <td class="column7 style158 n">2</td>
-            <td class="column8 style158 n">2</td>
+            <td class="column1 style158 n">{{substr($fua->fecha,-10,1)}}</td>
+            <td class="column2 style158 n">{{substr($fua->fecha,-9,1)}}</td>
+            <td class="column3 style158 n">{{substr($fua->fecha,-7,1)}}</td>
+            <td class="column4 style158 n">{{substr($fua->fecha,-6,1)}}</td>
+            <td class="column5 style158 n">{{substr($fua->fecha,-4,1)}}</td>
+            <td class="column6 style158 n">{{substr($fua->fecha,-3,1)}}</td>
+            <td class="column7 style158 n">{{substr($fua->fecha,-2,1)}}</td>
+            <td class="column8 style158 n">{{substr($fua->fecha,-1,1)}}</td>
             <td class="column16 style18 null"></td>
             <td class="column23 style73 s style69" colspan="5">SEMICONTRIBUTIVO </td>
-            <td class="column28 style155 n">0</td>
+            <td class="column28 style155 n">
+			@if ($fua->paciente->regimen === 'subsidiado')
+			@elseif ($fua->paciente->regimen === 'semicontributivo') X
+			@endif
+
+
+			</td>
           </tr>
           <tr class="row12">
             <td class="column0 style9 null"></td>
@@ -580,9 +602,9 @@
             <td class="column19 style114 s style114" colspan="10">APELLIDO MATERNO </td>
           </tr>
           <tr class="row14">
-            <td class="column1 style141 n style142" colspan="17">0</td>
+            <td class="column1 style141 n style142" colspan="17">{{$fua->paciente->apellidoPaterno}}</td>
             <td class="column18 style105 null"></td>
-            <td class="column19 style157 n style157" colspan="10">0</td>
+            <td class="column19 style157 n style157" colspan="10">{{$fua->paciente->apellidoMaterno}}</td>
           </tr>
           <tr class="row15">
             <td class="column0 style9 null"></td>
@@ -597,9 +619,9 @@
             <td class="column19 style114 s style114" colspan="10">OTROS NOMBRES </td>
           </tr>
           <tr class="row17">
-            <td class="column1 style141 n style142" colspan="17">0</td>
+            <td class="column1 style141 n style142" colspan="17">{{$fua->paciente->primerNombre}}</td>
             <td class="column18 style107 null"></td>
-            <td class="column19 style157 n style157" colspan="10">0</td>
+            <td class="column19 style157 n style157" colspan="10">{{$fua->paciente->otroNombre}}</td>
           </tr>
           <tr class="row18">
             <td class="column0 style13 null"></td>
@@ -615,9 +637,26 @@
           </tr>
           <tr class="row20">
             <td class="column1 style143 s style145" colspan="16">Consulta externa</td>
-            <td class="column17 style148 n">0</td>
+            <td class="column17 style148 n">
+			@if ($fua->tipoDeConsulta === 'Atencion de Procedimientos Ambulatorios')
+
+			@elseif ($fua->tipoDeConsulta === 'Consulta Externa')
+			X
+			@endif
+
+
+
+			</td>
             <td class="column18 style146 s style147" colspan="10">Atención de procedimientos ambulatorios</td>
-            <td class="column28 style149 n">0</td>
+            <td class="column28 style149 n">
+			@if ($fua->tipoDeConsulta === 'Atencion de Procedimientos Ambulatorios')
+                    X
+                    @elseif ($fua->tipoDeConsulta === 'Consulta Externa')
+
+            @endif
+
+
+			</td>
           </tr>
           <tr class="row21">
             <td class="column0 style13 null"></td>
@@ -693,9 +732,9 @@
             <td class="column24 style71 s style70" colspan="5">Nº COLEGIATURA </td>
           </tr>
           <tr class="row32">
-            <td class="column1 style131 n style133" colspan="8">0</td>
-            <td class="column9 style131 n style131" colspan="15">0</td>
-            <td class="column24 style154 n style154" colspan="5">0</td>
+            <td class="column1 style131 n style133" colspan="8">{{$fua->profesional->dniP}}</td>
+            <td class="column9 style131 n style131" colspan="15">{{$fua->profesional->primerNombreP}} {{$fua->profesional->otroNombreP}} {{$fua->profesional->apellidoPaternoP}} {{$fua->profesional->apellidoMaternoP}}</td>
+            <td class="column24 style154 n style154" colspan="5">{{$fua->profesional->colegiatura}}</td>
           </tr>
           <tr class="row33">
             <td class="column0 style13 null"></td>
@@ -708,10 +747,17 @@
           <tr class="row34">
             <td class="column0 style25 null"></td>
             <td class="column1 style45 s style161" colspan="9">RESPONSABLE DE LA ATENCIÓN </td>
-            <td class="column10 style134 n">0</td>
+            <td class="column10 style134 n">
+			@if ($fua->profesional->especialidad === 'Nefrologia')
+                    "1"
+            @elseif ($fua->profesional->especialidad === 'Nutricion')
+                    "10"
+            @endif
+
+			</td>
             <td class="column11 style20 null"></td>
             <td class="column12 style71 s style71" colspan="4">ESPECIALIDAD</td>
-            <td class="column16 style135 s style135" colspan="8">NEFROLOGIA</td>
+            <td class="column16 style135 s style135" colspan="8">{{$fua->profesional->especialidad}}</td>
             <td class="column24 style20 null"></td>
             <td class="column25 style83 s style83" colspan="4" rowspan="20">Huella Digital del Asegurado o Apoderado</td>
           </tr>
