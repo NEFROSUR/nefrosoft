@@ -162,7 +162,7 @@ class FuaController extends Controller
                     //$correlativoI++;
                     $i++;
                 }
-                $pdf = PDF::loadView('recepcion.formFua', ['fuas'=>$fuas]);
+                $pdf = PDF::loadView('recepcion.demo', ['fuas'=>$fuas]);
                 return $pdf->download('fua.pdf');
 
             } 
