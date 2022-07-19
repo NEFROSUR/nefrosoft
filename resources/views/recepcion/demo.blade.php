@@ -445,7 +445,7 @@
 	<br></br>
 	<br></br>
  <center> 
-  <img src="https://carnetvacunacion.minsa.gob.pe/assets/LogoMinsa.svg"  width="300" height="50">
+  <img src="imagen/logo.jpg" width="300" height="50">
 </center>
 <br></br>
     <table border="0" cellpadding="4" cellspacing="0" id="sheet0" class="sheet0 gridlines">
