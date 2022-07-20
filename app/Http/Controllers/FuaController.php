@@ -185,7 +185,7 @@ class FuaController extends Controller
                 //$rutaS = public_path()."/result.pdf";
                 //$pdfF->merge('file', $rutaS);
                 $pdfMerger->merge();
-                $pdfMerger->save("file.pdf", "download");
+                $pdfMerger->save("fuas.pdf", "download");
                 unlink($ruta1);
                 unlink($ruta2);
                 //return $pdf->download('fua.pdf');
