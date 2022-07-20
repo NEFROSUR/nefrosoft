@@ -440,15 +440,15 @@
     </style>
   </head>
 
-  <body>
+<body>
 	<br></br>
 	<br></br>
 	<br></br>
   
   <img src="imagen/logo.png" width="400" height="50">
 
-<br></br>
-    <table border="0" cellpadding="4" cellspacing="0" id="sheet0" class="sheet0 gridlines">
+  <br></br>
+  <table border="0" cellpadding="4" cellspacing="0" id="sheet0" class="sheet0 gridlines">
         <col class="col0">
         <col class="col1">
         <col class="col2">
@@ -1225,8 +1225,9 @@
             <td class="column0 style86 null style87" colspan="29"></td>
           </tr>
         </tbody>
-    </table>
-  </body>
+    </table>  
+
+</body>
 </html>
 
 @endforeach
