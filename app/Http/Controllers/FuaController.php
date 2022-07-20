@@ -12,11 +12,14 @@ use Illuminate\Support\Facades\App;
 
 use Nette\Utils\ArrayList;
 use PDF;
+//use PDFMerger;
+use LynX39\LaraPdfMerger\Facades\PdfMerger;
 use PhpParser\Node\Expr\Cast\Array_;
 use Sabberworm\CSS\Value\Size;
 
 use function PHPUnit\Framework\isEmpty;
 use Carbon\Carbon;
+
 //use Dompdf\Dompdf;
 //use Barryvdh\DomPdf\Facade as PDF;
 
@@ -162,8 +165,30 @@ class FuaController extends Controller
                     //$correlativoI++;
                     $i++;
                 }
+                $pdfMerger = PDFMerger::init();
+
                 $pdf = PDF::loadView('recepcion.demo', ['fuas'=>$fuas]);
-                return $pdf->download('fua.pdf');
+                $pdf->save(public_path()."/pdf.pdf");
+
+                $pdfr = PDF::loadView('recepcion.reverso', ['fuas'=>$fuas]);
+                $pdfr->save(public_path()."/pdfr.pdf");
+
+                $ruta1 = public_path()."/pdf.pdf";
+                $ruta2 = public_path()."/pdfr.pdf";
+                
+
+                
+
+                $pdfMerger->addPDF(public_path()."/pdf.pdf", '1');
+                $pdfMerger->addPDF(public_path()."/pdfr.pdf", '1');
+
+                //$rutaS = public_path()."/result.pdf";
+                //$pdfF->merge('file', $rutaS);
+                $pdfMerger->merge();
+                $pdfMerger->save("file.pdf", "download");
+                unlink($ruta1);
+                unlink($ruta2);
+                //return $pdf->download('fua.pdf');
 
             } 
         }
