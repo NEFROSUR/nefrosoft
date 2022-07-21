@@ -31,14 +31,15 @@ class PacienteSeeder extends Seeder
                     "apellidoPaterno" => $data['4'],
                     "apellidoMaterno" => $data['5'],
                     "fechaNacimiento" => $data['6'],
-                    "direccion" => $data['7'],
-                    "numHistoria" => $data['8'],
-                    "regimen" => $data['9'],
-                    "numAfiliacion" => $data['10'],
-                    "turno" => $data['11'],
-                    "fechaAfiliacion" => $data['12'],
-                    "frecuencia" => $data['13'],
-                    "estado" => $data['14']
+                    "telefono" => $data['7'],
+                    "direccion" => $data['8'],
+                    "numHistoria" => $data['9'],
+                    "regimen" => $data['10'],
+                    "numAfiliacion" => $data['11'],
+                    "turno" => $data['12'],
+                    "fechaAfiliacion" => $data['13'],
+                    "frecuencia" => $data['14'],
+                    "estado" => $data['15']
                 ]);    
             }
             $firstline = false;
