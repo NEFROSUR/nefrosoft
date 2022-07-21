@@ -133,10 +133,8 @@ class FuaController extends Controller
         if ($pacientesEscogidos != '') {
             if ($fechaGenerada != '') {
                 $fuas=array();
-                $i = 0;
                 foreach ($pacientesEscogidos as $item) {
                     $fua = new Fua();
-                    //$correlativo = $correlativoI;
                     //$fecha = Carbon::now();
                     //$fecha = $fecha->format('d-m-Y');
                     $tipoDeConsulta = $request->get('tipoDeConsulta');
@@ -147,7 +145,6 @@ class FuaController extends Controller
                     $sesionAnterior = fua::where('paciente_id', '=', $paciente_id)->where('tipoDeConsulta', '=', 'Atencion de Procedimientos Ambulatorios')->count();
                     $numSesion = $sesionAnterior +1;
                     //ingreso de datos
-                    //$fua->correlativo = $correlativo;
                     $fua->correlativo = fua::count() +1+ 32400; //agregar correlativo inicial mediante codigo
                     $fua->fecha = $fechaGenerada;
                     $fua->tipoDeConsulta = $tipoDeConsulta;
@@ -160,11 +157,9 @@ class FuaController extends Controller
                     $fua->save();
                     $fua->paciente;
                     $fua->profesional;
-                    $fua->regimen = $fua->paciente->regimen;
+
 
                     array_push($fuas,$fua);
-                    //$correlativoI++;
-                    $i++;
                 }
                 $pdfMerger = PDFMerger::init();
 
