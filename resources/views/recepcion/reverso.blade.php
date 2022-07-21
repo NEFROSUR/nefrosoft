@@ -2177,88 +2177,122 @@
       <tr class="row3">
         <td class="column0 style41 n">19238</td>
         <td class="column1 style42 s style43" colspan="3">Hierro (como saracato) 20 mg Fe/mL INY 5 mL </td>
-        <td class="column4 style44 n">0</td>
-        <td class="column5 style44 n">0</td>
+        <td class="column4 style44 n"></td>
+        <!--PROGRAMACION GENERAL DE MEDICAMENTOS-->
+        <td class="column5 style44 n"></td>
+        <!--PROGRAMACION GENERAL DE MEDICAMENTOS-->
         <td class="column6 style45 s">03078</td>
         <td class="column7 style42 s style43" colspan="3">Enalapril Maleato 10 mg TAB</td>
-        <td class="column10 style46 n">0</td>
-        <td class="column11 style47 n style48" colspan="2">0</td>
+        <td class="column10 style46 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
+        <td class="column11 style47 n style48" colspan="2"></td>
+        <!--CONSULTA NEFROLOGICA-->
       </tr>
       <tr class="row4">
         <td class="column0 style45 s">03107</td>
         <td class="column1 style42 s style43" colspan="3">Epoetina alfa (Eritropoyetina) 2000 UI/mL INY 1 Ml</td>
-        <td class="column4 style44 n">1</td>
-        <td class="column5 style44 n">0</td>
+        <td class="column4 style44 n"></td>
+        <!--PROGRAMACION GENERAL DE MEDICAMENTOS-->
+        <td class="column5 style44 n"></td>
+        <!--PROGRAMACION GENERAL DE MEDICAMENTOS-->
         <td class="column6 style45 s">01522</td>
         <td class="column7 style42 s style43" colspan="3">Captopril 25 mg TAB</td>
-        <td class="column10 style46 n">1</td>
-        <td class="column11 style47 n style48" colspan="2">1</td>
+        <td class="column10 style46 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
+        <td class="column11 style47 n style48" colspan="2"></td>
+        <!--CONSULTA NEFROLOGICA-->
       </tr>
       <tr class="row5">
         <td class="column0 style67 s">03979 <span style="font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:6.5pt"><sup>14</sup></span></td>
         <td class="column1 style42 s style43" colspan="3">Vitamina B12 Hidroxicobalamina 1mg/mL INY 1mL</td>
-        <td class="column4 style44 n">2</td>
-        <td class="column5 style44 n">0</td>
+        <td class="column4 style44 n"></td>
+        <!--PROGRAMACION GENERAL DE MEDICAMENTOS-->
+        <td class="column5 style44 n"></td>
+        <!--PROGRAMACION GENERAL DE MEDICAMENTOS-->
         <td class="column6 style45 s">00671</td>
         <td class="column7 style42 s style43" colspan="3">Amlodipino (como Besilato) 10 mg TAB </td>
-        <td class="column10 style46 n">2</td>
-        <td class="column11 style47 n style48" colspan="2">2</td>
+        <td class="column10 style46 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
+        <td class="column11 style47 n style48" colspan="2"></td>
+        <!--CONSULTA NEFROLOGICA-->
       </tr>
       <tr class="row6">
         <td class="column0 style45 s">02496</td>
         <td class="column1 style42 s style43" colspan="3">Vitamina B - complejo tab. (alternativo) (*)</td>
-        <td class="column4 style44 n">3</td>
-        <td class="column5 style44 n">0</td>
+        <td class="column4 style44 n">——</td>
+        <!--CONSULTA NEFROLOGICA-->
+        <td class="column5 style44 n">——</td>
+        <!--CONSULTA NEFROLOGICA-->
         <td class="column6 style45 s">05018</td>
         <td class="column7 style42 s style43" colspan="3">Nifedipino 10 MG</td>
-        <td class="column10 style46 n">3</td>
-        <td class="column11 style47 n style48" colspan="2">3</td>
+        <td class="column10 style46 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
+        <td class="column11 style47 n style48" colspan="2"></td>
+        <!--CONSULTA NEFROLOGICA-->
       </tr>
       <tr class="row7">
         <td class="column0 style45 s">05491</td>
         <td class="column1 style42 s style43" colspan="3">Piridoxina 50mg tab</td>
-        <td class="column4 style44 n">4</td>
-        <td class="column5 style44 n">0</td>
+        <td class="column4 style44 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
+        <td class="column5 style44 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
         <td class="column6 style45 s">05021</td>
         <td class="column7 style42 s style43" colspan="3">Nifedipino de 30 MG</td>
-        <td class="column10 style46 n">4</td>
-        <td class="column11 style47 n style48" colspan="2">4</td>
+        <td class="column10 style46 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
+        <td class="column11 style47 n style48" colspan="2"></td>
+        <!--CONSULTA NEFROLOGICA-->
       </tr>
       <tr class="row8">
         <td class="column0 style45 s">06127</td>
         <td class="column1 style42 s style43" colspan="3">Tiamina 100 mg tab</td>
-        <td class="column4 style44 n">5</td>
-        <td class="column5 style44 n">0</td>
+        <td class="column4 style44 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
+        <td class="column5 style44 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
         <td class="column6 style45 s">04701</td>
         <td class="column7 style42 s style43" colspan="3">Metildopa 250 MG</td>
-        <td class="column10 style46 n">5</td>
-        <td class="column11 style47 n style48" colspan="2">5</td>
+        <td class="column10 style46 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
+        <td class="column11 style47 n style48" colspan="2"></td>
+        <!--CONSULTA NEFROLOGICA-->
       </tr>
       <tr class="row9">
         <td class="column0 style45 s">00200</td>
         <td class="column1 style42 s style43" colspan="3">Ácido fólico 0.5 mg tab</td>
-        <td class="column4 style44 n">6</td>
-        <td class="column5 style44 n">0</td>
+        <td class="column4 style44 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
+        <td class="column5 style44 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
         <td class="column6 style45 s">00900</td>
         <td class="column7 style42 s style43" colspan="3">Atenolol 100 MG</td>
-        <td class="column10 style46 n">6</td>
-        <td class="column11 style47 n style48" colspan="2">6</td>
+        <td class="column10 style46 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
+        <td class="column11 style47 n style48" colspan="2"></td>
+        <!--CONSULTA NEFROLOGICA-->
       </tr>
       <tr class="row10">
         <td class="column0 style45 s">01451</td>
         <td class="column1 style42 s style43" colspan="3">Calcio Carbonato 500 mg (Equiv. a 500 mg de Calcio) tab</td>
-        <td class="column4 style44 n">7</td>
-        <td class="column5 style44 n">0</td>
+        <td class="column4 style44 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
+        <td class="column5 style44 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
         <td class="column6 style45 s">04522</td>
         <td class="column7 style42 s style43" colspan="3">Losartan 50 MG</td>
-        <td class="column10 style46 n">7</td>
-        <td class="column11 style47 n style48" colspan="2">7</td>
+        <td class="column10 style46 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
+        <td class="column11 style47 n style48" colspan="2"></td>
+        <!--CONSULTA NEFROLOGICA-->
       </tr>
       <tr class="row11">
         <td class="column0 style45 s">01502</td>
         <td class="column1 style42 s style43" colspan="3">Calcitriol 1 mcg/mL INY</td>
-        <td class="column4 style44 n">8</td>
-        <td class="column5 style44 n">0</td>
+        <td class="column4 style44 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
+        <td class="column5 style44 n"></td>
+        <!--CONSULTA NEFROLOGICA-->
         <td class="column6 style45 null"></td>
         <td class="column7 style49 null style50" colspan="3"></td>
         <td class="column10 style46 null"></td>
@@ -2282,58 +2316,124 @@
         <td class="column1 style64 s">Urea<span style="font-weight:bold; color:#000000; font-family:'Times New Roman'; font-size:6.5pt"><sup>2</sup></span></td>
         <td class="column2 style65 null"></td>
         <td class="column3 style66 null"></td>
-        <td class="column4 style52 n">0</td>
-        <td class="column5 style52 n">0</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style53 n">90937</td>
         <td class="column7 style54 s style43" colspan="3">Hemodiálisis</td>
-        <td class="column10 style55 n">1</td>
-        <td class="column11 style47 n style48" colspan="2">1</td>
+        <td class="column10 style55 n">
+          @if ($fua->tipoDeConsulta === 'Atencion de Procedimientos Ambulatorios')
+          1
+          @endif
+        </td>
+        <!--SESION-->
+        <td class="column11 style47 n style48" colspan="2">
+          @if ($fua->tipoDeConsulta === 'Atencion de Procedimientos Ambulatorios')
+          1
+          @endif
+        </td>
+        <!--SESION-->
       </tr>
       <tr class="row15">
         <td class="column0 style51 n">82565</td>
         <td class="column1 style54 s style43" colspan="3">Creatinina en sangre</td>
-        <td class="column4 style52 n">1</td>
-        <td class="column5 style52 n">1</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style53 n">99203</td>
         <td class="column7 style54 s style43" colspan="3">Consulta Nefrológica</td>
-        <td class="column10 style55 n">2</td>
-        <td class="column11 style47 n style48" colspan="2">2</td>
+        <td class="column10 style55 n">
+          @if ($fua->tipoDeConsulta === 'Consulta Externa')
+          @if ($fua->profesional->especialidad === 'Nefrologia               ')
+          1
+          @endif
+          @endif
+        </td>
+        <!--SESION-->
+        <td class="column11 style47 n style48" colspan="2">
+        @if ($fua->tipoDeConsulta === 'Consulta Externa')
+          @if ($fua->profesional->especialidad === 'Nefrologia               ')
+          1
+          @endif
+          @endif
+        </td>
+        <!--SESION-->
       </tr>
       <tr class="row16">
         <td class="column0 style51 n">85014</td>
         <td class="column1 style54 s style43" colspan="3">Hematocrito </td>
-        <td class="column4 style52 n">2</td>
-        <td class="column5 style52 n">2</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style53 n">99207</td>
         <td class="column7 style54 s style43" colspan="3">Atención en Salud Mental</td>
-        <td class="column10 style55 n">3</td>
-        <td class="column11 style47 n style48" colspan="2">3</td>
+        <td class="column10 style55 n">
+          @if ($fua->profesional->especialidad === 'Psicologia               ')
+          1
+          @endif
+        </td>
+        <!--SESION-->
+        <td class="column11 style47 n style48" colspan="2">
+        @if ($fua->profesional->especialidad === 'Psicologia               ')
+          1
+          @endif
+        </td>
+        <!--SESION-->
       </tr>
       <tr class="row17">
         <td class="column0 style51 n">85018</td>
         <td class="column1 style54 s style43" colspan="3">Dosaje de hemoglobina</td>
-        <td class="column4 style52 n">3</td>
-        <td class="column5 style52 n">3</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style53 n">99209</td>
         <td class="column7 style54 s style43" colspan="3">Atención en Nutrición</td>
-        <td class="column10 style55 n">4</td>
-        <td class="column11 style47 n style48" colspan="2">4</td>
+        <td class="column10 style55 n">
+        @if ($fua->profesional->especialidad === 'Nutricion                ')
+          1
+          @endif
+        </td>
+        <!--SESION-->
+        <td class="column11 style47 n style48" colspan="2">
+        @if ($fua->profesional->especialidad === 'Nutricion                ')
+          1
+          @endif
+        </td>
+        <!--SESION-->
       </tr>
       <tr class="row18">
         <td class="column0 style51 n">80051</td>
         <td class="column1 style54 s style43" colspan="3">Electrolitos séricos </td>
-        <td class="column4 style52 n">4</td>
-        <td class="column5 style52 n">4</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style53 n">99210</td>
         <td class="column7 style54 s style43" colspan="3">Atención en Servicio Social </td>
-        <td class="column10 style55 n">4</td>
-        <td class="column11 style47 n style48" colspan="2">4</td>
+        <td class="column10 style55 n">
+        @if ($fua->profesional->especialidad === 'Trabajo Social           ')
+          1
+          @endif
+        </td>
+        <!--SESION-->
+        <td class="column11 style47 n style48" colspan="2">
+        @if ($fua->profesional->especialidad === 'Trabajo Social           ')
+          1
+          @endif
+        </td>
+        <!--SESION-->
       </tr>
       <tr class="row19">
         <td class="column0 style51 n">84100</td>
         <td class="column1 style54 s style43" colspan="3">Fosforo en sangre</td>
-        <td class="column4 style52 n">5</td>
-        <td class="column5 style52 n">5</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style56 null"></td>
         <td class="column7 style57 null style59" colspan="3"></td>
         <td class="column10 style55 null"></td>
@@ -2342,8 +2442,10 @@
       <tr class="row20">
         <td class="column0 style51 n">82310</td>
         <td class="column1 style54 s style43" colspan="3">Calcio sérico </td>
-        <td class="column4 style52 n">6</td>
-        <td class="column5 style52 n">6</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style56 null"></td>
         <td class="column7 style57 null style59" colspan="3"></td>
         <td class="column10 style55 null"></td>
@@ -2352,8 +2454,10 @@
       <tr class="row21">
         <td class="column0 style51 n">84165</td>
         <td class="column1 style54 s style43" colspan="3">Proteínas; fraccionamiento y determinacion cuantitativa por electroforesis</td>
-        <td class="column4 style52 n">7</td>
-        <td class="column5 style52 n">7</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style56 null"></td>
         <td class="column7 style57 null style59" colspan="3"></td>
         <td class="column10 style55 null"></td>
@@ -2362,8 +2466,10 @@
       <tr class="row22">
         <td class="column0 style51 n">84075</td>
         <td class="column1 style54 s style43" colspan="3">Fosfatasa alcalina </td>
-        <td class="column4 style52 n">8</td>
-        <td class="column5 style52 n">8</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style60 null"></td>
         <td class="column7 style47 null style62" colspan="3"></td>
         <td class="column10 style63 null"></td>
@@ -2372,8 +2478,10 @@
       <tr class="row23">
         <td class="column0 style51 n">84450</td>
         <td class="column1 style54 s style43" colspan="3">TGO transaminasa glutámico oxalacética</td>
-        <td class="column4 style52 n">9</td>
-        <td class="column5 style52 n">9</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style63 null"></td>
         <td class="column7 style47 null style62" colspan="3"></td>
         <td class="column10 style63 null"></td>
@@ -2382,8 +2490,10 @@
       <tr class="row24">
         <td class="column0 style51 n">84460</td>
         <td class="column1 style54 s style43" colspan="3">TGP transaminasa glutámico pirúvica </td>
-        <td class="column4 style52 n">10</td>
-        <td class="column5 style52 n">10</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style63 null"></td>
         <td class="column7 style57 null style59" colspan="3"></td>
         <td class="column10 style63 null"></td>
@@ -2392,8 +2502,10 @@
       <tr class="row25">
         <td class="column0 style51 n">86703</td>
         <td class="column1 style54 s style43" colspan="3">ELISA o prueba rápida para HIV - 1 Y HIV - 2</td>
-        <td class="column4 style52 n">11</td>
-        <td class="column5 style52 n">11</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style63 null"></td>
         <td class="column7 style57 null style59" colspan="3"></td>
         <td class="column10 style63 null"></td>
@@ -2402,8 +2514,10 @@
       <tr class="row26">
         <td class="column0 style51 n">86592</td>
         <td class="column1 style54 s style43" colspan="3">Prueba de sifílis cualitativa (VDRL, RPR)</td>
-        <td class="column4 style52 n">12</td>
-        <td class="column5 style52 n">12</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style63 null"></td>
         <td class="column7 style57 null style59" colspan="3"></td>
         <td class="column10 style63 null"></td>
@@ -2412,8 +2526,10 @@
       <tr class="row27">
         <td class="column0 style51 n">83970</td>
         <td class="column1 style54 s style43" colspan="3">Paratohormona (PTH)</td>
-        <td class="column4 style52 n">13</td>
-        <td class="column5 style52 n">13</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style63 null"></td>
         <td class="column7 style57 null style59" colspan="3"></td>
         <td class="column10 style63 null"></td>
@@ -2422,8 +2538,10 @@
       <tr class="row28">
         <td class="column0 style51 n">87340</td>
         <td class="column1 style54 s style43" colspan="3">Detección de antígeno de superficie de virus de Hepatitis B (HBsAG) por ELISA </td>
-        <td class="column4 style52 n">14</td>
-        <td class="column5 style52 n">14</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style63 null"></td>
         <td class="column7 style57 null style59" colspan="3"></td>
         <td class="column10 style63 null"></td>
@@ -2432,8 +2550,10 @@
       <tr class="row29">
         <td class="column0 style51 n">86706</td>
         <td class="column1 style54 s style43" colspan="3">Detección de anticuerpos para antígeno de superficie Hepatitis B (HBs-Ag)</td>
-        <td class="column4 style52 n">15</td>
-        <td class="column5 style52 n">15</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style63 null"></td>
         <td class="column7 style47 null style62" colspan="3"></td>
         <td class="column10 style63 null"></td>
@@ -2442,8 +2562,10 @@
       <tr class="row30">
         <td class="column0 style51 n">86704</td>
         <td class="column1 style54 s style43" colspan="3">Detección de anticuerpos totales para núcleo de virus de Hepatitis B (Total Anti-Hbcore)</td>
-        <td class="column4 style52 n">16</td>
-        <td class="column5 style52 n">16</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style63 null"></td>
         <td class="column7 style47 null style62" colspan="3"></td>
         <td class="column10 style63 null"></td>
@@ -2452,8 +2574,10 @@
       <tr class="row31">
         <td class="column0 style51 n">86803</td>
         <td class="column1 style54 s style43" colspan="3">Determinacion de anticuerpos para Hepatitis C</td>
-        <td class="column4 style52 n">17</td>
-        <td class="column5 style52 n">17</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style63 null"></td>
         <td class="column7 style47 null style62" colspan="3"></td>
         <td class="column10 style63 null"></td>
@@ -2462,8 +2586,10 @@
       <tr class="row32">
         <td class="column0 style51 n">83540</td>
         <td class="column1 style54 s style43" colspan="3">Hierro sérico</td>
-        <td class="column4 style52 n">18</td>
-        <td class="column5 style52 n">18</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style53 null"></td>
         <td class="column7 style54 null style43" colspan="3"></td>
         <td class="column10 style55 null"></td>
@@ -2472,8 +2598,10 @@
       <tr class="row33">
         <td class="column0 style51 n">82728</td>
         <td class="column1 style54 s style43" colspan="3">Ferritina</td>
-        <td class="column4 style52 n">19</td>
-        <td class="column5 style52 n">19</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style53 null"></td>
         <td class="column7 style54 null style43" colspan="3"></td>
         <td class="column10 style55 null"></td>
@@ -2482,8 +2610,10 @@
       <tr class="row34">
         <td class="column0 style51 n">84466</td>
         <td class="column1 style54 s style43" colspan="3">Saturación de transferrina</td>
-        <td class="column4 style52 n">20</td>
-        <td class="column5 style52 n">20</td>
+        <td class="column4 style52 n"></td>
+        <!--KTV-->
+        <td class="column5 style52 n"></td>
+        <!--KTV-->
         <td class="column6 style53 null"></td>
         <td class="column7 style54 null style43" colspan="3"></td>
         <td class="column10 style55 null"></td>
