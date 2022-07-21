@@ -4968,13 +4968,11 @@
 <body>
   @foreach ($fuas as $fua)
   <br></br>
-  <br></br>
-  <br></br>
 
   <img src="imagen/logo.png" width="400" height="50">
 
   <br></br>
-  <table border="0" cellpadding="4" cellspacing="0" id="sheet0" class="sheet0 gridlines">
+  <table border="0" cellpadding="4.7" cellspacing="0" id="sheet0" class="sheet0 gridlines">
     <col class="col0">
     <col class="col1">
     <col class="col2">
@@ -5591,6 +5589,60 @@
         <td class="column24 style164 null"></td>
       </tr>
       <tr class="row48">
+        <td class="column0 style160 null"></td>
+        <td class="column1 style164 null"></td>
+        <td class="column2 style164 null"></td>
+        <td class="column3 style164 null"></td>
+        <td class="column4 style164 null"></td>
+        <td class="column5 style164 null"></td>
+        <td class="column6 style164 null"></td>
+        <td class="column7 style164 null"></td>
+        <td class="column8 style164 null"></td>
+        <td class="column9 style164 null"></td>
+        <td class="column10 style164 null"></td>
+        <td class="column11 style164 null"></td>
+        <td class="column12 style164 null"></td>
+        <td class="column13 style164 null"></td>
+        <td class="column14 style164 null"></td>
+        <td class="column15 style164 null"></td>
+        <td class="column16 style164 null"></td>
+        <td class="column17 style164 null"></td>
+        <td class="column18 style164 null"></td>
+        <td class="column19 style164 null"></td>
+        <td class="column20 style164 null"></td>
+        <td class="column21 style164 null"></td>
+        <td class="column22 style164 null"></td>
+        <td class="column23 style164 null"></td>
+        <td class="column24 style164 null"></td>
+      </tr>
+      <tr class="row49">
+        <td class="column0 style160 null"></td>
+        <td class="column1 style164 null"></td>
+        <td class="column2 style164 null"></td>
+        <td class="column3 style164 null"></td>
+        <td class="column4 style164 null"></td>
+        <td class="column5 style164 null"></td>
+        <td class="column6 style164 null"></td>
+        <td class="column7 style164 null"></td>
+        <td class="column8 style164 null"></td>
+        <td class="column9 style164 null"></td>
+        <td class="column10 style164 null"></td>
+        <td class="column11 style164 null"></td>
+        <td class="column12 style164 null"></td>
+        <td class="column13 style164 null"></td>
+        <td class="column14 style164 null"></td>
+        <td class="column15 style164 null"></td>
+        <td class="column16 style164 null"></td>
+        <td class="column17 style164 null"></td>
+        <td class="column18 style164 null"></td>
+        <td class="column19 style164 null"></td>
+        <td class="column20 style164 null"></td>
+        <td class="column21 style164 null"></td>
+        <td class="column22 style164 null"></td>
+        <td class="column23 style164 null"></td>
+        <td class="column24 style164 null"></td>
+      </tr>
+      <tr class="row49">
         <td class="column0 style160 null"></td>
         <td class="column1 style164 null"></td>
         <td class="column2 style164 null"></td>
