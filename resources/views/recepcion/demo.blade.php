@@ -4966,7 +4966,7 @@
 </head>
 
 <body>
-@foreach ($fuas as $fua)
+  @foreach ($fuas as $fua)
   <br></br>
   <br></br>
   <br></br>
@@ -5088,8 +5088,10 @@
         <td class="column20 style119 n style123" colspan="3" rowspan="2">{{$fua->paciente->dni}}</td>
         <td class="column23 style99 s style100" colspan="5">SUBSIDIADO </td>
         <td class="column28 style155 n">
-          @if ($fua->paciente->regimen === 'subsidiado') X
-          @elseif ($fua->paciente->regimen === 'semicontributivo')
+          @if ($fua->paciente->regimen === 'subsidiado          ')
+          X
+          @elseif ($fua->regimen === 'semicontributivo    ')
+
           @endif
         </td>
       </tr>
@@ -5105,8 +5107,10 @@
         <td class="column16 style18 null"></td>
         <td class="column23 style73 s style69" colspan="5">SEMICONTRIBUTIVO </td>
         <td class="column28 style155 n">
-          @if ($fua->paciente->regimen === 'subsidiado')
-          @elseif ($fua->paciente->regimen === 'semicontributivo') X
+          @if ($fua->regimen === 'subsidiado          ')
+
+          @elseif ($fua->regimen === 'semicontributivo    ')
+          X
           @endif
 
 
@@ -5275,14 +5279,24 @@
       <tr class="row34">
         <td class="column0 style25 null"></td>
         <td class="column1 style45 s style161" colspan="9">RESPONSABLE DE LA ATENCIÓN </td>
-        <td class="column10 style134 n">
-          @if ($fua->profesional->especialidad === 'Nefrologia')
-          "1"
-          @elseif ($fua->profesional->especialidad === 'Nutricion')
-          "10"
-          @endif
 
-        </td>
+          @switch($fua->profesional->especialidad)
+          @case('Nefrologia               ')
+          <td class="column10 style134 n">1</td>
+          @break
+          @case('Nutricion                ')
+          <td class="column10 style134 n">10</td>
+          @break
+          @case('Psicologia               ')
+          <td class="column10 style134 n">8</td>
+          @break
+          @case('Trabajo Social           ')
+          <td class="column10 style134 n">7</td>
+          @break
+          @default
+
+          @endswitch
+
         <td class="column11 style20 null"></td>
         <td class="column12 style71 s style71" colspan="4">ESPECIALIDAD</td>
         <td class="column16 style135 s style135" colspan="8">{{$fua->profesional->especialidad}}</td>
@@ -5754,7 +5768,7 @@
       </tr>
     </tbody>
   </table>
-@endforeach
+  @endforeach
 </body>
 
 </html>

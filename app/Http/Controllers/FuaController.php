@@ -160,6 +160,7 @@ class FuaController extends Controller
                     $fua->save();
                     $fua->paciente;
                     $fua->profesional;
+                    $fua->regimen = $fua->paciente->regimen;
 
                     array_push($fuas,$fua);
                     //$correlativoI++;
