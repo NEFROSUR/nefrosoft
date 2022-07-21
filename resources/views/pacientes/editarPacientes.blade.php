@@ -64,7 +64,7 @@
                 <div class="col">
                     <label for="inputState" class="form-label">Frecuencia</label>
                     <select id="inputState" name="frecuencia" class="form-select p-1 mt-0.5">
-                        <option value="lmv">Lunes - Miecoles - Viernes</option>
+                        <option value="lmv">Lunes - Miercoles - Viernes</option>
                         <option value="mjs">Martes - Jueves - Sabado</option>
                     </select>
                 </div>
@@ -84,6 +84,15 @@
                     <select id="inputState" name="regimen" class="form-select p-1 mt-0.5">
                         <option value="subsidiado">SUBSIDIADO</option>
                         <option value="semicontributivo">SEMICONTRIBUTIVO</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="inputState" class="form-label">
+                        <Table>Actualizar estado</Table>
+                    </label>
+                    <select id="inputState" name="estado" class="form-select p-1 mt-0.5">
+                        <option value="activo">ACTIVO</option>
+                        <option value="inactivo">INACTIVO</option>
                     </select>
                 </div>
             </div>

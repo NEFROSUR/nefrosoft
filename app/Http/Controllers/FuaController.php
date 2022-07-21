@@ -175,15 +175,15 @@ class FuaController extends Controller
 
                 $ruta1 = public_path()."/pdf.pdf";
                 $ruta2 = public_path()."/pdfr.pdf";
-                
+                $pasador = 1;
 
-                
+                foreach($fuas as $fua){
 
-                $pdfMerger->addPDF(public_path()."/pdf.pdf", '1');
-                $pdfMerger->addPDF(public_path()."/pdfr.pdf", '1');
+                    $pdfMerger->addPDF($ruta1, $pasador);
+                    $pdfMerger->addPDF($ruta2, $pasador);
 
-                //$rutaS = public_path()."/result.pdf";
-                //$pdfF->merge('file', $rutaS);
+                    $pasador++;
+                }
                 $pdfMerger->merge();
                 $pdfMerger->save("fuas.pdf", "download");
                 unlink($ruta1);

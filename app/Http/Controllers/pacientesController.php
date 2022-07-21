@@ -83,8 +83,13 @@ class pacientesController extends Controller
         return view ('pacientes.mostrarPacientes',$datos,['fechaActual'=>$fechaActual]);
     }
     public function destroy($id){
-        paciente::destroy($id);
-        return redirect('pacientes');
+
+        $pacienteInactivo=paciente::findOrFail($id);
+        //paciente::destroy($id);
+        //$pacienteInactivo->update(['estado'=>"inactivo"]);
+        return view('pacientes.desactivateP', ['paciente'=>$pacienteInactivo]);
+        //return redirect('pacientes/show');
+
     }
 
     public function edit($id){

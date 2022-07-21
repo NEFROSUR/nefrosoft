@@ -78,14 +78,14 @@
             <td>{{ $paciente->regimen}}</td>
             <td>N°: {{ $paciente->numAfiliacion}} - Hasta: {{ $paciente->fechaAfiliacion}}</td>
             <td>
-                <a class="btn btn-outline-warning" href="{{ url('/pacientes/'.$paciente->id.'/edit') }}">
-                    Editar
+                <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar al paciente\n {{ $paciente->primerNombre}} {{ $paciente->apellidoPaterno}}?')" href="{{ url('/pacientes/'.$paciente->id.'/edit') }}">
+                    Actualizar
                 </a>
 
                 <form action="{{ url('/pacientes/'.$paciente->id) }}" method="POST">
                     @csrf
                     {{ method_field('DELETE')}}
-                    <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Quieres eliminar al paciente?')" value="Borrar">
+                    <input class="btn btn-outline-danger" type="submit" onclick="return confirm('¿Esta seguro que quiere deshabilitar al paciente\n {{ $paciente->primerNombre}} {{ $paciente->apellidoPaterno}}?')" value="Estado">
 
                 </form>
                 <form>
