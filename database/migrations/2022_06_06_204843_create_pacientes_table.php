@@ -16,7 +16,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('pacientes', function (Blueprint $table) {
-            $table->id('id')->autoincrement(); //id del paciente
+            $table->id('id'); //id del paciente
             $table->char('dni',9);//numero de dni
             $table->char('primerNombre',50);//primer nombre del paciente
             $table->char('otroNombre',50)->nullable();//segundo nombre del paciente

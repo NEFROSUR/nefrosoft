@@ -184,6 +184,7 @@ class FuaController extends Controller
                 $pdfMerger->save("fuas.pdf", "download");
                 unlink($ruta1);
                 unlink($ruta2);
+                return redirect('recepcion/show');
                 //return $pdf->download('fua.pdf');
 
             } 

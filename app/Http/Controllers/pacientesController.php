@@ -29,7 +29,9 @@ class pacientesController extends Controller
         $paciente = new paciente();
         $estado = 'activo';
         $detalleEstado = '';
+        $id =  paciente::all()->count() +1;
         //$datosPaciente = request()->except('_token');
+        $paciente->id = $id;
         $paciente->dni = $request->dni;
         $paciente->primerNombre = $request->primerNombre;
         $paciente->otroNombre = $request->otroNombre;
