@@ -1,0 +1,3 @@
+id;dni;primerNombre;otroNombre;apellidoPaterno;apellidoMaterno;fechaNacimiento;direccion;numHistoria;regimen;numAfiliacion;turno;fechaAfiliacion;frecuencia;estado
+1;76754818;JAIME;RENI;MOSCOSO;MOSCOSO;12/12/2000;arequipa;76754818;subsidiado;n/a;2;12/12/2001;lmv;activo
+2;43889297;MARILYN ;DIANE ;CHUCTAYA ;LOPEZ;13/12/2000;arequipa;43889297;subsidiado;n/a;1;13/12/2001;jms;activo
