@@ -43,7 +43,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="{{ url('/pacientes/create') }}">Ingresar nuevo paciente</a>
                     <a class="dropdown-item" href="{{ url('/pacientes/show') }}">Mostrar Pacientes</a>
-                    <a class="dropdown-item" href="{{ url('/pacientes/pacientesForTurno') }}">Ver pacientes por turno</a>
+                    <a class="dropdown-item" href="">Ver pacientes por turno</a>
                 </div>
             </li>
             <li class="nav-item dropdown">

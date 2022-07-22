@@ -49,10 +49,10 @@ class pacientesController extends Controller
         //$datosPaciente = request()->except('_token');
         $paciente->id = $id;
         $paciente->dni = $request->dni;
-        $paciente->primerNombre = $request->primerNombre;
-        $paciente->otroNombre = $request->otroNombre;
-        $paciente->apellidoPaterno = $request->apellidoPaterno;
-        $paciente->apellidoMaterno = $request->apellidoMaterno;
+        $paciente->primerNombre = strtoupper($request->primerNombre);
+        $paciente->otroNombre = strtoupper($request->otroNombre);
+        $paciente->apellidoPaterno = strtoupper($request->apellidoPaterno);
+        $paciente->apellidoMaterno = strtoupper($request->apellidoMaterno);
         $paciente->fechaNacimiento = $request->fechaNacimiento;
         $paciente->direccion = $request->direccion;
         $paciente->direccion1 = $request->direccion1;
@@ -94,7 +94,10 @@ class pacientesController extends Controller
             }
             if($nombre==''&&$dni==''&&$turno==''){
                 $datos['pacientes']=paciente::where('frecuencia','=',$frecuencia)->where('estado','=','activo')->paginate(5);
-            };
+            }
+            if($nombre==''&&$dni==''){
+                $datos['pacientes']=paciente::where('frecuencia','=',$frecuencia)->where('turno','=',$turno)->where('estado','=','activo')->paginate(5);
+            }
         }
         return view ('pacientes.mostrarPacientes',$datos,['fechaActual'=>$fechaActual]);
     }
