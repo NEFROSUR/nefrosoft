@@ -6,19 +6,19 @@
     <label for="tittle" class="form-label">Nombres del paciente</label>
     <div class="row">
         <div class="col p-2 mt-0.5">
-            <input type="text" name="primerNombre" class="form-control" placeholder="Primer nombre" required>
+            <input type="text" name="primerNombre" class="form-control" placeholder="Primer Nombre" required>
         </div>
         <div class="col p-2 mt-0.5">
-            <input type="text" name="otroNombre" class="form-control" placeholder="Segundo nombre">
+            <input type="text" name="otroNombre" class="form-control" placeholder="Segundo Nombre">
         </div>
     </div>
     <label for="tittle" class="form-label">Apellidos del paciente</label>
     <div class="row">
         <div class="col p-2 mt-0.5">
-            <input type="text" name="apellidoPaterno" class="form-control" placeholder="Primer apellido" required>
+            <input type="text" name="apellidoPaterno" class="form-control" placeholder="Apellido Paterno" required>
         </div>
         <div class="col p-2 mt-0.5">
-            <input type="text" name="apellidoMaterno" class="form-control" placeholder="Segundo apellido" required>
+            <input type="text" name="apellidoMaterno" class="form-control" placeholder="Apellido Materno" required>
         </div>
     </div>
     <div class="row">
@@ -28,19 +28,19 @@
         </div>
         <div class="col p-2 mt-0.5">
             <label for="tittle" class="form-label">Celular</label>
-            <input type="text" name="telefono" class="form-control" placeholder="Celular" minlength="9" maxlength="9">
+            <input type="text" name="telefono" class="form-control" placeholder="9" minlength="9" maxlength="9">
         </div>
         <div class="col p-2 mt-0.5">
             <label for="tittle" class="form-label">Celular</label>
-            <input type="text" name="telefono1" class="form-control" placeholder="Celular 1" minlength="9" maxlength="9">
+            <input type="text" name="telefono1" class="form-control" placeholder="9" minlength="9" maxlength="9">
         </div>
         <div class="col p-2 mt-0.5">
             <label for="tittle" class="form-label">Celular</label>
-            <input type="text" name="telefono2" class="form-control" placeholder="Celular 2" minlength="9" maxlength="9">
+            <input type="text" name="telefono2" class="form-control" placeholder="9" minlength="9" maxlength="9">
         </div>
         <div class="col p-2 mt-0.5">
             <label for="tittle" class="form-label">Fecha de Nacimiento</label>
-            <input type="text" name="fechaNacimiento" class="form-control" placeholder="Fecha de Nacimiento">
+            <input type="text" name="fechaNacimiento" class="form-control" placeholder="dd-mm-yyyy">
         </div>
     </div>
     <div class="row">
@@ -59,7 +59,7 @@
         </div>
         <div class="col p-2 mt-0.5">
             <label for="tittle" class="form-label">Fecha de Vencimiento</label>
-            <input type="text" name="fechaAfiliacion" class="form-control" placeholder="Fecha de Afiliacion" required>
+            <input type="text" name="fechaAfiliacion" class="form-control" placeholder="dd-mm-yyyy" required>
         </div>
     </div>
     <label for="tittle" class="form-label">Direccion</label>
@@ -93,6 +93,6 @@
         </div>
     </div>
     <div class="p-1 mt-4">
-        <button type="submit" class="btn btn-primary ">Guardar</button>
+        <button type="submit" class="btn btn-primary "onclick="return confirm('¿Confirmar guardado de paciente?')">Guardar</button>
     </div>
 </div>

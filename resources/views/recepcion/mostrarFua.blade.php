@@ -3,6 +3,16 @@
 <div class="text-center">
     <h4 class="bg-warning p-2 text-dark bg-opacity-75">LISTA DE ATENCIONES</h4>
 </div>
+@if($errors->any())
+    <div class="alert alert-danger">
+        <p><strong>Opps: No se pudo realizar la accion</strong></p>
+        <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    </div>
+@endif
 <div style="float: left; width: 100%">
     <div class="container w-75 border p-2 mt-4">
         <form>

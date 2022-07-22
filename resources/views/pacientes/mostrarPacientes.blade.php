@@ -63,7 +63,39 @@
             <td>{{ $paciente->id}}</td>
             <td>{{ $paciente->dni}}</td>
             <td>{{ $paciente->apellidoPaterno}} {{ $paciente->apellidoMaterno}}, {{ $paciente->primerNombre}} {{ $paciente->otroNombre}}</td>
-            <td>{{ $paciente->fechaNacimiento}}</td>
+            <td>
+            @php
+            $date = $paciente->fechaNacimiento;
+            $dia=substr($date,-2,1).substr($date,-1,1);
+            $mes=substr($date,-5,1).substr($date,-4,1);
+            $year=substr($date,-10,1).substr($date,-9,1).substr($date,-8,1).substr($date,-7,1);
+            $fecha = $year."-".$mes."-".$dia;
+
+            
+            $diaA=substr($fechaActual,-2,1).substr($fechaActual,-1,1);
+            $mesA=substr($fechaActual,-5,1).substr($fechaActual,-4,1);
+            $yearA=substr($fechaActual,-10,1).substr($fechaActual,-9,1).substr($fechaActual,-8,1).substr($fechaActual,-7,1);
+            $fechaA = $yearA."-".$mesA."-".$diaA;
+
+            $edad = $yearA - $year;
+            $extra = 0;
+            if($edad>1){
+                if($mes<$mesA){
+                    $extra=$extra+1;
+
+                }
+                if($mes==$mesA){
+                    if($dia<$diaA){
+                        $extra=$extra+1;
+                    }
+                } 
+            }
+
+            $edad = $edad +$extra;
+
+            @endphp
+            {{$edad}}
+            </td>
             <td>{{ $paciente->direccion}}<br>{{ $paciente->direccion1}}</td>
             <td>{{ $paciente->telefono}}<br>{{ $paciente->telefono1}}<br>{{ $paciente->telefono2}}</td>
             <td>

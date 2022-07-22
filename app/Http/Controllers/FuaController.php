@@ -105,6 +105,7 @@ class FuaController extends Controller
      */
     public function show(Request $request)
     {
+        
         $estado = 'activo';
         $detalleEstado = '';
         $pacientesEscogidos = $request->get('pacientesEscogidos');
@@ -135,8 +136,6 @@ class FuaController extends Controller
                 $fuas=array();
                 foreach ($pacientesEscogidos as $item) {
                     $fua = new Fua();
-                    //$fecha = Carbon::now();
-                    //$fecha = $fecha->format('d-m-Y');
                     $tipoDeConsulta = $request->get('tipoDeConsulta');
                     $paciente_id = $item;
                     $profesional_id = $request->medico;
@@ -184,7 +183,7 @@ class FuaController extends Controller
                 $pdfMerger->save("fuas.pdf", "download");
                 unlink($ruta1);
                 unlink($ruta2);
-                return redirect('recepcion/show');
+
                 //return $pdf->download('fua.pdf');
 
             } 

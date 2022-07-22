@@ -26,6 +26,22 @@ class pacientesController extends Controller
         return view ('pacientes.crearPacientes');
     }
     public function store(Request $request){
+
+        $request->validate([
+            'dni' => 'required|unique:pacientes',
+            'primerNombre' => 'required|string',
+            'otroNombre' => 'nullable|string',
+            'apellidoPaterno' => 'required|string',
+            'apellidoMaterno' => 'required|string',
+            'telefono' => 'nullable|numeric|min:9',
+            'telefono1' => 'nullable|numeric|min:9',
+            'telefono2' => 'nullable|numeric|min:9',
+            'numAfiliacion' => 'required',
+            'fechaAfiliacion' => 'date',
+            'fechaNacimiento' => 'date',
+
+        ]);
+
         $paciente = new paciente();
         $estado = 'activo';
         $detalleEstado = '';
@@ -52,9 +68,7 @@ class pacientesController extends Controller
         $paciente->estado =$estado;
         $paciente->detalleEstado =$detalleEstado;
         $paciente->save();
-        //paciente::insert($paciente);
-
-        return view ('main');
+        return view ('pacientes'); 
     } 
     public function show(Request $request){
 
@@ -64,7 +78,7 @@ class pacientesController extends Controller
         $turno = $request->get('turno');
         $frecuencia = $request->get('frecuencia');
         $fechaActual = Carbon::now();
-        //$fechaActual = $fechaActual->format('d-m-Y');
+        $fechaActual = $fechaActual->format('Y-m-d');
 
         if($nombre==''&&$dni==''&&$turno==''&&$frecuencia==''){
             $datos['pacientes']=paciente::orderBy('turno','asc')->where('estado','=','activo')->paginate(5);
