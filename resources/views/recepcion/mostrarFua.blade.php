@@ -4,15 +4,23 @@
     <h4 class="bg-warning p-2 text-dark bg-opacity-75">LISTA DE ATENCIONES</h4>
 </div>
 @if($errors->any())
-    <div class="alert alert-danger">
-        <p><strong>Opps: No se pudo realizar la accion</strong></p>
-        <ul>
+<div class="alert alert-danger">
+    <p><strong>Opps: No se pudo realizar la accion</strong></p>
+    <ul>
         @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
+        <li>{{ $error }}</li>
         @endforeach
-        </ul>
-    </div>
+    </ul>
+</div>
 @endif
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
 <div style="float: left; width: 100%">
     <div class="container w-75 border p-2 mt-4">
         <form>
@@ -71,12 +79,13 @@
                         <div class="col">
                             <input name="fechaGenerada" class="form-control col p-2 mt-0.5" type="text" placeholder="Fecha">
                         </div>
+                        
                         <div class="form-group">
                             <div class="col">
                                 <label for="inputState" class="form-label">Tipo de Consulta</label>
                                 <select id="inputState" name="tipoDeConsulta" class="form-select p-1 mt-0.5">
-                                    <option value='Consulta Externa'>Consulta Externa</option>
                                     <option value='Atencion de Procedimientos Ambulatorios'>Atencion de Procedimientos Ambulatorios</option>
+                                    <option value='Consulta Externa'>Consulta Externa</option>
                                 </select>
                             </div>
                         </div>
@@ -104,5 +113,35 @@
                 <button type="submit" class="btn btn-success">Limpiar</button>
             </form>
         </div>
+        <div>
+            <section class="container">
+                <form>
+                    <div class="row form-group">
+                        <label for="date" class="col-sm-1 col-form-label">Fecha</label>
+                        <div class="col-sm-4">
+                            <div class="input-group date" id="datepicker">
+                                <input type="text" class="form-control" id="fechaGenerada">
+                                <span class="input-group-append">
+                                    <span class="input-group-text bg-white">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+
+            <script type="text/javascript">
+                $(function() {
+                    $('#datepicker').datepicker();
+                });
+            </script>
+        </div>
+        <div>
+
+        </div>
+
     </div>
+
     @endsection
