@@ -36,7 +36,8 @@ Route::resource('profesionales',ProfesionalController::class);
 
 Route::resource('recepcion',FuaController::class);
 Route::resource('historia',HistoriaController::class);
-Route::get('/recepcion/pdfunit', [App\Http\Controllers\FuaController::class, 'createUnitPDF'])->name('fuaunit.pdf');
+
+Route::get('/recepcion/pdfunit/{id}', [FuaController::class, 'createUnitPDF'])->name('fuaExtra.pdf');
 
 Route::get('/recepcion', [App\Http\Controllers\FuaController::class, 'index'])->name('recepcion.lisFua');
 

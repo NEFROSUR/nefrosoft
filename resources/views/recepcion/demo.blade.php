@@ -5029,9 +5029,15 @@
         <td class="column1 style42 null style60" colspan="12"></td>
         <td class="column13 style136 s style137" colspan="3">00026954</td>
         <td class="column16 style1 s">- </td>
-        <td class="column17 style136 s style138" colspan="2">22</td>
+        <td class="column17 style136 s style138" colspan="2">{{substr($fua->fecha,-2,1)}}{{substr($fua->fecha,-1,1)}}</td>
         <td class="column19 style1 s">- </td>
-        <td class="column20 style139 n">000{{ $fua->correlativo }}</td>
+        <td class="column20 style139 n">
+          @php
+          $tamaño = 8;
+          $numFua = substr(str_repeat(0, $tamaño).$fua->correlativo, - $tamaño);
+          @endphp
+          {{$numFua}}
+        </td>
         <td class="column21 style59 null style91" colspan="9"></td>
       </tr>
       <tr class="row4">
@@ -5081,7 +5087,18 @@
         <td class="column5 style67 s style76" colspan="4">AÑO </td>
         <td class="column10 style119 n style124" colspan="4" rowspan="2">{{$fua->paciente->numHistoria}}</td>
         <td class="column15 style53 s style54" rowspan="2">TD</td>
-        <td class="column16 style119 s null" rowspan="1" rowspan="2">1</td>
+        <td class="column16 style119 s null" rowspan="1" rowspan="2">
+          @php
+          $tipo = 1;
+          $ini = substr($fua->paciente->dni, 0, 1);
+          if($ini <> '00'){
+            $tipo = 1;
+          }elseif($ini =='00'){
+            $tipo = 2;
+          }
+          @endphp
+          {{$tipo}}
+        </td>
         <td class="column17 style77 s style82" colspan="3" rowspan="2">N° DOCUMENTO</td>
         <td class="column20 style119 n style123" colspan="3" rowspan="2">{{$fua->paciente->dni}}</td>
         <td class="column23 style99 s style100" colspan="5">SUBSIDIADO </td>
@@ -5278,22 +5295,22 @@
         <td class="column0 style25 null"></td>
         <td class="column1 style45 s style161" colspan="9">RESPONSABLE DE LA ATENCIÓN </td>
 
-          @switch($fua->profesional->especialidad)
-          @case('Nefrologia               ')
-          <td class="column10 style134 n">1</td>
-          @break
-          @case('Nutricion                ')
-          <td class="column10 style134 n">10</td>
-          @break
-          @case('Psicologia               ')
-          <td class="column10 style134 n">8</td>
-          @break
-          @case('Trabajo Social           ')
-          <td class="column10 style134 n">7</td>
-          @break
-          @default
+        @switch($fua->profesional->especialidad)
+        @case('Nefrologia               ')
+        <td class="column10 style134 n">1</td>
+        @break
+        @case('Nutricion                ')
+        <td class="column10 style134 n">10</td>
+        @break
+        @case('Psicologia               ')
+        <td class="column10 style134 n">8</td>
+        @break
+        @case('Trabajo Social           ')
+        <td class="column10 style134 n">7</td>
+        @break
+        @default
 
-          @endswitch
+        @endswitch
 
         <td class="column11 style20 null"></td>
         <td class="column12 style71 s style71" colspan="4">ESPECIALIDAD</td>

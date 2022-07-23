@@ -60,16 +60,19 @@
             <td>{{ $fua->profesional->primerNombreP }} {{ $fua->profesional->otroNombreP }} {{ $fua->profesional->apellidoPaternoP }} {{ $fua->profesional->apellidoMaternoP }}</td>
             <td>{{ $fua->created_at }}</td>
             <td>
-                <form action="{{ url('/recepcion') }}">
+                
 
-                    <input class="btn btn-outline-success" type="submit" onclick="return confirm('Generar nuevamente este Formato?') " value="Imprimir">
-                    
+                <form action="{{ url('/recepcion/pdfunit/'.$fua->id) }}" method="GET">
+
+                    <input class="btn btn-outline-success" type="submit" onclick="return confirm('¿Deseas imprimir nuevamente este Formato?')" value="Imprimir">
+
                 </form>
+
 
                 <form action="{{ url('/recepcion/'.$fua->id) }}" method="POST">
                     @csrf
                     {{ method_field('DELETE')}}
-                    <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Quieres eliminar al paciente?')" value="Borrar">
+                    <input class="btn btn-outline-danger" type="submit" onclick="return confirm('¿Deseas cancelar esta atencion?')" value="Borrar">
 
                 </form>
             </td>

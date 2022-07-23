@@ -31,7 +31,8 @@ class FuaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request){
+    public function index(Request $request)
+    {
 
         $turno = $request->get('turno');
         $frecuencia = $request->get('frecuencia');
@@ -45,17 +46,17 @@ class FuaController extends Controller
             $f1 = $f1->format('d-m-Y');
             $totalFuas = fua::whereBetween('fecha', [$f1, $f2])->cursorPaginate(5);
         } else {
-            if ($turno == '' && $frecuencia == ''&& $correlativo != '' && $documento == '') {
+            if ($turno == '' && $frecuencia == '' && $correlativo != '' && $documento == '') {
                 $totalFuas = fua::where('correlativo', '=', $correlativo)->paginate(5);
             }
-            if ($turno == '' && $frecuencia == ''&& $correlativo == '' && $documento != '') {
+            if ($turno == '' && $frecuencia == '' && $correlativo == '' && $documento != '') {
                 $paciente = paciente::where('dni', '=', $documento)->paginate(5);
                 //$id_buscado = $paciente->id;
                 $totalFuas = fua::where('paciente_id', '=', $paciente)->paginate(5);
             }
         }
-        
-        return view('recepcion', ['totalFuas'=>$totalFuas]);
+
+        return view('recepcion', ['totalFuas' => $totalFuas]);
     }
 
     /**
@@ -65,20 +66,39 @@ class FuaController extends Controller
      */
     public function create(Request $request)
     {
-
     }
     public function createPDF()
     {
-
     }
-    public static function createUnitPDF($id)
+    public function createUnitPDF($id)
     {
-        //$fuas=fua::findOrFail($id);
-        $fuas = fua::where('id', '=', $id)->first();
-        $paciente = paciente::where('id','=',$fuas->paciente_id)->first();
-        $fuas->paciente;
-        $pdf = PDF::loadView('recepcion.formFua', ['fuas'=>$fuas]);
-        return $pdf->download('fuaunit.pdf');
+        $fuas = array();
+        $fua = Fua::findOrFail($id);
+        //transformar fecha
+        //tipo de consulta
+        //registro de atras tampoco sale
+        $fechaT = strrev($fua->fecha);
+        $fua->fecha = $fechaT;
+        $fua->paciente;
+        $fua->profesional;
+        array_push($fuas, $fua);
+        $pdfMerger = PDFMerger::init();
+        $pdf = PDF::loadView('recepcion.demo', ['fuas' => $fuas]);
+        $pdf->save(public_path() . "/pdf.pdf");
+
+        $pdfr = PDF::loadView('recepcion.reverso', ['fuas' => $fuas]);
+        $pdfr->save(public_path() . "/pdfr.pdf");
+
+        $ruta1 = public_path() . "/pdf.pdf";
+        $ruta2 = public_path() . "/pdfr.pdf";
+
+        $pdfMerger->addPDF($ruta1, '1');
+        $pdfMerger->addPDF($ruta2, '1');
+
+        $pdfMerger->merge();
+        $pdfMerger->save("fuas.pdf", "download");
+        unlink($ruta1);
+        unlink($ruta2);
         return view('recepcion');
     }
 
@@ -105,7 +125,6 @@ class FuaController extends Controller
      */
     public function show(Request $request)
     {
-        
         $estado = 'activo';
         $detalleEstado = '';
         $pacientesEscogidos = $request->get('pacientesEscogidos');
@@ -122,18 +141,21 @@ class FuaController extends Controller
             $data = array("lista_pacientes" => $pacientesAll);
         } else {
             if ($turno == '' && $frecuencia != '') {
-                $data['lista_pacientes'] = Paciente::where('frecuencia', '=', $frecuencia)->where('estado','=','activo')->paginate(5);
+                $data['lista_pacientes'] = Paciente::where('frecuencia', '=', $frecuencia)->where('estado', '=', 'activo')->paginate(5);
             }
             if ($turno != '' && $frecuencia == '') {
-                $data['lista_pacientes'] = Paciente::where('turno', '=', $turno)->where('estado','=','activo')->paginate(5);
+                $data['lista_pacientes'] = Paciente::where('turno', '=', $turno)->where('estado', '=', 'activo')->paginate(5);
             }
             if ($turno != '' && $frecuencia != '') {
-                $data['lista_pacientes'] = Paciente::where('turno', '=', $turno)->where('frecuencia', '=', $frecuencia)->where('estado','=','activo')->paginate(5);
+                $data['lista_pacientes'] = Paciente::where('turno', '=', $turno)->where('frecuencia', '=', $frecuencia)->where('estado', '=', 'activo')->paginate(5);
             }
         }
         if ($pacientesEscogidos != '') {
             if ($fechaGenerada != '') {
-                $fuas=array();
+                $request->validate([
+                    'fechaGenerada' => 'date',
+                ]);
+                $fuas = array();
                 foreach ($pacientesEscogidos as $item) {
                     $fua = new Fua();
                     $tipoDeConsulta = $request->get('tipoDeConsulta');
@@ -142,37 +164,37 @@ class FuaController extends Controller
 
                     //ingreso de sesion
                     $sesionAnterior = fua::where('paciente_id', '=', $paciente_id)->where('tipoDeConsulta', '=', 'Atencion de Procedimientos Ambulatorios')->count();
-                    $numSesion = $sesionAnterior +1;
+                    $numSesion = $sesionAnterior + 1;
                     //ingreso de datos
-                    $fua->correlativo = fua::count() +1+ 32400; //agregar correlativo inicial mediante codigo
+                    $fua->correlativo = fua::count() + 1 + 32400; //agregar correlativo inicial mediante codigo
                     $fua->fecha = $fechaGenerada;
                     $fua->tipoDeConsulta = $tipoDeConsulta;
                     $fua->numSesion = $numSesion;
                     $fua->paciente_id = $paciente_id;
 
-                    $fua->profesional_id=$profesional_id;
+                    $fua->profesional_id = $profesional_id;
                     $fua->estado = $estado;
-                    $fua->detalleEstado=$detalleEstado;
+                    $fua->detalleEstado = $detalleEstado;
                     $fua->save();
                     $fua->paciente;
                     $fua->profesional;
 
 
-                    array_push($fuas,$fua);
+                    array_push($fuas, $fua);
                 }
                 $pdfMerger = PDFMerger::init();
 
-                $pdf = PDF::loadView('recepcion.demo', ['fuas'=>$fuas]);
-                $pdf->save(public_path()."/pdf.pdf");
+                $pdf = PDF::loadView('recepcion.demo', ['fuas' => $fuas]);
+                $pdf->save(public_path() . "/pdf.pdf");
 
-                $pdfr = PDF::loadView('recepcion.reverso', ['fuas'=>$fuas]);
-                $pdfr->save(public_path()."/pdfr.pdf");
+                $pdfr = PDF::loadView('recepcion.reverso', ['fuas' => $fuas]);
+                $pdfr->save(public_path() . "/pdfr.pdf");
 
-                $ruta1 = public_path()."/pdf.pdf";
-                $ruta2 = public_path()."/pdfr.pdf";
+                $ruta1 = public_path() . "/pdf.pdf";
+                $ruta2 = public_path() . "/pdfr.pdf";
                 $pasador = 1;
 
-                foreach($fuas as $fua){
+                foreach ($fuas as $fua) {
 
                     $pdfMerger->addPDF($ruta1, $pasador);
                     $pdfMerger->addPDF($ruta2, $pasador);
@@ -186,10 +208,10 @@ class FuaController extends Controller
 
                 //return $pdf->download('fua.pdf');
 
-            } 
+            }
         }
 
-        return view('recepcion.mostrarFua', $data , ['medicos'=>$medicosAll]);
+        return view('recepcion.mostrarFua', $data, ['medicos' => $medicosAll]);
     }
 
     /**
@@ -200,6 +222,7 @@ class FuaController extends Controller
      */
     public function edit($id)
     {
+    
 
     }
 
@@ -210,9 +233,12 @@ class FuaController extends Controller
      * @param  \App\Models\fua  $fua
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, fua $fua)
+    public function update(Request $request, $fua)
     {
-
+        /*$fuaE = request()->except(['_token','_method']);
+        $totalFuas=Fua::findOrFail($fua);
+        return view('recepcion', compact('totalFuas'));*/
+        return redirect('recepcion');
     }
 
     /**
@@ -223,7 +249,9 @@ class FuaController extends Controller
      */
     public function destroy($id)
     {
-        fua::destroy($id);
-        return redirect('recepcion');
+        $FuaInactiva = Fua::findOrFail($id);
+        //paciente::destroy($id);
+        //$pacienteInactivo->update(['estado'=>"inactivo"]);
+        return view('recepcion.desactivateF', ['FuaInactiva' => $FuaInactiva]);
     }
 }
