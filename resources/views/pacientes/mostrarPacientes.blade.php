@@ -153,4 +153,5 @@
         </div>
     </tbody>
 </table>
+{{ $pacientes->links() }}
 @endsection

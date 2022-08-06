@@ -109,9 +109,11 @@ class ProfesionalController extends Controller
      * @param  \App\Models\profesional  $profesional
      * @return \Illuminate\Http\Response
      */
-    public function edit(profesional $profesional)
+    public function edit($id)
     {
-        //
+        $profesional=Profesional::findOrFail($id);
+
+        return view('profesionales.editarProfesionales', ['profesional'=>$profesional]);
     }
 
     /**
@@ -121,9 +123,12 @@ class ProfesionalController extends Controller
      * @param  \App\Models\profesional  $profesional
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, profesional $profesional)
+    public function update(Request $request, $id)
     {
-        //
+        $datosProfesional = request()->except(['_token','_method']);
+        Profesional::where('id','=',$id)->update($datosProfesional);
+        $profesional=Profesional::findOrFail($id);
+        return view('profesional', compact('profesional'));
     }
 
     /**

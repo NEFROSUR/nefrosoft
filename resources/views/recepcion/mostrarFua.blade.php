@@ -98,15 +98,6 @@
                                 </form>
                             </section>
                         </div>
-                        <div class="form-group">
-                            <div class="col">
-                                <label for="inputState" class="form-label">Tipo de Consulta</label>
-                                <select id="inputState" name="tipoDeConsulta" class="form-select p-1 mt-0.5">
-                                    <option value='Atencion de Procedimientos Ambulatorios'>Atencion de Procedimientos Ambulatorios</option>
-                                    <option value='Consulta Externa'>Consulta Externa</option>
-                                </select>
-                            </div>
-                        </div>
                         <div>
                             <div class="form-group">
                                 <div class="col">
@@ -117,6 +108,20 @@
                                         @endforeach
                                     </select>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col">
+                                <label for="inputState" class="form-label">Tipo de Consulta</label>
+                                <select id="inputState" name="tipoDeConsulta" class="form-select p-1 mt-0.5">
+
+                                    <!--@if ($item->especialidad === 'Nefrologia               ')-->
+                                    <option value='Atencion de Procedimientos Ambulatorios'>Atencion de Procedimientos Ambulatorios</option>
+                                    <option value='Consulta Externa'>Consulta Externa</option>
+                                    <!--@else
+                                    <option value='Consulta Externa'>Consulta Externa</option>
+                                    @endif-->
+                                </select>
                             </div>
                         </div>
                     </div>

@@ -78,6 +78,13 @@
                 <div class="col">
                     <label for="inputState" class="form-label">Frecuencia</label>
                     <select id="inputState" name="frecuencia" class="form-select p-1 mt-0.5">
+                        <option value="{{$paciente->frecuencia}}">Actual:
+                            @if ($paciente->frecuencia === 'lmv')
+                            Lunes - Miercoles - Viernes
+                            @elseif ($paciente->frecuencia === 'mjs')
+                            Martes - Jueves - Sabado
+                            @endif
+                        </option>
                         <option value="lmv">Lunes - Miercoles - Viernes</option>
                         <option value="mjs">Martes - Jueves - Sabado</option>
                     </select>
@@ -85,6 +92,7 @@
                 <div class="col">
                     <label for="inputState" class="form-label">Turno</label>
                     <select id="inputState" name="turno" class="form-select p-1 mt-0.5">
+                        <option value="{{$paciente->turno}}">Actual: {{$paciente->turno}}</option>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -96,15 +104,17 @@
                         <Table>Regimen</Table>
                     </label>
                     <select id="inputState" name="regimen" class="form-select p-1 mt-0.5">
+                        <option value="{{$paciente->regimen}}">Actual: {{$paciente->regimen}}</option>
                         <option value="subsidiado">SUBSIDIADO</option>
                         <option value="semicontributivo">SEMICONTRIBUTIVO</option>
                     </select>
                 </div>
                 <div class="col">
                     <label for="inputState" class="form-label">
-                        <Table>Actualizar estado</Table>
+                        <Table>Actualizar Estado</Table>
                     </label>
                     <select id="inputState" name="estado" class="form-select p-1 mt-0.5">
+                        <option value="{{$paciente->estado}}">Actual: {{$paciente->estado}}</option>
                         <option value="activo">ACTIVO</option>
                         <option value="inactivo">INACTIVO</option>
                     </select>

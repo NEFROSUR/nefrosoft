@@ -12,7 +12,7 @@
         "laravel/framework": "^9.11",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
-        "laravel/ui": "^3.4",
+        "laravel/ui": "^4.0",
         "nesbot/carbon": "^2.58",
         "rguedes/pdfmerger": "^1.0",
         "twbs/bootstrap": "4.6.1"
