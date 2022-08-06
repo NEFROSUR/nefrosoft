@@ -35,10 +35,42 @@ class ProfesionalController extends Controller
      */
     public function store(Request $request)
     {
-        $datosProfesional = request()->except('_token');
+        $request->validate([
+            'dniP' => 'required|unique:profesionals',
+            'primerNombreP' => 'required|string',
+            'otroNombreP' => 'nullable|string',
+            'apellidoPaternoP' => 'required|string',
+            'apellidoMaternoP' => 'required|string',
+            'colegiatura' => 'required|numeric|min:4|max:5',
+            'telefonoP' => 'nullable|numeric|min:9',
+            'direccionP' => 'required|string',
+        ]);
+        $pN = strtolower($request->primerNombreP);
+        $sN = strtolower($request->otroNombreP);
+        $pA = strtolower($request->apellidoPaternoP);
+        $sA = strtolower($request->apellidoMaternoP);
+
+        $profesional = new Profesional();
+        $id =  Profesional::all()->count() +1;
+        $profesional->id = $id;
+        $profesional->dniP = $request->dniP;
+        $profesional->primerNombreP = ucfirst($pN);
+        $profesional->otroNombreP = ucfirst($sN);
+        $profesional->apellidoPaternoP = ucfirst($pA);
+        $profesional->apellidoMaternoP = ucfirst($sA);
+        $profesional->colegiatura = $request->colegiatura;
+        $profesional->telefonoP = $request->telefonoP;
+        $profesional->direccionP = $request->direccionP;
+        $profesional->especialidad = $request->especialidad;
+        $profesional->save();
+
+        $doctoresAll['doctoresAll']=profesional::orderBy('id','asc')->paginate(5);
+        return view ('profesionales.mostrarProfesionales',$doctoresAll);
+
+        /*$datosProfesional = request()->except('_token');
         profesional::insert($datosProfesional);
 
-        return view ('main');
+        return view ('main');*/
     }
 
     /**

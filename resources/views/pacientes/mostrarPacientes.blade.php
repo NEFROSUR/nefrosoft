@@ -7,8 +7,8 @@
 <div>
     <div class="navbar navbar-light float right">
         <form class="d-flex" role="search">
-            <input name="nombre" class="form-control me-2" type="search" placeholder="Nombre" aria-label="Search">
-            <input name="dni" class="form-control me-2" type="search" placeholder="Documento" aria-label="Search">
+            <input name="nombre" class="form-control me-2" type="search" placeholder="Apellido Paterno" aria-label="Search">
+            <input name="dni" class="form-control me-2" type="search" placeholder="DNI / CE" aria-label="Search">
             <div class="form-group">
 
                 <div class="col">

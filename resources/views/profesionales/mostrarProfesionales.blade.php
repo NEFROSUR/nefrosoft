@@ -3,6 +3,16 @@
 <div class="text-center">
     <h4 class="bg-warning p-2 text-dark bg-opacity-75">MOSTRAR DOCTORES Y MULTIDISCIPLINARIOS</h4>
 </div>
+@if($errors->any())
+    <div class="alert alert-danger">
+        <p><strong>Opps: No se pudo realizar la accion</strong></p>
+        <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    </div>
+@endif
 <div>
     <div class="navbar navbar-light float right">
         <form class="d-flex" role="search">
@@ -15,6 +25,8 @@
                         <option value=''>Todos</option>
                         <option >Nefrologia</option>
                         <option >Nutricion</option>
+                        <option >Psicologia</option>
+                        <option >Trabajo Social</option>
                     </select>
                 </div>
             </div>
@@ -60,7 +72,7 @@
                 <form action="{{ url('/profesionales/'.$doctor->id) }}" method="POST">
                     @csrf
                     {{ method_field('DELETE')}}
-                    <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Quieres eliminar al paciente?')" value="Borrar">
+                    <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea inhabilitar al profesional\n {{ $doctor->primerNombreP}} {{ $doctor->apellidoPaternoP}}?')" value="Borrar">
 
                 </form>
                 <form>

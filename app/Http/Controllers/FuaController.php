@@ -138,7 +138,7 @@ class FuaController extends Controller
 
 
         if ($turno == '' && $frecuencia == '') {
-            $data = array("lista_pacientes" => $pacientesAll);
+            $data['lista_pacientes'] = Paciente::where('estado', '=', 'activo')->paginate(5);
         } else {
             if ($turno == '' && $frecuencia != '') {
                 $data['lista_pacientes'] = Paciente::where('frecuencia', '=', $frecuencia)->where('estado', '=', 'activo')->paginate(5);

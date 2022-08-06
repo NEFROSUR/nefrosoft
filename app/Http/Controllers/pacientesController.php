@@ -37,7 +37,7 @@ class pacientesController extends Controller
             'telefono1' => 'nullable|numeric|min:9',
             'telefono2' => 'nullable|numeric|min:9',
             'numAfiliacion' => 'required',
-            'fechaAfiliacion' => 'date',
+            'fechaAfiliacion' => 'nullable|date',
             'fechaNacimiento' => 'date',
 
         ]);
@@ -74,6 +74,7 @@ class pacientesController extends Controller
 
         //captura de datos
         $nombre = $request->get('nombre');
+        $nombre = strtoupper($nombre);
         $dni = $request->get('dni');
         $turno = $request->get('turno');
         $frecuencia = $request->get('frecuencia');
@@ -84,7 +85,7 @@ class pacientesController extends Controller
             $datos['pacientes']=paciente::orderBy('turno','asc')->where('estado','=','activo')->paginate(5);
         }else{
             if($dni==''&&$turno==''&&$frecuencia==''){
-                $datos['pacientes']=paciente::where('primerNombre','=',$nombre)->where('estado','=','activo')->paginate(5);
+                $datos['pacientes']=paciente::where('apellidoPaterno','=',$nombre)->where('estado','=','activo')->paginate(5);
             }
             if($nombre==''&&$turno==''&&$frecuencia==''){
                 $datos['pacientes']=paciente::where('dni','=',$dni)->paginate(5);

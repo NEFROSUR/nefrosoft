@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <div>
     <div>
         <label for="tittle" class="form-label">REGISTRO DEL PACIENTE</label>
@@ -42,6 +45,7 @@
             <label for="tittle" class="form-label">Fecha de Nacimiento</label>
             <input type="text" name="fechaNacimiento" class="form-control" placeholder="dd-mm-yyyy">
         </div>
+
     </div>
     <div class="row">
         <div class="col">
@@ -58,8 +62,25 @@
             <input type="text" name="numAfiliacion" class="form-control" placeholder="N° de Afiliacion" required>
         </div>
         <div class="col p-2 mt-0.5">
-            <label for="tittle" class="form-label">Fecha de Vencimiento</label>
-            <input type="text" name="fechaAfiliacion" class="form-control" placeholder="dd-mm-yyyy" required>
+            <div>
+                <label for="tittle" class="form-label">Fecha de Vencimiento</label>
+                <section class="container">
+                    <form>
+                        <div class="row form-group">
+                            <div class="col">
+                                <div class="input-group date" id="datepicker">
+                                    <input type="text" class="form-control" name="fechaAfiliacion">
+                                    <span class="input-group-append">
+                                        <span class="input-group-text bg-white">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
         </div>
     </div>
     <label for="tittle" class="form-label">Direccion</label>
@@ -93,6 +114,13 @@
         </div>
     </div>
     <div class="p-1 mt-4">
-        <button type="submit" class="btn btn-primary "onclick="return confirm('¿Confirmar guardado de paciente?')">Guardar</button>
+        <button type="submit" class="btn btn-primary " onclick="return confirm('¿Confirmar guardado de paciente?')">Guardar</button>
     </div>
 </div>
+<script type="text/javascript">
+    $(function() {
+        $('#datepicker').datepicker({
+            format: 'dd-mm-yyyy'
+        });
+    });
+</script>

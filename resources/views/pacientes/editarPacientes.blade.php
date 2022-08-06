@@ -36,6 +36,10 @@
                     <input type="text" name="dni" class="form-control" placeholder="DNI / CE" value="{{$paciente->dni}}" required>
                 </div>
                 <div class="col p-2 mt-0.5">
+                    <label for="tittle" class="form-label">Fecha de Nacimiento</label>
+                    <input type="text" name="fechaNacimiento" class="form-control" placeholder="dd-mm-yyyy" value="{{$paciente->fechaNacimiento}}">
+                </div>
+                <div class="col p-2 mt-0.5">
                     <label for="tittle" class="form-label">Celular</label>
                     <input type="text" name="telefono" class="form-control" placeholder="Celular" value="{{$paciente->telefono}}" minlength="9" maxlength="9">
                 </div>
@@ -50,6 +54,16 @@
                 <div class="col p-2 mt-0.5">
                     <label for="tittle" class="form-label">Historia Clinica</label>
                     <input type="text" name="numHistoria" class="form-control" placeholder="N° Historia" value="{{$paciente->numHistoria}}" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col p-2 mt-0.5">
+                    <label for="tittle" class="form-label">Numero de Afiliacion</label>
+                    <input type="text" name="numAfiliacion" class="form-control" placeholder="N° de Afiliacion" value="{{$paciente->numAfiliacion}}" required>
+                </div>
+                <div class="col p-2 mt-0.5">
+                    <label for="tittle" class="form-label">Fecha de Vencimiento</label>
+                    <input type="text" name="fechaAfiliacion" class="form-control" placeholder="dd-mm-yyyy" value="{{$paciente->fechaAfiliacion}}">
                 </div>
             </div>
             <label for="tittle" class="form-label">Direccion</label>
