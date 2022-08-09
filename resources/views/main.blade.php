@@ -1,13 +1,44 @@
-@extends('welcome')
     @section('main')
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <img src="http://assets.stickpng.com/images/585e4beacb11b227491c3399.png" bg-success p-2 text-white width="50" height="50" class="img-fluid" alt="...">
+    <!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <title>Nefrosoft</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css">
+    <style>
+        body {
+            margin: 16;
+            padding: 16;
+            font-family: sans-serif;
+        }
+
+        .color-container {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            border-radius: 4px;
+        }
+    </style>
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+</head>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-dark text-white">
+        <!--<img src="http://assets.stickpng.com/images/585e4beacb11b227491c3399.png" bg-success p-2 text-white width="50" height="50" class="img-fluid" alt="...">--->
         <a class="navbar-brand" href="/">NEFROSUR</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
+        @if(auth()->check())
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="navigation" data-toggle="dropdown" aria-expanded="false" aria-label="Toggle navigation">
                     Pacientes
@@ -52,7 +83,29 @@
                     <a class="dropdown-item" href="/">...</a>
                 </div>
             </li>
+          
         </ul>
+        <ul class="w-1/2 px-16 ml-auto flex justify-end align-self-center">
+        <li class="mx-8">
+          <p class="text-l">Bienvenido <b>{{ auth()->user()->name }}</b></p>
+        </li>
+        <li>
+          <a href="{{ route('login.destroy') }}" class="
+          py-3 px-4 rounded-md bg-red-500 hover:bg-red-600 ">Salir</a>
+        </li>
+      @else
+        <li class="mx-6">
+          <a href="{{ route('login.index') }}" class="
+          border-2 border-white py-2 px-4 rounded-md hover:bg-white 
+          hover:text-indigo-700 justify-content-end">Ingresar</a>
+        </li>
+        <li>
+          <a href="{{ route('register.index') }}" class="
+          border-2 border-white py-2 px-4 rounded-md hover:bg-white 
+          hover:text-indigo-700 justify-content-end">Resgistrarse</a>
+        </li>
+      @endif
+      </ul>
 
     </nav>
 
@@ -64,7 +117,6 @@
     </div>
 </body>
 <footer>
-<h1 class="text-5xl text-center pt-24">Bienvenido a la clinica Nefrologica del Sur NEFROSUR E.I.R.L.</h1>
+<h2 class="d-flex justify-content-start align-self-end">Bienvenido a la clinica Nefrologica del Sur NEFROSUR E.I.R.L.</h2>
 </footer>
 
-@endsection

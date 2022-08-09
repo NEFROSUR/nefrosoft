@@ -32,9 +32,9 @@
 
 <body class="bg-gray-100 text-gray-800">
 @yield('main')
-    <nav class="flex py-5 bg-indigo-500 text-black">
+    <nav class="flex py-3 bg-dark text-white">
         <div class="w-1/2 px-12 mr-auto">
-            <p class="text-2xl font-bold">NEFROSOFT</p>
+        <a class="navbar-brand" href="/">NEFROSUR</a>
         </div>
         
         <ul class="w-1/2 px-16 ml-auto flex justify-end pt-1">
@@ -43,17 +43,17 @@
           <p class="text-xl">Bienvenido <b>{{ auth()->user()->name }} espero que tengas un buen dia!! Tu puedes !!</b></p>
         </li>
         <li>
-          <a href="{{ route('login.destroy') }}" class="font-bold
-          py-3 px-4 rounded-md bg-red-500 hover:bg-red-600">Log Out</a>
+          <a href="{{ route('login.destroy') }}" class="
+          py-3 px-4 rounded-md bg-red-500 hover:bg-red-600">Salir</a>
         </li>
       @else
         <li class="mx-6">
-          <a href="{{ route('login.index') }}" class="font-semibold
+          <a href="{{ route('login.index') }}" class="
           border-2 border-white py-2 px-4 rounded-md hover:bg-white 
           hover:text-indigo-700">Ingresar</a>
         </li>
         <li>
-          <a href="{{ route('register.index') }}" class="font-semibold
+          <a href="{{ route('register.index') }}" class="
           border-2 border-white py-2 px-4 rounded-md hover:bg-white 
           hover:text-indigo-700">Resgistrarse</a>
         </li>

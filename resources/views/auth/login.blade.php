@@ -15,7 +15,7 @@
         <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">* {{ $message }}</p>
         @enderror
 
-        <button type="submit" class="rounded-md bg-indigo-500 w-full text-lg text-white font-semibold p-2 my-3 hover:bg-indigo-600">Ingresar</button>
+        <button type="submit" class="rounded-md bg-green-500 w-full text-lg text-white  p-2 my-3 hover:bg-green-600">Ingresar</button>
     </form>
 </div>
 @endsection

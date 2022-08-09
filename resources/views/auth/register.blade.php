@@ -35,8 +35,8 @@ rounded-lg shadow-lg">
             <input type="password" class="border border-gray-200 rounded-md bg-gray-200 
     w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Password confirmation" id="password_confirmation" name="password_confirmation">
 
-            <button type="submit" class="rounded-md bg-indigo-500 w-full text-lg
-    text-white font-semibold p-2 my-3 hover:bg-indigo-600">Send</button>
+            <button type="submit" class="rounded-md bg-green-500 w-full text-lg
+    text-white  p-2 my-3 hover:bg-green-600">Registrar</button>
 
 
         </form>
