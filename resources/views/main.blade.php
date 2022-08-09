@@ -23,6 +23,7 @@
             display: inline-block;
             border-radius: 4px;
         }
+        
     </style>
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
@@ -117,6 +118,6 @@
     </div>
 </body>
 <footer>
-<h2 class="d-flex justify-content-start align-self-end">Bienvenido a la clinica Nefrologica del Sur NEFROSUR E.I.R.L.</h2>
+<h1 style="text-align:center; margin-bottom: 0; padding: 1rem;" >Hola {{ auth()->user()->name }} espero que tengas un buen dia !! Tu puedes !!🐶🐶🐶🐶🐶😹😹😹😹😹 :)</h1>
 </footer>
 
