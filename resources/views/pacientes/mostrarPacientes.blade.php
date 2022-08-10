@@ -85,49 +85,6 @@
                         $extra=$extra+1;
 
                     }
-<<<<<<< HEAD
-                } 
-            }
-
-            $edad = $edad +$extra;
-
-            @endphp
-            {{$edad}}
-            </td>
-            <td>{{ $paciente->direccion}}<br>{{ $paciente->direccion1}}</td>
-            <td>{{ $paciente->telefono}}<br>{{ $paciente->telefono1}}<br>{{ $paciente->telefono2}}</td>
-            <td>
-                @if ($paciente->frecuencia === 'lmv')
-                LUNES - MIECOLES - VIERNES
-                @elseif ($paciente->frecuencia === 'mjs')
-                MARTES - JUEVES - SABADO
-                @endif
-            </td>
-            <td>{{ $paciente->turno}}</td>
-
-            <td>{{ $paciente->regimen}}</td>
-            <td>N°: {{ $paciente->numAfiliacion}} - Hasta: {{ $paciente->fechaAfiliacion}}</td>
-            <td>
-                <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar al paciente\n {{ $paciente->primerNombre}} {{ $paciente->apellidoPaterno}}?')" href="{{ url('/pacientes/'.$paciente->id.'/edit') }}">
-                    Actualizar
-                </a>
-
-                <form action="{{ url('/pacientes/'.$paciente->id) }}" method="POST">
-                    @csrf
-                    {{ method_field('DELETE')}}
-                    <input class="btn btn-outline-danger" type="submit" onclick="return confirm('¿Esta seguro que quiere deshabilitar al paciente\n {{ $paciente->primerNombre}} {{ $paciente->apellidoPaterno}}?')" value="Estado">
-
-                </form>
-                <form>
-                    <input class="btn btn-outline-primary" type="submit" value="Detalle" >
-
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-=======
                     if($mes==$mesA){
                         if($dia<$diaA){
                             $extra=$extra+1;
@@ -176,7 +133,7 @@
 </div>
 
 <div class="container">
->>>>>>> 58b211a0c5b3b8d8770298721af21a32f2515f4d
+
 {{ $pacientes->links() }}
 </div>
 @endsection

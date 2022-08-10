@@ -41,7 +41,7 @@ class ProfesionalController extends Controller
             'otroNombreP' => 'nullable|string',
             'apellidoPaternoP' => 'required|string',
             'apellidoMaternoP' => 'required|string',
-            'colegiatura' => 'required|numeric|min:4|max:5',
+            'colegiatura' => 'required|numeric|min:4',
             'telefonoP' => 'nullable|numeric|min:9',
             'direccionP' => 'required|string',
         ]);
