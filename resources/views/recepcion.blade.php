@@ -3,7 +3,7 @@
 <div class="text-center">
     <h4 class="bg-info p-2 text-white bg-opacity-75">LISTA DE FORMATOS DE ATENCION</h4>
 </div>
-<div>
+<div class="container">
     <label for="exampleFormControlSelect2">Busqueda</label>
     <div class="navbar navbar-light float right">
         <form class="d-flex" role="search">
@@ -35,7 +35,8 @@
 
     </div>
 </div>
-<table class="table table-light table-hover ">
+<div class="container ">
+<table class="table table-condensed table-hover table-bordered w-auto small rounded-md">
     <thead class="thead-light">
         <tr>
             <th>N°</th>
@@ -85,5 +86,6 @@
         </tr>
     </tbody>
 </table>
-<div>{{$totalFuas->links()}}</div>
+</div>
+<div class="container">{{$totalFuas->links()}}</div>
 @endsection
