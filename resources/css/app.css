@@ -13,3 +13,7 @@ body {
 div.Section1 {
     page: Section1;
 }
+
+div.table-condensed{
+    font-size: 100px;
+  }

@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 <div class="text-center">
-    <h4 class="bg-warning p-2 text-dark bg-opacity-75">LISTA DE FORMATOS DE ATENCION</h4>
+    <h4 class="bg-info p-2 text-white bg-opacity-75">LISTA DE FORMATOS DE ATENCION</h4>
 </div>
 <div>
     <label for="exampleFormControlSelect2">Busqueda</label>
