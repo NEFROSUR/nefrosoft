@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 <div class="text-center">
-    <h4 class="bg-warning p-2 text-dark bg-opacity-75">GENERAR HISTORIAS CLINICAS</h4>
+    <h4 class="bg-info p-2 text-white bg-opacity-75">GENERAR HISTORIAS CLINICAS</h4>
 </div>
 <div style="float: left; width: 100%">
     <div class="container w-75 border p-2 mt-4">

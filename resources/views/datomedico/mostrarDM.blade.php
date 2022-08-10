@@ -1,9 +1,9 @@
 @extends('main')
 @section('content')
 <div class="text-center">
-    <h4 class="bg-warning p-2 text-dark bg-opacity-75">DATOS MEDICOS DEL PACIENTE</h4>
+    <h4 class="bg-info p-2 text-white bg-opacity-75">DATOS MEDICOS DEL PACIENTE</h4>
 </div>
-<div>
+<div class="container">
     <div class="navbar navbar-light float right">
         <form class="d-flex" role="search">
             <input name="dni" class="form-control me-2" type="search" placeholder="DNI / CE" aria-label="Search">
@@ -12,7 +12,8 @@
         </form>
 
     </div>
-    <table class="table table-light table-hover ">
+    <div class="container">
+    <table class="table table-condensed table-hover table-bordered w-auto small rounded-md">
         <thead class="thead-light">
             <tr>
                 <th>Documento de Identidad</th>
@@ -33,5 +34,7 @@
         </tbody>
     </table>
     <button class="btn btn-outline-primary" type="submit">Actualizar Datos</button>
+
+    </div>
 
     @endsection

@@ -39,7 +39,7 @@
 
 
 </div>
-<div  class="container" >
+<div  class="container mx-auto" >
     <table class="table table-condensed table-hover table-bordered w-auto small rounded-md">
         <thead class="thead-light">
             <tr>

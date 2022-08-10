@@ -13,7 +13,7 @@
         </ul>
     </div>
 @endif
-<div>
+<div class="container">
     <div class="navbar navbar-light float right">
         <form class="d-flex" role="search">
             <input name="nombre" class="form-control me-2" type="search" placeholder="Nombre" aria-label="Search">
@@ -37,7 +37,8 @@
 
 
 </div>
-<table class="table table-light table-hover ">
+<div class="container">
+<table class="table table-condensed table-hover table-bordered w-auto small rounded-md">
     <thead class="thead-light">
         <tr>
             <th>N°</th>
@@ -87,5 +88,6 @@
         @endforeach
     </tbody>
 </table>
+</div>
 {{ $doctoresAll->links() }}
 @endsection
