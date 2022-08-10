@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DatomedicoController;
 use App\Http\Controllers\FuaController;
 use App\Http\Controllers\HistoriaController;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +9,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfesionalController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+
 
 
 Route::get('/', function () {
@@ -45,3 +47,4 @@ Route::get('/logout', [SessionsController::class, 'destroy'])
     ->middleware('auth')
     ->name('login.destroy');
 
+Route::resource('datomedico',DatomedicoController::class);

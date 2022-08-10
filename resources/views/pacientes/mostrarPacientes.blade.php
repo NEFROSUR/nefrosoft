@@ -121,7 +121,7 @@
 
                 </form>
                 <form>
-                    <input class="btn btn-outline-primary" type="submit" value="Detalle">
+                    <input class="btn btn-outline-primary" type="submit" value="Detalle" >
 
                 </form>
             </td>

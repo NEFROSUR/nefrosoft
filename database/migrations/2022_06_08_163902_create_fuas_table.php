@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('fuas', function (Blueprint $table) {
             $table->id('id')->autoincrement();
-            $table->integer('correlativo');
+            $table->integer('correlativo')->unique();
             $table->date('fecha');
             $table->char('tipoDeConsulta');
             $table->integer('numSesion');

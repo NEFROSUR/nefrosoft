@@ -17,5 +17,9 @@ class fua extends Model
     {
         return $this->belongsTo(profesional::class,'profesional_id');
     }
+    public function historia()
+    {
+        return $this->hasMany(historia::class,'correlativo');
+    }
 
 }

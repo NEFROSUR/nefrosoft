@@ -17,4 +17,9 @@ class paciente extends Model
     {
         return $this->hasMany(fua::class,'paciente_id');
     }
+    public function datosmedicos()
+    {
+        return $this->hasMany(datomedico::class,'paciente_id');
+    }
 }
+
