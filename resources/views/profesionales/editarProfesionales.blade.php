@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="text-center">
-    <h4 class="bg-warning p-2 text-dark bg-opacity-75">EDITANDO PROFESIONAL: {{$profesional->primerNombreP}} {{$profesional->apellidoPaternoP}} {{$profesional->apellidoMaternoP}}</h4>
+    <h4 class="bg-info p-2 text-white bg-opacity-75">EDITANDO PROFESIONAL: {{$profesional->primerNombreP}} {{$profesional->apellidoPaternoP}} {{$profesional->apellidoMaternoP}}</h4>
 </div>
 <div class="container border p-4 mt-4">
     <form action="{{ url('/profesionales/'.$profesional->id) }}" method="POST">
