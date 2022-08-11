@@ -26,9 +26,9 @@ class DatomedicoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $pacientes['pacientes'] = paciente::All();
+        $pacientes['pacientes'] = paciente::orderBy('turno','asc')->get();
         return view('datomedico.crearDM',$pacientes);
     }
 
@@ -40,6 +40,7 @@ class DatomedicoController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
 
         ]);
@@ -101,5 +102,11 @@ class DatomedicoController extends Controller
     public function destroy(datomedico $datomedico)
     {
         //
+    }
+    public function mdatoBase()
+    {
+        $datobase=1;
+        //$this->create($datobase);
+        return view('datomedico.datomedicoBase');
     }
 }

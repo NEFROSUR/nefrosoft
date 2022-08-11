@@ -48,3 +48,5 @@ Route::get('/logout', [SessionsController::class, 'destroy'])
     ->name('login.destroy');
 
 Route::resource('datomedico',DatomedicoController::class);
+
+Route::get('/datomedico/datomedicoBase', [DatomedicoController::class, 'mdatoBase'])->name('datomedicoBase');

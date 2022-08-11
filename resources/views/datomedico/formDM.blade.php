@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
@@ -63,7 +64,7 @@
     <div class="row">
         <div class="col p-2 mt-0.5">
             <div>
-                <label for="tittle" class="form-label">Fecha de Consulta Neforlogica</label>
+                <label for="tittle" class="form-label">Fecha de Consulta Nefrologica</label>
                 <section class="container">
                     <form>
                         <div class="row form-group">

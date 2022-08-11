@@ -13,28 +13,41 @@
 
     </div>
     <div class="container">
-    <table class="table table-condensed table-hover table-bordered w-auto small rounded-md">
-        <thead class="thead-light">
-            <tr>
-                <th>Documento de Identidad</th>
-                <th>Nombre del Paciente</th>
-                <th>Direccion</th>
-                <th>Telefono de Contacto</th>
-                <th>mes</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ $paciente->dni}}</td>
-                <td>{{ $paciente->apellidoPaterno}} {{ $paciente->apellidoMaterno}}, {{ $paciente->primerNombre}} {{ $paciente->otroNombre}}</td>
-                <td>{{ $paciente->direccion}}<br>{{ $paciente->direccion1}}</td>
-                <td>{{ $paciente->telefono}}<br>{{ $paciente->telefono1}}<br>{{ $paciente->telefono2}}</td>
-                <td>{{ optional($paciente->datomedico)->mes}}</td>
-            </tr>
-        </tbody>
-    </table>
-    <button class="btn btn-outline-primary" type="submit">Actualizar Datos</button>
+        <table class="table table-condensed table-hover table-bordered w-auto small rounded-md">
+            <thead class="thead-light">
+                <tr>
+                    <th>Documento de Identidad</th>
+                    <th>Nombre del Paciente</th>
+                    <th>Opciones</th>
 
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ $paciente->dni}}</td>
+                    <td>{{ $paciente->apellidoPaterno}} {{ $paciente->apellidoMaterno}}, {{ $paciente->primerNombre}} {{ $paciente->otroNombre}}</td>
+                    <td>
+                        <form action="{{ url('/datomedico/create') }}" method="GET">
+                            <input class="btn btn-outline-warning" type="submit" value="Datos Medicos Base" id="medicosB">
+                        </form>
+                        <a class="btn btn-outline-success btn-sm p-auto" href="{{ url('/datomedico/mdatoBase') }}">
+                            Datos Medicos Base
+                        </a>
+                        <a class="btn btn-outline-success btn-sm p-auto" href="{{url('/datomedico/create')}}">
+                            Consulta Nefrologica
+                        </a>
+                        <a class="btn btn-outline-success btn-sm p-auto" href="">
+                            Ver KTV
+                        </a>
+                        <a class="btn btn-outline-success btn-sm p-auto" href="">
+                            Generar KTV
+                        </a>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
     </div>
-
+    @yield('datomedicoBase')
+    <button class="btn btn-outline-primary" type="submit">Actualizar Datos</button>
     @endsection

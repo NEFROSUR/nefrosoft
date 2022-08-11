@@ -16,6 +16,7 @@
 <div class="container w-30 border p-4 mt-4">
     <form action="{{ url('/datomedico') }}" method="POST">
         @csrf
+
         @include('datomedico.formDM')
     </form>
     <form action="{{ url('/datomedico/create') }}">
