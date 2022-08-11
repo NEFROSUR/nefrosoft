@@ -112,17 +112,17 @@
                 <td>N°: {{ $paciente->numAfiliacion}} - Hasta: {{ $paciente->fechaAfiliacion}}</td>
                 <td>
                     <a class="btn btn-outline-warning btn-sm p-auto" onclick="return confirm('¿Esta seguro que quiere editar al paciente\n {{ $paciente->primerNombre}} {{ $paciente->apellidoPaterno}}?')" href="{{ url('/pacientes/'.$paciente->id.'/edit') }}">
-                        Actualizar
+                    ✏️
                     </a>
 
                     <form action="{{ url('/pacientes/'.$paciente->id) }}" method="POST">
                         @csrf
                         {{ method_field('DELETE')}}
-                        <input class="btn btn-outline-danger btn-sm p-auto" type="submit" onclick="return confirm('¿Esta seguro que quiere deshabilitar al paciente\n {{ $paciente->primerNombre}} {{ $paciente->apellidoPaterno}}?')" value="Estado">
+                        <input class="btn btn-outline-danger btn-sm p-auto" type="submit" onclick="return confirm('¿Esta seguro que quiere deshabilitar al paciente\n {{ $paciente->primerNombre}} {{ $paciente->apellidoPaterno}}?')" value="🗑️">
 
                     </form>
                     <form>
-                        <input class="btn btn-outline-primary btn-sm p-auto" type="submit" value="Detalle">
+                        <input class="btn btn-outline-primary btn-sm p-auto" type="submit" value="❕">
 
                     </form>
                 </td>
