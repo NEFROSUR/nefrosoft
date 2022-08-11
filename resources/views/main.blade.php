@@ -37,61 +37,69 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="container">
-        <ul class="navbar-nav nav justify-content-center ">
-            @if(auth()->check())
+            <ul class="navbar-nav nav justify-content-center ">
+                @if(auth()->check())
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="navigation" data-toggle="dropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    Pacientes
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{{ url('/pacientes/create') }}">Ingresar nuevo paciente</a>
-                    <a class="dropdown-item" href="{{ url('/pacientes/show') }}">Mostrar Pacientes</a>
-                    <a class="dropdown-item" href="{{ url('/datomedico/show') }}">Datos Medicos</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" role="navigation" data-toggle="dropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    Recepcion
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/recepcion">Ver Atenciones</a>
-                    <a class="dropdown-item" href="/recepcion/show">Crear Formato de Atencion</a>
-                    <a class="dropdown-item" href="/historia/create">Crear Hoja de Monitoreo</a>
-                    <a class="dropdown-item" href="/">Crear Multisciplinario</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled">Almacen</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled">Jefatura de Enfermeria</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled">Direccion Medica</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled">Administracion</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" role="navigation" data-toggle="dropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    Recursos Humanos
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/profesionales/create">Registrar Profesional</a>
-                    <a class="dropdown-item" href="/profesionales/show">Ver profesionales</a>
-                    <a class="dropdown-item" href="/">Horarios de Profesionales</a>
-                    <a class="dropdown-item" href="/">...</a>
-                </div>
-            </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="navigation" data-toggle="dropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        Pacientes
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ url('/pacientes/create') }}">Ingresar nuevo paciente</a>
+                        <a class="dropdown-item" href="{{ url('/pacientes/show') }}">Mostrar Pacientes</a>
+                        <a class="dropdown-item" href="{{ url('/datomedico/show') }}">Datos Medicos</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" role="navigation" data-toggle="dropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        Recepcion
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/recepcion">Ver Atenciones</a>
+                        <a class="dropdown-item" href="/recepcion/show">Crear Formato de Atencion</a>
+                        <a class="dropdown-item" href="/historia/create">Crear Hoja de Monitoreo</a>
+                        <a class="dropdown-item" href="/">Crear Multisciplinario</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="navigation" data-toggle="dropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        Jefatura de Enfermeria
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ url('/datomedico/create') }}">Registrar Nuevos Datos Medicos</a>
+                        <a class="dropdown-item" href="{{ url('/datomedico/show') }}">Ver Datos Medicos</a>
+                        <a class="dropdown-item" href="">Generar Anexo 2</a>
+                        <a class="dropdown-item" href="">Generar Anexo 7</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Almacen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Direccion Medica</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Administracion</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" role="navigation" data-toggle="dropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        Recursos Humanos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/profesionales/create">Registrar Profesional</a>
+                        <a class="dropdown-item" href="/profesionales/show">Ver profesionales</a>
+                        <a class="dropdown-item" href="/">Horarios de Profesionales</a>
+                        <a class="dropdown-item" href="/">...</a>
+                    </div>
+                </li>
 
-            </div>
-            
-                <h1 class="text-l">Bienvenido <b>{{ auth()->user()->name }}</b></h1>
-            
-            
-                <a href="{{ route('login.destroy') }}" class="py-2 px-3 rounded-md bg-red-500 hover:bg-red-600 ">Salir</a>
-            
+        </div>
+
+        <h1 class="text-l">Bienvenido <b>{{ auth()->user()->name }}</b></h1>
+
+
+        <a href="{{ route('login.destroy') }}" class="py-2 px-3 rounded-md bg-red-500 hover:bg-red-600 ">Salir</a>
+
         </ul>
     </nav>
 

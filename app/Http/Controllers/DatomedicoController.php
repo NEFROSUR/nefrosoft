@@ -28,7 +28,8 @@ class DatomedicoController extends Controller
      */
     public function create(Request $request)
     {
-        return view('datomedico.crearDM');
+        $pacientes['pacientes'] = paciente::All();
+        return view('datomedico.crearDM',$pacientes);
     }
 
     /**
@@ -37,9 +38,14 @@ class DatomedicoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+
+        ]);
+        $datomedico = new datomedico();
+        $fechaActual = Carbon::now();
+        
     }
 
     /**
