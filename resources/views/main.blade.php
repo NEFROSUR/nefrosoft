@@ -68,7 +68,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="{{ url('/datomedico/create') }}">Registrar Nuevos Datos Medicos</a>
                         <a class="dropdown-item" href="{{ url('/datomedico/show') }}">Ver Datos Medicos</a>
-                        <a class="dropdown-item" href="">Generar Anexo 2</a>
+                        <a class="dropdown-item" href="{{url('/historias/formHD')}}">Generar Anexo 2</a>
                         <a class="dropdown-item" href="">Generar Anexo 7</a>
                     </div>
                 </li>
