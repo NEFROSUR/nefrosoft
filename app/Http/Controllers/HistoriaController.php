@@ -18,9 +18,7 @@ class HistoriaController extends Controller
      */
     public function index()
     {
-        $pdf = PDF::loadView('historia');
-        return $pdf->download('hd.pdf');
-        //return view ('historia');
+        return view ('historia');
     }
 
     /**
