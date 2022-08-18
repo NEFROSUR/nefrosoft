@@ -75,8 +75,16 @@
                 <li class="nav-item">
                     <a class="nav-link disabled">Almacen</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Direccion Medica</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="navigation" data-toggle="dropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    Direccion Medica
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ url('/consultaCN/create') }}">Registrar Nueva Consulta Nefrologica</a>
+                        <a class="dropdown-item" href="{{ url('/consultaCN/show') }}">Ver Consultas Nefrologicas</a>
+                        <a class="dropdown-item" href="">Generar Anexo 2</a>
+                        <a class="dropdown-item" href="">Generar Anexo 7</a>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled">Administracion</a>

@@ -9,6 +9,8 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfesionalController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\ConsultaNefrologica;
+use App\Http\Controllers\ExamenesKTV;
 
 
 
@@ -48,5 +50,7 @@ Route::get('/logout', [SessionsController::class, 'destroy'])
     ->name('login.destroy');
 
 Route::resource('datomedico',DatomedicoController::class);
-
+Route::resource('consultaCN',ConsultaNefrologica::class);
+Route::resource('examenKTV',ExamenesKTV::class);
+Route::get('/examenKTV/create/{id}' , [FuaController::class, 'create']);
 Route::get('/datomedico/datomedicoBase', [DatomedicoController::class, 'mdatoBase'])->name('datomedicoBase');

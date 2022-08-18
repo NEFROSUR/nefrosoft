@@ -39,7 +39,7 @@
                         <a class="btn btn-outline-success btn-sm p-auto" href="">
                             Ver KTV
                         </a>
-                        <a class="btn btn-outline-success btn-sm p-auto" href="">
+                        <a class="btn btn-outline-success btn-sm p-auto" href="{{url('/examenKTV/create/'.$paciente->id)}}" method="POST">
                             Generar KTV
                         </a>
                     </td>
