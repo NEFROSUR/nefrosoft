@@ -18,10 +18,10 @@ class PacienteSeeder extends Seeder
         //
         paciente::truncate();
   
-        $csvFile = fopen(base_path("database/data/pacientes_demo2.csv"), "r");
+        $csvFile = fopen(base_path("database/data/PACIENTES.csv"), "r");
   
         $firstline = true;
-        while (($data = fgetcsv($csvFile, 2000, ";")) !== FALSE) {
+        while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
             if (!$firstline) {
                 paciente::create([
                     "id" => $data['0'],
@@ -31,15 +31,20 @@ class PacienteSeeder extends Seeder
                     "apellidoPaterno" => $data['4'],
                     "apellidoMaterno" => $data['5'],
                     "fechaNacimiento" => $data['6'],
-                    "telefono" => $data['7'],
-                    "direccion" => $data['8'],
-                    "numHistoria" => $data['9'],
-                    "regimen" => $data['10'],
-                    "numAfiliacion" => $data['11'],
-                    "turno" => $data['12'],
-                    "fechaAfiliacion" => $data['13'],
-                    "frecuencia" => $data['14'],
-                    "estado" => $data['15']
+                    "direccion" => $data['7'],
+                    "direccion1" => $data['8'],
+                    "telefono" => $data['9'],
+                    "telefono1" => $data['10'],
+                    "telefono2" => $data['11'],
+                    "numHistoria" => $data['12'],
+                    "regimen" => $data['13'],
+                    "numAfiliacion" => $data['14'],
+                    "fechaAfiliacion" => $data['15'],
+                    "turno" => $data['16'],
+                    "frecuencia" => $data['17'],
+                    "estado" => $data['18'],
+                    "detalleEstado" => $data['19']
+
                 ]);    
             }
             $firstline = false;
