@@ -36,6 +36,7 @@ return new class extends Migration
             $table->string('frecuencia'); //turno al que pertenece actualmente
             $table->char('estado',8);//OBS_0010
             $table->string('detalleEstado')->nullable();//OBS_0010
+            $table->integer('cama')->nullable();
             $table->timestamps();
         });
     }

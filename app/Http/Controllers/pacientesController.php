@@ -39,6 +39,7 @@ class pacientesController extends Controller
             'numAfiliacion' => 'required',
             'fechaAfiliacion' => 'nullable|date',
             'fechaNacimiento' => 'date',
+            'cama'=>'numeric',
 
         ]);
 
@@ -67,6 +68,7 @@ class pacientesController extends Controller
         $paciente->frecuencia = $request->frecuencia;
         $paciente->estado =$estado;
         $paciente->detalleEstado =$detalleEstado;
+        $paciente->cama =$request->cama;
         $paciente->save();
         return view ('pacientes'); 
     } 
@@ -82,22 +84,22 @@ class pacientesController extends Controller
         $fechaActual = $fechaActual->format('Y-m-d');
 
         if($nombre==''&&$dni==''&&$turno==''&&$frecuencia==''){
-            $datos['pacientes']=paciente::orderBy('turno','asc')->where('estado','=','activo')->paginate(5);
+            $datos['pacientes']=paciente::orderBy('apellidoPaterno')->where('estado','=','activo')->paginate(10);
         }else{
             if($dni==''&&$turno==''&&$frecuencia==''){
-                $datos['pacientes']=paciente::where('apellidoPaterno','=',$nombre)->where('estado','=','activo')->paginate(5);
+                $datos['pacientes']=paciente::where('apellidoPaterno','=',$nombre)->where('estado','=','activo')->paginate(10);
             }
             if($nombre==''&&$turno==''&&$frecuencia==''){
-                $datos['pacientes']=paciente::where('dni','=',$dni)->paginate(5);
+                $datos['pacientes']=paciente::where('dni','=',$dni)->paginate(10);
             }
             if($nombre==''&&$dni==''&&$frecuencia==''){
-                $datos['pacientes']=paciente::where('turno','=',$turno)->where('estado','=','activo')->paginate(5);
+                $datos['pacientes']=paciente::where('turno','=',$turno)->where('estado','=','activo')->paginate(10);
             }
             if($nombre==''&&$dni==''&&$turno==''){
-                $datos['pacientes']=paciente::where('frecuencia','=',$frecuencia)->where('estado','=','activo')->paginate(5);
+                $datos['pacientes']=paciente::where('frecuencia','=',$frecuencia)->where('estado','=','activo')->paginate(10);
             }
             if($nombre==''&&$dni==''){
-                $datos['pacientes']=paciente::where('frecuencia','=',$frecuencia)->where('turno','=',$turno)->where('estado','=','activo')->paginate(5);
+                $datos['pacientes']=paciente::where('frecuencia','=',$frecuencia)->where('turno','=',$turno)->where('estado','=','activo')->paginate(10);
             }
         }
         return view ('pacientes.mostrarPacientes',$datos,['fechaActual'=>$fechaActual]);

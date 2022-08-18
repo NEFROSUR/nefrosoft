@@ -9,26 +9,6 @@
         <form class="d-flex" role="search">
             <input name="correlativo" class="form-control me-2" type="search" placeholder="Correlativo" aria-label="Search">
             <input name="documento" class="form-control me-2" type="search" placeholder="documento" aria-label="Search">
-            <div class="form-group">
-                <div class="col">
-                    <label for="inputState" class="form-label">Frecuencia</label>
-                    <select id="inputState" name="frecuencia" class="form-select p-1 mt-0.5">
-                        <option value=''>Todos</option>
-                        <option value="lmv">Lunes - Miecoles - Viernes</option>
-                        <option value="mjs">Martes - Jueves - Sabado</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col">
-                <label for="inputState" class="form-label">Turno</label>
-                <select id="inputState" name="turno" class="form-select p-1 mt-0.5">
-                    <option value=''>Todos</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                </select>
-            </div>
 
             <button class="btn btn-outline-success" type="submit">Filtrar</button>
         </form>
@@ -61,15 +41,10 @@
             <td>{{ $fua->profesional->primerNombreP }} {{ $fua->profesional->otroNombreP }} {{ $fua->profesional->apellidoPaternoP }} {{ $fua->profesional->apellidoMaternoP }}</td>
             <td>{{ $fua->created_at }}</td>
             <td>
-                
-
+            
                 <form action="{{ url('/recepcion/pdfunit/'.$fua->id) }}" method="GET">
-
                     <input class="btn btn-outline-success" type="submit" onclick="return confirm('¿Deseas imprimir nuevamente este Formato?')" value="Imprimir">
-
                 </form>
-
-
                 <form action="{{ url('/recepcion/'.$fua->id) }}" method="POST">
                     @csrf
                     {{ method_field('DELETE')}}

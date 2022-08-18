@@ -44,15 +44,15 @@ class FuaController extends Controller
             $f2 = $f2->format('d-m-Y');
             $f1 = Carbon::now()->startOfMonth();
             $f1 = $f1->format('d-m-Y');
-            $totalFuas = fua::whereBetween('fecha', [$f1, $f2])->cursorPaginate(5);
+            //$totalFuas = fua::whereBetween('fecha', [$f1, $f2])->cursorPaginate(5);
+            $totalFuas = fua::orderBy('correlativo','asc')->paginate(10);
         } else {
             if ($turno == '' && $frecuencia == '' && $correlativo != '' && $documento == '') {
-                $totalFuas = fua::where('correlativo', '=', $correlativo)->paginate(5);
+                $totalFuas = fua::where('correlativo', '=', $correlativo)->paginate(10);
             }
             if ($turno == '' && $frecuencia == '' && $correlativo == '' && $documento != '') {
-                $paciente = paciente::where('dni', '=', $documento)->paginate(5);
-                //$id_buscado = $paciente->id;
-                $totalFuas = fua::where('paciente_id', '=', $paciente)->paginate(5);
+                $paciente = paciente::where('dni', '=', $documento)->paginate(10);
+                $totalFuas = fua::where('paciente_id', '=', $paciente)->paginate(10);
             }
         }
 
@@ -138,16 +138,16 @@ class FuaController extends Controller
 
 
         if ($turno == '' && $frecuencia == '') {
-            $data['lista_pacientes'] = Paciente::where('estado', '=', 'activo')->paginate(5);
+            $data['lista_pacientes'] = Paciente::orderBy('cama','asc')->where('estado', '=', 'activo')->paginate(11);
         } else {
             if ($turno == '' && $frecuencia != '') {
-                $data['lista_pacientes'] = Paciente::where('frecuencia', '=', $frecuencia)->where('estado', '=', 'activo')->paginate(5);
+                $data['lista_pacientes'] = Paciente::orderBy('cama','asc')->where('frecuencia', '=', $frecuencia)->where('estado', '=', 'activo')->paginate(11);
             }
             if ($turno != '' && $frecuencia == '') {
-                $data['lista_pacientes'] = Paciente::where('turno', '=', $turno)->where('estado', '=', 'activo')->paginate(5);
+                $data['lista_pacientes'] = Paciente::orderBy('cama','asc')->where('turno', '=', $turno)->where('estado', '=', 'activo')->paginate(11);
             }
             if ($turno != '' && $frecuencia != '') {
-                $data['lista_pacientes'] = Paciente::where('turno', '=', $turno)->where('frecuencia', '=', $frecuencia)->where('estado', '=', 'activo')->paginate(5);
+                $data['lista_pacientes'] = Paciente::orderBy('cama','asc')->where('turno', '=', $turno)->where('frecuencia', '=', $frecuencia)->where('estado', '=', 'activo')->paginate(11);
             }
         }
         if ($pacientesEscogidos != '') {
