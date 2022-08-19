@@ -45,7 +45,7 @@ class FuaController extends Controller
             $f1 = Carbon::now()->startOfMonth();
             $f1 = $f1->format('d-m-Y');
             //$totalFuas = fua::whereBetween('fecha', [$f1, $f2])->cursorPaginate(5);
-            $totalFuas = fua::orderBy('correlativo','asc')->paginate(10);
+            $totalFuas = fua::orderBy('correlativo', 'asc')->paginate(10);
         } else {
             if ($turno == '' && $frecuencia == '' && $correlativo != '' && $documento == '') {
                 $totalFuas = fua::where('correlativo', '=', $correlativo)->paginate(10);
@@ -78,12 +78,22 @@ class FuaController extends Controller
         //tipo de consulta
         //registro de atras tampoco sale
         $fechaT = strrev($fua->fecha);
+
+        $fecha_invertida = '';
+        $index = strlen($fechaT) - 1;
+        while ($index >= 0) {
+            $fecha_invertida .= $fechaT[$index];
+
+            $index--;
+        }
+
         $fua->fecha = $fechaT;
         $fua->paciente;
         $fua->profesional;
+        
         array_push($fuas, $fua);
         $pdfMerger = PDFMerger::init();
-        $pdf = PDF::loadView('recepcion.demo', ['fuas' => $fuas]);
+        $pdf = PDF::loadView('recepcion.demoIni', ['fuas' => $fuas]);
         $pdf->save(public_path() . "/pdf.pdf");
 
         $pdfr = PDF::loadView('recepcion.reverso', ['fuas' => $fuas]);
@@ -138,16 +148,16 @@ class FuaController extends Controller
 
 
         if ($turno == '' && $frecuencia == '') {
-            $data['lista_pacientes'] = Paciente::orderBy('cama','asc')->where('estado', '=', 'activo')->paginate(11);
+            $data['lista_pacientes'] = Paciente::orderBy('cama', 'asc')->where('estado', '=', 'activo')->paginate(11);
         } else {
             if ($turno == '' && $frecuencia != '') {
-                $data['lista_pacientes'] = Paciente::orderBy('cama','asc')->where('frecuencia', '=', $frecuencia)->where('estado', '=', 'activo')->paginate(11);
+                $data['lista_pacientes'] = Paciente::orderBy('cama', 'asc')->where('frecuencia', '=', $frecuencia)->where('estado', '=', 'activo')->paginate(11);
             }
             if ($turno != '' && $frecuencia == '') {
-                $data['lista_pacientes'] = Paciente::orderBy('cama','asc')->where('turno', '=', $turno)->where('estado', '=', 'activo')->paginate(11);
+                $data['lista_pacientes'] = Paciente::orderBy('cama', 'asc')->where('turno', '=', $turno)->where('estado', '=', 'activo')->paginate(11);
             }
             if ($turno != '' && $frecuencia != '') {
-                $data['lista_pacientes'] = Paciente::orderBy('cama','asc')->where('turno', '=', $turno)->where('frecuencia', '=', $frecuencia)->where('estado', '=', 'activo')->paginate(11);
+                $data['lista_pacientes'] = Paciente::orderBy('cama', 'asc')->where('turno', '=', $turno)->where('frecuencia', '=', $frecuencia)->where('estado', '=', 'activo')->paginate(11);
             }
         }
         if ($pacientesEscogidos != '') {
@@ -222,8 +232,6 @@ class FuaController extends Controller
      */
     public function edit($id)
     {
-    
-
     }
 
     /**

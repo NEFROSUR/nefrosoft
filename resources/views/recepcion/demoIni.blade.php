@@ -5029,7 +5029,7 @@
         <td class="column1 style42 null style60" colspan="12"></td>
         <td class="column13 style136 s style137" colspan="3">00026954</td>
         <td class="column16 style1 s">- </td>
-        <td class="column17 style136 s style138" colspan="2">{{substr($fua->fecha,-2,1)}}{{substr($fua->fecha,-1,1)}}</td>
+        <td class="column17 style136 s style138" colspan="2">{{substr($fua->fecha,-4,1)}}{{substr($fua->fecha,-3,1)}}</td>
         <td class="column19 style1 s">- </td>
         <td class="column20 style139 n">
           @php
@@ -5111,14 +5111,16 @@
         </td>
       </tr>
       <tr class="row11">
-        <td class="column1 style158 n">{{substr($fua->fecha,-10,1)}}</td>
-        <td class="column2 style158 n">{{substr($fua->fecha,-9,1)}}</td>
-        <td class="column3 style158 n">{{substr($fua->fecha,-7,1)}}</td>
-        <td class="column4 style158 n">{{substr($fua->fecha,-6,1)}}</td>
-        <td class="column5 style158 n">{{substr($fua->fecha,-4,1)}}</td>
-        <td class="column6 style158 n">{{substr($fua->fecha,-3,1)}}</td>
-        <td class="column7 style158 n">{{substr($fua->fecha,-2,1)}}</td>
-        <td class="column8 style158 n">{{substr($fua->fecha,-1,1)}}</td>
+        <td class="column1 style158 n">{{substr($fua->fecha,-9,1)}}</td>
+        <td class="column2 style158 n">{{substr($fua->fecha,-10,1)}}</td>
+
+        <td class="column3 style158 n">{{substr($fua->fecha,-6,1)}}</td>
+        <td class="column4 style158 n">{{substr($fua->fecha,-7,1)}}</td>
+
+        <td class="column5 style158 n">{{substr($fua->fecha,-1,1)}}</td>
+        <td class="column6 style158 n">{{substr($fua->fecha,-2,1)}}</td>
+        <td class="column7 style158 n">{{substr($fua->fecha,-3,1)}}</td>
+        <td class="column8 style158 n">{{substr($fua->fecha,-4,1)}}</td>
         <td class="column16 style18 null"></td>
         <td class="column23 style73 s style69" colspan="5">SEMICONTRIBUTIVO </td>
         <td class="column28 style155 n">
