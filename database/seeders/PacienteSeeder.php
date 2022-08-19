@@ -43,7 +43,8 @@ class PacienteSeeder extends Seeder
                     "turno" => $data['16'],
                     "frecuencia" => $data['17'],
                     "estado" => $data['18'],
-                    "detalleEstado" => $data['19']
+                    "detalleEstado" => $data['19'],
+                    "cama"=> $data['20']
 
                 ]);    
             }
