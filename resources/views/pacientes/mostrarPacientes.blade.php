@@ -78,7 +78,7 @@
                 $yearA=substr($fechaActual,-10,1).substr($fechaActual,-9,1).substr($fechaActual,-8,1).substr($fechaActual,-7,1);
                 $fechaA = $yearA."-".$mesA."-".$diaA;
 
-                $edad = $yearA - $year;
+                $edad = $yearA - $year - 1;
                 $extra = 0;
                 if($edad>1){
                     if($mes<$mesA){
@@ -89,6 +89,8 @@
                         if($dia<$diaA){
                             $extra=$extra+1;
                         }
+                    }if($mes>$mesA){
+                        $extra=$extra+0;
                     } 
                 }
 
