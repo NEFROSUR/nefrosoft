@@ -8,7 +8,25 @@
     <div class="navbar navbar-light float right">
         <form class="d-flex" role="search">
             <input name="correlativo" class="form-control me-2" type="search" placeholder="Correlativo" aria-label="Search">
-            <input name="documento" class="form-control me-2" type="search" placeholder="documento" aria-label="Search">
+            <div class="col">
+                    <label for="inputState" class="form-label">Mes</label>
+                    <select id="inputState" name="mes" class="form-select p-1 mt-0.5">
+                        <option value=''>Todos</option>
+                        <option value='01'>Enero</option>
+                        <option value='02'>Febrero</option>
+                        <option value='03'>Marzo</option>
+                        <option value='04'>Abril</option>
+                        <option value='05'>Mayo</option>
+                        <option value='06'>Junio</option>
+                        <option value='07'>Julio</option>
+                        <option value='08'>Agosto</option>
+                        <option value='09'>Setiembre</option>
+                        <option value='10'>Octubre</option>
+                        <option value='11'>Noviembre</option>
+                        <option value='12'>Diciembre</option>
+                        
+                    </select>
+                </div>
 
             <button class="btn btn-outline-success" type="submit">Filtrar</button>
         </form>
@@ -43,12 +61,15 @@
             <td>
             
                 <form action="{{ url('/recepcion/pdfunit/'.$fua->id) }}" method="GET">
-                    <input class="btn btn-outline-success" type="submit" onclick="return confirm('¿Deseas imprimir nuevamente este Formato?')" value="Imprimir">
+                    <input class="btn btn-outline-success" type="submit" onclick="return confirm('¿Deseas imprimir nuevamente este Formato?')" value="🖨️">
+                </form>
+                <form action="{{ url('/recepcion/'.$fua->id.'/edit') }}" method="GET">
+                    <input class="btn btn-outline-warning" type="submit" onclick="return confirm('¿Deseas anotar observacion de esta atencion?')" value="✏️">
                 </form>
                 <form action="{{ url('/recepcion/'.$fua->id) }}" method="POST">
                     @csrf
                     {{ method_field('DELETE')}}
-                    <input class="btn btn-outline-danger" type="submit" onclick="return confirm('¿Deseas cancelar esta atencion?')" value="Borrar">
+                    <input class="btn btn-outline-danger" type="submit" onclick="return confirm('¿Deseas eliminar completamente esta atencion?')" value="🗑️">
 
                 </form>
             </td>

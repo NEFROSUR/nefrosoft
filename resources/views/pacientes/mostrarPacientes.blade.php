@@ -39,7 +39,7 @@
 
 
 </div>
-<div  class="container mx-auto" >
+<div class="container mx-auto">
     <table class="table table-condensed table-hover table-bordered w-auto small rounded-md">
         <thead class="thead-light">
             <tr>
@@ -65,42 +65,51 @@
                 <td>{{ $paciente->dni}}</td>
                 <td>{{ $paciente->apellidoPaterno}} {{ $paciente->apellidoMaterno}}, {{ $paciente->primerNombre}} {{ $paciente->otroNombre}}</td>
                 <td>
-                @php
-                $date = $paciente->fechaNacimiento;
-                $dia=substr($date,-2,1).substr($date,-1,1);
-                $mes=substr($date,-5,1).substr($date,-4,1);
-                $year=substr($date,-10,1).substr($date,-9,1).substr($date,-8,1).substr($date,-7,1);
-                $fecha = $year."-".$mes."-".$dia;
+                    @php
+                    $date = $paciente->fechaNacimiento;
+                    $dia=substr($date,-2,1).substr($date,-1,1);
+                    $mes=substr($date,-5,1).substr($date,-4,1);
+                    $year=substr($date,-10,1).substr($date,-9,1).substr($date,-8,1).substr($date,-7,1);
+                    $fecha = $year."-".$mes."-".$dia;
 
-                
-                $diaA=substr($fechaActual,-2,1).substr($fechaActual,-1,1);
-                $mesA=substr($fechaActual,-5,1).substr($fechaActual,-4,1);
-                $yearA=substr($fechaActual,-10,1).substr($fechaActual,-9,1).substr($fechaActual,-8,1).substr($fechaActual,-7,1);
-                $fechaA = $yearA."-".$mesA."-".$diaA;
 
-                $edad = $yearA - $year - 1;
-                $extra = 0;
-                if($edad>1){
-                    if($mes<$mesA){
-                        $extra=$extra+1;
+                    $diaA=substr($fechaActual,-2,1).substr($fechaActual,-1,1);
+                    $mesA=substr($fechaActual,-5,1).substr($fechaActual,-4,1);
+                    $yearA=substr($fechaActual,-10,1).substr($fechaActual,-9,1).substr($fechaActual,-8,1).substr($fechaActual,-7,1);
+                    $fechaA = $yearA."-".$mesA."-".$diaA;
 
-                    }
-                    if($mes==$mesA){
-                        if($dia<$diaA){
-                            $extra=$extra+1;
-                        }
-                    }if($mes>$mesA){
+                    $edad = $yearA - $year - 1;
+                    $extra = 0;
+                    if($edad>1){
+                    if($mes<$mesA){ $extra=$extra+1; } if($mes==$mesA){ if($dia<$diaA){ $extra=$extra+1; } }if($mes>$mesA){
                         $extra=$extra+0;
-                    } 
-                }
+                        }
+                        }
 
-                $edad = $edad +$extra;
+                        $edad = $edad +$extra;
 
-                @endphp
-                {{$edad}}
+                        @endphp
+                        {{$edad}}
                 </td>
-                <td>{{ $paciente->direccion}}<br>{{ $paciente->direccion1}}</td>
-                <td>{{ $paciente->telefono}}<br>{{ $paciente->telefono1}}<br>{{ $paciente->telefono2}}</td>
+                <td>{{ $paciente->direccion}}
+                    <br>
+                    @if ($paciente->direccion1=='\N')
+                    @else
+                    {{ $paciente->direccion1}}
+                    @endif
+                </td>
+                <td>{{ $paciente->telefono}}
+                    <br>
+                    @if ($paciente->telefono1=='0')
+                    @else
+                    {{ $paciente->telefono1}}
+                    @endif
+                    <br>
+                    @if ($paciente->telefono2=='0')
+                    @else
+                    {{ $paciente->telefono2}}
+                    @endif
+                </td>
                 <td>
                     @if ($paciente->frecuencia === 'lmv')
                     LUNES - MIECOLES - VIERNES
@@ -110,11 +119,20 @@
                 </td>
                 <td>{{ $paciente->turno}}</td>
 
-                <td>{{ $paciente->regimen}}</td>
-                <td>N°: {{ $paciente->numAfiliacion}} - Hasta: {{ $paciente->fechaAfiliacion}}</td>
+                <td>{{ ucfirst($paciente->regimen)}}</td>
+                <td>
+                    @php
+                    $fechadeAfiliacion = $paciente->fechaAfiliacion;
+                    if($paciente->fechaAfiliacion=='1111-11-11'){
+                    $fechadeAfiliacion='🚫';
+                    }else{
+                    $fechadeAfiliacion = $paciente->fechaAfiliacion;
+                    }
+                    @endphp
+                    N°: {{ $paciente->numAfiliacion}} - Vence: {{ $fechadeAfiliacion}}</td>
                 <td>
                     <a class="btn btn-outline-warning btn-sm p-auto" onclick="return confirm('¿Esta seguro que quiere editar al paciente\n {{ $paciente->primerNombre}} {{ $paciente->apellidoPaterno}}?')" href="{{ url('/pacientes/'.$paciente->id.'/edit') }}">
-                    ✏️
+                        ✏️
                     </a>
 
                     <form action="{{ url('/pacientes/'.$paciente->id) }}" method="POST">
@@ -136,6 +154,6 @@
 
 <div class="container">
 
-{{ $pacientes->links() }}
+    {{ $pacientes->links() }}
 </div>
 @endsection

@@ -34,12 +34,9 @@ class FuaController extends Controller
     public function index(Request $request)
     {
 
-        $turno = $request->get('turno');
-        $frecuencia = $request->get('frecuencia');
         $correlativo = $request->get('correlativo');
-        $documento = $request->get('documento');
-
-        if ($turno == '' && $frecuencia == '' && $correlativo == '' && $documento == '') {
+        $mes = $request->get('mes');
+        if ($correlativo == '') {
             $f2 = Carbon::now();
             $f2 = $f2->format('d-m-Y');
             $f1 = Carbon::now()->startOfMonth();
@@ -47,12 +44,13 @@ class FuaController extends Controller
             //$totalFuas = fua::whereBetween('fecha', [$f1, $f2])->cursorPaginate(5);
             $totalFuas = fua::orderBy('correlativo', 'asc')->paginate(10);
         } else {
-            if ($turno == '' && $frecuencia == '' && $correlativo != '' && $documento == '') {
+            if ($correlativo != '') {
                 $totalFuas = fua::where('correlativo', '=', $correlativo)->paginate(10);
             }
-            if ($turno == '' && $frecuencia == '' && $correlativo == '' && $documento != '') {
-                $paciente = paciente::where('dni', '=', $documento)->paginate(10);
-                $totalFuas = fua::where('paciente_id', '=', $paciente)->paginate(10);
+            if($mes !=''){
+                $fechaInicial='01'.$mes;
+
+                //$totalFuas = fua::where('fecha', '<', $f1)->paginate(10);
             }
         }
 
@@ -176,7 +174,7 @@ class FuaController extends Controller
                     $sesionAnterior = fua::where('paciente_id', '=', $paciente_id)->where('tipoDeConsulta', '=', 'Atencion de Procedimientos Ambulatorios')->count();
                     $numSesion = $sesionAnterior + 1;
                     //ingreso de datos
-                    $fua->correlativo = fua::count() + 1 + 32400; //agregar correlativo inicial mediante codigo
+                    $fua->correlativo = fua::max('correlativo')+ 1;//toma el mayor correlativo
                     $fua->fecha = $fechaGenerada;
                     $fua->tipoDeConsulta = $tipoDeConsulta;
                     $fua->numSesion = $numSesion;
@@ -219,6 +217,7 @@ class FuaController extends Controller
                 //return $pdf->download('fua.pdf');
 
             }
+            return view('recepcion.show');
         }
 
         return view('recepcion.mostrarFua', $data, ['medicos' => $medicosAll]);
@@ -232,6 +231,8 @@ class FuaController extends Controller
      */
     public function edit($id)
     {
+        $FuaInactiva = Fua::findOrFail($id);
+        return view('recepcion.desactivateF', ['FuaInactiva' => $FuaInactiva]);
     }
 
     /**
@@ -257,9 +258,10 @@ class FuaController extends Controller
      */
     public function destroy($id)
     {
-        $FuaInactiva = Fua::findOrFail($id);
-        //paciente::destroy($id);
+        //$FuaInactiva = Fua::findOrFail($id);
+        fua::destroy($id);
         //$pacienteInactivo->update(['estado'=>"inactivo"]);
-        return view('recepcion.desactivateF', ['FuaInactiva' => $FuaInactiva]);
+        return redirect('recepcion');
+        //return view('recepcion.desactivateF', ['FuaInactiva' => $FuaInactiva]);
     }
 }
