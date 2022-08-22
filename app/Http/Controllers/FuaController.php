@@ -143,6 +143,8 @@ class FuaController extends Controller
         $fechaGenerada = $request->get('fechaGenerada');
         $pacientesAll = paciente::all();
         $medicosAll = profesional::all();
+        $ultimoUsado = fua::max('correlativo');
+        
 
 
         if ($turno == '' && $frecuencia == '') {
@@ -214,13 +216,10 @@ class FuaController extends Controller
                 unlink($ruta1);
                 unlink($ruta2);
 
-                //return $pdf->download('fua.pdf');
-
             }
             return view('recepcion.show');
         }
-
-        return view('recepcion.mostrarFua', $data, ['medicos' => $medicosAll]);
+        return view('recepcion.mostrarFua', $data, ['medicos' => $medicosAll])->with('ultimoUsado',$ultimoUsado);;
     }
 
     /**

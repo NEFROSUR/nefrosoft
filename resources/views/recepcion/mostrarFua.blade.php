@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
+<div class="loader"></div>
 <div style="float: left; width: 100%">
     <div class="container w-75 border p-2 mt-4">
         <form>
@@ -45,9 +46,13 @@
                             </select>
                         </div>
                     </div>
-
                     <div class="col">
                         <button class="btn btn-outline-primary" type="submit" id="filtro">Filtrar</button>
+                    </div>
+                    <div class="col">
+
+                        <label class="bg-indigo p-2 text-black">Ultimo correlativo usado:{{$ultimoUsado}}</label>
+
                     </div>
                 </div>
             </div>
@@ -152,6 +157,9 @@
             $('#datepicker').datepicker({
                 format: 'dd-mm-yyyy'
             });
+        });
+        $(window).load(function() {
+            $(".loader").fadeOut("slow");
         });
     </script>
 
