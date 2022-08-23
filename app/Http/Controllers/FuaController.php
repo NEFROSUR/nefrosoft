@@ -42,7 +42,7 @@ class FuaController extends Controller
             $f1 = Carbon::now()->startOfMonth();
             $f1 = $f1->format('d-m-Y');
             //$totalFuas = fua::whereBetween('fecha', [$f1, $f2])->cursorPaginate(5);
-            $totalFuas = fua::orderBy('correlativo', 'asc')->paginate(10);
+            $totalFuas = fua::orderBy('correlativo', 'desc')->paginate(10);
         } else {
             if ($correlativo != '') {
                 $totalFuas = fua::where('correlativo', '=', $correlativo)->paginate(10);

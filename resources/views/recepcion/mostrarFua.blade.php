@@ -18,8 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
-<div class="loader"></div>
+<script src="{{ mix('js/app.js') }}"></script>
 <div style="float: left; width: 100%">
     <div class="container w-75 border p-2 mt-4">
         <form>
@@ -62,11 +61,12 @@
                     <tr>
                         <th>Paciente</th>
                         <th>Turno - Cama</th>
-                        <th>Marcar</th>
+                        <th>Seleccionar todos  <input type="checkbox" name="select-all" id="select-all"/></th>
+
                     </tr>
                 </thead>
                 <tbody>
-
+                
                     @foreach ($lista_pacientes as $item)
                     <tr>
                         <td>{{ $item->apellidoPaterno}} {{ $item->apellidoMaterno}}, {{ $item->primerNombre}} {{ $item->otroNombre}}</td>
@@ -79,6 +79,7 @@
                     </tr>
                     @endforeach
                     </tr>
+
                 </tbody>
             </table>
 
@@ -152,16 +153,4 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        $(function() {
-            $('#datepicker').datepicker({
-                format: 'dd-mm-yyyy'
-            });
-        });
-        $(window).load(function() {
-            $(".loader").fadeOut("slow");
-        });
-    </script>
-
-
     @endsection
