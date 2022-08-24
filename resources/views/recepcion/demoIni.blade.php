@@ -5188,24 +5188,33 @@
       <tr class="row20">
         <td class="column1 style143 s style145" colspan="16">Consulta externa</td>
         <td class="column17 style148 n">
-          @if ($fua->tipoDeConsulta === 'Atencion de Procedimientos Ambulatorios')
-
-          @elseif ($fua->tipoDeConsulta === 'Consulta Externa')
-          X
-          @endif
-
-
-
+        @php
+        $searchString = " ";
+        $replaceString = "";
+        $originalString = $fua->tipoDeConsulta; 
+        $marcador="";
+ 
+        $outputString = str_replace($searchString, $replaceString, $originalString);
+        if($outputString == "ConsultaExterna"){
+          $marcador="X";
+        }
+        @endphp  
+        {{$marcador}}
         </td>
         <td class="column18 style146 s style147" colspan="10">Atención de procedimientos ambulatorios</td>
         <td class="column28 style149 n">
-          @if ($fua->tipoDeConsulta === 'Atencion de Procedimientos Ambulatorios')
-          X
-          @elseif ($fua->tipoDeConsulta === 'Consulta Externa')
-
-          @endif
-
-
+        @php
+        $searchString = " ";
+        $replaceString = "";
+        $originalString = $fua->tipoDeConsulta; 
+        $marcador="";
+ 
+        $outputString = str_replace($searchString, $replaceString, $originalString);
+        if($outputString == "AtenciondeProcedimientosAmbulatorios"){
+          $marcador="X";
+        }
+        @endphp  
+        {{$marcador}}  
         </td>
       </tr>
       <tr class="row21">
