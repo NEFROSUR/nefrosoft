@@ -5088,12 +5088,13 @@
         <td class="column10 style119 n style124" colspan="4" rowspan="2">{{$fua->paciente->numHistoria}}</td>
         <td class="column15 style53 s style54" rowspan="2">TD</td>
         <td class="column16 style119 s null" rowspan="1" rowspan="2">
-          @php
-          $tipo = 1;
-          $ini = substr($fua->paciente->dni, 0, 1);
-          if($ini <> '00'){
+        @php
+          $tipo = '';
+          $ini = strlen($fua->paciente->dni) - substr_count($fua->paciente->dni, ' ');
+
+          if($ini == 8){
             $tipo = 1;
-          }elseif($ini =='00'){
+          }elseif($ini == 9){
             $tipo = 2;
           }
           @endphp
