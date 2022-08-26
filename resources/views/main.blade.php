@@ -57,8 +57,18 @@
                         <a class="dropdown-item" href="">Generar Anexo 7</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Almacen</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="navigation" data-toggle="dropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    Almacen
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{url('/proveedores/create')}}">Registrar Nuevo Proveedor</a>
+                        <a class="dropdown-item" href="{{url('/proveedores/show')}}">Lista de Proveedores</a>
+                        <a class="dropdown-item" href="{{url('/producto/create')}}">Registrar Nuevo Producto</a>
+                        <a class="dropdown-item" href="{{url('/producto/show')}}">Ver Productos</a>
+                        <a class="dropdown-item" href="">Entradas</a>
+                        <a class="dropdown-item" href="">Salidas</a>
+                    </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="navigation" data-toggle="dropdown" aria-expanded="false" aria-label="Toggle navigation">

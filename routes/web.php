@@ -11,8 +11,11 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\ConsultaNefrologica;
 use App\Http\Controllers\ExamenesKTV;
-
-
+use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\InventarioController;
+use App\Http\Controllers\IngresoAlmacenController;
+use App\Http\Controllers\SalidaAlmacenController;
 
 Route::get('/', function () {
     return view('/mainNefrosur.principal');
@@ -54,3 +57,8 @@ Route::resource('consultaCN',ConsultaNefrologica::class);
 Route::resource('examenKTV',ExamenesKTV::class);
 Route::get('/examenKTV/create/{id}' , [FuaController::class, 'create']);
 Route::get('/datomedico/datomedicoBase', [DatomedicoController::class, 'mdatoBase'])->name('datomedicoBase');
+
+
+Route::resource('proveedores',ProveedorController::class);
+Route::resource('producto',ProductoController::class);
+Route::resource('almacen',InventarioController::class);
