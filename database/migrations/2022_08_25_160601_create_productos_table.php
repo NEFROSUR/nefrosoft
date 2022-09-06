@@ -16,14 +16,14 @@ return new class extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id('id')->autoincrement();
-            $table->char('codigo',5)->unique();
-            $table->char('nombreProducto',50);
+            $table->char('codigoProd',5)->unique();
+            $table->char('nombreProd',50);
             $table->unsignedBigInteger('categoria_id');
             $table->unsignedBigInteger('proveedor_id');
-            $table->char('marca',50);
-            $table->char('unidadMedida',20);//
+            $table->char('marcaProd',50);
+            $table->char('unidadMedidaProd',20);//
             $table->char('um',7);
-            $table->char('precioUnitario',10);
+            $table->char('precioUnitarioProd',10);
             $table->char('tipoMoneda',1);//SOLES = 1 - DOLARES = 2
             $table->timestamps();
 

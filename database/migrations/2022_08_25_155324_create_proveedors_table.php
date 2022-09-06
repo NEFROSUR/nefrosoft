@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('proveedors', function (Blueprint $table) {
             $table->id('id')->autoincrement();
-            $table->char('ruc',15)->unique();
+            $table->char('rucProv',15)->unique();
             $table->char('nameProv',50);
             $table->integer('telefonoProv')->nullable();
-            $table->char('categoria',15)->nullable();
-            $table->char('correo',30)->nullable();
-            $table->string('direccion')->nullable();
-            $table->string('detalle')->nullable();
+            $table->char('categoriaProv',15)->nullable();
+            $table->char('correoProv',30)->nullable();
+            $table->string('direccionProv')->nullable();
+            $table->string('detalleProv')->nullable();
             //mas datos
             $table->timestamps();
         });
