@@ -18,8 +18,6 @@
         @csrf
         @include('producto.formProducto')
     </form>
-    <form action="{{ url('/producto/create') }}">
-        <button type="submit" class="btn btn-success">Limpiar</button>
-    </form>
+
 </div>
 @endsection

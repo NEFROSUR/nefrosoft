@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('inventarios', function (Blueprint $table) {
             $table->id('id')->autoIncrement();
-            $table->unsignedBigInteger('producto_id_inventario');
+            //$table->unsignedBigInteger('producto_id_inventario');
             //$table->char('producto_id_inventario');
             $table->integer('stock');
             $table->timestamps();
-            $table->foreign('producto_id_inventario')->references('id')->on('productos');
+            //$table->foreign('producto_id_inventario')->references('id')->on('productos');
         });
     }
 

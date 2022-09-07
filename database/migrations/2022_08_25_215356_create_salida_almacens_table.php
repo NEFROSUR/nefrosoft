@@ -18,12 +18,12 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id_salida');
             $table->date('fechaSalida');
             $table->integer('numSalida');
-            $table->char('reponsable',50);
+            $table->string('reponsable',50);
             $table->integer('cantidad');
-            $table->char('precioUnidad');
-            $table->char('areaDestino',15);
-            $table->char('recepcionista',50);
-            $table->char('objetivoP',50);
+            $table->string('precioUnidad');
+            $table->string('areaDestino',15);
+            $table->string('recepcionista',50);
+            $table->string('objetivoP',50);
             $table->string('detalle');
             $table->timestamps();
 

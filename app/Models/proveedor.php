@@ -9,9 +9,4 @@ class proveedor extends Model
 {
     use HasFactory;
 
-    public function productos()
-    {
-        return $this->hasMany(producto::class,'proveedor_id');
-    }
-
 }

@@ -15,17 +15,19 @@ return new class extends Migration
     {
         Schema::create('ingreso_almacens', function (Blueprint $table) {
             $table->id('id')->autoIncrement();
-            $table->unsignedBigInteger('product_id_ingreso');
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('proveedor_id');
             $table->date('fechaIngreso');
             $table->date('fechaVencimiento');
             $table->integer('numFactura');
             $table->integer('cantidadIngresada');
             $table->integer('PrecioTotal');
-            $table->char('estadoPaga',1);//1=pagado, 0=no pagado
+            $table->string('estadoPaga',1);//1=pagado, 0=no pagado
             $table->string('detalle',250);
             $table->timestamps();
 
-            $table->foreign('product_id_ingreso')->references('id')->on('inventarios');
+            $table->foreign('product_id')->references('id')->on('productos');
+            $table->foreign('proveedor_id')->references('id')->on('proveedors');
         });
     }
 

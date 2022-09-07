@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('categoriaP', function (Blueprint $table) {
             $table->id('id')->autoIncrement();
-            $table->char('nombreCategoria',25);
+            $table->string('nombreCategoria',25);
             $table->timestamps();
             
         });

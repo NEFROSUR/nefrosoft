@@ -9,7 +9,7 @@
     <label for="tittle" class="form-label">Razón social del proveedor</label>
     <div class="row">
         <div class="col p-2 mt-0.5">
-            <input type="text" name="nameProv" class="form-control" placeholder="Razon social" required>
+            <input type="text" name="nameProv" class="form-control" placeholder="Nombre del Proveedor" required>
         </div>
         <div class="col p-2 mt-0.5">
             <input type="text" name="rucProv" class="form-control" placeholder="N° RUC">
@@ -40,21 +40,19 @@
                 <option>Categoria4</option>
             </select>
     </div>
-   
+    <label for="tittle" class="form-label">Datos del proveedor: </label>
+    <div class="row">
+        <div class="col p-2 mt-0.5">
+            <input type="text" name="detalleProv" class="form-control" placeholder="Detalle">
+        </div>
+          
+    </div>
     <div class="text-center p-1 mt-4">
         <button type="submit" class="btn btn-primary " onclick="return confirm('¿Confirmar guardado de proveedor?')">Guardar</button>
         <button type="submit" class="btn btn-success" onclick="limpiar()">Limpiar</button>
 
     </div>
-
-    <label for="tittle" class="form-label">Datos del proveedor: </label>
-    <div class="row">
-        <div class="col p-2 mt-0.5">
-            <input type="text" name="detalleProv" class="form-control" placeholder="Detalle" required>
-        </div>
-          
-    </div>
-    
+   
 </div>
 
 <script type="text/javascript">

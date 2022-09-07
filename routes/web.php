@@ -60,5 +60,7 @@ Route::get('/datomedico/datomedicoBase', [DatomedicoController::class, 'mdatoBas
 
 
 Route::resource('proveedores',ProveedorController::class);
+
 Route::resource('producto',ProductoController::class);
+
 Route::resource('almacen',InventarioController::class);

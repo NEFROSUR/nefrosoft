@@ -14,7 +14,7 @@
     </div>
 @endif
 <div class="container w-30 border p-4 mt-4" >
-    <form action="{{ url('/proveedors') }}" method="POST">
+    <form action="{{ url('/proveedores') }}" method="POST">
         @csrf
         @include('proveedores.formProveedor')
     </form>

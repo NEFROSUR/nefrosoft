@@ -16,19 +16,17 @@ return new class extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id('id')->autoincrement();
-            $table->char('codigoProd',5)->unique();
-            $table->char('nombreProd',50);
+            $table->string('codigoProd',5)->unique();
+            $table->string('nombreProd',50);
             $table->unsignedBigInteger('categoria_id');
-            $table->unsignedBigInteger('proveedor_id');
-            $table->char('marcaProd',50);
-            $table->char('unidadMedidaProd',20);//
-            $table->char('um',7);
-            $table->char('precioUnitarioProd',10);
-            $table->char('tipoMoneda',1);//SOLES = 1 - DOLARES = 2
+            $table->string('marcaProd',50);
+            $table->string('unidadMedidaProd',20);//
+            $table->string('um',7);
+            $table->string('precioUnitarioProd',10);
+            $table->string('tipoMoneda',1);//SOLES = 1 - DOLARES = 2
             $table->timestamps();
 
             $table->foreign('categoria_id')->references('id')->on('categoriaP');
-            $table->foreign('proveedor_id')->references('id')->on('proveedors');
 
         });
     }

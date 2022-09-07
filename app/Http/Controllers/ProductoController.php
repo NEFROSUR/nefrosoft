@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\producto;
+
 use Illuminate\Http\Request;
+use App\Models\proveedor;
 
 class ProductoController extends Controller
 {
@@ -14,7 +16,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -24,7 +26,9 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return view('producto.crearProducto');
+        $proveedorAll['proveedorAll'] = proveedor::orderBy('id', 'asc')->paginate(5);
+        return view('producto.crearProducto',$proveedorAll);
+        //return view('producto.crearProducto');
     }
 
     /**
@@ -35,7 +39,35 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'nombreProd' => 'required|unique:productos',
+            'codigoProd' => 'required|unique:productos',
+            'marcaProd' => 'required',
+            'precioUnitarioProd' => 'nullable',
+            'unidadMedidaProd' => 'nullable',
+            'um' => 'nullable',
+            'tipoMoneda' => 'nullable',
+        ]);
+
+        $producto = new producto();
+
+        $producto->nombreProd = $request->nombreProd;
+        $producto->codigoProd = $request->codigoProd;
+        $producto->marcaProd = $request->marcaProd;
+        $producto->precioUnitarioProd = $request->precioUnitarioProd;
+        $producto->unidadMedidaProd = $request->unidadMedidaProd;
+        $producto->um = $request->um;
+        $producto->tipoMoneda = $request->tipoMoneda;
+        $producto->categoria_id = $request->categoria_id;
+
+        $producto->save();
+        //producto::insert($producto);
+        //$producto->proveedor;
+
+        //$productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(5);
+        return view('producto.crearProducto');
+
     }
 
     /**

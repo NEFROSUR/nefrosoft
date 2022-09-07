@@ -14,7 +14,7 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-        //
+        return view('proveedores.proveedores');
     }
 
     /**
@@ -35,7 +35,37 @@ class ProveedorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nameProv' => 'required|unique:proveedors',
+            'rucProv' => 'required|unique:proveedors',
+            'direccionProv' => 'nullable',
+            'correoProv' => 'nullable|string',
+            'telefonoProv' => 'required|numeric|min:9',
+            'categoriaProv' => 'nullable',
+            'detalleProv' => 'nullable|string',
+        ]);
+
+        $searchString = " ";
+        $replaceString = "";
+
+        $proveedor = new proveedor();
+        $proveedor->nameProv = $request->nameProv;
+        $rucProv = str_replace($searchString, $replaceString, $request->rucProv);
+        $proveedor->rucProv = $rucProv;
+        
+        $proveedor->direccionProv = $request->direccionProv;
+
+        $correoProv = str_replace($searchString, $replaceString, $request->correoProv);
+        $proveedor->correoProv = $correoProv;
+
+        $proveedor->telefonoProv = $request->telefonoProv;
+
+        $proveedor->categoriaProv = $request->categoriaProv;
+        $proveedor->detalleProv = $request->detalleProv;
+
+        $proveedor->save();
+        $proveedorAll['proveedorAll'] = proveedor::orderBy('id', 'asc')->paginate(5);
+        return view('proveedores.verProveedor',$proveedorAll);
     }
 
     /**
@@ -44,9 +74,25 @@ class ProveedorController extends Controller
      * @param  \App\Models\proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function show(proveedor $proveedor)
+    public function show(Request $request)
     {
-        return view('proveedores.verProveedor');
+        $nameProv = $request->get('nameProv');
+        $rucProv = $request->get('rucProv');
+        $categoriaProv = $request->get('categoriaProv');
+        if ($nameProv == '' && $rucProv == '' && $categoriaProv == '') {
+            $proveedorAll['proveedorAll'] = proveedor::orderBy('id', 'asc')->paginate(5);
+        } else {
+            if ($rucProv == '' && $categoriaProv == '') {
+                $proveedorAll['proveedorAll'] = proveedor::where('primerNombreP', '=', $nameProv)->paginate(5);
+            }
+            if ($nameProv == '' && $categoriaProv == '') {
+                $proveedorAll['proveedorAll'] = proveedor::where('rucProv', '=', $rucProv)->paginate(5);
+            }
+            if ($nameProv == '' && $rucProv == '') {
+                $proveedorAll['proveedorAll'] = proveedor::where('categoriaProv', '=', $categoriaProv)->paginate(5);
+            };
+        }
+        return view('proveedores.verProveedor', $proveedorAll);
     }
 
     /**
@@ -55,9 +101,11 @@ class ProveedorController extends Controller
      * @param  \App\Models\proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function edit(proveedor $proveedor)
+    public function edit($id)
     {
-        return view('proveedores.editProveedor');
+        $proveedor = proveedor::findOrFail($id);
+
+        return view('proveedores.editProveedor', ['proveedor' => $proveedor]);
     }
 
     /**
@@ -67,9 +115,12 @@ class ProveedorController extends Controller
      * @param  \App\Models\proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, proveedor $proveedor)
+    public function update(Request $request, $id)
     {
-        //
+        $datosProveedor = request()->except(['_token', '_method']);
+        proveedor::where('id', '=', $id)->update($datosProveedor);
+        $proveedor = proveedor::findOrFail($id);
+        return view('proveedores.proveedores', compact('proveedor'));
     }
 
     /**
@@ -78,8 +129,9 @@ class ProveedorController extends Controller
      * @param  \App\Models\proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(proveedor $proveedor)
+    public function destroy($id)
     {
-        //
+        proveedor::destroy($id);
+        return redirect('proveedores');
     }
 }
