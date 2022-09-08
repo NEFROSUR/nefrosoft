@@ -63,4 +63,6 @@ Route::resource('proveedores',ProveedorController::class);
 
 Route::resource('producto',ProductoController::class);
 
-Route::resource('almacen',InventarioController::class);
+Route::resource('almacen.ingresoAlmacen',IngresoAlmacenController::class);
+
+//Route::resource('almacen',InventarioController::class);

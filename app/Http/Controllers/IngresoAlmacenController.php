@@ -14,7 +14,7 @@ class IngresoAlmacenController extends Controller
      */
     public function index()
     {
-        //
+        return view('almacen.ingresoAlmacen.ingresoAlmacen');
     }
 
     /**
@@ -24,7 +24,7 @@ class IngresoAlmacenController extends Controller
      */
     public function create()
     {
-        //
+        return view('almacen.ingresoAlmacen.crearIngresoAlmacen');
     }
 
     /**
@@ -35,7 +35,7 @@ class IngresoAlmacenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return view('almacen.ingresoAlmacen.crearIngresoAlmacen');
     }
 
     /**
@@ -46,7 +46,7 @@ class IngresoAlmacenController extends Controller
      */
     public function show(ingresoAlmacen $ingresoAlmacen)
     {
-        //
+        return view('almacen.ingresoAlmacen.mostrarIngresoAlmacen');
     }
 
     /**
@@ -57,7 +57,7 @@ class IngresoAlmacenController extends Controller
      */
     public function edit(ingresoAlmacen $ingresoAlmacen)
     {
-        //
+        return view('almacen.ingresoAlmacen.editIngresoAlmacen.blade');
     }
 
     /**
