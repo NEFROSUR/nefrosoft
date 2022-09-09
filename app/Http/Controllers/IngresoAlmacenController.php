@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ingresoAlmacen;
 use Illuminate\Http\Request;
+use App\Models\proveedor;
+use App\Models\producto;
 
 class IngresoAlmacenController extends Controller
 {
@@ -14,7 +16,7 @@ class IngresoAlmacenController extends Controller
      */
     public function index()
     {
-        return view('almacen.ingresoAlmacen.ingresoAlmacen');
+        return view('ingresoAlmacen.ingresoAlmacen');
     }
 
     /**
@@ -24,7 +26,9 @@ class IngresoAlmacenController extends Controller
      */
     public function create()
     {
-        return view('almacen.ingresoAlmacen.crearIngresoAlmacen');
+        $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(5);
+        $proveedorAll['proveedorAll'] = proveedor::orderBy('id', 'asc')->paginate(5);
+        return view('ingresoAlmacen.crearIngresoAlmacen',$proveedorAll,$productoAll);
     }
 
     /**
@@ -35,7 +39,7 @@ class IngresoAlmacenController extends Controller
      */
     public function store(Request $request)
     {
-        return view('almacen.ingresoAlmacen.crearIngresoAlmacen');
+        return view('ingresoAlmacen.crearIngresoAlmacen');
     }
 
     /**
@@ -46,7 +50,7 @@ class IngresoAlmacenController extends Controller
      */
     public function show(ingresoAlmacen $ingresoAlmacen)
     {
-        return view('almacen.ingresoAlmacen.mostrarIngresoAlmacen');
+        return view('ingresoAlmacen.mostrarIngresoAlmacen');
     }
 
     /**
@@ -55,9 +59,10 @@ class IngresoAlmacenController extends Controller
      * @param  \App\Models\ingresoAlmacen  $ingresoAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function edit(ingresoAlmacen $ingresoAlmacen)
+    public function edit($id)
     {
-        return view('almacen.ingresoAlmacen.editIngresoAlmacen.blade');
+        $ingresoAlmacen = ingresoAlmacen::findOrFail($id);
+        return view('ingresoAlmacen.editIngresoAlmacen', ['ingresoAlmacen' => $ingresoAlmacen]);
     }
 
     /**
@@ -67,9 +72,12 @@ class IngresoAlmacenController extends Controller
      * @param  \App\Models\ingresoAlmacen  $ingresoAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ingresoAlmacen $ingresoAlmacen)
+    public function update(Request $request, $id)
     {
-        //
+        $datosIngreso = request()->except(['_token', '_method']);
+        ingresoAlmacen::where('id', '=', $id)->update($datosIngreso);
+        $ingresoAlmacen = ingresoAlmacen::findOrFail($id);
+        return view('ingresoAlmacen.ingresoAlmacen', compact('ingresoAlmacen'));
     }
 
     /**
@@ -78,8 +86,9 @@ class IngresoAlmacenController extends Controller
      * @param  \App\Models\ingresoAlmacen  $ingresoAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ingresoAlmacen $ingresoAlmacen)
+    public function destroy($id)
     {
-        //
+        ingresoAlmacen::destroy($id);
+        return redirect('ingresoAlmacen');
     }
 }

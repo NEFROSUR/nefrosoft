@@ -16,7 +16,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-
+        return view('producto.productos');
     }
 
     /**
@@ -26,9 +26,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        $proveedorAll['proveedorAll'] = proveedor::orderBy('id', 'asc')->paginate(5);
-        return view('producto.crearProducto',$proveedorAll);
-        //return view('producto.crearProducto');
+        return view('producto.crearProducto');
     }
 
     /**
@@ -41,7 +39,7 @@ class ProductoController extends Controller
     {
 
         $request->validate([
-            'nombreProd' => 'required|unique:productos',
+            'nombreProd' => 'required',
             'codigoProd' => 'required|unique:productos',
             'marcaProd' => 'required',
             'precioUnitarioProd' => 'nullable',
@@ -62,10 +60,7 @@ class ProductoController extends Controller
         $producto->categoria_id = $request->categoria_id;
 
         $producto->save();
-        //producto::insert($producto);
-        //$producto->proveedor;
 
-        //$productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(5);
         return view('producto.crearProducto');
 
     }
@@ -76,9 +71,25 @@ class ProductoController extends Controller
      * @param  \App\Models\producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function show(producto $producto)
+    public function show(Request $request)
     {
-        return view('producto.verProducto');
+        $nombreProd = $request->get('nombreProd');
+        $codigoProd = $request->get('codigoProd');
+        $categoria_id = $request->get('categoria_id');
+        if ($nombreProd == '' && $codigoProd == '' && $categoria_id == '') {
+            $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(5);
+        } else {
+            if ($codigoProd == '' && $categoria_id == '') {
+                $productoAll['productoAll'] = producto::where('nombreProd', '=', $nombreProd)->paginate(5);
+            }
+            if ($codigoProd == '' && $categoria_id == '') {
+                $productoAll['productoAll'] = producto::where('codigoProd', '=', $codigoProd)->paginate(5);
+            }
+            if ($nombreProd == '' && $codigoProd == '') {
+                $productoAll['productoAll'] = producto::where('categoria_id', '=', $categoria_id)->paginate(5);
+            };
+        }
+        return view('producto.verProducto', $productoAll);
     }
 
     /**
@@ -87,9 +98,11 @@ class ProductoController extends Controller
      * @param  \App\Models\producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(producto $producto)
+    public function edit($id)
     {
-        return view('producto.editProducto');
+        $producto = producto::findOrFail($id);
+
+        return view('producto.editProducto', ['producto' => $producto]);
     }
 
     /**
@@ -99,9 +112,12 @@ class ProductoController extends Controller
      * @param  \App\Models\producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, producto $producto)
+    public function update(Request $request, $id)
     {
-        //
+        $datosProducto = request()->except(['_token', '_method']);
+        producto::where('id', '=', $id)->update($datosProducto);
+        $producto = producto::findOrFail($id);
+        return view('producto.productos', compact('producto'));
     }
 
     /**
@@ -110,8 +126,9 @@ class ProductoController extends Controller
      * @param  \App\Models\producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(producto $producto)
+    public function destroy($id)
     {
-        //
+        producto::destroy($id);
+        return redirect('producto');
     }
 }
