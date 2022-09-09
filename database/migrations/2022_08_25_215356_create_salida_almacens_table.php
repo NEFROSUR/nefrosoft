@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('salida_almacens', function (Blueprint $table) {
             $table->id('id')->autoIncrement();
-            $table->unsignedBigInteger('product_id_salida');
+           // $table->unsignedBigInteger('product_id_salida');
             $table->date('fechaSalida');
             $table->integer('numSalida');
             $table->string('reponsable',50);
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('detalle');
             $table->timestamps();
 
-            $table->foreign('product_id_salida')->references('id')->on('inventarios');
+            //$table->foreign('product_id_salida')->references('id')->on('inventarios');
         });
     }
 

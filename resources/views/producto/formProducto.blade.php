@@ -45,8 +45,13 @@
                 <Table>Categoria</Table>
             </label>
             <select id="inputState" name="categoria_id" class="form-select p-1 mt-0.5">
-                <option value="1">Categoria 1</option>
-                <option value="2">Categoria 2</option>
+                <option value="1">Medicamentos</option>
+                <option value="2">Desechables médicos</option>
+                <option value="3">Limpieza</option>
+                <option value="4">Oficina</option>
+                <option value="5">Farmacia</option>
+                <option value="6">Soluciones</option>
+                <option value="7">Insumos de MH</option>
             </select>
         </div>
         <div class="col">
@@ -58,7 +63,6 @@
                 <option value="2">Dolares</option>
             </select>
         </div>
-
     </div>
 
     <div class="text-center p-1 mt-4">

@@ -9,7 +9,7 @@ class inventario extends Model
 {
     use HasFactory;
 
-    public function inventario()
+    /*public function inventario()
     {
         return $this->belongsTo(inventario::class,'producto_id_inventario');
     }
@@ -21,5 +21,5 @@ class inventario extends Model
     {
         return $this->hasMany(salidaAlmacen::class,'product_id_salida');
     }
-
+*/
 }
