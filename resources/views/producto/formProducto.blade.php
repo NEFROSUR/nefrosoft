@@ -17,14 +17,6 @@
             <label for="tittle" class="form-label">Marca</label>
             <input type="text" name="marcaProd" class="form-control">
         </div>
-        <div class="col p-2 mt-0.5">
-            <label for="tittle" class="form-label">Precio unitario</label>
-            <input type="text" name="precioUnitarioProd" class="form-control" maxlength="9">
-        </div>
-        <div class="col p-2 mt-0.5">
-            <label for="tittle" class="form-label">Unidad de medida</label>
-            <input type="text" name="unidadMedidaProd" class="form-control">
-        </div>
         <div class="col">
             <label for="inputState" class="form-label">
                 <Table>U.M</Table>
@@ -52,15 +44,6 @@
                 <option value="5">Farmacia</option>
                 <option value="6">Soluciones</option>
                 <option value="7">Insumos de MH</option>
-            </select>
-        </div>
-        <div class="col">
-            <label for="inputState" class="form-label">
-                <Table>Tipo de moneda</Table>
-            </label>
-            <select id="inputState" name="tipoMoneda" class="form-select p-1 mt-0.5">
-                <option value="1">Soles</option>
-                <option value="2">Dolares</option>
             </select>
         </div>
     </div>

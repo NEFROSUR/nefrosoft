@@ -13,6 +13,7 @@
         </ul>
     </div>
 @endif
+
 <div class="container w-30 border p-4 mt-4">
     <form action="{{ url('/ingresoAlmacen') }}" method="POST">
         @csrf

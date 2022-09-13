@@ -10,8 +10,8 @@ class producto extends Model
     use HasFactory;
 
     
-    /*public function inventario()
+    public function ingreso()
     {
-        return $this->hasMany(inventario::class,'producto_id_inventario');
-    }*/
+        return $this->hasMany(ingresoAlmacen::class,'product_id');
+    }
 }

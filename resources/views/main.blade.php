@@ -15,6 +15,7 @@
         <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+        @livewireStyles
     </head>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-dark text-white w-auto small">
         <a class="navbar-brand" href="/">NEFROSUR</a>
@@ -59,7 +60,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="navigation" data-toggle="dropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    Proveedores y Productos
+                        Proveedores y Productos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="{{url('/proveedores/create')}}">Registrar Proveedores</a>
@@ -70,17 +71,18 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="navigation" data-toggle="dropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    Almacen
+                        Almacen
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="{{url('/ingresoAlmacen/create')}}">Entradas</a>
+                        <a class="dropdown-item" href="{{url('/ingresoAlmacen/show')}}">Lista de Facturas</a>
                         <a class="dropdown-item" href="">Inventario</a>
                         <a class="dropdown-item" href="">Salidas</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="navigation" data-toggle="dropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    Direccion Medica
+                        Direccion Medica
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="{{ url('/consultaCN/create') }}">Registrar Nueva Consulta Nefrologica</a>
@@ -119,6 +121,7 @@
     <body style="width:100%; height:100%;">
 
         @yield('content')
+        @livewireScripts
         </div>
     </body>
     <footer>

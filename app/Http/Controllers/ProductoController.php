@@ -42,10 +42,7 @@ class ProductoController extends Controller
             'nombreProd' => 'required',
             'codigoProd' => 'required|unique:productos',
             'marcaProd' => 'required',
-            'precioUnitarioProd' => 'nullable',
-            'unidadMedidaProd' => 'nullable',
             'um' => 'nullable',
-            'tipoMoneda' => 'nullable',
         ]);
 
         $producto = new producto();
@@ -53,10 +50,7 @@ class ProductoController extends Controller
         $producto->nombreProd = $request->nombreProd;
         $producto->codigoProd = $request->codigoProd;
         $producto->marcaProd = $request->marcaProd;
-        $producto->precioUnitarioProd = $request->precioUnitarioProd;
-        $producto->unidadMedidaProd = $request->unidadMedidaProd;
         $producto->um = $request->um;
-        $producto->tipoMoneda = $request->tipoMoneda;
         $producto->categoria_id = $request->categoria_id;
 
         $producto->save();

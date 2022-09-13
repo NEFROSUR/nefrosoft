@@ -39,7 +39,48 @@ class IngresoAlmacenController extends Controller
      */
     public function store(Request $request)
     {
-        return view('ingresoAlmacen.crearIngresoAlmacen');
+        $request->validate([
+        'usuario' =>'required',
+        'product_id' => 'required',
+        'proveedor_id' => 'required',
+        'fechaIngreso' => 'required',
+        'fechaEmision' => 'required',
+        'fechaVencimiento' => 'required',
+        'numFactura' => 'required',
+        'numIngreso' => 'required',
+        'cantidadIngresada' => 'required',
+        'unidadMedida' => 'required',
+        'PrecioTotal' => 'required',
+        'PrecioUnitario' => 'required',
+        'moneda' => 'required',
+        'estadoPaga' => 'required|max:1',//1=pagado, 0=no pagado
+        'detalle' => 'nullable'
+        ]);
+
+
+        $ingresoAlmacen = new ingresoAlmacen();
+
+        $ingresoAlmacen->usuario = $request->usuario;
+        $ingresoAlmacen->product_id = $request->product_id;
+        $ingresoAlmacen->proveedor_id = $request->proveedor_id;
+        $ingresoAlmacen->fechaIngreso = $request->fechaIngreso;
+        $ingresoAlmacen->fechaEmision = $request->fechaEmision;
+        $ingresoAlmacen->fechaVencimiento = $request->fechaVencimiento;
+        $ingresoAlmacen->numFactura = $request->numFactura;
+        $ingresoAlmacen->numIngreso = $request->numIngreso;
+        $ingresoAlmacen->cantidadIngresada = $request->cantidadIngresada;
+        $ingresoAlmacen->unidadMedida = $request->unidadMedida;
+        $ingresoAlmacen->PrecioTotal = $request->PrecioTotal;
+        $ingresoAlmacen->PrecioUnitario = $request->PrecioUnitario;
+        $ingresoAlmacen->moneda = $request->moneda;
+        $ingresoAlmacen->estadoPaga = $request->estadoPaga;
+        $ingresoAlmacen->detalle = $request->detalle;
+
+        $ingresoAlmacen->save();
+
+
+
+        return view('ingresoAlmacen.ingresoAlmacen');
     }
 
     /**
@@ -48,9 +89,12 @@ class IngresoAlmacenController extends Controller
      * @param  \App\Models\ingresoAlmacen  $ingresoAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function show(ingresoAlmacen $ingresoAlmacen)
+    public function show(Request $request)
     {
-        return view('ingresoAlmacen.mostrarIngresoAlmacen');
+        $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'asc')->paginate(5);
+        
+        return view('ingresoAlmacen.mostrarIngresoAlmacen',$entradasAll);
+        //return view('ingresoAlmacen.mostrarIngresoAlmacen');
     }
 
     /**

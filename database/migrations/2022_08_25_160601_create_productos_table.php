@@ -20,10 +20,7 @@ return new class extends Migration
             $table->string('nombreProd',50);
             $table->string('categoria_id',1);
             $table->string('marcaProd',50);
-            $table->string('unidadMedidaProd',20);//
             $table->string('um',7);
-            $table->string('precioUnitarioProd',10);
-            $table->string('tipoMoneda',1);//SOLES = 1 - DOLARES = 2
             $table->timestamps();
 
             //$table->foreign('categoria_id')->references('id')->on('categoriaP');

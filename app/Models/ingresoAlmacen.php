@@ -9,6 +9,14 @@ class ingresoAlmacen extends Model
 {
     use HasFactory;
 
+    public function productos()
+    {
+        return $this->belongsTo(producto::class,'product_id');
+    }
+    public function proveedores()
+    {
+        return $this->belongsTo(proveedor::class,'proveedor_id');
+    }
     public function inventario()
     {
         return $this->belongsTo(inventario::class,'product_id_ingreso');

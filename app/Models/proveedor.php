@@ -8,5 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class proveedor extends Model
 {
     use HasFactory;
-
+    public function ingreso()
+    {
+        return $this->hasMany(ingresoAlmacen::class,'proveedor_id');
+    }
 }
