@@ -7,11 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class producto extends Model
 {
-    use HasFactory;
-
-    
+    use HasFactory;    
     public function ingreso()
     {
-        return $this->hasMany(ingresoAlmacen::class,'product_id');
+        return $this->hasMany(detalleIngresoAlmacen::class,'product_id');
     }
 }

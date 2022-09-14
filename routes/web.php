@@ -15,6 +15,7 @@ use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\IngresoAlmacenController;
+use App\Http\Controllers\DetalleIngresoAlmacenController;
 use App\Http\Controllers\SalidaAlmacenController;
 
 Route::get('/', function () {
@@ -65,4 +66,7 @@ Route::resource('producto',ProductoController::class);
 
 Route::resource('ingresoAlmacen',IngresoAlmacenController::class);
 
+Route::get('/detalleIngresoAlmacen/create/{id}',[DetalleIngresoAlmacenController::class, 'createMedica'])->name('detalleIngresoAlmacen.createMedica');
+
+Route::resource('detalleIngresoAlmacen',DetalleIngresoAlmacenController::class);
 //Route::resource('almacen',InventarioController::class);

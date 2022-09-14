@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 <div class="text-center">
-    <h4 class="bg-info p-2 text-white bg-opacity-75">LISTA DE FACTURAS</h4>
+    <h4 class="bg-info p-2 text-white bg-opacity-75">BUSQUEDA DE FACTURAS</h4>
 </div>
 @if($errors->any())
 <div class="alert alert-danger">
@@ -13,24 +13,28 @@
     </ul>
 </div>
 @endif
+<div class="navbar navbar-light float right">
+    <form class="d-flex" role="search">
+        <input name="numFactura" class="form-control me-2" type="search" placeholder="Numero de Factura" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+    </form>
+</div>
+<div class="text-center">
+    <h4 class="bg-info p-2 text-white bg-opacity-75">FACTURAS</h4>
+</div>
 <div class="container">
-    <div class="text-center">
-        <h4 class="bg-info p-2 text-white bg-opacity-75">FACTURA</h4>
-    </div>
     <table class="table table-condensed table-hover table-bordered w-auto small rounded-md">
         <thead class="thead-light">
             <tr>
                 <th>N°</th>
                 <th>N° de Factura</th>
-                <th>Usuario</th>
+                <th>Usuario Generador</th>
                 <th>Producto</th>
-                <th>Proveedor</th>
-                <th>Cantidad Ingresada</th>
-                <th>Costo</th>
-                <th>Moneda</th>
-                <th>Estado de Paga</th>
+                <th>Fecha Emision</th>
+                <th>Fecha Ingreso Almacen</th>
+                <th>Fecha Vencimiento</th>
+                <th>Estado de Pago</th>
                 <th>Acciones</th>
-
             </tr>
         </thead>
         <tbody>
@@ -39,25 +43,30 @@
                 <td>{{ $entradas->id}}</td>
                 <td>{{ $entradas->numFactura}}</td>
                 <td>{{ $entradas->usuario}}</td>
-                <td>{{ $entradas->product_id}}</td>
                 <td>{{ $entradas->proveedor_id}}</td>
-                <td>{{ $entradas->cantidadIngresada}}</td>
-                <td>{{ $entradas->PrecioTotal}}</td>
-                <td>{{ $entradas->moneda}}</td>
-                <td>{{ $entradas->estadoPaga}}</td>
+                <td>{{ $entradas->fechaEmision}}</td>
+                <td>{{ $entradas->fechaIngreso}}</td>
+                <td>{{ $entradas->fechaVencimiento}}</td>
+                <td>@php
+                    $estado = " ";
+                    if($entradas->estadoPaga=='1'){
+                        $estado = "Pagado";
+                    }else{
+                        $estado = "No Pagado";
+                    }
+                    @endphp
+                {{$estado}}</td>
                 <td>
                     <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar al Ingreso: \n {{ $entradas->id}}?')" href="{{ url('ingresoAlmacen/'.$entradas->id.'/edit') }}">
-                        Actualizar
+                    ✏️
                     </a>
-                    <form action="{{ url('/ingresoAlmacen/'.$entradas->id) }}" method="POST">
+                    <form action="{{ url('detalleIngresoAlmacen/create/'.$entradas->id) }}">
+                        <input class="btn btn-outline-success" type="submit" value="➕">
+                    </form>
+                    <form action="{{ url('/ingresoAlmacen/create'.$entradas->id) }}" method="POST">
                         @csrf
                         {{ method_field('DELETE')}}
-                        <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea eliminar al Ingreso\n {{ $entradas->id}}?')" value="Borrar">
-
-                    </form>
-                    <form>
-                        <input class="btn btn-outline-primary" type="submit" value="Detalle">
-
+                        <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea eliminar al Ingreso\n {{ $entradas->id}}?')" value="🗑️">
                     </form>
                 </td>
             </tr>

@@ -6,6 +6,7 @@ use App\Models\ingresoAlmacen;
 use Illuminate\Http\Request;
 use App\Models\proveedor;
 use App\Models\producto;
+use Illuminate\Support\Arr;
 
 class IngresoAlmacenController extends Controller
 {
@@ -26,9 +27,8 @@ class IngresoAlmacenController extends Controller
      */
     public function create()
     {
-        $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(5);
         $proveedorAll['proveedorAll'] = proveedor::orderBy('id', 'asc')->paginate(5);
-        return view('ingresoAlmacen.crearIngresoAlmacen',$proveedorAll,$productoAll);
+        return view('ingresoAlmacen.crearIngresoAlmacen', $proveedorAll);
     }
 
     /**
@@ -40,39 +40,27 @@ class IngresoAlmacenController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'usuario' =>'required',
-        'product_id' => 'required',
-        'proveedor_id' => 'required',
-        'fechaIngreso' => 'required',
-        'fechaEmision' => 'required',
-        'fechaVencimiento' => 'required',
-        'numFactura' => 'required',
-        'numIngreso' => 'required',
-        'cantidadIngresada' => 'required',
-        'unidadMedida' => 'required',
-        'PrecioTotal' => 'required',
-        'PrecioUnitario' => 'required',
-        'moneda' => 'required',
-        'estadoPaga' => 'required|max:1',//1=pagado, 0=no pagado
-        'detalle' => 'nullable'
+            'usuario' => 'required',
+            'proveedor_id' => 'required',
+            'fechaIngreso' => 'required',
+            'fechaEmision' => 'required',
+            'fechaVencimiento' => 'required',
+            'numFactura' => 'required',
+            'numIngreso' => 'required',
+            'estadoPaga' => 'required|max:1', //1=pagado, 0=no pagado
+            'detalle' => 'nullable'
         ]);
 
 
         $ingresoAlmacen = new ingresoAlmacen();
 
         $ingresoAlmacen->usuario = $request->usuario;
-        $ingresoAlmacen->product_id = $request->product_id;
         $ingresoAlmacen->proveedor_id = $request->proveedor_id;
         $ingresoAlmacen->fechaIngreso = $request->fechaIngreso;
         $ingresoAlmacen->fechaEmision = $request->fechaEmision;
         $ingresoAlmacen->fechaVencimiento = $request->fechaVencimiento;
         $ingresoAlmacen->numFactura = $request->numFactura;
         $ingresoAlmacen->numIngreso = $request->numIngreso;
-        $ingresoAlmacen->cantidadIngresada = $request->cantidadIngresada;
-        $ingresoAlmacen->unidadMedida = $request->unidadMedida;
-        $ingresoAlmacen->PrecioTotal = $request->PrecioTotal;
-        $ingresoAlmacen->PrecioUnitario = $request->PrecioUnitario;
-        $ingresoAlmacen->moneda = $request->moneda;
         $ingresoAlmacen->estadoPaga = $request->estadoPaga;
         $ingresoAlmacen->detalle = $request->detalle;
 
@@ -91,10 +79,12 @@ class IngresoAlmacenController extends Controller
      */
     public function show(Request $request)
     {
-        $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'asc')->paginate(5);
-        
-        return view('ingresoAlmacen.mostrarIngresoAlmacen',$entradasAll);
-        //return view('ingresoAlmacen.mostrarIngresoAlmacen');
+        $numFactura = $request->get('numFactura');
+        if ($numFactura != '') {
+            $entradasAll['entradasAll'] = ingresoAlmacen::where('numFactura', '=', $numFactura)->paginate(10);
+        }
+        $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);
+        return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
     }
 
     /**
