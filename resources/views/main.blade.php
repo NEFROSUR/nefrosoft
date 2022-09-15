@@ -16,7 +16,7 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
         @livewireStyles
-    </head>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-dark text-white w-auto small">
         <a class="navbar-brand" href="/">NEFROSUR</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,8 +74,9 @@
                         Almacen
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{{url('/ingresoAlmacen/create')}}">Entradas</a>
-                        <a class="dropdown-item" href="{{url('/ingresoAlmacen/show')}}">Lista de Facturas</a>
+                        <a class="dropdown-item" href="{{url('/ingresoAlmacen/create')}}">Generar Factura</a>
+                        <a class="dropdown-item" href="{{url('/ingresoAlmacen/show')}}">Ver de Facturas</a>
+                        <a class="dropdown-item" href="{{url('/detalleIngresoAlmacen/show')}}">Productos x Factura</a>
                         <a class="dropdown-item" href="">Inventario</a>
                         <a class="dropdown-item" href="">Salidas</a>
                     </div>
@@ -121,8 +122,9 @@
     <body style="width:100%; height:100%;">
 
         @yield('content')
-        @livewireScripts
+
         </div>
+        @livewireScripts
     </body>
     <footer>
         <h1 style="text-align:center; margin-bottom: 0; padding: 1rem;">Hola {{ auth()->user()->name }} espero que tengas un buen dia !! Tu puedes !!🐶🐶🐶🐶🐶😹😹😹😹😹 :)</h1>

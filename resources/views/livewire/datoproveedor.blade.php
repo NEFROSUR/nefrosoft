@@ -4,13 +4,16 @@
         <label for="inputState" class="form-label">PROVEEDOR</label>
         <select wire:model="selectProveedor" name="proveedor_id" class="form-select">
             @foreach ($proveedores as $item)
-            <option value={{$item->id}}>{{$item->nameProv}} </option>
+            <option wire:click="updateselectProveedor('{{$item->id}}')" value={{$item->id}}>{{$item->nameProv}} </option>
             @endforeach
         </select>
     </div>
 
-    @if(!is_null($proveedor))
-    <input wire:model="selectProv" class="form-control" type="text" value="{{$proveedor->nameProv}}" disabled readonly>
+    @if(!is_null($provDato))
+    <div class="col p-2">
+        <input wire:model="provDato" class="form-control" type="text">
+        <h1>{{$provDato}}</h1>
+    </div>
     @endif
-    
+
 </div>

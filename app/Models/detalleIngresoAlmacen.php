@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class detalleIngresoAlmacen extends Model
 {
     use HasFactory;
-    public function ingresoA()
+    public function ingreso()
     {
         return $this->belongsTo(ingresoAlmacen::class,'factura_id');
     }

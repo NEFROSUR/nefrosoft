@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 <div class="text-center">
-    <h4 class="bg-info p-2 text-white bg-opacity-75">LISTA DE FACTURAS</h4>
+    <h4 class="bg-info p-2 text-white bg-opacity-75">PRODUCTOS x FACTURA</h4>
 </div>
 @if($errors->any())
 <div class="alert alert-danger">
@@ -13,26 +13,27 @@
     </ul>
 </div>
 @endif
-<div class="navbar navbar-light float right">
-    <form class="d-flex" role="search">
-        <input name="numFactura" class="form-control me-2" type="search" placeholder="Numero de Factura" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-    </form>
-</div>
-@if(!is_null($entradasAll))
-@if(!is_null($primero))
-<div class="container">
-    <div class="text-center">
-        <h4 class="bg-info p-2 text-white bg-opacity-75">FACTURA</h4>
+<div class="container w-30 p-4 mt-4">
+    <h4 class="bg-info p-2 text-white bg-opacity-75">BUSQUEDA POR FACTURA</h4>
+    <div class="navbar navbar-light float right">
+        <form class="d-flex" role="search">
+            <input name="numFactura" class="form-control me-2" type="search" placeholder="Numero de Factura" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
     </div>
-    @foreach ($primero as $prime)
+</div>
+@if(!is_null($detalleIngresoAlmacen))
+<div class="container border">
+    <div class="text-center">
+        <h4 class="bg-info p-2 text-white bg-opacity-75">DATOS DE LA FACTURA</h4>
+    </div>
     <div class="row">
         <div class="col">
             <label for="tittle" class="form-label">Numero de Factura</label>
         </div>
         <div class="col">
             <fieldset disabled>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ $prime->numFactura}}">
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$factura->numFactura}}">
             </fieldset>
         </div>
     </div>
@@ -42,7 +43,7 @@
         </div>
         <div class="col">
             <fieldset disabled>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ $prime->usuario}}">
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$factura->usuario}}">
             </fieldset>
         </div>
     </div>
@@ -52,7 +53,7 @@
         </div>
         <div class="col">
             <fieldset disabled>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ $prime->proveedor_id}}">
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$factura->proveedor->nameProv}}">
             </fieldset>
         </div>
     </div>
@@ -62,7 +63,15 @@
         </div>
         <div class="col">
             <fieldset disabled>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ $prime->estadoPaga}}">
+                @php
+                    $estado = "No especificado";
+                    if($factura->estadoPaga=='1'){
+                        $estado = "Pagado";
+                    }else{
+                        $estado = "No Pagado";
+                    }
+                @endphp
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$estado}}">
             </fieldset>
         </div>
     </div>
@@ -70,57 +79,77 @@
         <div class="col">
             <label for="tittle" class="form-label">Moneda</label>
         </div>
-        <div class="col">
-            <fieldset disabled>
-                @php
-                    $moneda = " ";
-                    if($prime->moneda=='1'){
-                        $moneda = "Pagado";
-                    }else{
-                        $moneda = "No pagado";
-                    }
-                @endphp
-                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$moneda}}">
-            </fieldset>
-        </div>
     </div>
-
-    @endforeach
+    <div class="text-center">
+        <h4 class="bg-info p-2 text-white bg-opacity-75">PRODUCTOS DE LA FACTURA</h4>
+    </div>
     <table class="table table-condensed table-hover table-bordered w-auto small rounded-md">
         <thead class="thead-light">
             <tr>
                 <th>N°</th>
-                <th>Usuario</th>
                 <th>Producto</th>
+                <th>Unidad de Medida</th>
                 <th>Cantidad Ingresada</th>
-                <th>Costo</th>
-                <th>Acciones</th>
+                <th>Costo Unitario</th>
+                <th>Costo Total Producto</th>
+                <th>Descripcion</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($entradasAll as $entradas)
+            @foreach ($detalleIngresoAlmacen as $detalle)
             <tr>
-                <td>{{ $entradas->id}}</td>
-                <td>{{ $entradas->usuario}}</td>
-                <td>{{ $entradas->product_id}}</td>
-                <td>{{ $entradas->cantidadIngresada}}</td>
-                <td>{{ $entradas->PrecioTotal}}</td>
+                <td>{{ $detalle->id}}</td>
+                <td>{{ $detalle->producto->nombreProd}}</td>
+                <td>{{ $detalle->unidadMedida}}</td>
+                <td>{{ $detalle->cantidadIngresada}}</td>
+                <td>@php
+                    $moneda = "No especificado";
+                    if($detalle->moneda=="1"){
+                    $moneda="Soles";
+                    }else{
+                    $moneda="Dolares";
+                    }
+                    @endphp
+                    {{ $detalle->PrecioTotal}} {{ $moneda}}
+                </td>
+                <td>{{ $detalle->detalle}}</td>
+                <td>{{ $detalle->detalle}}</td>
                 <td>
-                    <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar al Ingreso: \n {{ $entradas->id}}?')" href="{{ url('ingresoAlmacen/'.$entradas->id.'/edit') }}">
-                    ✏️
+                    <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar al Ingreso: \n {{ $detalle->id}}?')" href="{{ url('detalleIngresoAlmacen/'.$detalle->id.'/edit') }}">
+                        ✏️
                     </a>
-                    <form action="{{ url('/ingresoAlmacen/'.$entradas->id) }}" method="POST">
+
+                </td>
+                <td>
+                    <form action="{{ url('/detalleIngresoAlmacen/'.$detalle->id) }}" method="POST">
                         @csrf
                         {{ method_field('DELETE')}}
-                        <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea eliminar al Ingreso\n {{ $entradas->id}}?')" value="🗑️">
+                        <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea eliminar al Proveedor\n {{ $detalle->producto->nombreProd}}?')" value="🗑️">
+
                     </form>
+
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
+    <div class="text-center">
+        <h4 class="bg-info p-2 text-white bg-opacity-75">TOTALES</h4>
+    </div>
+    <div class="row">
+    <div class="col">
+            <label for="tittle" class="form-label">Costo Total de la Factura</label>
+        </div>
+        <div class="col">
+            <fieldset disabled>
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="10000">
+            </fieldset>
+        </div>
+    </div>
 </div>
-{{ $entradasAll->links() }}
-@endif
+{{ $detalleIngresoAlmacen->links() }}
+
 @endif
 @endsection

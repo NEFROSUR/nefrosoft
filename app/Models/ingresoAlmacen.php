@@ -13,7 +13,7 @@ class ingresoAlmacen extends Model
     {
         return $this->hasMany(detalleIngresoAlmacen::class,'factura_id');
     }
-    public function proveedores()
+    public function proveedor()
     {
         return $this->belongsTo(proveedor::class,'proveedor_id');
     }

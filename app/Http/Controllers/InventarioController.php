@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\inventario;
+use App\Models\detalleIngresoAlmacen;
+use App\Models\producto;
 use Illuminate\Http\Request;
 
 class InventarioController extends Controller
@@ -14,7 +16,7 @@ class InventarioController extends Controller
      */
     public function index()
     {
-        //
+        return view('almacen.indexAlmacen');
     }
 
     /**
@@ -24,7 +26,8 @@ class InventarioController extends Controller
      */
     public function create()
     {
-        //
+        $productoAll['productoAll'] = producto::All();
+        return view('almacen.crearAlmacen');
     }
 
     /**
@@ -35,7 +38,7 @@ class InventarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return view('almacen.crearAlmacen');
     }
 
     /**
@@ -46,7 +49,7 @@ class InventarioController extends Controller
      */
     public function show(inventario $inventario)
     {
-        //
+        return view('almacen.mostrarAlmacen');
     }
 
     /**
@@ -57,7 +60,7 @@ class InventarioController extends Controller
      */
     public function edit(inventario $inventario)
     {
-        //
+        return view('almacen.editAlmacen');
     }
 
     /**

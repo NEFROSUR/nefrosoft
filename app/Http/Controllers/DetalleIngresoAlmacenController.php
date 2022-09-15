@@ -26,26 +26,13 @@ class DetalleIngresoAlmacenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createMedica(Request $request, $id)
+    public function createMedica($id)
     {
         $factura = ingresoAlmacen::findOrFail($id);
 
         $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(5);
         //$validator = $request->get('cantidadIngresada'); 
-        if ($request->product_id!='') {
-            $detalleIngresoAlmacen = new detalleIngresoAlmacen();
-            $detalleIngresoAlmacen->factura_id = $id;
-            $detalleIngresoAlmacen->product_id = $request->product_id;
-            $detalleIngresoAlmacen->cantidadIngresada = $request->cantidadIngresada;
-            $detalleIngresoAlmacen->unidadMedida = $request->unidadMedida;
-            $detalleIngresoAlmacen->PrecioTotal = $request->PrecioTotal;
-            $detalleIngresoAlmacen->PrecioUnitario = $request->PrecioUnitario;
-            $detalleIngresoAlmacen->moneda = $request->moneda;
-            $detalleIngresoAlmacen->detalle = $request->detalle;
-            $detalleIngresoAlmacen->save();
-
-        }
-        return view('detalleIngresoAlmacen.crearDetalleIngresoAlmacen', $productoAll,['factura'=>$factura]);
+        return view('detalleIngresoAlmacen.crearDetalleIngresoAlmacen', $productoAll, ['factura' => $factura]);
     }
     public function create(Request $request, $id)
     {
@@ -71,8 +58,9 @@ class DetalleIngresoAlmacenController extends Controller
             'moneda' => 'required',
             'detalle' => 'nullable'
         ]);
-        $detalleIngresoAlmacen = new detalleIngresoAlmacen();
 
+        $detalleIngresoAlmacen = new detalleIngresoAlmacen();
+        $detalleIngresoAlmacen->factura_id = $request->factura_id;
         $detalleIngresoAlmacen->product_id = $request->product_id;
         $detalleIngresoAlmacen->cantidadIngresada = $request->cantidadIngresada;
         $detalleIngresoAlmacen->unidadMedida = $request->unidadMedida;
@@ -83,9 +71,10 @@ class DetalleIngresoAlmacenController extends Controller
 
         $detalleIngresoAlmacen->save();
 
+        $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);
+        return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
 
-
-        return view('detalleIngresoAlmacen.crearDetalleIngresoAlmacen');
+        //return view('detalleIngresoAlmacen.detalleIngresoAlmacen');
     }
 
     /**
@@ -94,9 +83,29 @@ class DetalleIngresoAlmacenController extends Controller
      * @param  \App\Models\detalleIngresoAlmacen  $detalleIngresoAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function show(detalleIngresoAlmacen $detalleIngresoAlmacen)
+    public function show(Request $request)
     {
-        //
+        /*$request->validate([
+            'numFactura' => 'numeric|exists:ingresoAlmacen',
+        ]);*/
+        $numFactura = $request->get('numFactura');
+
+        if ($numFactura != '') {
+            $factura = ingresoAlmacen::where('numFactura', '=', $numFactura)->first();
+            if ($factura == null) {
+                $detalleIngresoAlmacen['detalleIngresoAlmacen'] = null;
+                return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen', $detalleIngresoAlmacen);
+            } else {
+                $detalleIngresoAlmacen['detalleIngresoAlmacen'] = detalleIngresoAlmacen::where('factura_id', '=', $factura->id)->paginate(10);
+                return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen', $detalleIngresoAlmacen, ['factura' => $factura]);
+            }
+        } else {
+            $detalleIngresoAlmacen['detalleIngresoAlmacen'] = null;
+        }
+
+        //return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen', ['detalleIngresoAlmacen' => $detalleIngresoAlmacen]);
+
+        return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen', $detalleIngresoAlmacen);
     }
 
     /**
@@ -107,6 +116,8 @@ class DetalleIngresoAlmacenController extends Controller
      */
     public function edit($id)
     {
+        $detalleIngresoAlmacen = detalleIngresoAlmacen::findOrFail($id);
+        return view('detalleIngresoAlmacen.editDetalleIngresoAlmacen', ['detalleIngresoAlmacen' => $detalleIngresoAlmacen]);
     }
 
     /**

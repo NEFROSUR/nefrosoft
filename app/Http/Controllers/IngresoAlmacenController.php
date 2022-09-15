@@ -66,8 +66,6 @@ class IngresoAlmacenController extends Controller
 
         $ingresoAlmacen->save();
 
-
-
         return view('ingresoAlmacen.ingresoAlmacen');
     }
 
@@ -79,11 +77,21 @@ class IngresoAlmacenController extends Controller
      */
     public function show(Request $request)
     {
+
         $numFactura = $request->get('numFactura');
         if ($numFactura != '') {
-            $entradasAll['entradasAll'] = ingresoAlmacen::where('numFactura', '=', $numFactura)->paginate(10);
+            $factura = ingresoAlmacen::where('numFactura', '=', $numFactura)->first();
+            if($factura == null){;
+                $entradasAll['entradasAll'] = null;
+                return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
+            }else{
+                $entradasAll['entradasAll'] = ingresoAlmacen::where('numFactura', '=', $numFactura)->paginate(10);
+                return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
+            }
+        }else{
+            $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);
         }
-        $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);
+        
         return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
     }
 
