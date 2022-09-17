@@ -120,7 +120,9 @@ class ProveedorController extends Controller
         $datosProveedor = request()->except(['_token', '_method']);
         proveedor::where('id', '=', $id)->update($datosProveedor);
         $proveedor = proveedor::findOrFail($id);
-        return view('proveedores.proveedores', compact('proveedor'));
+        $proveedorAll['proveedorAll'] = proveedor::orderBy('id', 'asc')->paginate(5);
+        return view('proveedores.verProveedor',$proveedorAll);
+        //return view('proveedores.proveedores', compact('proveedor'));
     }
 
     /**

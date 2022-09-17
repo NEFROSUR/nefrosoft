@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\proveedor;
 use App\Models\producto;
 use App\Models\ingresoAlmacen;
+use App\Models\inventario;
 use Illuminate\Support\Arr;
 
 class DetalleIngresoAlmacenController extends Controller
@@ -70,7 +71,12 @@ class DetalleIngresoAlmacenController extends Controller
         $detalleIngresoAlmacen->detalle = $request->detalle;
 
         $detalleIngresoAlmacen->save();
-
+        
+        $producto = producto::where('id','=',$request->product_id)->first();
+        $stock = $producto->stock + $request->cantidadIngresada;
+        producto::where('id', '=', $request->product_id)->update(['stock'=>$stock,]);
+        
+        
         $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);
         return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
 
@@ -117,7 +123,7 @@ class DetalleIngresoAlmacenController extends Controller
     public function edit($id)
     {
         $detalleIngresoAlmacen = detalleIngresoAlmacen::findOrFail($id);
-        return view('detalleIngresoAlmacen.editDetalleIngresoAlmacen', ['detalleIngresoAlmacen' => $detalleIngresoAlmacen]);
+        return view('detalleIngresoAlmacen.editDetalleIngresoAlmacen', ['detalle' => $detalleIngresoAlmacen]);
     }
 
     /**
@@ -127,9 +133,25 @@ class DetalleIngresoAlmacenController extends Controller
      * @param  \App\Models\detalleIngresoAlmacen  $detalleIngresoAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, detalleIngresoAlmacen $detalleIngresoAlmacen)
+    public function update(Request $request, $id)
     {
-        //
+        $datosDetalle = request()->except(['_token', '_method']);
+        $stockReal = $request->cantidadIngresada;
+        $detalleI = detalleIngresoAlmacen::where('id', '=', $id)->first();
+        $stockInicial = $detalleI->cantidadIngresada;
+        $dif = $stockInicial - $stockReal;
+
+        $producto = producto::where('id','=',$detalleI->product_id)->first();
+        if($dif>0){
+            $stock = $producto->stock - abs($dif);
+        }if($dif<0){
+            $stock = $producto->stock + abs($dif);
+        }else{
+            $stock = $producto->stock;
+        }
+        producto::where('id', '=', $detalleI->product_id)->update(['stock'=>$stock,]);
+        detalleIngresoAlmacen::where('id', '=', $id)->update($datosDetalle);
+        return view('detalleIngresoAlmacen.detalleIngresoAlmacen');
     }
 
     /**
@@ -138,8 +160,15 @@ class DetalleIngresoAlmacenController extends Controller
      * @param  \App\Models\detalleIngresoAlmacen  $detalleIngresoAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function destroy(detalleIngresoAlmacen $detalleIngresoAlmacen)
+    public function destroy($id)
     {
-        //
+        
+        $detalleI = detalleIngresoAlmacen::where('id', '=', $id)->first();
+        $stockInicial = $detalleI->cantidadIngresada;
+        $producto = producto::where('id','=',$detalleI->product_id)->first();
+        $stock = $producto->stock - $stockInicial;
+        producto::where('id', '=', $detalleI->product_id)->update(['stock'=>$stock,]);
+        detalleIngresoAlmacen::destroy($id);
+        return redirect('detalleIngresoAlmacen');
     }
 }

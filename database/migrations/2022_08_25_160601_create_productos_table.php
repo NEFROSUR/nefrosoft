@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('categoria_id',1);
             $table->string('marcaProd',50);
             $table->string('um',7);
+            $table->integer('stock');
             $table->timestamps();
 
             //$table->foreign('categoria_id')->references('id')->on('categoriaP');

@@ -6,9 +6,6 @@
         <div class="col p-2 mt-0.5">
             <input type="text" name="nombreProd" class="form-control" placeholder="Nombre del producto" required>
         </div>
-        <div class="col p-2 mt-0.5">
-            <input type="text" name="codigoProd" class="form-control" placeholder="Código del producto" required>
-        </div>
     </div>
 
     <div class="row">

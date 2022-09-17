@@ -40,20 +40,34 @@ class ProductoController extends Controller
 
         $request->validate([
             'nombreProd' => 'required',
-            'codigoProd' => 'required|unique:productos',
             'marcaProd' => 'required',
             'um' => 'nullable',
         ]);
 
         $producto = new producto();
 
+        $cparte1 = $request->nombreProd;
+        $cparte1 = substr( $cparte1, 0, 2);
+        $cparte2 = $request->um;
+        $cparte2 = substr( $cparte2, 0, 2);
+        $cparte3 = $request->categoria_id;
+        $codigo = $cparte1.$cparte2.$cparte3;
+        
+
         $producto->nombreProd = $request->nombreProd;
-        $producto->codigoProd = $request->codigoProd;
+        $producto->codigoProd = strtoupper($codigo);
         $producto->marcaProd = $request->marcaProd;
         $producto->um = $request->um;
         $producto->categoria_id = $request->categoria_id;
-
+        $producto->stock = 0;
         $producto->save();
+
+        /*
+        $inventario = new inventario();
+        $inventario->producto_id = $codigo;
+        $inventario->stock = 0;
+        $inventario->save();
+        */
 
         return view('producto.crearProducto');
 

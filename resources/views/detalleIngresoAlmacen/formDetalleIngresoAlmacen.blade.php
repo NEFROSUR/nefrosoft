@@ -6,7 +6,7 @@
     <form action="{{ url('/detalleIngresoAlmacen/create/'.$factura->id) }}" method="POST">
         <div>
             <div class="col p-2 mt-0.5">
-                <input type="text" name="factura_id" class="form-control" value="{{$factura->id}}" disabled>
+                <input type="text" name="factura_id" class="form-control" value="{{$factura->id}}">
             </div>
             <div>
                 <label for="tittle" class="form-label">REGISTRO MEDICAMENTOS</label>

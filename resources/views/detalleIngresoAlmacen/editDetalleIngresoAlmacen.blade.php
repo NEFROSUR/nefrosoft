@@ -12,38 +12,45 @@
             <div>
                 <label for="tittle" class="form-label">REGISTRO MEDICAMENTOS</label>
             </div>
-            <div class="row">
-                <label for="tittle" class="form-label">PRODUCTOS</label>
-                <div class="col p-2 mt-0.5">
-                    <select id="inputState" name="product_id" class="form-select p-1 mt-0.5">
-                        @foreach ($productoAll as $producto)
-                        <option value="{{$producto->id}}">{{$producto->nombreProd}}</option>
-                        @endforeach
-                    </select>
-                </div>
+            <div class="col p-2 mt-0.5">
+                <fieldset disabled>
+                    <input type="text" class="form-control" value="{{$detalle->producto->nombreProd}}">
+                </fieldset>
+            </div>
+            <div class="col p-2 mt-0.5" style="display: none">
+                <input type="text" name="product_id" class="form-control" value="{{$detalle->product_id}}">
             </div>
             <div class="row">
                 <div class="col p-2 mt-0.5">
-                    <input type="text" name="cantidadIngresada" class="form-control" placeholder="cantidadIngresada">
+                    <input type="text" name="cantidadIngresada" class="form-control" value="{{$detalle->cantidadIngresada}}">
                 </div>
                 <div class="col p-2 mt-0.5">
-                    <input type="text" name="unidadMedida" class="form-control" placeholder="unidadMedida">
+                    <input type="text" name="unidadMedida" class="form-control" value="{{$detalle->unidadMedida}}">
                 </div>
                 <div class="col p-2 mt-0.5">
-                    <input type="text" name="PrecioTotal" class="form-control" placeholder="PrecioTotal">
+                    <input type="text" name="PrecioTotal" class="form-control" value="{{$detalle->PrecioTotal}}">
                 </div>
                 <div class="col p-2 mt-0.5">
-                    <input type="text" name="PrecioUnitario" class="form-control" placeholder="PrecioUnitario">
+                    <input type="text" name="PrecioUnitario" class="form-control" value="{{$detalle->PrecioUnitario}}">
                 </div>
                 <div class="col p-2 mt-0.5">
                     <select id="inputState" name="moneda" class="form-select p-1 mt-0.5">
+                        <option value="{{$detalle->moneda}}">@php
+                            $moneda = "No especificado";
+                            if($detalle->moneda=="1"){
+                            $moneda="Soles";
+                            }else{
+                            $moneda="Dolares";
+                            }
+                            @endphp
+                            Actual : {{$moneda}}</option>
                         <option value="1">Soles</option>
                         <option value="2">Dolares</option>
                     </select>
                 </div>
             </div>
             <div class="col p-2 mt-0.5">
-                <input type="text" name="detalle" class="form-control" placeholder="Detalle">
+                <input type="text" name="detalle" class="form-control" value="{{$detalle->detalle}}">
             </div>
             <div class="text-center p-1 mt-4">
                 <button type="submit" class="text-center btn btn-primary " onclick="return confirm('¿Registrar Factura?')">Registrar Factura</button>
