@@ -77,7 +77,7 @@
                         <a class="dropdown-item" href="{{url('/ingresoAlmacen/create')}}">Generar Factura</a>
                         <a class="dropdown-item" href="{{url('/ingresoAlmacen/show')}}">Ver de Facturas</a>
                         <a class="dropdown-item" href="{{url('/detalleIngresoAlmacen/show')}}">Productos x Factura</a>
-                        <a class="dropdown-item" href="">Inventario</a>
+                        <a class="dropdown-item" href="{{url('/almacen/show')}}">Inventario</a>
                         <a class="dropdown-item" href="">Salidas</a>
                     </div>
                 </li>

@@ -69,4 +69,4 @@ Route::resource('ingresoAlmacen',IngresoAlmacenController::class);
 Route::get('/detalleIngresoAlmacen/create/{id}',[DetalleIngresoAlmacenController::class, 'createMedica'])->name('detalleIngresoAlmacen.createMedica');
 
 Route::resource('detalleIngresoAlmacen',DetalleIngresoAlmacenController::class);
-//Route::resource('almacen',InventarioController::class);
+Route::resource('almacen',InventarioController::class);

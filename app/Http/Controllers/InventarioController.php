@@ -47,9 +47,21 @@ class InventarioController extends Controller
      * @param  \App\Models\inventario  $inventario
      * @return \Illuminate\Http\Response
      */
-    public function show(inventario $inventario)
+    public function show(Request $request)
     {
-        return view('almacen.mostrarAlmacen');
+        $codigoProd = $request->get('codigoProd');
+        $categoria_id = $request->get('categoria_id');
+        if ($codigoProd == '' && $categoria_id == '') {
+            $productoAll['productoAll'] = producto::orderBy('id', 'asc')->where('stock', '>', 0)->paginate(5);
+        } else {
+            if ($categoria_id == '') {
+                $productoAll['productoAll'] = producto::where('codigoProd', '=', $codigoProd)->paginate(5);
+            }
+            if ($codigoProd == '') {
+                $productoAll['productoAll'] = producto::where('categoria_id', '=', $categoria_id)->paginate(5);
+            }
+        }
+        return view('almacen.mostrarAlmacen', $productoAll);
     }
 
     /**

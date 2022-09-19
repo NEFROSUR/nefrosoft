@@ -143,15 +143,17 @@ class DetalleIngresoAlmacenController extends Controller
 
         $producto = producto::where('id','=',$detalleI->product_id)->first();
         if($dif>0){
-            $stock = $producto->stock - abs($dif);
+            $dif * -1;
+            $stock = $producto->stock - $dif;
+            producto::where('id', '=', $detalleI->product_id)->update(['stock'=>$stock,]);
         }if($dif<0){
             $stock = $producto->stock + abs($dif);
-        }else{
-            $stock = $producto->stock;
+            producto::where('id', '=', $detalleI->product_id)->update(['stock'=>$stock,]);
         }
-        producto::where('id', '=', $detalleI->product_id)->update(['stock'=>$stock,]);
         detalleIngresoAlmacen::where('id', '=', $id)->update($datosDetalle);
-        return view('detalleIngresoAlmacen.detalleIngresoAlmacen');
+
+        $detalleIngresoAlmacen['detalleIngresoAlmacen'] = null;
+        return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen', $detalleIngresoAlmacen);
     }
 
     /**

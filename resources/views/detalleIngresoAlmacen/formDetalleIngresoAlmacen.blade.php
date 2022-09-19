@@ -26,8 +26,15 @@
                     <input type="text" name="cantidadIngresada" class="form-control" placeholder="cantidadIngresada">
                 </div>
                 <div class="col p-2 mt-0.5">
-                    <input type="text" name="unidadMedida" class="form-control" placeholder="unidadMedida">
+                    <select id="inputState" name="unidadMedida" class="form-select p-1 mt-0.5">
+                        <option value="1">unidad</option>
+                        <option value="2">galon</option>
+                        <option value="3">caja</option>
+                        <option value="4">blister</option>
+
+                    </select>
                 </div>
+
                 <div class="col p-2 mt-0.5">
                     <input type="text" name="PrecioTotal" class="form-control" placeholder="PrecioTotal">
                 </div>
