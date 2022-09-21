@@ -64,7 +64,7 @@
                 <td>{{ $producto->stock}}</td>
                 <td>{{ $producto->updated_at}}</td>
                 <td>
-                    <form action="{{ url('/producto/'.$producto->id) }}" method="POST">
+                    <form action="{{ url('/salidaAlmacen/'.$producto->id) }}" method="POST">
                         @csrf
                         {{ method_field('DELETE')}}
                         <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea eliminar al Proveedor\n {{ $producto->nombreProd}}?')" value="Generar Salida">
