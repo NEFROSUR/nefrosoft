@@ -17,6 +17,8 @@ use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\IngresoAlmacenController;
 use App\Http\Controllers\DetalleIngresoAlmacenController;
 use App\Http\Controllers\SalidaAlmacenController;
+use App\Http\Controllers\ExcelController;
+
 
 Route::get('/', function () {
     return view('/mainNefrosur.principal');
@@ -70,4 +72,10 @@ Route::get('/detalleIngresoAlmacen/create/{id}',[DetalleIngresoAlmacenController
 
 Route::resource('detalleIngresoAlmacen',DetalleIngresoAlmacenController::class);
 Route::resource('almacen',InventarioController::class);
+
+Route::get('/salidaAlmacen/create/{id}',[SalidaAlmacenController::class, 'createSalida'])->name('salidaAlmacen.createSalida');
+
 Route::resource('salidaAlmacen',SalidaAlmacenController::class);
+
+
+Route::get('/exportarProductos',[ExcelController::class, 'export']);

@@ -90,7 +90,7 @@ class ProductoController extends Controller
             if ($codigoProd == '' && $categoria_id == '') {
                 $productoAll['productoAll'] = producto::where('nombreProd', '=', $nombreProd)->paginate(5);
             }
-            if ($codigoProd == '' && $categoria_id == '') {
+            if ($nombreProd == '' && $categoria_id == '') {
                 $productoAll['productoAll'] = producto::where('codigoProd', '=', $codigoProd)->paginate(5);
             }
             if ($nombreProd == '' && $codigoProd == '') {

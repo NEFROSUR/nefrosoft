@@ -18,27 +18,27 @@
         <form class="d-flex" role="search">
             <input name="nombreProd" class="form-control me-2" type="search" placeholder="Nombre Producto" aria-label="Search">
             <input name="codigoProd" class="form-control me-2" type="search" placeholder="Código del Producto" aria-label="Search">
-            <div class="form-group">
-                <div class="col">
-                    <label for="inputState" class="form-label">Categoria</label>
-                    <select id="inputState" name="categoria_id" class="form-select p-1 mt-0.5">
-                        <option value=" ">Todos</option>
-                        <option value="1">Medicamentos</option>
-                        <option value="2">Desechables médicos</option>
-                        <option value="3">Limpieza</option>
-                        <option value="4">Oficina</option>
-                        <option value="5">Farmacia</option>
-                        <option value="6">Soluciones</option>
-                        <option value="7">Insumos de MH</option>
-                    </select>
-                </div>
+            <div class="col">
+                <label for="inputState" class="form-label">Categoria</label>
+                <select id="inputState" name="categoria_id" class="form-select p-1 mt-0.5">
+                    <option value=" ">Todos</option>
+                    <option value="1">Medicamentos</option>
+                    <option value="2">Desechables médicos</option>
+                    <option value="3">Limpieza</option>
+                    <option value="4">Oficina</option>
+                    <option value="5">Farmacia</option>
+                    <option value="6">Soluciones</option>
+                    <option value="7">Insumos de MH</option>
+                </select>
             </div>
-            <button class="btn btn-outline-success" type="submit">Filtrar</button>
+            <div class="col">
+                <button class="btn btn-outline-success" type="submit">Filtrar</button>
+            </div>
+            <div class="col">
+                <a class="btn btn-outline-primary" href="/exportarProductos">exportar</a>
+            </div>
         </form>
-
     </div>
-
-
 </div>
 <div class="container">
     <table class="table table-condensed table-hover table-bordered w-auto small rounded-md">
@@ -60,7 +60,7 @@
                 <td>{{ $producto->nombreProd}}</td>
                 <td>{{ $producto->categoria_id}}</td>
                 <td>
-                    <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar al Proveedor: \n {{ $producto->nombreProd}}?')" href="{{ url('producto/'.$producto->id.'/edit') }}" >
+                    <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar al Proveedor: \n {{ $producto->nombreProd}}?')" href="{{ url('producto/'.$producto->id.'/edit') }}">
                         Actualizar
                     </a>
                     <form action="{{ url('/producto/'.$producto->id) }}" method="POST">

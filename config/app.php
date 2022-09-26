@@ -196,6 +196,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         //Libreria de DOMPDF
         Barryvdh\DomPDF\ServiceProvider::class,
+        //EXCEL
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -217,5 +219,6 @@ return [
     'aliases' => [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 ];

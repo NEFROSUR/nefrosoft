@@ -27,15 +27,11 @@ class SalidaAlmacenController extends Controller
     {
         $producto = producto::findOrFail($id);
 
-        $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(5);
-        //$validator = $request->get('cantidadIngresada'); 
-        return view('detalleIngresoAlmacen.crearDetalleIngresoAlmacen', $productoAll, ['producto' => $producto]);
+        return view('salidaAlmacen.crearSalidaAlmacen', ['producto' => $producto]);
     }
     public function create()
     {
-
-        $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(5);
-        return view('salidaAlmacen.crearSalidaAlmacen', $productoAll);
+        return view('salidaAlmacen.crearSalidaAlmacen');
     }
 
     /**
@@ -58,6 +54,7 @@ class SalidaAlmacenController extends Controller
             'areaDestino' => 'nullable',
             'detalle' => 'nullable'
         ]);
+
         $salidaAlmacen = new salidaAlmacen();
         $salidaAlmacen->reponsableA = $request->reponsableA;
         $salidaAlmacen->responsable = $request->responsable;
@@ -71,10 +68,13 @@ class SalidaAlmacenController extends Controller
         $salidaAlmacen->detalle = $request->detalle;
         $salidaAlmacen->save();
 
-        $producto = producto::where('id','=',$request->product_id)->first();
         //REDUCIR STOCK
+        $producto = producto::where('id','=',$request->product_id)->first();
+        $stock = $producto->stock - $request->cantidad;
+        producto::where('id', '=', $request->product_id)->update(['stock'=>$stock,]);
         
-
+        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'desc')->paginate(10);
+        return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
     }
 
     /**
@@ -83,9 +83,10 @@ class SalidaAlmacenController extends Controller
      * @param  \App\Models\salidaAlmacen  $salidaAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function show(salidaAlmacen $salidaAlmacen)
+    public function show(Request $request)
     {
-        //
+        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(5);
+        return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
     }
 
     /**

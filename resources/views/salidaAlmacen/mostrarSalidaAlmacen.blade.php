@@ -51,21 +51,21 @@
                 <th>NOMBRE DEL PRODUCTO</th>
                 <th>STOCK EN ALMACEN</th>
                 <th>ULTIMA ACTUALIZACION</th>
-                <th>GENERAR SALIDA</th>
+                <th>-</th>
 
             </tr>
         </thead>
         <tbody>
-            @foreach ($productoAll as $producto)
+            @foreach ($salidasAll as $salida)
             <tr>
-                <td>{{ $producto->id}}</td>
-                <td>{{ $producto->codigoProd}}</td>
-                <td>{{ $producto->nombreProd}}</td>
-                <td>{{ $producto->stock}}</td>
-                <td>{{ $producto->updated_at}}</td>
+                <td>{{ $salida->id}}</td>
+                <td>{{ $salida->codigoProd}}</td>
+                <td>{{ $salida->nombreProd}}</td>
+                <td>{{ $salida->stock}}</td>
+                <td>{{ $salida->updated_at}}</td>
                 <td>
                     <form action="{{ url('salidaAlmacen/create/'.$producto->id) }}">
-                        <input class="btn " type="submit" value="➡️">
+                        <input class="btn btn-outline-success" type="submit" value="➕">
                     </form>
                 </td>
             </tr>
@@ -73,6 +73,6 @@
         </tbody>
     </table>
 </div>
-{{ $productoAll->links() }}
+{{ $salidasAll->links() }}
 
 @endsection
