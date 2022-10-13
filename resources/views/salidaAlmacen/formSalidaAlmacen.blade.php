@@ -4,7 +4,7 @@
 <script src="{{ mix('js/app.js') }}"></script>
 <div>
     <div>
-        <label for="tittle" class="form-label">GENERANDO SALIDA DEL PRODUCTO {{$producto->codigoProd}}: {{$producto->nombreProd}} </label>
+        <label for="tittle" class="form-label">GENERANDO SALIDA DEL PRODUCTO </label>
     </div>
     <div class="row">
         <label for="tittle" class="form-label">Datos de la Salida</label>
@@ -36,24 +36,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <label for="tittle" class="form-label">Datos del Producto</label>
-    </div>
-    <div class="row">
-        <div class="col">
-            <label for="tittle" class="form-label">Cantidad del Producto</label>
-            <input type="text" name="cantidad" class="form-control" placeholder="0000">
-        </div>
-        <div class="col">
-            <label for="tittle" class="form-label">Presentacion del Producto</label>
-            <select id="inputState" name="um" class="form-select p-1 mt-0.5">
-                <option>unidad</option>
-                <option>galon</option>
-                <option>caja</option>
-                <option>blister</option>
-            </select>
-        </div>
-    </div>
+   
     <div class="row">
         <label for="tittle" class="form-label">Datos del Recepcionista</label>
     </div>

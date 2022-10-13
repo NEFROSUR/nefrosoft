@@ -16,15 +16,15 @@ return new class extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id('id')->autoincrement();
-            $table->string('codigoProd',5)->unique();
+            $table->string('codigoProd',10)->unique();
             $table->string('nombreProd',50);
             $table->string('categoria_id',1);
+            $table->string('categoria',25);
             $table->string('marcaProd',50);
-            $table->string('um',7);
+            $table->string('umedida',10);
+            $table->string('um',4);
             $table->integer('stock');
             $table->timestamps();
-
-            //$table->foreign('categoria_id')->references('id')->on('categoriaP');
 
         });
     }

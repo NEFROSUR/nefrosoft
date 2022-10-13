@@ -15,26 +15,22 @@ return new class extends Migration
     {
         Schema::create('salida_almacens', function (Blueprint $table) {
             $table->id('id')->autoIncrement();
-            $table->unsignedBigInteger('product_id');
+            $table->integer('numSalida')->unique();
+            $table->date('fechaSalida');
             //DATOS DEL USUARIO QUE ENTREGA
             $table->string('reponsableA',20);//Area del que entrega
             $table->string('responsable',50);//Nombre del usuario que entrega
-            $table->date('fechaSalida');
-            $table->integer('numSalida');
-            //DATOS DEL PRODUCTO ENTREGADO
-            $table->integer('cantidad');
-            $table->string('um',7);
-            $table->string('precioUnidad');
             //DATOS DEL QUE RECEPCIONA
             $table->string('areaRecepcion',20);
             $table->string('recepcionista',50);
             //DATOS DEL AREA O FIN AL QUE VA
             $table->string('areaDestino',20);
-            $table->string('detalle');
+            //TURNO DE LA ENTREGA
+            $table->string('turno',1);
 
+            $table->string('detalle')->nullable();
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('productos');
         });
     }
 

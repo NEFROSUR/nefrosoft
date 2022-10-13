@@ -9,8 +9,8 @@ class salidaAlmacen extends Model
 {
     use HasFactory;
 
-    public function inventario()
+    public function detalle()
     {
-        return $this->belongsTo(inventario::class,'product_id_salida');
+        return $this->hasMany(detalleSalidaAlmacen::class,'salida_id');
     }
 }

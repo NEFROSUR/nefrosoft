@@ -12,4 +12,8 @@ class producto extends Model
     {
         return $this->hasMany(detalleIngresoAlmacen::class,'product_id');
     }
+    public function salida()
+    {
+        return $this->hasMany(detalleSalidaAlmacen::class,'product_id');
+    }
 }

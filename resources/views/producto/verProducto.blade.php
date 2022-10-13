@@ -22,13 +22,13 @@
                 <label for="inputState" class="form-label">Categoria</label>
                 <select id="inputState" name="categoria_id" class="form-select p-1 mt-0.5">
                     <option value=" ">Todos</option>
-                    <option value="1">Medicamentos</option>
-                    <option value="2">Desechables médicos</option>
-                    <option value="3">Limpieza</option>
-                    <option value="4">Oficina</option>
-                    <option value="5">Farmacia</option>
-                    <option value="6">Soluciones</option>
-                    <option value="7">Insumos de MH</option>
+                    <option value="1">INSTRUMENTO</option>
+                    <option value="2">MATERIAL DE LIMPIEZA</option>
+                    <option value="3">MEDICAMENTO</option>
+                    <option value="4">SERVICIO</option>
+                    <option value="5">UTILES DE ESCRITORIO</option>
+                    <option value="6">OTROS</option>
+                    <option value="7">SIN CATEGORIA</option>
                 </select>
             </div>
             <div class="col">
@@ -48,7 +48,10 @@
                 <th>Codigo</th>
                 <th>Nombre Producto</th>
                 <th>Categoria</th>
-                <th>Acciones</th>
+                <th>Marca</th>
+                <th>Actualizar</th>
+                <th>Detalle</th>
+                <th>Borrar</th>
 
             </tr>
         </thead>
@@ -58,19 +61,24 @@
                 <td>{{ $producto->id}}</td>
                 <td>{{ $producto->codigoProd}}</td>
                 <td>{{ $producto->nombreProd}}</td>
-                <td>{{ $producto->categoria_id}}</td>
+                <td>{{ $producto->categoria}}</td>
+                <td>{{ $producto->marcaProd}}</td>
                 <td>
                     <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar al Proveedor: \n {{ $producto->nombreProd}}?')" href="{{ url('producto/'.$producto->id.'/edit') }}">
                         Actualizar
                     </a>
+                </td>
+                <td>
+                    <form>
+                        <input class="btn btn-outline-primary" type="submit" value="Detalle">
+
+                    </form>
+                </td>
+                <td>
                     <form action="{{ url('/producto/'.$producto->id) }}" method="POST">
                         @csrf
                         {{ method_field('DELETE')}}
                         <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea eliminar al Proveedor\n {{ $producto->nombreProd}}?')" value="Borrar">
-
-                    </form>
-                    <form>
-                        <input class="btn btn-outline-primary" type="submit" value="Detalle">
 
                     </form>
                 </td>

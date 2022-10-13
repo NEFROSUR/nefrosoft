@@ -18,12 +18,15 @@
             <label for="inputState" class="form-label">
                 <Table>U.M</Table>
             </label>
-            <select id="inputState" name="um" class="form-select p-1 mt-0.5">
-                <option>unidad</option>
-                <option>galon</option>
-                <option>caja</option>
-                <option>blister</option>
-
+            <select id="inputState" name="umedida" class="form-select p-1 mt-0.5">
+                <option>Unidad</option>
+                <option>Bolsa</option>
+                <option>Caja</option>
+                <option>Galon</option>
+                <option>Metros</option>
+                <option>Paquete</option>
+                <option>Pares</option>
+                <option>Resma</option>
             </select>
         </div>
 
@@ -34,13 +37,13 @@
                 <Table>Categoria</Table>
             </label>
             <select id="inputState" name="categoria_id" class="form-select p-1 mt-0.5">
-                <option value="1">Medicamentos</option>
-                <option value="2">Desechables médicos</option>
-                <option value="3">Limpieza</option>
-                <option value="4">Oficina</option>
-                <option value="5">Farmacia</option>
-                <option value="6">Soluciones</option>
-                <option value="7">Insumos de MH</option>
+                <option value="1">INSTRUMENTO</option>
+                <option value="2">MATERIAL DE LIMPIEZA</option>
+                <option value="3">MEDICAMENTO</option>
+                <option value="4">SERVICIO</option>
+                <option value="5">UTILES DE ESCRITORIO</option>
+                <option value="6">OTROS</option>
+                <option value="7">SIN CATEGORIA</option>
             </select>
         </div>
     </div>

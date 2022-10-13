@@ -47,8 +47,6 @@ class SalidaAlmacenController extends Controller
             'responsable' => 'required',
             'fechaSalida' => 'required',
             'numSalida' => 'required',
-            'cantidad' => 'required',
-            'um' => 'required',
             'areaRecepcion' => 'nullable',
             'recepcionista' => 'nullable',
             'areaDestino' => 'nullable',
@@ -60,21 +58,16 @@ class SalidaAlmacenController extends Controller
         $salidaAlmacen->responsable = $request->responsable;
         $salidaAlmacen->fechaSalida = $request->fechaSalida;
         $salidaAlmacen->numSalida = $request->numSalida;
-        $salidaAlmacen->cantidad = $request->cantidad;
-        $salidaAlmacen->um = $request->um;
         $salidaAlmacen->areaRecepcion = $request->areaRecepcion;
         $salidaAlmacen->recepcionista = $request->recepcionista;
         $salidaAlmacen->areaDestino = $request->areaDestino;
         $salidaAlmacen->detalle = $request->detalle;
         $salidaAlmacen->save();
 
-        //REDUCIR STOCK
-        $producto = producto::where('id','=',$request->product_id)->first();
-        $stock = $producto->stock - $request->cantidad;
-        producto::where('id', '=', $request->product_id)->update(['stock'=>$stock,]);
-        
-        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'desc')->paginate(10);
-        return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
+
+        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(5);
+        return view('salidaAlmacen.mostrarSalidaAlmacen');
+
     }
 
     /**
@@ -95,9 +88,10 @@ class SalidaAlmacenController extends Controller
      * @param  \App\Models\salidaAlmacen  $salidaAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function edit(salidaAlmacen $salidaAlmacen)
+    public function edit($id)
     {
-        //
+        $salidaAlmacen = salidaAlmacen::findOrFail($id);
+        return view('salidaAlmacen.editSalidaAlmacen', ['salidaAlmacen' => $salidaAlmacen]);
     }
 
     /**
@@ -107,9 +101,12 @@ class SalidaAlmacenController extends Controller
      * @param  \App\Models\salidaAlmacen  $salidaAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, salidaAlmacen $salidaAlmacen)
+    public function update(Request $request, $id)
     {
-        //
+        $datosSalida = request()->except(['_token', '_method']);
+        salidaAlmacen::where('id', '=', $id)->update($datosSalida);
+        $salidaAlmacen = salidaAlmacen::findOrFail($id);
+        return view('ingresoAlmacen.ingresoAlmacen', compact('salidaAlmacen'));
     }
 
     /**
@@ -118,8 +115,9 @@ class SalidaAlmacenController extends Controller
      * @param  \App\Models\salidaAlmacen  $salidaAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function destroy(salidaAlmacen $salidaAlmacen)
+    public function destroy($id)
     {
-        //
+        salidaAlmacen::destroy($id);
+        return redirect('salidaAlmacen');
     }
 }

@@ -9,6 +9,7 @@ use App\Models\proveedor;
 
 class ProductoController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -37,6 +38,27 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
+        $categorias = [
+            "1" => "INSTRUMENTO",
+            "2" => "MATERIAL DE LIMPIEZA",
+            "3" => "MEDICAMENTO",
+            "4" => "SERVICIO",
+            "5" => "UTILES DE ESCRITORIO",
+            "6" => "OTROS",
+            "7" => "SIN CATEGORIA",
+
+        ];
+        $unidades = [
+            "Unidad" => "und.",
+            "Bolsa" => "bol.",
+            "Caja" => "caj.",
+            "Galon" => "gal.",
+            "Metros" => "m.",
+            "Paquete" => "paq.",
+            "Pares" => "par.",
+            "Resma" => "resma",
+
+        ];
 
         $request->validate([
             'nombreProd' => 'required',
@@ -57,8 +79,10 @@ class ProductoController extends Controller
         $producto->nombreProd = $request->nombreProd;
         $producto->codigoProd = strtoupper($codigo);
         $producto->marcaProd = $request->marcaProd;
-        $producto->um = $request->um;
+        $producto->umedida = $request->umedida;
+        $producto->um = $unidades[$request->umedida];
         $producto->categoria_id = $request->categoria_id;
+        $producto->categoria = $categorias[$request->categoria_id];
         $producto->stock = 0;
         $producto->save();
 

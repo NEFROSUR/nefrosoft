@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 <div class="text-center">
-    <h4 class="bg-info p-2 text-white bg-opacity-75">STOCK DEL PRODUCTO</h4>
+    <h4 class="bg-info p-2 text-white bg-opacity-75">LISTA DE SALIDAS</h4>
 </div>
 @if($errors->any())
 <div class="alert alert-danger">
@@ -46,11 +46,11 @@
     <table class="table table-condensed table-hover table-bordered w-auto small rounded-md">
         <thead class="thead-light">
             <tr>
-                <th>N°</th>
-                <th>CODIGO DEL PRODUCTO</th>
-                <th>NOMBRE DEL PRODUCTO</th>
-                <th>STOCK EN ALMACEN</th>
-                <th>ULTIMA ACTUALIZACION</th>
+                <th>N° DE SALIDA</th>
+                <th>FECHA DE SALIDA</th>
+                <th>RESPONSABLE DE LA ENTREGA</th>
+                <th>RESPONSABLE DE LA RECEPCION</th>
+                <th>DESTINO DEL MATERIAL</th>
                 <th>-</th>
 
             </tr>
@@ -58,15 +58,15 @@
         <tbody>
             @foreach ($salidasAll as $salida)
             <tr>
-                <td>{{ $salida->id}}</td>
-                <td>{{ $salida->codigoProd}}</td>
-                <td>{{ $salida->nombreProd}}</td>
-                <td>{{ $salida->stock}}</td>
-                <td>{{ $salida->updated_at}}</td>
+                <td>{{ $salida->numSalida}}</td>
+                <td>{{ $salida->fechaSalida}}</td>
+                <td>{{ $salida->reponsableA}}: {{$salida->responsable}}</td>
+                <td>{{ $salida->areaRecepcion}}</td>
+                <td>{{ $salida->areaDestino}}</td>
                 <td>
-                    <form action="{{ url('salidaAlmacen/create/'.$producto->id) }}">
-                        <input class="btn btn-outline-success" type="submit" value="➕">
-                    </form>
+                <form action="{{ url('detalleSalidaAlmacen/create/'.$salida->id) }}">
+                            <input class="btn btn-outline-success" type="submit" value="➕">
+                        </form>
                 </td>
             </tr>
             @endforeach

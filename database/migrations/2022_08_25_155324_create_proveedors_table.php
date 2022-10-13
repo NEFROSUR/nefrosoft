@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('rucProv',15)->unique();
             $table->string('nameProv',50);
             $table->integer('telefonoProv')->nullable();
-            $table->string('categoriaProv',15)->nullable();
+            $table->string('categoriaProv',20)->nullable();
             $table->string('correoProv',30)->nullable();
             $table->string('direccionProv')->nullable();
             $table->string('detalleProv')->nullable();

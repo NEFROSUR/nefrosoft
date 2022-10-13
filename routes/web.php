@@ -16,27 +16,26 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\IngresoAlmacenController;
 use App\Http\Controllers\DetalleIngresoAlmacenController;
+use App\Http\Controllers\DetalleSalidaAlmacenController;
 use App\Http\Controllers\SalidaAlmacenController;
 use App\Http\Controllers\ExcelController;
 
-
+//INICIO
 Route::get('/', function () {
     return view('/mainNefrosur.principal');
 });
 Route::get('/init', function () {
     return view('/welcome');
 });
+//AREA RECEPCION
 Route::get('/recepcion/pdf', [App\Http\Controllers\FuaController::class, 'createPDF'])->name('fua.pdf');
 Route::resource('pacientes',pacientesController::class);
 Route::resource('profesionales',ProfesionalController::class);
-
-
 Route::resource('recepcion',FuaController::class);
 Route::resource('historia',HistoriaController::class);
-
 Route::get('/recepcion/pdfunit/{id}', [FuaController::class, 'createUnitPDF'])->name('fuaExtra.pdf');
-
 Route::get('/recepcion', [App\Http\Controllers\FuaController::class, 'index'])->name('recepcion.lisFua');
+//LOGIN Y REGISTRO
 Route::get('/register', [RegisterController::class, 'create'])
     ->middleware('guest')
     ->name('register.index');
@@ -54,28 +53,24 @@ Route::post('/login', [SessionsController::class, 'store'])
 Route::get('/logout', [SessionsController::class, 'destroy'])
     ->middleware('auth')
     ->name('login.destroy');
-
+//ENFERMERIA
 Route::resource('datomedico',DatomedicoController::class);
 Route::resource('consultaCN',ConsultaNefrologica::class);
 Route::resource('examenKTV',ExamenesKTV::class);
 Route::get('/examenKTV/create/{id}' , [FuaController::class, 'create']);
 Route::get('/datomedico/datomedicoBase', [DatomedicoController::class, 'mdatoBase'])->name('datomedicoBase');
 
-
+//ALMACEN
 Route::resource('proveedores',ProveedorController::class);
-
 Route::resource('producto',ProductoController::class);
-
 Route::resource('ingresoAlmacen',IngresoAlmacenController::class);
-
 Route::get('/detalleIngresoAlmacen/create/{id}',[DetalleIngresoAlmacenController::class, 'createMedica'])->name('detalleIngresoAlmacen.createMedica');
 
 Route::resource('detalleIngresoAlmacen',DetalleIngresoAlmacenController::class);
 Route::resource('almacen',InventarioController::class);
 
-Route::get('/salidaAlmacen/create/{id}',[SalidaAlmacenController::class, 'createSalida'])->name('salidaAlmacen.createSalida');
+Route::get('/detalleSalidaAlmacen/create/{id}',[DetalleSalidaAlmacenController::class, 'createSalida'])->name('detalleSalidaAlmacen.createSalida');
 
 Route::resource('salidaAlmacen',SalidaAlmacenController::class);
-
-
+Route::resource('detalleSalidaAlmacen',DetalleSalidaAlmacenController::class);
 Route::get('/exportarProductos',[ExcelController::class, 'export']);
