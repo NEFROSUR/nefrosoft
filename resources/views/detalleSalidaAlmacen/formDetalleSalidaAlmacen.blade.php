@@ -8,6 +8,9 @@
             <div>
                 <label for="tittle" class="form-label">REGISTRO MEDICAMENTOS</label>
             </div>
+            <div class="col p-2 mt-0.5">
+                <input type="text" name="salida_id" class="form-control" value="{{$salida_id->id}}">
+            </div>
             <div class="row">
                 <label for="tittle" class="form-label">PRODUCTOS</label>
                 <div class="col p-2 mt-0.5">
@@ -20,7 +23,7 @@
             </div>
             <div class="row">
                 <div class="col p-2 mt-0.5">
-                    <input type="text" name="cantidadIngresada" class="form-control" placeholder="cantidadIngresada">
+                    <input type="text" name="cantidad" class="form-control" placeholder="Cantidad de Salida">
                 </div>
                 <div class="col p-2 mt-0.5">
                     <select id="inputState" name="unidadMedida" class="form-select p-1 mt-0.5">
@@ -41,7 +44,7 @@
             </div>
             <div class="col">
                 <label for="tittle" class="form-label">Detalle del Destino</label>
-                <input type="text" name="detalle" class="form-control">
+                <input type="text" name="observacion" class="form-control">
             </div>
         </div>
         <div class="text-center p-1 mt-4">

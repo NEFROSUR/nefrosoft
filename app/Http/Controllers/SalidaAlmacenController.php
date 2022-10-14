@@ -47,9 +47,10 @@ class SalidaAlmacenController extends Controller
             'responsable' => 'required',
             'fechaSalida' => 'required',
             'numSalida' => 'required',
-            'areaRecepcion' => 'nullable',
-            'recepcionista' => 'nullable',
-            'areaDestino' => 'nullable',
+            'turno' => 'required',
+            'areaRecepcion' => 'required',
+            'recepcionista' => 'required',
+            'areaDestino' => 'required',
             'detalle' => 'nullable'
         ]);
 
@@ -61,12 +62,13 @@ class SalidaAlmacenController extends Controller
         $salidaAlmacen->areaRecepcion = $request->areaRecepcion;
         $salidaAlmacen->recepcionista = $request->recepcionista;
         $salidaAlmacen->areaDestino = $request->areaDestino;
+        $salidaAlmacen->turno = $request->turno;
         $salidaAlmacen->detalle = $request->detalle;
         $salidaAlmacen->save();
 
 
         $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(5);
-        return view('salidaAlmacen.mostrarSalidaAlmacen');
+        return view('salidaAlmacen.mostrarSalidaAlmacen',$salidasAll);
 
     }
 

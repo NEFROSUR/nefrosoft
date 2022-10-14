@@ -80,6 +80,7 @@
                         <a class="dropdown-item" href="{{url('/almacen/show')}}">Inventario</a>
                         <a class="dropdown-item" href="{{url('/salidaAlmacen/create')}}">Generar Salida</a>
                         <a class="dropdown-item" href="{{url('/salidaAlmacen/show')}}">Ver Salidas</a>
+                        <a class="dropdown-item" href="{{url('/detalleSalidaAlmacen/show')}}">Salida Detalle</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

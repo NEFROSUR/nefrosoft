@@ -46,9 +46,6 @@
         <input type="text" name="fechaVencimiento" class="form-control" placeholder="Fecha Vencimiento de la Factura">
     </div>
     <div class="col p-2 mt-0.5">
-        <input type="text" name="numIngreso" class="form-control" placeholder="Numero de Ingreso">
-    </div>
-    <div class="col p-2 mt-0.5">
         <input type="text" name="numFactura" class="form-control" placeholder="Numero de Factura">
     </div>
 

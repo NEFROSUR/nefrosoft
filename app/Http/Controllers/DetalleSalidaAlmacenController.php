@@ -35,7 +35,7 @@ class DetalleSalidaAlmacenController extends Controller
     }
     public function create()
     {
-        
+
         $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(5);
         return view('detalleSalidaAlmacen.crearDetalleSalidaAlmacen', $productoAll);
     }
@@ -48,17 +48,46 @@ class DetalleSalidaAlmacenController extends Controller
      */
     public function store(Request $request)
     {
+        $unidades = [
+            "Unidad" => "und.",
+            "Bolsa" => "bol.",
+            "Caja" => "caj.",
+            "Galon" => "gal.",
+            "Metros" => "m.",
+            "Paquete" => "paq.",
+            "Pares" => "par.",
+            "Resma" => "resma",
+
+        ];
+        $request->validate([
+            'product_id' => 'required',
+            'cantidad' => 'required',
+            'destino' => 'required',
+            'unidadMedida' => 'required',
+        ]);
+        $detalleSalida = new detalleSalidaAlmacen();
+
+        $guia = "S" . substr(str_repeat(0, 6) . detalleSalidaAlmacen::All()->count(), -5);
+        $detalleSalida->guiaInterna = $guia;
+        $detalleSalida->salida_id = $request->salida_id;
+        $detalleSalida->product_id = $request->product_id;
+        $detalleSalida->cantidad = $request->cantidad;
+        $detalleSalida->precioSalida = 0;
+        $detalleSalida->um = $request->unidadMedida;
+        $detalleSalida->destino = $request->destino;
+        $detalleSalida->observacion = $request->observacion;
+        $detalleSalida->save();
         
-        /*
         //REDUCIR STOCK
         $producto = producto::where('id', '=', $request->product_id)->first();
         $stock = $producto->stock - $request->cantidad;
         producto::where('id', '=', $request->product_id)->update(['stock' => $stock,]);
 
+        /*
         $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'desc')->paginate(10);
         return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
-
         */
+        return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen');
     }
 
     /**
@@ -67,9 +96,26 @@ class DetalleSalidaAlmacenController extends Controller
      * @param  \App\Models\detalleSalidaAlmacen  $detalleSalidaAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function show(detalleSalidaAlmacen $detalleSalidaAlmacen)
+    public function show(Request $request)
     {
-        //
+
+        $numSalida = $request->get('numSalida');
+        if ($numSalida != '') {
+            $salida = salidaAlmacen::where('numSalida', '=', $numSalida)->first();
+            if ($salida == null) {
+                $detalleSalidaAlmacen['detalleSalidaAlmacen'] = null;
+                return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen', $detalleSalidaAlmacen);
+            } else {
+                $detalleSalidaAlmacen['detalleSalidaAlmacen'] = detalleSalidaAlmacen::where('salida_id', '=', $salida->id)->paginate(10);
+                return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen', $detalleSalidaAlmacen, ['salida' => $salida]);
+            }
+        } else {
+            $detalleSalidaAlmacen['detalleSalidaAlmacen'] = null;
+        }
+
+
+        //$detalleSalidaAlmacen['detalleSalidaAlmacen'] = detalleSalidaAlmacen::All();
+        return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen',$detalleSalidaAlmacen);
     }
 
     /**
@@ -78,9 +124,10 @@ class DetalleSalidaAlmacenController extends Controller
      * @param  \App\Models\detalleSalidaAlmacen  $detalleSalidaAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function edit(detalleSalidaAlmacen $detalleSalidaAlmacen)
+    public function edit($id)
     {
-        //
+        $detalleSalidaAlmacen = detalleSalidaAlmacen::findOrFail($id);
+        return view('detalleSalidaAlmacen.editDetalleSalidaAlmacen', ['detalle' => $detalleSalidaAlmacen]);
     }
 
     /**
@@ -90,9 +137,27 @@ class DetalleSalidaAlmacenController extends Controller
      * @param  \App\Models\detalleSalidaAlmacen  $detalleSalidaAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, detalleSalidaAlmacen $detalleSalidaAlmacen)
+    public function update(Request $request, $id)
     {
-        //
+        $datosDetalle = request()->except(['_token', '_method']);
+        $stockReal = $request->cantidad;
+        $detalleS = detalleSalidaAlmacen::where('id', '=', $id)->first();
+        $stockInicial = $detalleS->cantidad;
+        $dif = $stockInicial - $stockReal;
+
+        $producto = producto::where('id','=',$detalleS->product_id)->first();
+        if($dif>0){
+            $dif * -1;
+            $stock = $producto->stock + $dif;
+            producto::where('id', '=', $detalleS->product_id)->update(['stock'=>$stock,]);
+        }if($dif<0){
+            $stock = $producto->stock - abs($dif);
+            producto::where('id', '=', $detalleS->product_id)->update(['stock'=>$stock,]);
+        }
+        detalleSalidaAlmacen::where('id', '=', $id)->update($datosDetalle);
+
+        $detalleSalidaAlmacen['detalleSalidaAlmacen'] = null;
+        return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen', $detalleSalidaAlmacen);
     }
 
     /**
@@ -101,8 +166,14 @@ class DetalleSalidaAlmacenController extends Controller
      * @param  \App\Models\detalleSalidaAlmacen  $detalleSalidaAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function destroy(detalleSalidaAlmacen $detalleSalidaAlmacen)
+    public function destroy($id)
     {
-        //
+        $detalleS = detalleSalidaAlmacen::where('id', '=', $id)->first();
+        $cantidadSalida = $detalleS->cantidad;
+        $producto = producto::where('id','=',$detalleS->product_id)->first();
+        $stock = $producto->stock + $cantidadSalida;
+        producto::where('id', '=', $detalleS->product_id)->update(['stock'=>$stock,]);
+        detalleSalidaAlmacen::destroy($id);
+        return redirect('detalleSalidaAlmacen');
     }
 }
