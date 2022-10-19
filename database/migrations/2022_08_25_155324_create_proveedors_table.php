@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('proveedors', function (Blueprint $table) {
             $table->id('id')->autoincrement();
-            $table->string('rucProv',15)->unique();
+            $table->string('rucProv',15);
             $table->string('nameProv',50);
             $table->integer('telefonoProv')->nullable();
             $table->string('categoriaProv',20)->nullable();
-            $table->string('correoProv',30)->nullable();
+            $table->string('correoProv',50)->nullable();
             $table->string('direccionProv')->nullable();
             $table->string('detalleProv')->nullable();
             //mas datos
