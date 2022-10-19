@@ -64,12 +64,12 @@
         <div class="col">
             <fieldset disabled>
                 @php
-                    $estado = "No especificado";
-                    if($factura->estadoPaga=='1'){
-                        $estado = "Pagado";
-                    }else{
-                        $estado = "No Pagado";
-                    }
+                $estado = "No especificado";
+                if($factura->estadoPaga=='1'){
+                $estado = "Pagado";
+                }else{
+                $estado = "No Pagado";
+                }
                 @endphp
                 <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$estado}}">
             </fieldset>
@@ -102,8 +102,37 @@
             <tr>
                 <td>{{ $detalle->id}}</td>
                 <td>{{ $detalle->producto->nombreProd}}</td>
-                <td>{{ $detalle->unidadMedida}}</td>
+                <td>
+                @php
+                $medida = "";
+                switch ($detalle->unidadMedida) {
+                case 1:
+                    $medida = "Unidad";
+                break;
+                case 2:
+                    $medida = "Galon";
+                break;
+                case 3:
+                    $medida = "Caja";
+                break;
+                case 4:
+                    $medida = "Blister";
+                break;
+                }
+                @endphp
+                {{$medida}}
+                </td>
                 <td>{{ $detalle->cantidadIngresada}}</td>
+                <td>@php
+                    $moneda = "No especificado";
+                    if($detalle->moneda=="1"){
+                    $moneda="Soles";
+                    }else{
+                    $moneda="Dolares";
+                    }
+                    @endphp
+                    {{ $detalle->PrecioUnitario}} {{ $moneda}}
+                </td>
                 <td>@php
                     $moneda = "No especificado";
                     if($detalle->moneda=="1"){
@@ -114,7 +143,6 @@
                     @endphp
                     {{ $detalle->PrecioTotal}} {{ $moneda}}
                 </td>
-                <td>{{ $detalle->detalle}}</td>
                 <td>{{ $detalle->detalle}}</td>
                 <td>
                     <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar al Ingreso: \n {{ $detalle->id}}?')" href="{{ url('detalleIngresoAlmacen/'.$detalle->id.'/edit') }}">
@@ -139,7 +167,7 @@
         <h4 class="bg-info p-2 text-white bg-opacity-75">TOTALES</h4>
     </div>
     <div class="row">
-    <div class="col">
+        <div class="col">
             <label for="tittle" class="form-label">Costo Total de la Factura</label>
         </div>
         <div class="col">

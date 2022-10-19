@@ -55,7 +55,6 @@ class DetalleIngresoAlmacenController extends Controller
             'cantidadIngresada' => 'required',
             'unidadMedida' => 'required',
             'PrecioTotal' => 'required',
-            'PrecioUnitario' => 'required',
             'moneda' => 'required',
             'detalle' => 'nullable'
         ]);
@@ -66,7 +65,7 @@ class DetalleIngresoAlmacenController extends Controller
         $detalleIngresoAlmacen->cantidadIngresada = $request->cantidadIngresada;
         $detalleIngresoAlmacen->unidadMedida = $request->unidadMedida;
         $detalleIngresoAlmacen->PrecioTotal = $request->PrecioTotal;
-        $detalleIngresoAlmacen->PrecioUnitario = $request->PrecioUnitario;
+        $detalleIngresoAlmacen->PrecioUnitario = $request->PrecioTotal/$request->cantidadIngresada;
         $detalleIngresoAlmacen->moneda = $request->moneda;
         $detalleIngresoAlmacen->detalle = $request->detalle;
 
@@ -75,11 +74,10 @@ class DetalleIngresoAlmacenController extends Controller
         $producto = producto::where('id','=',$request->product_id)->first();
         $stock = $producto->stock + $request->cantidadIngresada;
         producto::where('id', '=', $request->product_id)->update(['stock'=>$stock,]);
-        
-        
         $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);
         return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
-
+    
+        //$this->show($request);
         //return view('detalleIngresoAlmacen.detalleIngresoAlmacen');
     }
 
@@ -150,7 +148,10 @@ class DetalleIngresoAlmacenController extends Controller
             $stock = $producto->stock + abs($dif);
             producto::where('id', '=', $detalleI->product_id)->update(['stock'=>$stock,]);
         }
+
+        $PrecioUnitario = $request->PrecioTotal/$stockReal;
         detalleIngresoAlmacen::where('id', '=', $id)->update($datosDetalle);
+        detalleIngresoAlmacen::where('id', '=', $id)->update(['PrecioUnitario'=>$PrecioUnitario,]);
 
         $detalleIngresoAlmacen['detalleIngresoAlmacen'] = null;
         return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen', $detalleIngresoAlmacen);

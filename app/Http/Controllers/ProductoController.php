@@ -84,6 +84,7 @@ class ProductoController extends Controller
         $producto->categoria_id = $request->categoria_id;
         $producto->categoria = $categorias[$request->categoria_id];
         $producto->stock = 0;
+        $producto->precioProm = 0;
         $producto->save();
 
         /*

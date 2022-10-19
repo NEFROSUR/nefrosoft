@@ -36,10 +36,7 @@
                 </div>
 
                 <div class="col p-2 mt-0.5">
-                    <input type="text" name="PrecioTotal" class="form-control" placeholder="PrecioTotal">
-                </div>
-                <div class="col p-2 mt-0.5">
-                    <input type="text" name="PrecioUnitario" class="form-control" placeholder="PrecioUnitario">
+                    <input type="text" name="PrecioTotal" class="form-control" placeholder="Precio Total del Producto sin IGV">
                 </div>
                 <div class="col p-2 mt-0.5">
                     <select id="inputState" name="moneda" class="form-select p-1 mt-0.5">

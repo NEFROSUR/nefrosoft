@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('umedida',10);
             $table->string('um',4);
             $table->integer('stock');
+            $table->decimal('precioProm', 8, 2);
             $table->timestamps();
 
         });

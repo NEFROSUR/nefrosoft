@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\inventario;
 use App\Models\detalleIngresoAlmacen;
+use App\Models\detalleSalidaAlmacen;
 use App\Models\producto;
 use Illuminate\Http\Request;
 
@@ -61,7 +62,14 @@ class InventarioController extends Controller
                 $productoAll['productoAll'] = producto::where('categoria_id', '=', $categoria_id)->paginate(5);
             }
         }
-        return view('almacen.mostrarAlmacen', $productoAll);
+
+        $listIdProduct['listIdProduct'] = detalleIngresoAlmacen::groupBy('product_id')->get();
+        /*foreach ($listIdProduct as $posi){
+            $promedioUnitario['promedioUnitario'] = detalleIngresoAlmacen::where('product_id', '=', $posi)->avg();    
+        }*/
+
+
+        return view('almacen.mostrarAlmacen', $productoAll, $listIdProduct);
     }
 
     /**

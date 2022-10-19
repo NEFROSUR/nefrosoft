@@ -50,9 +50,9 @@
                 <th>CODIGO DEL PRODUCTO</th>
                 <th>NOMBRE DEL PRODUCTO</th>
                 <th>STOCK EN ALMACEN</th>
+                <th>PRECIO UNITARIO PROMEDIO</th>
                 <th>ULTIMA ACTUALIZACION</th>
-                <th>GENERAR SALIDA</th>
-
+                <th>GENERAR SALIDA UNITARIA</th>
             </tr>
         </thead>
         <tbody>
@@ -61,6 +61,7 @@
                 <td>{{ $producto->id}}</td>
                 <td>{{ $producto->codigoProd}}</td>
                 <td>{{ $producto->nombreProd}}</td>
+                <td>{{ $producto->stock}}</td>
                 <td>{{ $producto->stock}}</td>
                 <td>{{ $producto->updated_at}}</td>
                 <td>

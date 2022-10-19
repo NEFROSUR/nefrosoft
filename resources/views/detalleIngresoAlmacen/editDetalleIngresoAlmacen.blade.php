@@ -24,14 +24,34 @@
                 <div class="col p-2 mt-0.5">
                     <input type="text" name="cantidadIngresada" class="form-control" value="{{$detalle->cantidadIngresada}}">
                 </div>
+                @php
+                $medida = "";
+                switch ($detalle->unidadMedida) {
+                case 1:
+                $medida = "Unidad";
+                break;
+                case 2:
+                $medida = "Galon";
+                break;
+                case 3:
+                $medida = "Caja";
+                break;
+                case 4:
+                $medida = "Blister";
+                break;
+                }
+                @endphp
                 <div class="col p-2 mt-0.5">
-                    <input type="text" name="unidadMedida" class="form-control" value="{{$detalle->unidadMedida}}">
+                    <select id="inputState" name="unidadMedida" class="form-select p-1 mt-0.5">
+                        <option value="{{$detalle->unidadMedida}}">Actual: {{$medida}} </option>
+                        <option value="1">unidad</option>
+                        <option value="2">galon</option>
+                        <option value="3">caja</option>
+                        <option value="4">blister</option>
+                    </select>
                 </div>
                 <div class="col p-2 mt-0.5">
                     <input type="text" name="PrecioTotal" class="form-control" value="{{$detalle->PrecioTotal}}">
-                </div>
-                <div class="col p-2 mt-0.5">
-                    <input type="text" name="PrecioUnitario" class="form-control" value="{{$detalle->PrecioUnitario}}">
                 </div>
                 <div class="col p-2 mt-0.5">
                     <select id="inputState" name="moneda" class="form-select p-1 mt-0.5">
@@ -48,6 +68,9 @@
                         <option value="2">Dolares</option>
                     </select>
                 </div>
+            </div>
+            <div>
+                <label for="tittle" class="form-label">Detalle del Ingreso</label>
             </div>
             <div class="col p-2 mt-0.5">
                 <input type="text" name="detalle" class="form-control" value="{{$detalle->detalle}}">
