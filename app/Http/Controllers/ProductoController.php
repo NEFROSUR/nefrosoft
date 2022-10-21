@@ -110,16 +110,16 @@ class ProductoController extends Controller
         $codigoProd = $request->get('codigoProd');
         $categoria_id = $request->get('categoria_id');
         if ($nombreProd == '' && $codigoProd == '' && $categoria_id == '') {
-            $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(5);
+            $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(10);
         } else {
             if ($codigoProd == '' && $categoria_id == '') {
-                $productoAll['productoAll'] = producto::where('nombreProd', '=', $nombreProd)->paginate(5);
+                $productoAll['productoAll'] = producto::where('nombreProd', '=', $nombreProd)->paginate(10);
             }
             if ($nombreProd == '' && $categoria_id == '') {
-                $productoAll['productoAll'] = producto::where('codigoProd', '=', $codigoProd)->paginate(5);
+                $productoAll['productoAll'] = producto::where('codigoProd', '=', $codigoProd)->paginate(10);
             }
             if ($nombreProd == '' && $codigoProd == '') {
-                $productoAll['productoAll'] = producto::where('categoria_id', '=', $categoria_id)->paginate(5);
+                $productoAll['productoAll'] = producto::where('categoria_id', '=', $categoria_id)->paginate(10);
             };
         }
         return view('producto.verProducto', $productoAll);

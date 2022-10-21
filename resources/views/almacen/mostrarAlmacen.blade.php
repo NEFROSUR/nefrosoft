@@ -62,10 +62,10 @@
                 <td>{{ $producto->codigoProd}}</td>
                 <td>{{ $producto->nombreProd}}</td>
                 <td>{{ $producto->stock}}</td>
-                <td>{{ $producto->stock}}</td>
+                <td>{{ $producto->precioProm}}</td>
                 <td>{{ $producto->updated_at}}</td>
                 <td>
-                    <form action="{{ url('salidaAlmacen/create/'.$producto->id) }}">
+                    <form action="{{ url('salidaUnitaria/create/'.$producto->id) }}">
                         <input class="btn " type="submit" value="➡️">
                     </form>
                 </td>

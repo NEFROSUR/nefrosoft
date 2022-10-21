@@ -3,23 +3,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="{{ mix('js/app.js') }}"></script>
 <div>
-    <form action="{{ url('/detalleSalidaAlmacen/create/'.$salida_id->id) }}" method="POST">
+    <form action="{{ url('/salidaUnitaria/create/'.$producto->id) }}" method="POST">
         <div>
             <div>
                 <label for="tittle" class="form-label">REGISTRO DE PRODUCTOS DE SALIDA</label>
             </div>
             <div class="col p-2 mt-0.5">
-                <input type="text" name="salida_id" class="form-control" value="{{$salida_id->id}}">
+                <fieldset disabled>
+                    <input type="text" class="form-control" value="{{$producto->nombreProd}}">
+                </fieldset>
             </div>
-            <div class="row">
-                <label for="tittle" class="form-label">PRODUCTOS</label>
-                <div class="col p-2 mt-0.5">
-                    <select id="inputState" name="product_id" class="form-select p-1 mt-0.5">
-                        @foreach ($productoAll as $producto)
-                        <option value="{{$producto->id}}">{{$producto->nombreProd}}</option>
-                        @endforeach
-                    </select>
-                </div>
+            <div class="col p-2 mt-0.5" style="display: none">
+                <input type="text" name="product_id" class="form-control" value="{{$producto->id}}">
             </div>
             <div class="row">
                 <div class="col p-2 mt-0.5">
@@ -39,7 +34,7 @@
                 </div>
             </div>
             <div class="col">
-                <label for="tittle" class="form-label">Destino</label>
+                <label for="tittle" class="form-label">Recepcionista</label>
                 <input type="text" name="destino" class="form-control">
             </div>
             <div class="col">
@@ -48,7 +43,7 @@
             </div>
         </div>
         <div class="text-center p-1 mt-4">
-            <button type="submit" class="text-center btn btn-primary " onclick="return confirm('¿Registrar Salida?')">Registrar Consumo en Salida {{$salida_id->id}}</button>
+            <button type="submit" class="text-center btn btn-primary " onclick="return confirm('¿Registrar Salida?')">Registrar Consumo en Salida {{$producto->id}}</button>
         </div>
 
     </form>

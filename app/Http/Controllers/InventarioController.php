@@ -53,23 +53,24 @@ class InventarioController extends Controller
         $codigoProd = $request->get('codigoProd');
         $categoria_id = $request->get('categoria_id');
         if ($codigoProd == '' && $categoria_id == '') {
-            $productoAll['productoAll'] = producto::orderBy('id', 'asc')->where('stock', '>', 0)->paginate(5);
+            $productoAll['productoAll'] = producto::orderBy('id', 'asc')->where('stock', '>', 0)->paginate(10);
+            //$productoAll['productoAll'] = producto::groupBy('nombreProd','id')->orderBy('id', 'asc')->where('stock', '>', 0)->paginate(5);
         } else {
             if ($categoria_id == '') {
-                $productoAll['productoAll'] = producto::where('codigoProd', '=', $codigoProd)->paginate(5);
+                $productoAll['productoAll'] = producto::where('codigoProd', '=', $codigoProd)->paginate(10);
             }
             if ($codigoProd == '') {
-                $productoAll['productoAll'] = producto::where('categoria_id', '=', $categoria_id)->paginate(5);
+                $productoAll['productoAll'] = producto::where('categoria_id', '=', $categoria_id)->paginate(10);
             }
         }
 
-        $listIdProduct['listIdProduct'] = detalleIngresoAlmacen::groupBy('product_id')->get();
-        /*foreach ($listIdProduct as $posi){
+        /*$listIdProduct['listIdProduct'] = detalleIngresoAlmacen::groupBy('product_id')->get();
+        foreach ($listIdProduct as $posi){
             $promedioUnitario['promedioUnitario'] = detalleIngresoAlmacen::where('product_id', '=', $posi)->avg();    
-        }*/
+        }
 
-
-        return view('almacen.mostrarAlmacen', $productoAll, $listIdProduct);
+        return view('almacen.mostrarAlmacen', $productoAll, $listIdProduct);*/
+        return view('almacen.mostrarAlmacen', $productoAll);
     }
 
     /**

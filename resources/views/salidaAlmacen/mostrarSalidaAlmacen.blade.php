@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 <div class="text-center">
-    <h4 class="bg-info p-2 text-white bg-opacity-75">LISTA DE SALIDAS</h4>
+    <h4 class="bg-info p-2 text-white bg-opacity-75">LISTA DE SALIDAS POR PAQUETE</h4>
 </div>
 @if($errors->any())
 <div class="alert alert-danger">
@@ -17,31 +17,15 @@
     <div class="navbar navbar-light float right">
         <form class="d-flex" role="search">
             <div class="col">
-                <label for="inputState" class="form-label">Busca por codigo</label>
-                <input name="codigoProd" class="form-control me-2" type="search" placeholder="Código del Producto" aria-label="Search">
+                <label for="inputState" class="form-label">Busca por Numero de Salida</label>
+                <input name="numSalida" class="form-control me-2" type="search" placeholder="Codigo de Salida" aria-label="Search">
             </div>
 
-            <div class="form-group">
-                <div class="col">
-                    <label for="inputState" class="form-label">Categoria</label>
-                    <select id="inputState" name="categoria_id" class="form-select p-1 mt-0.5">
-                        <option value=" ">Todos</option>
-                        <option value="1">Medicamentos</option>
-                        <option value="2">Desechables médicos</option>
-                        <option value="3">Limpieza</option>
-                        <option value="4">Oficina</option>
-                        <option value="5">Farmacia</option>
-                        <option value="6">Soluciones</option>
-                        <option value="7">Insumos de MH</option>
-                    </select>
-                </div>
-            </div>
             <button class="btn btn-outline-success" type="submit">Filtrar</button>
         </form>
     </div>
-
-
 </div>
+@if(!is_null($salidasAll))
 <div class="container">
     <table class="table table-condensed table-hover table-bordered w-auto small rounded-md">
         <thead class="thead-light">
@@ -51,7 +35,7 @@
                 <th>RESPONSABLE DE LA ENTREGA</th>
                 <th>RESPONSABLE DE LA RECEPCION</th>
                 <th>DESTINO DEL MATERIAL</th>
-                <th>-</th>
+                <th>AGREGAR PRODUCTO</th>
 
             </tr>
         </thead>
@@ -65,7 +49,7 @@
                 <td>{{ $salida->areaDestino}}</td>
                 <td>
                 <form action="{{ url('detalleSalidaAlmacen/create/'.$salida->id) }}">
-                            <input class="btn btn-outline-success" type="submit" value="➕">
+                            <input class="btn btn-outline-danger" type="submit" value="➕">
                         </form>
                 </td>
             </tr>
@@ -74,5 +58,5 @@
     </table>
 </div>
 {{ $salidasAll->links() }}
-
+@endif
 @endsection

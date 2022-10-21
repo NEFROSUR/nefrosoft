@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('detalle_salida_almacens', function (Blueprint $table) {
             $table->id('id')->autoIncrement();
             $table->string('guiaInterna',7);
-            $table->unsignedBigInteger('salida_id');
+            $table->unsignedBigInteger('salida_id')->nullable();
             $table->unsignedBigInteger('product_id');
             //DATOS DEL PRODUCTO ENTREGADO
             $table->integer('cantidad');

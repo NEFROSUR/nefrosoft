@@ -80,7 +80,21 @@ class SalidaAlmacenController extends Controller
      */
     public function show(Request $request)
     {
+        $numSalida = $request->get('numSalida');
+        /*if ($numSalida != '') {
+            $salidasAll['salidasAll'] = salidaAlmacen::where('numSalida', '=', $numSalida)->paginate(5);
+            if ($salidasAll == null) {
+                $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(5);
+                return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
+            } else {
+                $salidasAll['salidasAll'] = salidaAlmacen::where('numSalida', '=', $numSalida)->paginate(5);
+                return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
+            }
+        }else{
+            $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(5);
+        }*/
         $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(5);
+
         return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
     }
 

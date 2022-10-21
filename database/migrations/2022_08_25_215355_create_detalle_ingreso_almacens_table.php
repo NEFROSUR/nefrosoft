@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('detalle_ingreso_almacens', function (Blueprint $table) {
             $table->id('id')->autoIncrement();
-            $table->unsignedBigInteger('factura_id');
+            $table->unsignedBigInteger('factura_id')->nullable();
             $table->unsignedBigInteger('product_id');
             //ESPECIFICACIONES DEL PRODUCTO COMPRA
             $table->integer('cantidadIngresada');

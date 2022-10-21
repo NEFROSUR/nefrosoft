@@ -31,7 +31,7 @@ class DetalleIngresoAlmacenController extends Controller
     {
         $factura = ingresoAlmacen::findOrFail($id);
 
-        $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(5);
+        $productoAll['productoAll'] = producto::orderBy('id', 'asc')->get();
         //$validator = $request->get('cantidadIngresada'); 
         return view('detalleIngresoAlmacen.crearDetalleIngresoAlmacen', $productoAll, ['factura' => $factura]);
     }
@@ -74,11 +74,16 @@ class DetalleIngresoAlmacenController extends Controller
         $producto = producto::where('id','=',$request->product_id)->first();
         $stock = $producto->stock + $request->cantidadIngresada;
         producto::where('id', '=', $request->product_id)->update(['stock'=>$stock,]);
+
+        $precioProm = detalleIngresoAlmacen::where('product_id','=',$request->product_id)->avg('PrecioUnitario');
+        producto::where('id', '=', $request->product_id)->update(['precioProm'=>$precioProm,]);
+        
         $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);
         return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
     
         //$this->show($request);
-        //return view('detalleIngresoAlmacen.detalleIngresoAlmacen');
+        //$precioProm = detalleIngresoAlmacen::select('product_id','PrecioUnitario')->where('product_id','=',$producto->id)->avg();
+        //producto::where('codigoProd', '=', $producto->codigoProd)->update(['precioProm'=>$precioProm,]);
     }
 
     /**

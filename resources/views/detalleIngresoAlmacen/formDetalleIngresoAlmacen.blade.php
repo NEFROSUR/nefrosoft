@@ -16,7 +16,7 @@
                 <div class="col p-2 mt-0.5">
                     <select id="inputState" name="product_id" class="form-select p-1 mt-0.5">
                         @foreach ($productoAll as $producto)
-                        <option value="{{$producto->id}}">{{$producto->nombreProd}}</option>
+                        <option value="{{$producto->id}}">{{$producto->nombreProd}} :: {{$producto->marcaProd}}</option>
                         @endforeach
                     </select>
                 </div>

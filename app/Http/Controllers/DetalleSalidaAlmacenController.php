@@ -29,7 +29,7 @@ class DetalleSalidaAlmacenController extends Controller
     {
         $salida_id = salidaAlmacen::findOrFail($id);
 
-        $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(5);
+        $productoAll['productoAll'] = producto::orderBy('id', 'asc')->where('stock', '>', 0)->paginate(5);
         //$validator = $request->get('cantidadIngresada'); 
         return view('detalleSalidaAlmacen.crearDetalleSalidaAlmacen', $productoAll, ['salida_id' => $salida_id]);
     }
