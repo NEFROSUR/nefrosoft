@@ -1,39 +1,47 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+
 <div>
-    <div>
-        <label for="tittle" class="form-label">REGISTRO DEL PROVEEDOR</label>
+
+    <div class="text-center">
+    <h2 class="bg-dark p-2 ml-0 text-white bg-opacity-10 rounded-pill">REGISTRO DE PROVEEDOR</h2>
     </div>
 
-    <label for="tittle" class="form-label">Razón social del proveedor</label>
+    <div class="row ">
+        
+        <div class="col p-3 mt-1">
+            <input type="text" name="nameProv" class="form-control rounded-pill  border-info" placeholder="Razon social de la empresa: EJEMPLO SAC" required>
+        </div>
+        
+        <div class="col p-3 mt-1">
+            <input type="text" name="rucProv" class="form-control rounded-pill  border-info" placeholder="N° RUC">
+        </div>
+    </div>
+
+    <div class="text-center">
+    <h2 class="bg-dark p-2 text-white bg-opacity-10 rounded-pill">DATOS ADICIONALES</h2>
+    </div>   
+
     <div class="row">
-        <div class="col p-2 mt-0.5">
-            <input type="text" name="nameProv" class="form-control" placeholder="Nombre del Proveedor" required>
+        <div class="col p-3 mt-1">
+            <input type="text" name="direccionProv" class="form-control rounded-pill  border-info" placeholder="Dirección" required>
         </div>
-        <div class="col p-2 mt-0.5">
-            <input type="text" name="rucProv" class="form-control" placeholder="N° RUC">
+        <div class="col p-3 mt-1">
+            <input type="text" name="correoProv" class="form-control rounded-pill  border-info" placeholder="Correo electrónico: ejemplo@mail.com" required>
         </div>
-
-
-    </div>
-    <label for="tittle" class="form-label">Datos del proveedor: </label>
-    <div class="row">
-        <div class="col p-2 mt-0.5">
-            <input type="text" name="direccionProv" class="form-control" placeholder="Dirección" required>
-        </div>
-        <div class="col p-2 mt-0.5">
-            <input type="text" name="correoProv" class="form-control" placeholder="Correo electrónico" required>
-        </div>
-        <div class="col p-2 mt-0.5">
-            <input type="text" name="telefonoProv" class="form-control" placeholder="Telefono" minlength="9" maxlength="9">
+        <div class="col p-3 mt-1">
+            <input type="text" name="telefonoProv" class="form-control rounded-pill  border-info" placeholder="Teléfono:(ej)99999999" minlength="9" maxlength="9">
         </div>
     </div>
 
-    <label for="tittle" class="form-label">Categoria: </label>
+    <div class="text-center">
+    <h2 class="bg-secondary p-2 text-white bg-opacity-10 rounded-pill">CATEGORIA</h2>
+    </div>
 
-    <div class="col p-2 mt-0.5">
-        <select id="inputState" name="categoriaProv" class="form-select p-1 mt-0.5">
+    <div class="col p-1 mt-1 mb-2">
+        <select id="inputState" name="categoriaProv" class="form-select p-1 mt-0.5 text-center rounded-pill border-info">
             <option>GENERAL</option>
             <option>ALMACEN</option>
             <option>VENTAS</option>
@@ -41,14 +49,16 @@
             <option>TRANSPORTES</option>
         </select>
     </div>
-    <label for="tittle" class="form-label">Observacion del proveedor: </label>
-    <div class="row">
-        <div class="col p-2 mt-0.5">
-            <input type="text" name="detalleProv" class="form-control" placeholder="Detalle">
+    <div class="text-center">
+    <h2 class="bg-secondary p-2 text-white bg-opacity-10 rounded-pill">OBSERVACIONES</h2>
+    </div>
+    <div class="row ">
+        <div class="col p-3 mt-1">
+            <input type="text" name="detalleProv" class="form-control rounded-pill  border-info" placeholder="Detalle">
         </div>
 
     </div>
-    <div class="text-center p-1 mt-4">
+    <div class="text-center p-1 mt-3">
         <button type="submit" class="btn btn-primary " onclick="return confirm('¿Confirmar guardado de proveedor?')">Guardar</button>
         <button type="submit" class="btn btn-success" onclick="limpiar()">Limpiar</button>
 
