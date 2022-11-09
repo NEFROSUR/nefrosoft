@@ -129,7 +129,7 @@
         @livewireScripts
     </body>
     <footer>
-        <h1 style="text-align:center; margin-bottom: 0; padding: 1rem;">Hola {{ auth()->user()->name }} espero que tengas un buen dia !! Tu puedes !!🐶🐶🐶🐶🐶😹😹😹😹😹 :)</h1>
+        <h1 style="text-align:center; margin-bottom: 0; padding: 1rem;">Bienvenido {{ auth()->user()->name }} espero que tengas un buen dia</h1>
     </footer>
     @else
     <li class="mx-6">
