@@ -51,6 +51,7 @@
                 <th>NOMBRE DEL PRODUCTO</th>
                 <th>STOCK EN ALMACEN</th>
                 <th>PRECIO UNITARIO PROMEDIO</th>
+                <th>PRECIO TOTAL EN STOCK</th>
                 <th>ULTIMA ACTUALIZACION</th>
                 <th>GENERAR SALIDA UNITARIA</th>
             </tr>
@@ -63,6 +64,12 @@
                 <td>{{ $producto->nombreProd}}</td>
                 <td>{{ $producto->stock}}</td>
                 <td>{{ $producto->precioProm}}</td>
+                <td>
+                    @php
+                        $precioTotalStock = $producto->stock * $producto->precioProm;
+                    @endphp
+                    {{$precioTotalStock}}
+                </td>
                 <td>{{ $producto->updated_at}}</td>
                 <td>
                     <form action="{{ url('salidaUnitaria/create/'.$producto->id) }}">

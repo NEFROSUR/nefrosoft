@@ -75,11 +75,15 @@
             </fieldset>
         </div>
     </div>
-    <div class="row">
-        <div class="col">
-            <label for="tittle" class="form-label">Moneda</label>
-        </div>
+    <div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProducto">+ Agregar producto</button>
     </div>
+
+    <div>
+        @livewire('agregar-producto',["factura_id"=>$factura->id])
+        @stack('scripts')
+    </div>
+
     <div class="text-center">
         <h4 class="bg-info p-2 text-white bg-opacity-75">PRODUCTOS DE LA FACTURA</h4>
     </div>
@@ -103,24 +107,24 @@
                 <td>{{ $detalle->id}}</td>
                 <td>{{ $detalle->producto->nombreProd}}</td>
                 <td>
-                @php
-                $medida = "";
-                switch ($detalle->unidadMedida) {
-                case 1:
+                    @php
+                    $medida = "";
+                    switch ($detalle->unidadMedida) {
+                    case 1:
                     $medida = "Unidad";
-                break;
-                case 2:
+                    break;
+                    case 2:
                     $medida = "Galon";
-                break;
-                case 3:
+                    break;
+                    case 3:
                     $medida = "Caja";
-                break;
-                case 4:
+                    break;
+                    case 4:
                     $medida = "Blister";
-                break;
-                }
-                @endphp
-                {{$medida}}
+                    break;
+                    }
+                    @endphp
+                    {{$medida}}
                 </td>
                 <td>{{ $detalle->cantidadIngresada}}</td>
                 <td>@php
@@ -172,7 +176,7 @@
         </div>
         <div class="col">
             <fieldset disabled>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder="10000">
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$factura->total}}">
             </fieldset>
         </div>
     </div>

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('salida_almacens', function (Blueprint $table) {
             $table->id('id')->autoIncrement();
-            $table->integer('numSalida')->unique();
+            $table->string('numSalida');
             $table->date('fechaSalida');
             //DATOS DEL USUARIO QUE ENTREGA
             $table->string('reponsableA',20);//Area del que entrega

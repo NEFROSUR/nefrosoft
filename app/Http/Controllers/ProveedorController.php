@@ -40,7 +40,7 @@ class ProveedorController extends Controller
             'rucProv' => 'required|unique:proveedors',
             'direccionProv' => 'nullable',
             'correoProv' => 'nullable|string',
-            'telefonoProv' => 'required|numeric|min:9',
+            'telefonoProv' => 'nullable|numeric|min:9',
             'categoriaProv' => 'nullable',
             'detalleProv' => 'nullable|string',
         ]);

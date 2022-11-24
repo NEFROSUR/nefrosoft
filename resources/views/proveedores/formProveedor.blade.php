@@ -16,7 +16,7 @@
         </div>
         
         <div class="col p-3 mt-1">
-            <input type="text" name="rucProv" class="form-control rounded-pill  border-info" placeholder="N° RUC">
+            <input type="text" name="rucProv" class="form-control rounded-pill  border-info" placeholder="N° RUC" required>
         </div>
     </div>
 
@@ -26,10 +26,10 @@
 
     <div class="row">
         <div class="col p-3 mt-1">
-            <input type="text" name="direccionProv" class="form-control rounded-pill  border-info" placeholder="Dirección" required>
+            <input type="text" name="direccionProv" class="form-control rounded-pill  border-info" placeholder="Dirección">
         </div>
         <div class="col p-3 mt-1">
-            <input type="text" name="correoProv" class="form-control rounded-pill  border-info" placeholder="Correo electrónico: ejemplo@mail.com" required>
+            <input type="text" name="correoProv" class="form-control rounded-pill  border-info" placeholder="Correo electrónico: ejemplo@mail.com">
         </div>
         <div class="col p-3 mt-1">
             <input type="text" name="telefonoProv" class="form-control rounded-pill  border-info" placeholder="Teléfono:(ej)99999999" minlength="9" maxlength="9">

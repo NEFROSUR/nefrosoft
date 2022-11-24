@@ -45,7 +45,7 @@ class IngresoAlmacenController extends Controller
             'fechaIngreso' => 'required',
             'fechaEmision' => 'required',
             'fechaVencimiento' => 'required',
-            'numFactura' => 'required',
+            'numFactura' => 'required|unique:ingreso_almacens',
             'estadoPaga' => 'required|max:1', //1=pagado, 0=no pagado
             'detalle' => 'nullable'
         ]);
@@ -62,6 +62,7 @@ class IngresoAlmacenController extends Controller
         $numingreso = "I" . substr(str_repeat(0, 6) . ingresoAlmacen::All()->count(), -5);
         $ingresoAlmacen->numIngreso = $numingreso;
         $ingresoAlmacen->estadoPaga = $request->estadoPaga;
+        $ingresoAlmacen->total = 0;
         $ingresoAlmacen->detalle = $request->detalle;
 
         $ingresoAlmacen->save();

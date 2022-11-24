@@ -46,7 +46,6 @@ class SalidaAlmacenController extends Controller
             'reponsableA' => 'required',
             'responsable' => 'required',
             'fechaSalida' => 'required',
-            'numSalida' => 'required',
             'turno' => 'required',
             'areaRecepcion' => 'required',
             'recepcionista' => 'required',
@@ -58,7 +57,7 @@ class SalidaAlmacenController extends Controller
         $salidaAlmacen->reponsableA = $request->reponsableA;
         $salidaAlmacen->responsable = $request->responsable;
         $salidaAlmacen->fechaSalida = $request->fechaSalida;
-        $salidaAlmacen->numSalida = $request->numSalida;
+        $salidaAlmacen->numSalida = "S" . substr(str_repeat(0, 6) . salidaAlmacen::All()->count(), -5);;
         $salidaAlmacen->areaRecepcion = $request->areaRecepcion;
         $salidaAlmacen->recepcionista = $request->recepcionista;
         $salidaAlmacen->areaDestino = $request->areaDestino;

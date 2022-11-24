@@ -26,10 +26,6 @@
             <input type="text" name="responsable" class="form-control">
         </div>
         <div class="row p-2 mt-0.5">
-            <div class="col">
-                <label for="tittle" class="form-label">Numero de Salida</label>
-                <input type="text" name="numSalida" class="form-control" placeholder="0000">
-            </div>
             <div>
                 <section class="container">
 
