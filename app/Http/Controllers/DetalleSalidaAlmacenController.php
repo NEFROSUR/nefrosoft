@@ -112,10 +112,14 @@ class DetalleSalidaAlmacenController extends Controller
         } else {
             $detalleSalidaAlmacen['detalleSalidaAlmacen'] = null;
         }
-
-
-        //$detalleSalidaAlmacen['detalleSalidaAlmacen'] = detalleSalidaAlmacen::All();
+        
         return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen',$detalleSalidaAlmacen);
+    }
+    public function showN($id)
+    {
+        $salida = salidaAlmacen::where('id', '=', $id)->first();
+        $detalleSalidaAlmacen['detalleSalidaAlmacen'] = detalleSalidaAlmacen::where('salida_id', '=', $salida->id)->paginate(10);
+        return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen',$detalleSalidaAlmacen,['salida' => $salida]);
     }
 
     /**

@@ -39,13 +39,16 @@
                     <th>Fecha Ingreso Almacen</th>
                     <th>Fecha Vencimiento</th>
                     <th>Estado de Pago</th>
-                    <th>Acciones</th>
+                    <th>Editar</th>
+                    <th>Agregar</th>
+                    <th>Eliminar</th>
+                    <th>Ver</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($entradasAll as $entradas)
                 <tr>
-                    <td>{{ $entradas->id}}</td>
+                    <td>{{ $entradas->numIngreso}}</td>
                     <td>{{ $entradas->numFactura}}</td>
                     <td>{{ $entradas->usuario}}</td>
                     <td>{{ $entradas->proveedor->nameProv}}</td>
@@ -66,13 +69,22 @@
                         <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar al Ingreso: \n {{ $entradas->id}}?')" href="{{ url('ingresoAlmacen/'.$entradas->id.'/edit') }}">
                             ✏️
                         </a>
-                        <form action="{{ url('detalleIngresoAlmacen/create/'.$entradas->id) }}">
-                            <input class="btn btn-outline-success" type="submit" value="➕">
+                    </td>
+                    <td>
+                    <form action="{{ url('detalleIngresoAlmacen/create/'.$entradas->id) }}">
+                            <input class="btn btn-outline-success" type="submit" value="+">
                         </form>
-                        <form action="{{ url('/ingresoAlmacen/create'.$entradas->id) }}" method="POST">
+                    </td>
+                    <td>
+                    <form action="{{ url('/ingresoAlmacen/create'.$entradas->id) }}" method="POST">
                             @csrf
                             {{ method_field('DELETE')}}
                             <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea eliminar al Ingreso\n {{ $entradas->id}}?')" value="🗑️">
+                        </form>
+                    </td>
+                    <td>
+                    <form action="{{ url('detalleIngresoAlmacen/show/'.$entradas->id) }}">
+                            <input class="btn btn-outline-success" type="submit" value="Ver">
                         </form>
                     </td>
                 </tr>

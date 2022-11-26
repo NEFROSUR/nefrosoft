@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 <div class="text-center">
-    <h4 class="bg-info p-2 text-white bg-opacity-75">STOCK DEL PRODUCTO</h4>
+    <h4 class="bg-info p-2 text-white bg-opacity-75">INVENTARIO</h4>
 </div>
 @if($errors->any())
 <div class="alert alert-danger">
@@ -39,7 +39,28 @@
             <button class="btn btn-outline-success" type="submit">Filtrar</button>
         </form>
     </div>
-
+    <div class="text-center">
+        <h4 class="bg-info p-2 text-white bg-opacity-75">INVENTARIO DETALLE</h4>
+    </div>
+    @php
+    $totalC = 0
+    @endphp
+    @foreach ($productoAll as $producto)
+    @php
+    $precioTotalStock = $producto->stock * $producto->precioProm;
+    $totalC = $precioTotalStock + $totalC
+    @endphp
+    @endforeach
+    <div class="row">
+        <div class="col">
+            <label for="tittle" class="form-label">Total Precio en Stock</label>
+        </div>
+        <div class="col">
+            <fieldset disabled>
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="S/. {{$totalC}} Soles">
+            </fieldset>
+        </div>
+    </div>
 
 </div>
 <div class="container">
@@ -66,7 +87,7 @@
                 <td>{{ $producto->precioProm}}</td>
                 <td>
                     @php
-                        $precioTotalStock = $producto->stock * $producto->precioProm;
+                    $precioTotalStock = $producto->stock * $producto->precioProm;
                     @endphp
                     {{$precioTotalStock}}
                 </td>

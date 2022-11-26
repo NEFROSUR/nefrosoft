@@ -13,15 +13,6 @@
     </ul>
 </div>
 @endif
-<div class="container w-30 p-4 mt-4">
-    <h4 class="bg-info p-2 text-white bg-opacity-75">BUSQUEDA POR SALIDA</h4>
-    <div class="navbar navbar-light float right">
-        <form class="d-flex" role="search">
-            <input name="numSalida" class="form-control me-2" type="search" placeholder="Numero de Salida" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
-        </form>
-    </div>
-</div>
 @if(!is_null($detalleSalidaAlmacen))
 <div class="container border">
     <div class="text-center">
@@ -66,6 +57,14 @@
                 <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$salida->areaDestino}}">
             </fieldset>
         </div>
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductoS">+ Agregar producto</button>
+    </div>
+
+    <div>
+        @livewire('agregar-producto-s',["salida_id"=>$salida->id])
+        @stack('scripts')
     </div>
     <div class="text-center">
         <h4 class="bg-info p-2 text-white bg-opacity-75">RESUMEN DEL MATERIAL DE LA SALIDA DE ALMACEN</h4>

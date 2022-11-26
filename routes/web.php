@@ -68,9 +68,12 @@ Route::resource('ingresoAlmacen',IngresoAlmacenController::class);
 Route::get('/detalleIngresoAlmacen/create/{id}',[DetalleIngresoAlmacenController::class, 'createMedica'])->name('detalleIngresoAlmacen.createMedica');
 
 Route::resource('detalleIngresoAlmacen',DetalleIngresoAlmacenController::class);
+Route::get('/detalleIngresoAlmacen/show/{id}',[DetalleIngresoAlmacenController::class, 'showN'])->name('detalleSalidaAlmacen.showN');
+
 Route::resource('almacen',InventarioController::class);
 
 Route::get('/detalleSalidaAlmacen/create/{id}',[DetalleSalidaAlmacenController::class, 'createSalida'])->name('detalleSalidaAlmacen.createSalida');
+Route::get('/detalleSalidaAlmacen/show/{id}',[DetalleSalidaAlmacenController::class, 'showN'])->name('detalleSalidaAlmacen.showN');
 
 Route::resource('salidaAlmacen',SalidaAlmacenController::class);
 Route::resource('detalleSalidaAlmacen',DetalleSalidaAlmacenController::class);

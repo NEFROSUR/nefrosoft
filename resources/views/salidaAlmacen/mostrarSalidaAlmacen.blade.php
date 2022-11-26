@@ -36,6 +36,7 @@
                 <th>RESPONSABLE DE LA RECEPCION</th>
                 <th>DESTINO DEL MATERIAL</th>
                 <th>AGREGAR PRODUCTO</th>
+                <th>VER</th>
 
             </tr>
         </thead>
@@ -50,6 +51,11 @@
                 <td>
                 <form action="{{ url('detalleSalidaAlmacen/create/'.$salida->id) }}">
                             <input class="btn btn-outline-danger" type="submit" value="➕">
+                        </form>
+                </td>
+                <td>
+                <form action="{{ url('detalleSalidaAlmacen/show/'.$salida->id) }}">
+                            <input class="btn btn-outline-danger" type="submit" value="👀">
                         </form>
                 </td>
             </tr>

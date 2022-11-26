@@ -13,15 +13,6 @@
     </ul>
 </div>
 @endif
-<div class="container w-30 p-4 mt-4">
-    <h4 class="bg-info p-2 text-white bg-opacity-75">BUSQUEDA POR FACTURA</h4>
-    <div class="navbar navbar-light float right">
-        <form class="d-flex" role="search">
-            <input name="numFactura" class="form-control me-2" type="search" placeholder="Numero de Factura" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
-        </form>
-    </div>
-</div>
 @if(!is_null($detalleIngresoAlmacen))
 <div class="container border">
     <div class="text-center">
@@ -177,6 +168,29 @@
         <div class="col">
             <fieldset disabled>
                 <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$factura->total}}">
+            </fieldset>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="tittle" class="form-label">IGV 18%</label>
+        </div>
+        @php
+            $igv = $factura->total * 0.18;
+        @endphp
+        <div class="col">
+            <fieldset disabled>
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$igv}}">
+            </fieldset>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="tittle" class="form-label">Precio IGV (incluido)</label>
+        </div>
+        <div class="col">
+            <fieldset disabled>
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$igv+$factura->total}}">
             </fieldset>
         </div>
     </div>

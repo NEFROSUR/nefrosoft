@@ -107,6 +107,13 @@ class DetalleIngresoAlmacenController extends Controller
         }
         return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen', $detalleIngresoAlmacen);
     }
+    public function showN($id)
+    {
+        $factura = ingresoAlmacen::where('id', '=', $id)->first();
+        $detalleIngresoAlmacen['detalleIngresoAlmacen'] = detalleIngresoAlmacen::where('factura_id', '=', $factura->id)->paginate(10);
+        //return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen',$detalleSalidaAlmacen,['salida' => $salida]);
+        return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen',$detalleIngresoAlmacen,['factura' => $factura]);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -157,9 +164,9 @@ class DetalleIngresoAlmacenController extends Controller
         detalleIngresoAlmacen::where('id', '=', $id)->update(['PrecioUnitario'=>$PrecioUnitario,]);
 
 
-        
-        $detalleIngresoAlmacen['detalleIngresoAlmacen'] = null;
-        return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen', $detalleIngresoAlmacen);
+        $factura = ingresoAlmacen::where('id', '=', $detalleI->factura_id)->first();
+        $detalleIngresoAlmacen['detalleIngresoAlmacen'] = detalleIngresoAlmacen::where('factura_id', '=', $factura->id)->paginate(10);
+        return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen',$detalleIngresoAlmacen,['factura' => $factura]);
     }
 
     /**
