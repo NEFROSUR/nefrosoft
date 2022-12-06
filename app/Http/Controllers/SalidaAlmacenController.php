@@ -66,7 +66,7 @@ class SalidaAlmacenController extends Controller
         $salidaAlmacen->save();
 
 
-        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(5);
+        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(12);
         return view('salidaAlmacen.mostrarSalidaAlmacen',$salidasAll);
 
     }
@@ -80,19 +80,19 @@ class SalidaAlmacenController extends Controller
     public function show(Request $request)
     {
         $numSalida = $request->get('numSalida');
-        /*if ($numSalida != '') {
-            $salidasAll['salidasAll'] = salidaAlmacen::where('numSalida', '=', $numSalida)->paginate(5);
+        if ($numSalida != '') {
+            $salidasAll['salidasAll'] = salidaAlmacen::where('numSalida', '=', $numSalida)->paginate(12);
             if ($salidasAll == null) {
-                $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(5);
+                $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(12);
                 return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
             } else {
-                $salidasAll['salidasAll'] = salidaAlmacen::where('numSalida', '=', $numSalida)->paginate(5);
+                $salidasAll['salidasAll'] = salidaAlmacen::where('numSalida', '=', $numSalida)->paginate(12);
                 return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
             }
         }else{
-            $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(5);
-        }*/
-        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(5);
+            $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(12);
+        }
+        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(12);
 
         return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
     }
@@ -121,7 +121,8 @@ class SalidaAlmacenController extends Controller
         $datosSalida = request()->except(['_token', '_method']);
         salidaAlmacen::where('id', '=', $id)->update($datosSalida);
         $salidaAlmacen = salidaAlmacen::findOrFail($id);
-        return view('ingresoAlmacen.ingresoAlmacen', compact('salidaAlmacen'));
+        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(12);
+        return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
     }
 
     /**
@@ -132,7 +133,9 @@ class SalidaAlmacenController extends Controller
      */
     public function destroy($id)
     {
+        
         salidaAlmacen::destroy($id);
-        return redirect('salidaAlmacen');
+        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(12);
+        return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
     }
 }

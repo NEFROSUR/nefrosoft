@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Agregando Producto</h5>
+                <h5 class="modal-title"><b>Agregando Producto a la Salida</b></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <form wire:submit.prevent="guardarProduct()">
                     <div class="form-group">
-                        <label for="product_id" class="col-form-label">Producto</label>
+                        <label for="product_id" class="col-form-label">Producto en Stock</label>
                         <select id="product_id" name="product_id" class="form-select p-1 mt-0.5" wire:model="product_id">
                             <option> </option>
                             @foreach ($productoAll as $producto)
@@ -22,14 +22,14 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="cantidad" class="col-form-label">Cantidad de Salida:</label>
+                        <label for="cantidad" class="col-form-label">Cantidad de Salida</label>
                         <input type="number" class="form-control" id="cantidad" wire:model="cantidad">
                         @error('cantidad')
                         <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="unidadMedida" class="col-form-label">Unidad de Medida:</label>
+                        <label for="unidadMedida" class="col-form-label">Unidad de Medida</label>
                         <select id="unidadMedida" name="unidadMedida" class="form-select p-1 mt-0.5" wire:model="unidadMedida">
                             <option> </option>
                             <option>Unidad</option>
@@ -46,15 +46,15 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="destino" class="col-form-label">Destino:</label>
+                        <label for="destino" class="col-form-label">Usuario destino especifico</label>
                         <input type="text" class="form-control" id="destino" wire:model="destino">
                         @error('destino')
                         <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="observacion" class="col-form-label">Detalle:</label>
-                        <input type="text" class="form-control" id="observacion" wire:model="observacion">
+                        <label for="observacion" class="col-form-label">Observaciones del producto entregado</label>
+                        <input type="textarea" class="form-control" id="observacion" wire:model="observacion">
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Agregar</button>

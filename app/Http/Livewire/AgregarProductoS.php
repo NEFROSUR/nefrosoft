@@ -36,12 +36,13 @@ class AgregarProductoS extends Component
 
         $detalleSalida = new detalleSalidaAlmacen();
 
+        $producto = producto::where('id', '=', $this->product_id)->first();
         $guia = "S" . substr(str_repeat(0, 6) . detalleSalidaAlmacen::All()->count(), -5);
         $detalleSalida->guiaInterna = $guia;
         $detalleSalida->salida_id = $this->salida_id;
         $detalleSalida->product_id = $this->product_id;
         $detalleSalida->cantidad = $this->cantidad;
-        $detalleSalida->precioSalida = 0;
+        $detalleSalida->precioSalida = $producto->precioProm;
         $detalleSalida->um = $this->unidadMedida;
         $detalleSalida->destino = $this->destino;
         $detalleSalida->observacion = $this->observacion;
@@ -50,7 +51,7 @@ class AgregarProductoS extends Component
         session()->flash('message', 'Se agrego producto');
 
         //REDUCIR STOCK
-        $producto = producto::where('id', '=', $this->product_id)->first();
+        //$producto = producto::where('id', '=', $this->product_id)->first();
         $stock = $producto->stock - $this->cantidad;
         producto::where('id', '=', $this->product_id)->update(['stock' => $stock,]);
 
@@ -66,7 +67,7 @@ class AgregarProductoS extends Component
 
     public function render()
     {
-        $productoAll['productoAll'] = producto::orderBy('id', 'asc')->get();
+        $productoAll['productoAll'] = producto::orderBy('id', 'asc')->where('stock', '>', 0)->get();
         return view('livewire.agregar-producto-s', $productoAll);
     }
 }

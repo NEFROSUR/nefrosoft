@@ -4,14 +4,14 @@
 <script src="{{ mix('js/app.js') }}"></script>
 <div>
     <div>
-        <label for="tittle" class="form-label">GENERANDO SALIDA DEL PRODUCTO </label>
+        <label for="tittle" class="form-label"><b>GENERANDO SALIDA DEL PRODUCTO</b></label>
     </div>
     <div class="row">
-        <label for="tittle" class="form-label">Datos de la Salida</label>
+        <label for="tittle" class="form-label"><b>Datos de la Salida</b></label>
     </div>
     <div class="row">
         <div class="col">
-            <label for="tittle" class="form-label">Area del Usuario</label>
+            <label for="tittle" class="form-label">Area del Responsable</label>
             <select id="inputState" name="reponsableA" class="form-select p-1 mt-0.5">
                 <option>Almacen</option>
                 <option>Administracion</option>
@@ -22,47 +22,21 @@
             </select>
         </div>
         <div class="col">
-            <label for="tittle" class="form-label">Nombre del Usuario</label>
+            <label for="tittle" class="form-label">Nombre del Responsable</label>
             <input type="text" name="responsable" class="form-control">
         </div>
-        <div class="row p-2 mt-0.5">
-            <div>
-                <section class="container">
-
-                    <div class="row form-group">
-                        <label for="date" class="col-sm-1 col-form-label">Fecha</label>
-                        <div class="col-sm-4">
-                            <div class="input-group date" id="datepicker">
-                                <input type="text" class="form-control" name="fechaSalida">
-                                <span class="input-group-append">
-                                    <span class="input-group-text bg-white">
-                                        <i class="fa fa-calendar"></i>
-                                    </span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                </section>
-            </div>
-            <div class="col">
-                <label for="tittle" class="form-label">Area del Usuario</label>
-                <select id="inputState" name="turno" class="form-select p-1 mt-0.5">
-                    <option value="1">TURNO 1</option>
-                    <option value="2">TURNO 2</option>
-                    <option value="3">TURNO 3</option>
-                    <option value="4">TURNO 4</option>
-                </select>
-            </div>
+        <div class="col">
+            <label for="tittle" class="form-label">Fecha de Salida de Almacen</label>
+            <input type="date" name="fechaSalida" class="form-control">
         </div>
     </div>
 
-    <div class="row">
-        <label for="tittle" class="form-label">Datos del Recepcionista</label>
+    <div>
+        <label for="tittle" class="form-label"><b>Datos del Recepcionista</b></label>
     </div>
     <div class="row">
         <div class="col">
-            <label for="tittle" class="form-label">Area del Recepcionista</label>
+            <label for="tittle" class="form-label">Area a la que pertenece el recepcionista del Producto</label>
             <select id="inputState" name="areaRecepcion" class="form-select p-1 mt-0.5">
                 <option>Tecnicos Enfermeria</option>
                 <option>Enfermeria</option>
@@ -74,12 +48,30 @@
             </select>
         </div>
         <div class="col">
-            <label for="tittle" class="form-label">Nombre del Recepcionista</label>
+            <label for="tittle" class="form-label">Nombre del Recepcionista de Producto</label>
             <input type="text" name="recepcionista" class="form-control">
         </div>
+
+    </div>
+    <div>
+        <label for="tittle" class="form-label"><b>Datos del area destino del producto</b></label>
+    </div>
+    <div class="row">
         <div class="col">
-            <label for="tittle" class="form-label">Area destino</label>
+            <div class="col">
+                <label for="tittle" class="form-label">Turno de Entrega</label>
+                <select id="inputState" name="turno" class="form-select p-1 mt-0.5">
+                    <option value="1">TURNO 1</option>
+                    <option value="2">TURNO 2</option>
+                    <option value="3">TURNO 3</option>
+                    <option value="4">TURNO 4</option>
+                </select>
+            </div>
+        </div>
+        <div class="col">
+            <label for="tittle" class="form-label">Area de Entrega</label>
             <select id="inputState" name="areaDestino" class="form-select p-1 mt-0.5">
+                <option>Pacientes</option>
                 <option>Tecnicos Enfermeria</option>
                 <option>Enfermeria</option>
                 <option>Direccion Medica</option>
@@ -89,12 +81,11 @@
                 <option>Almacen</option>
             </select>
         </div>
+        <div class="col">
+            <label for="tittle" class="form-label">Detalle de la Entrega</label>
+            <input type="text" name="detalle" class="form-control">
+        </div>
     </div>
-    <div class="col">
-        <label for="tittle" class="form-label">Detalle del Destino</label>
-        <input type="text" name="detalle" class="form-control">
+    <div class="text-center p-1 mt-4">
+        <button type="submit" class="text-center btn btn-primary " onclick="return confirm('¿Registrar Salida?')">Generar Salida</button>
     </div>
-</div>
-<div class="text-center p-1 mt-4">
-    <button type="submit" class="text-center btn btn-primary " onclick="return confirm('¿Registrar Salida?')">Generar Salida</button>
-</div>

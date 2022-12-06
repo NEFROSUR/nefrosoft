@@ -66,8 +66,8 @@ class IngresoAlmacenController extends Controller
         $ingresoAlmacen->detalle = $request->detalle;
 
         $ingresoAlmacen->save();
-
-        return view('ingresoAlmacen.ingresoAlmacen');
+        $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);
+        return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
     }
 
     /**
@@ -104,8 +104,9 @@ class IngresoAlmacenController extends Controller
      */
     public function edit($id)
     {
+        $proveedorAll['proveedorAll'] = proveedor::All();
         $ingresoAlmacen = ingresoAlmacen::findOrFail($id);
-        return view('ingresoAlmacen.editIngresoAlmacen', ['ingresoAlmacen' => $ingresoAlmacen]);
+        return view('ingresoAlmacen.editIngresoAlmacen', ['ingresoAlmacen' => $ingresoAlmacen],$proveedorAll);
     }
 
     /**
@@ -120,7 +121,8 @@ class IngresoAlmacenController extends Controller
         $datosIngreso = request()->except(['_token', '_method']);
         ingresoAlmacen::where('id', '=', $id)->update($datosIngreso);
         $ingresoAlmacen = ingresoAlmacen::findOrFail($id);
-        return view('ingresoAlmacen.ingresoAlmacen', compact('ingresoAlmacen'));
+        $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);
+        return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
     }
 
     /**
@@ -132,6 +134,7 @@ class IngresoAlmacenController extends Controller
     public function destroy($id)
     {
         ingresoAlmacen::destroy($id);
-        return redirect('ingresoAlmacen');
+        $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);
+        return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
     }
 }

@@ -71,6 +71,10 @@ class AgregarProducto extends Component
         $this->moneda = '';
         $this->detalle = '';
         $this->dispatchBrowserEvent('close-modal');
+
+
+        $detalleIngresoAlmacen['detalleIngresoAlmacen'] = detalleIngresoAlmacen::where('factura_id', '=', $factura->id)->paginate(10);
+        return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen',$detalleIngresoAlmacen,['factura' => $factura]);
     }
     public function render()
     {

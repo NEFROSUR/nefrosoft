@@ -53,7 +53,7 @@
     @endforeach
     <div class="row">
         <div class="col">
-            <label for="tittle" class="form-label">Total Precio en Stock</label>
+            <label for="tittle" class="form-label"><b>Total Precio en Stock</b></label>
         </div>
         <div class="col">
             <fieldset disabled>
@@ -74,13 +74,17 @@
                 <th>PRECIO UNITARIO PROMEDIO</th>
                 <th>PRECIO TOTAL EN STOCK</th>
                 <th>ULTIMA ACTUALIZACION</th>
-                <th>GENERAR SALIDA UNITARIA</th>
+                <th>MOVIMIENTOS</th>
+                <th>SALIDA UNITARIA</th>
             </tr>
         </thead>
+        @php
+        $i = 1;
+        @endphp
         <tbody>
             @foreach ($productoAll as $producto)
             <tr>
-                <td>{{ $producto->id}}</td>
+                <td>{{ $i}}</td>
                 <td>{{ $producto->codigoProd}}</td>
                 <td>{{ $producto->nombreProd}}</td>
                 <td>{{ $producto->stock}}</td>
@@ -93,11 +97,19 @@
                 </td>
                 <td>{{ $producto->updated_at}}</td>
                 <td>
+                    <form action="{{ url('almacen/'.$producto->id.'/edit') }}">
+                        <input class="btn btn-outline-success" type="submit" value="Movimientos">
+                    </form>
+                </td>
+                <td>
                     <form action="{{ url('salidaUnitaria/create/'.$producto->id) }}">
-                        <input class="btn " type="submit" value="➡️">
+                        <input class="btn btn-outline-primary" type="submit" value="➡️">
                     </form>
                 </td>
             </tr>
+            @php
+            $i = $i+1;
+            @endphp
             @endforeach
         </tbody>
     </table>

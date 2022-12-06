@@ -92,10 +92,13 @@
                 <th>Eliminar</th>
             </tr>
         </thead>
+        @php
+        $i = 1;
+        @endphp
         <tbody>
             @foreach ($detalleIngresoAlmacen as $detalle)
             <tr>
-                <td>{{ $detalle->id}}</td>
+                <td>{{ $i}}</td>
                 <td>{{ $detalle->producto->nombreProd}}</td>
                 <td>
                     @php
@@ -155,6 +158,9 @@
 
                 </td>
             </tr>
+            @php
+            $i = $i+1;
+            @endphp
             @endforeach
         </tbody>
     </table>
@@ -167,7 +173,7 @@
         </div>
         <div class="col">
             <fieldset disabled>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$factura->total}}">
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="S/.{{$factura->total}} (Nuevos Soles)">
             </fieldset>
         </div>
     </div>
@@ -176,11 +182,11 @@
             <label for="tittle" class="form-label">IGV 18%</label>
         </div>
         @php
-            $igv = $factura->total * 0.18;
+        $igv = $factura->total * 0.18;
         @endphp
         <div class="col">
             <fieldset disabled>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$igv}}">
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="S/. {{$igv}} (Nuevos Soles)">
             </fieldset>
         </div>
     </div>
@@ -190,7 +196,7 @@
         </div>
         <div class="col">
             <fieldset disabled>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$igv+$factura->total}}">
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="S/. {{$igv+$factura->total}} (Nuevos Soles)">
             </fieldset>
         </div>
     </div>

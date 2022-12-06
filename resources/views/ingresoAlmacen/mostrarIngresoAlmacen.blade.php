@@ -39,10 +39,9 @@
                     <th>Fecha Ingreso Almacen</th>
                     <th>Fecha Vencimiento</th>
                     <th>Estado de Pago</th>
-                    <th>Editar</th>
-                    <th>Agregar</th>
-                    <th>Eliminar</th>
                     <th>Ver</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -66,25 +65,20 @@
                         {{$estado}}
                     </td>
                     <td>
+                    <form action="{{ url('detalleIngresoAlmacen/show/'.$entradas->id) }}">
+                            <input class="btn btn-outline-primary" type="submit" value="👁️">
+                        </form>
+                    </td>
+                    <td>
                         <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar al Ingreso: \n {{ $entradas->id}}?')" href="{{ url('ingresoAlmacen/'.$entradas->id.'/edit') }}">
                             ✏️
                         </a>
                     </td>
                     <td>
-                    <form action="{{ url('detalleIngresoAlmacen/create/'.$entradas->id) }}">
-                            <input class="btn btn-outline-success" type="submit" value="+">
-                        </form>
-                    </td>
-                    <td>
-                    <form action="{{ url('/ingresoAlmacen/create'.$entradas->id) }}" method="POST">
+                    <form action="{{ url('/ingresoAlmacen/'.$entradas->id) }}" method="POST">
                             @csrf
                             {{ method_field('DELETE')}}
                             <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea eliminar al Ingreso\n {{ $entradas->id}}?')" value="🗑️">
-                        </form>
-                    </td>
-                    <td>
-                    <form action="{{ url('detalleIngresoAlmacen/show/'.$entradas->id) }}">
-                            <input class="btn btn-outline-success" type="submit" value="Ver">
                         </form>
                     </td>
                 </tr>

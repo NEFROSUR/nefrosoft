@@ -158,10 +158,13 @@ class DetalleIngresoAlmacenController extends Controller
         $prodtotal = $factura->total - $detalleI->PrecioTotal;
         $prodtotal = $prodtotal + $request->PrecioTotal;
         ingresoAlmacen::where('id', '=', $factura->id)->update(['total'=>$prodtotal]);
-
+        //Actualizacion del precio Unitario de la Factura
         $PrecioUnitario = $request->PrecioTotal/$stockReal;
         detalleIngresoAlmacen::where('id', '=', $id)->update($datosDetalle);
-        detalleIngresoAlmacen::where('id', '=', $id)->update(['PrecioUnitario'=>$PrecioUnitario,]);
+        detalleIngresoAlmacen::where('id', '=', $id)->update(['PrecioUnitario'=>$PrecioUnitario]);
+        //Actualizacion en la tabla Productos de Precio Promedio
+        $precioProm = detalleIngresoAlmacen::where('product_id','=',$request->product_id)->avg('PrecioUnitario');
+        producto::where('id', '=', $request->product_id)->update(['precioProm'=>$precioProm,]);
 
 
         $factura = ingresoAlmacen::where('id', '=', $detalleI->factura_id)->first();
@@ -190,7 +193,11 @@ class DetalleIngresoAlmacenController extends Controller
         
         detalleIngresoAlmacen::destroy($id);
 
-        $detalleIngresoAlmacen['detalleIngresoAlmacen'] = null;
+        /*$detalleIngresoAlmacen['detalleIngresoAlmacen'] = null;
         return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen', $detalleIngresoAlmacen);
+        */
+
+        $detalleIngresoAlmacen['detalleIngresoAlmacen'] = detalleIngresoAlmacen::where('factura_id', '=', $factura->id)->paginate(10);
+        return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen', $detalleIngresoAlmacen, ['factura' => $factura]);
     }
 }

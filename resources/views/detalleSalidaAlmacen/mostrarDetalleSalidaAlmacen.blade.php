@@ -20,7 +20,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <label for="tittle" class="form-label">Numero de Salida</label>
+            <label for="tittle" class="form-label">Guia Interna de Salida</label>
         </div>
         <div class="col">
             <fieldset disabled>
@@ -30,7 +30,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <label for="tittle" class="form-label">Usuario que registro la salida de almacen</label>
+            <label for="tittle" class="form-label">Responsable que registro la salida de almacen</label>
         </div>
         <div class="col">
             <fieldset disabled>
@@ -50,11 +50,21 @@
     </div>
     <div class="row">
         <div class="col">
-            <label for="tittle" class="form-label">Area a la que esta destinado el material</label>
+            <label for="tittle" class="form-label">Turno donde se genero la salida</label>
         </div>
         <div class="col">
             <fieldset disabled>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$salida->areaDestino}}">
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="Turno: {{$salida->turno}}">
+            </fieldset>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="tittle" class="form-label">Fecha y Hora </label>
+        </div>
+        <div class="col">
+            <fieldset disabled>
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$salida->updated_at}}">
             </fieldset>
         </div>
     </div>
@@ -91,7 +101,7 @@
                 <td>{{ $detalle->cantidad}}</td>
                 <td>{{ $detalle->um}}</td>
                 <td>{{ $detalle->destino}}</td>
-                <td>{{ $detalle->precioSalida}}</td>
+                <td>S/. {{ $detalle->precioSalida}} (Nuevos Soles)</td>
                 <td>{{ $detalle->detalle}}</td>
                 <td>
                     <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar la cantidad de salida: \n {{ $detalle->id}}?')" href="{{ url('detalleSalidaAlmacen/'.$detalle->id.'/edit') }}">

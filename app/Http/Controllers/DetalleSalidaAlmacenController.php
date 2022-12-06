@@ -178,6 +178,10 @@ class DetalleSalidaAlmacenController extends Controller
         $stock = $producto->stock + $cantidadSalida;
         producto::where('id', '=', $detalleS->product_id)->update(['stock'=>$stock,]);
         detalleSalidaAlmacen::destroy($id);
-        return redirect('detalleSalidaAlmacen');
+
+
+        $salida = salidaAlmacen::where('numSalida', '=', $detalleS->guiaInterna)->first();
+        $detalleSalidaAlmacen['detalleSalidaAlmacen'] = detalleSalidaAlmacen::where('salida_id', '=', $detalleS->id)->paginate(10);
+        return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen', $detalleSalidaAlmacen, ['salida' => $salida]);
     }
 }

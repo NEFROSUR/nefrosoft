@@ -56,10 +56,10 @@ class InventarioController extends Controller
             $productoAll['productoAll'] = producto::orderBy('id', 'asc')->where('stock', '>', 0)->paginate(10);
         } else {
             if ($categoria_id == '') {
-                $productoAll['productoAll'] = producto::where('codigoProd', '=', $codigoProd)->paginate(10);
+                $productoAll['productoAll'] = producto::where('codigoProd', '=', $codigoProd)->where('stock', '>', 0)->paginate(10);
             }
             if ($codigoProd == '') {
-                $productoAll['productoAll'] = producto::where('categoria_id', '=', $categoria_id)->paginate(10);
+                $productoAll['productoAll'] = producto::where('categoria_id', '=', $categoria_id)->where('stock', '>', 0)->paginate(10);
             }
         }
 
@@ -74,9 +74,12 @@ class InventarioController extends Controller
      * @param  \App\Models\inventario  $inventario
      * @return \Illuminate\Http\Response
      */
-    public function edit(inventario $inventario)
+    public function edit($id)
     {
-        return view('almacen.editAlmacen');
+        $producto = producto::findOrFail($id);
+        $ingresos['ingresos'] = detalleIngresoAlmacen::where('product_id', '=', $producto->id)->paginate(12);
+        $salidas['salidas'] = detalleSalidaAlmacen::where('product_id', '=', $producto->id)->paginate(12);
+        return view('almacen.editAlmacen')->with('producto',$producto);
     }
 
     /**

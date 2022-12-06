@@ -10,47 +10,28 @@
         {{ method_field('PATCH') }}
         <div>
             <div>
-                <label for="tittle" class="form-label">EDITAR FACTURA</label>
+                <label for="tittle" class="form-label"><b>EDITAR FACTURA: {{$ingresoAlmacen->numFactura}}</b></label>
             </div>
             <div class="row">
-                <label for="tittle" class="form-label">DATOS DE INGRESO</label>
-                <div class="col p-2 mt-0.5">
-                    <input type="text" name="usuario" class="form-control" value="{{$ingresoAlmacen->usuario}}">
-                </div>
-            </div>
-            <div class="row">
-                <div>
-                    <label for="tittle" class="form-label">DATOS DE LA FACTURA</label>
-                </div>
-                <section class="container">
-                    <form>
-                        <div class="row form-group">
-                            <label for="date" class="col-sm-1 col-form-label">Fecha Emision</label>
-                            <div class="col-sm-4">
-                                <div class="input-group date" id="datepicker">
-                                    <input type="text" class="form-control" name="fechaEmision" value="{{$ingresoAlmacen->fechaEmision}}">
-                                    <span class="input-group-append">
-                                        <span class="input-group-text bg-white">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </section>
-                <div class="col p-2 mt-0.5">
-                    <label for="date" class="col">Fecha Ingreso a Almacen</label>
-                    <input type="text" name="fechaIngreso" class="form-control" value="{{$ingresoAlmacen->fechaIngreso}}">
+                <div class="col">
+                    <label for="tittle" class="form-label"><b>DATOS DEL USUARIO RESPONSABLE</b></label>
+                    <div>
+                        <select id="inputState" name="usuario" class="form-select p-1 mt-0.5">
+                            <option value="{{$ingresoAlmacen->usuario}}">Actual: {{$ingresoAlmacen->usuario}}</option>
+                            <option>Almacen</option>
+                            <option>Administracion</option>
+                            <option>Datos</option>
+                            <option>Recepcion</option>
+                            <option>Enfermeria</option>
+                            <option>Direccion Medica</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="col p-2 mt-0.5">
-                    <label for="date" class="col">Fecha de Vencimiento</label>
-                    <input type="text" name="fechaVencimiento" class="form-control" value="{{$ingresoAlmacen->fechaVencimiento}}">
+                    <label for="date" class="col">Fecha de Emision</label>
+                    <input type="date" name="fechaEmision" class="form-control" value="{{$ingresoAlmacen->fechaEmision}}">
                 </div>
-                <div class="col p-2 mt-0.5">
-                    <label for="date" class="col">Numero de Factura</label>
-                    <input type="text" name="numFactura" class="form-control" value="{{$ingresoAlmacen->numFactura}}">
-                </div>
+
                 <div class="col p-2 mt-0.5">
                     <label for="date" class="col">Estado de Pago</label>
                     <select id="inputState" name="estadoPaga" class="form-select p-1 mt-0.5">
@@ -58,20 +39,39 @@
                             @php
                             $estadoPagado = "Sin informacion";
                             if($ingresoAlmacen->estadoPaga=='1'){
-                                $estadoPagado = "Pagado";
+                            $estadoPagado = "Pagado";
                             }else{
-                                $estadoPagado = "No Pagado";
+                            $estadoPagado = "No Pagado";
                             }
-                        @endphp
-                        Actual: {{$estadoPagado}}</option>
+                            @endphp
+                            Actual: {{$estadoPagado}}</option>
                         <option value="1">Pagado</option>
                         <option value="2">No Pagado</option>
                     </select>
                 </div>
             </div>
-            <div class="col p-2 mt-0.5">
-                <input type="text" name="detalle" class="form-control" value="detalle">
+            <div class="row">
+                <div>
+                    <h2><b>DATOS DE LA FACTURA</b></h2>
+                </div>
+                <div class="col p-2 mt-0.5">
+                    <label for="date" class="col">Fecha Ingreso a Almacen</label>
+                    <input type="date" name="fechaIngreso" class="form-control" value="{{$ingresoAlmacen->fechaIngreso}}">
+                </div>
+                <div class="col p-2 mt-0.5">
+                    <label for="date" class="col">Fecha de Vencimiento</label>
+                    <input type="date" name="fechaVencimiento" class="form-control" value="{{$ingresoAlmacen->fechaVencimiento}}">
+                </div>
+                <div class="col p-2 mt-0.5">
+                    <label for="date" class="col">Numero de Factura</label>
+                    <input type="text" name="numFactura" class="form-control" value="{{$ingresoAlmacen->numFactura}}">
+                </div>
             </div>
+            <div>
+                <label for="date" class="col">Observaciones de la Factura</label>
+                <input type="text" name="detalle" class="form-control" value="{{$ingresoAlmacen->detalle}}">
+            </div>
+            
             <div class="text-center p-1 mt-4">
                 <button type="submit" class="text-center btn btn-primary">Actualizar Factura</button>
             </div>

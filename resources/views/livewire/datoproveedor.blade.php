@@ -1,7 +1,7 @@
 <div>
     <label for="tittle" class="form-label">DATOS DEL PROVEEDOR</label>
     <div class="col p-2">
-        <label for="inputState" class="form-label">PROVEEDOR</label>
+        <label for="inputState" class="form-label">Seleccione Proveedor</label>
         <select wire:model="selectProveedor" name="proveedor_id" class="form-select">
             @foreach ($proveedores as $item)
             <option wire:click="updateselectProveedor('{{$item->id}}')" value={{$item->id}}>{{$item->nameProv}} </option>
