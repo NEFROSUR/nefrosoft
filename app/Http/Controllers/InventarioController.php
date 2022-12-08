@@ -6,6 +6,8 @@ use App\Models\inventario;
 use App\Models\detalleIngresoAlmacen;
 use App\Models\detalleSalidaAlmacen;
 use App\Models\producto;
+use App\Models\ingresoAlmacen;
+use App\Models\salidaAlmacen;
 use Illuminate\Http\Request;
 
 class InventarioController extends Controller
@@ -77,9 +79,31 @@ class InventarioController extends Controller
     public function edit($id)
     {
         $producto = producto::findOrFail($id);
-        $ingresos['ingresos'] = detalleIngresoAlmacen::where('product_id', '=', $producto->id)->paginate(12);
-        $salidas['salidas'] = detalleSalidaAlmacen::where('product_id', '=', $producto->id)->paginate(12);
-        return view('almacen.editAlmacen')->with('producto',$producto);
+        $ingresos = detalleIngresoAlmacen::where('product_id', '=', $producto->id)->get();
+        $size = detalleIngresoAlmacen::where('product_id', '=', $producto->id)->count();
+        $salidas = detalleSalidaAlmacen::where('product_id', '=', $producto->id)->get();
+        //return view('almacen.editAlmacen',$ingresos)->with('producto',$producto);
+        $ingresosReales = array();
+        $salidasReales = array();
+        /*for ($i = 0; $i < $size; $i++){
+            //$factura = salidaAlmacen::where('id', $ingresos->factura_id)->first();
+            $factura = "hola";
+            array_push($ingresosReales, $factura);
+        }*/
+        foreach($ingresos as $indice){
+            $factura = ingresoAlmacen::where('id', '=', $indice->factura_id)->first();
+            $factura->cantidad = $indice->cantidadIngresada;
+            array_push($ingresosReales, $factura);
+        }
+        foreach($salidas as $indice){
+            $factura = salidaAlmacen::where('id', '=', $indice->salida_id)->first();
+            $factura->cantidad = $indice->cantidad;
+            array_push($salidasReales, $factura);
+        }
+
+
+        return view('almacen.editAlmacen',['ingresosReales' => $ingresosReales], ['salidasReales' => $salidasReales] )->with('producto',$producto);
+
     }
 
     /**
