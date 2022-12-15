@@ -64,8 +64,11 @@ class InventarioController extends Controller
                 $productoAll['productoAll'] = producto::where('categoria_id', '=', $categoria_id)->where('stock', '>', 0)->paginate(10);
             }
         }
-
-        $total = producto::where('stock', '>', 0)->sum('precioProm');
+        $productos = producto::where('stock', '>', '0')->get();
+        $total=0;
+        foreach($productos as $indice){
+            $total = $total+($indice->precioProm * $indice->stock);
+        }
 
         return view('almacen.mostrarAlmacen', $productoAll)->with('total',$total);
     }

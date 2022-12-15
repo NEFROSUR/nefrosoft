@@ -66,9 +66,17 @@
             </fieldset>
         </div>
     </div>
-    <div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProducto">+ Agregar producto</button>
+    <div class="p-2 row">
+        <div class="col">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProducto">+ Agregar producto</button>
+        </div>
+        <div class="col text-right">
+            <a class="btn btn-success" href="{{ url('detalleIngresoAlmacen/refresh/'.$factura->id)}}">
+                Actualizar cambios
+            </a>
+        </div>
     </div>
+
 
     <div>
         @livewire('agregar-producto',["factura_id"=>$factura->id])

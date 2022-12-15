@@ -36,17 +36,17 @@ class AgregarProducto extends Component
             'detalle' => 'nullable',
         ]);
 
-        $detalleIngresoAlmacen = new detalleIngresoAlmacen();
-        $detalleIngresoAlmacen->factura_id = $this->factura_id;
-        $detalleIngresoAlmacen->product_id = $this->product_id;
-        $detalleIngresoAlmacen->cantidadIngresada = $this->cantidadIngresada;
-        $detalleIngresoAlmacen->unidadMedida = $this->unidadMedida;
-        $detalleIngresoAlmacen->PrecioTotal = $this->PrecioTotal;
-        $detalleIngresoAlmacen->PrecioUnitario = $this->PrecioTotal / $this->cantidadIngresada;
-        $detalleIngresoAlmacen->moneda = $this->moneda;
-        $detalleIngresoAlmacen->detalle = $this->detalle;
+        $nuevoIngreso = new detalleIngresoAlmacen();
+        $nuevoIngreso->factura_id = $this->factura_id;
+        $nuevoIngreso->product_id = $this->product_id;
+        $nuevoIngreso->cantidadIngresada = $this->cantidadIngresada;
+        $nuevoIngreso->unidadMedida = $this->unidadMedida;
+        $nuevoIngreso->PrecioTotal = $this->PrecioTotal;
+        $nuevoIngreso->PrecioUnitario = $this->PrecioTotal / $this->cantidadIngresada;
+        $nuevoIngreso->moneda = $this->moneda;
+        $nuevoIngreso->detalle = $this->detalle;
 
-        $detalleIngresoAlmacen->save();
+        $nuevoIngreso->save();
 
         session()->flash('message', 'Se agrego correctamente');
 
@@ -72,9 +72,10 @@ class AgregarProducto extends Component
         $this->detalle = '';
         $this->dispatchBrowserEvent('close-modal');
 
+        
 
-        $detalleIngresoAlmacen['detalleIngresoAlmacen'] = detalleIngresoAlmacen::where('factura_id', '=', $factura->id)->paginate(10);
-        return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen',$detalleIngresoAlmacen,['factura' => $factura]);
+        //$detalleIngresoAlmacen['detalleIngresoAlmacen'] = detalleIngresoAlmacen::where('factura_id', '=', $factura->id)->paginate(20);
+        //return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen',$detalleIngresoAlmacen,['factura' => $factura]);
     }
     public function render()
     {

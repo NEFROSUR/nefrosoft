@@ -64,6 +64,9 @@
             @if (session()->has('message'))
             <div class="alert alert-success text center">{{session('message')}}</div>
             @endif
+            @if (session()->has('error'))
+            <div class="alert alert-danger text center">{{session('error')}}</div>
+            @endif
         </div>
     </div>
 </div>

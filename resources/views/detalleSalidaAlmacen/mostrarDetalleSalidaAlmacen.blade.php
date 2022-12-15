@@ -68,8 +68,15 @@
             </fieldset>
         </div>
     </div>
-    <div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductoS">+ Agregar producto</button>
+    <div class="p-2 row">
+        <div class="col">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductoS">+ Agregar producto</button>
+        </div>
+        <div class="col text-right">
+            <a class="btn btn-success" href="{{ url('detalleSalidaAlmacen/refresh/'.$salida->id)}}">
+                Actualizar cambios
+            </a>
+        </div>
     </div>
 
     <div>
@@ -86,17 +93,20 @@
                 <th>Producto</th>
                 <th>Cantidad Salida</th>
                 <th>Unidad de Medida</th>
-                <th>Area Objetivo</th>
+                <th>Area de Destino</th>
                 <th>Precio Salida</th>
                 <th>Observaciones / Detalles</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
         </thead>
+        @php
+        $i = 1;
+        @endphp
         <tbody>
             @foreach ($detalleSalidaAlmacen as $detalle)
             <tr>
-                <td>{{ $detalle->id}}</td>
+                <td>{{ $i}}</td>
                 <td>{{ $detalle->producto->nombreProd}}</td>
                 <td>{{ $detalle->cantidad}}</td>
                 <td>{{ $detalle->um}}</td>
@@ -119,9 +129,15 @@
 
                 </td>
             </tr>
+            @php
+            $i = $i+1;
+            @endphp
             @endforeach
         </tbody>
     </table>
+    @if (session()->has('error'))
+    <div class="alert alert-danger text center">{{session('error')}}</div>
+    @endif
 </div>
 {{ $detalleSalidaAlmacen->links() }}
 

@@ -21,7 +21,7 @@ class AgregarProductoS extends Component
             'cantidad' => 'required|numeric',
             'unidadMedida' => 'required',
             'destino' => 'required',
-        ]);       
+        ]);
     }
 
 
@@ -33,36 +33,38 @@ class AgregarProductoS extends Component
             'unidadMedida' => 'required',
             'destino' => 'required',
         ]);
-
-        $detalleSalida = new detalleSalidaAlmacen();
-
         $producto = producto::where('id', '=', $this->product_id)->first();
-        $guia = "S" . substr(str_repeat(0, 6) . detalleSalidaAlmacen::All()->count(), -5);
-        $detalleSalida->guiaInterna = $guia;
-        $detalleSalida->salida_id = $this->salida_id;
-        $detalleSalida->product_id = $this->product_id;
-        $detalleSalida->cantidad = $this->cantidad;
-        $detalleSalida->precioSalida = $producto->precioProm;
-        $detalleSalida->um = $this->unidadMedida;
-        $detalleSalida->destino = $this->destino;
-        $detalleSalida->observacion = $this->observacion;
-        $detalleSalida->save();
+        if ($this->cantidad <= $producto->stock) {
+            $detalleSalida = new detalleSalidaAlmacen();
 
-        session()->flash('message', 'Se agrego producto');
+            $guia = "S" . substr(str_repeat(0, 6) . detalleSalidaAlmacen::All()->count(), -5);
+            $detalleSalida->guiaInterna = $guia;
+            $detalleSalida->salida_id = $this->salida_id;
+            $detalleSalida->product_id = $this->product_id;
+            $detalleSalida->cantidad = $this->cantidad;
+            $detalleSalida->precioSalida = $producto->precioProm;
+            $detalleSalida->um = $this->unidadMedida;
+            $detalleSalida->destino = $this->destino;
+            $detalleSalida->observacion = $this->observacion;
+            $detalleSalida->save();
 
-        //REDUCIR STOCK
-        //$producto = producto::where('id', '=', $this->product_id)->first();
-        $stock = $producto->stock - $this->cantidad;
-        producto::where('id', '=', $this->product_id)->update(['stock' => $stock,]);
+            session()->flash('message', 'Se agrego producto');
 
-        $this->product_id='';
-        $this->cantidad='';
-        $this->unidadMedida='';
-        $this->destino='';
-        $this->observacion='';
+            //REDUCIR STOCK
+            $stock = $producto->stock - $this->cantidad;
+            producto::where('id', '=', $this->product_id)->update(['stock' => $stock,]);
 
-        $this->dispatchBrowserEvent('close-modal');
+            $this->product_id = '';
+            $this->cantidad = '';
+            $this->unidadMedida = '';
+            $this->destino = '';
+            $this->observacion = '';
 
+            $this->dispatchBrowserEvent('close-modal');
+        }else{
+            $this->cantidad = '';
+            session()->flash('error', 'Excede el Stock');
+        }
     }
 
     public function render()

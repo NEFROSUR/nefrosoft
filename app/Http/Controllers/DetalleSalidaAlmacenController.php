@@ -77,7 +77,7 @@ class DetalleSalidaAlmacenController extends Controller
         $detalleSalida->destino = $request->destino;
         $detalleSalida->observacion = $request->observacion;
         $detalleSalida->save();
-        
+
         //REDUCIR STOCK
         $producto = producto::where('id', '=', $request->product_id)->first();
         $stock = $producto->stock - $request->cantidad;
@@ -112,14 +112,14 @@ class DetalleSalidaAlmacenController extends Controller
         } else {
             $detalleSalidaAlmacen['detalleSalidaAlmacen'] = null;
         }
-        
-        return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen',$detalleSalidaAlmacen);
+
+        return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen', $detalleSalidaAlmacen);
     }
     public function showN($id)
     {
         $salida = salidaAlmacen::where('id', '=', $id)->first();
         $detalleSalidaAlmacen['detalleSalidaAlmacen'] = detalleSalidaAlmacen::where('salida_id', '=', $salida->id)->paginate(10);
-        return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen',$detalleSalidaAlmacen,['salida' => $salida]);
+        return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen', $detalleSalidaAlmacen, ['salida' => $salida]);
     }
 
     /**
@@ -144,24 +144,33 @@ class DetalleSalidaAlmacenController extends Controller
     public function update(Request $request, $id)
     {
         $datosDetalle = request()->except(['_token', '_method']);
-        $stockReal = $request->cantidad;
+        $nuevaCantidad = $request->cantidad;
         $detalleS = detalleSalidaAlmacen::where('id', '=', $id)->first();
-        $stockInicial = $detalleS->cantidad;
-        $dif = $stockInicial - $stockReal;
+        $cantidadInicial = $detalleS->cantidad;
+        $producto = producto::where('id', '=', $detalleS->product_id)->first();
+        $ini = $producto->stock + $cantidadInicial;
+        if ($nuevaCantidad <= $ini) {
+            $dif = $cantidadInicial - $nuevaCantidad;
+            if ($dif > 0) {
+                $dif * -1;
+                $stock = $producto->stock + $dif;
+                producto::where('id', '=', $detalleS->product_id)->update(['stock' => $stock,]);
+            }
+            if ($dif < 0) {
+                $stock = $producto->stock - abs($dif);
+                producto::where('id', '=', $detalleS->product_id)->update(['stock' => $stock,]);
+            }
+            detalleSalidaAlmacen::where('id', '=', $id)->update($datosDetalle);
 
-        $producto = producto::where('id','=',$detalleS->product_id)->first();
-        if($dif>0){
-            $dif * -1;
-            $stock = $producto->stock + $dif;
-            producto::where('id', '=', $detalleS->product_id)->update(['stock'=>$stock,]);
-        }if($dif<0){
-            $stock = $producto->stock - abs($dif);
-            producto::where('id', '=', $detalleS->product_id)->update(['stock'=>$stock,]);
+            $salida = salidaAlmacen::where('id', '=', $detalleS->salida_id)->first();
+            $detalleSalidaAlmacen['detalleSalidaAlmacen'] = detalleSalidaAlmacen::where('salida_id', '=', $salida->id)->paginate(10);
+            return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen', $detalleSalidaAlmacen, ['salida' => $salida]);
+        } else {
+            session()->flash('error', 'RETIRAR: '.$nuevaCantidad.' del producto '.$producto->nombreProd.' excede el Stock maximo: '.$ini);
+            $salida = salidaAlmacen::where('id', '=', $detalleS->salida_id)->first();
+            $detalleSalidaAlmacen['detalleSalidaAlmacen'] = detalleSalidaAlmacen::where('salida_id', '=', $salida->id)->paginate(10);
+            return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen', $detalleSalidaAlmacen, ['salida' => $salida]);
         }
-        detalleSalidaAlmacen::where('id', '=', $id)->update($datosDetalle);
-
-        $detalleSalidaAlmacen['detalleSalidaAlmacen'] = null;
-        return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen', $detalleSalidaAlmacen);
     }
 
     /**
@@ -174,14 +183,21 @@ class DetalleSalidaAlmacenController extends Controller
     {
         $detalleS = detalleSalidaAlmacen::where('id', '=', $id)->first();
         $cantidadSalida = $detalleS->cantidad;
-        $producto = producto::where('id','=',$detalleS->product_id)->first();
+        $producto = producto::where('id', '=', $detalleS->product_id)->first();
         $stock = $producto->stock + $cantidadSalida;
-        producto::where('id', '=', $detalleS->product_id)->update(['stock'=>$stock,]);
+        producto::where('id', '=', $detalleS->product_id)->update(['stock' => $stock,]);
         detalleSalidaAlmacen::destroy($id);
 
 
-        $salida = salidaAlmacen::where('numSalida', '=', $detalleS->guiaInterna)->first();
-        $detalleSalidaAlmacen['detalleSalidaAlmacen'] = detalleSalidaAlmacen::where('salida_id', '=', $detalleS->id)->paginate(10);
+        $salida = salidaAlmacen::where('id', '=', $detalleS->salida_id)->first();
+        $detalleSalidaAlmacen['detalleSalidaAlmacen'] = detalleSalidaAlmacen::where('salida_id', '=', $salida->id)->paginate(10);
+        return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen', $detalleSalidaAlmacen, ['salida' => $salida]);
+    }
+
+    public function refresh($id)
+    {
+        $salida = salidaAlmacen::where('id', '=', $id)->first();
+        $detalleSalidaAlmacen['detalleSalidaAlmacen'] = detalleSalidaAlmacen::where('salida_id', '=', $salida->id)->paginate(10);
         return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen', $detalleSalidaAlmacen, ['salida' => $salida]);
     }
 }

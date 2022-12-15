@@ -111,7 +111,6 @@ class DetalleIngresoAlmacenController extends Controller
     {
         $factura = ingresoAlmacen::where('id', '=', $id)->first();
         $detalleIngresoAlmacen['detalleIngresoAlmacen'] = detalleIngresoAlmacen::where('factura_id', '=', $factura->id)->paginate(10);
-        //return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen',$detalleSalidaAlmacen,['salida' => $salida]);
         return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen',$detalleIngresoAlmacen,['factura' => $factura]);
     }
 
@@ -193,10 +192,14 @@ class DetalleIngresoAlmacenController extends Controller
         
         detalleIngresoAlmacen::destroy($id);
 
-        /*$detalleIngresoAlmacen['detalleIngresoAlmacen'] = null;
-        return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen', $detalleIngresoAlmacen);
-        */
+        $detalleIngresoAlmacen['detalleIngresoAlmacen'] = detalleIngresoAlmacen::where('factura_id', '=', $factura->id)->paginate(10);
+        return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen', $detalleIngresoAlmacen, ['factura' => $factura]);
+    }
 
+
+    public function refresh($id)
+    {
+        $factura = ingresoAlmacen::where('id', '=', $id)->first();
         $detalleIngresoAlmacen['detalleIngresoAlmacen'] = detalleIngresoAlmacen::where('factura_id', '=', $factura->id)->paginate(10);
         return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen', $detalleIngresoAlmacen, ['factura' => $factura]);
     }

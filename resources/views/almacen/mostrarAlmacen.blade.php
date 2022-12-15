@@ -57,7 +57,7 @@
         </div>
         <div class="col">
             <fieldset disabled>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder="S/. {{$totalC}} Soles">
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="S/. {{$total}} Soles">
             </fieldset>
         </div>
     </div>
