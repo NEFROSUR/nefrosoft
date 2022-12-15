@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 <div class="text-center">
-    <h4 class="bg-info p-2 text-white bg-opacity-75">REGISTRAR NUEVO PRODUCTO EN LA SALIDA: {{$producto->id}} </h4>
+    <h4 class="bg-info p-2 text-white bg-opacity-75">REGISTRAR NUEVA SALIDA DEL PRODUCTO: {{$producto->id}} </h4>
 </div>
 @if($errors->any())
 <div class="alert alert-danger">
@@ -19,6 +19,8 @@
         @csrf
         @include('salidaUnitaria.formSalidaUnitaria')
     </form>
-
+    @if (session()->has('error'))
+    <div class="alert alert-danger text center">{{session('error')}}</div>
+    @endif
 </div>
 @endsection

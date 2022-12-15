@@ -80,6 +80,11 @@ Route::get('/detalleSalidaAlmacen/refresh/{id}',[DetalleSalidaAlmacenController:
 Route::resource('salidaAlmacen',SalidaAlmacenController::class);
 Route::resource('detalleSalidaAlmacen',DetalleSalidaAlmacenController::class);
 
-Route::get('/exportarProductos',[ExcelController::class, 'export']);
+
 Route::get('/salidaUnitaria/create/{id}',[SalidaUnitaria::class, 'create'])->name('salidaUnitaria.crearSalidaUnitaria');
 Route::resource('salidaUnitaria',SalidaUnitaria::class);
+
+//EXPORTS EN EXCEL
+Route::get('/exportarProductos',[ExcelController::class, 'export']);
+Route::get('/exportarFacturas',[ExcelController::class, 'exportFacturas']);
+Route::get('/exportarSalidas',[ExcelController::class, 'exportSalidas']);

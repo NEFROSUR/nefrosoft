@@ -37,7 +37,7 @@ class AgregarProductoS extends Component
         if ($this->cantidad <= $producto->stock) {
             $detalleSalida = new detalleSalidaAlmacen();
 
-            $guia = "S" . substr(str_repeat(0, 6) . detalleSalidaAlmacen::All()->count(), -5);
+            $guia = "DS" . substr(str_repeat(0, 6) . detalleSalidaAlmacen::All()->count(), -5);
             $detalleSalida->guiaInterna = $guia;
             $detalleSalida->salida_id = $this->salida_id;
             $detalleSalida->product_id = $this->product_id;

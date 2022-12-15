@@ -27,6 +27,9 @@
             </div>
         </form>
     </div>
+    <div class="col p-2.5 m-1">
+        <a class="btn btn-outline-primary" href="/exportarSalidas">Exportar Salidas de Almacen</a>
+    </div>
 </div>
 @if(!is_null($salidasAll))
 <div class="container">

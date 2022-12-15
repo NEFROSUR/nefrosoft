@@ -83,16 +83,12 @@ class InventarioController extends Controller
     {
         $producto = producto::findOrFail($id);
         $ingresos = detalleIngresoAlmacen::where('product_id', '=', $producto->id)->get();
-        $size = detalleIngresoAlmacen::where('product_id', '=', $producto->id)->count();
-        $salidas = detalleSalidaAlmacen::where('product_id', '=', $producto->id)->get();
-        //return view('almacen.editAlmacen',$ingresos)->with('producto',$producto);
+        $salidas = detalleSalidaAlmacen::where('product_id', '=', $producto->id)->where('salida_id', '!=', null)->get();
+        $salidasUnitarias = detalleSalidaAlmacen::where('product_id', '=', $producto->id)->where('salida_id', '=', null)->get();
+        
         $ingresosReales = array();
         $salidasReales = array();
-        /*for ($i = 0; $i < $size; $i++){
-            //$factura = salidaAlmacen::where('id', $ingresos->factura_id)->first();
-            $factura = "hola";
-            array_push($ingresosReales, $factura);
-        }*/
+        $salidasU = array();
         foreach($ingresos as $indice){
             $factura = ingresoAlmacen::where('id', '=', $indice->factura_id)->first();
             $factura->cantidad = $indice->cantidadIngresada;
@@ -103,9 +99,14 @@ class InventarioController extends Controller
             $factura->cantidad = $indice->cantidad;
             array_push($salidasReales, $factura);
         }
+        foreach($salidasUnitarias as $indice){
+            //$factura = salidaAlmacen::where('id', '=', $indice->salida_id)->first();
+            //$factura->cantidad = $indice->cantidad;
+            array_push($salidasReales, $indice);
+        }
 
 
-        return view('almacen.editAlmacen',['ingresosReales' => $ingresosReales], ['salidasReales' => $salidasReales] )->with('producto',$producto);
+        return view('almacen.editAlmacen',['ingresosReales' => $ingresosReales], ['salidasReales' => $salidasReales])->with('producto',$producto);
 
     }
 

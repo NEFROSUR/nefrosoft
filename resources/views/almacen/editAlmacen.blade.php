@@ -20,11 +20,11 @@
                 <h4 class="bg-success p-2 text-white bg-opacity-75">INGRESOS</h4>
             </div>
             @php
-                if($ingresosReales==null){
-                    $msj1 = "NO SE REGISTRARON INGRESOS";
-                }else{
-                    $msj1="true";
-                }
+            if($ingresosReales==null){
+            $msj1 = "NO SE REGISTRARON INGRESOS";
+            }else{
+            $msj1="true";
+            }
             @endphp
             <table class="table table-condensed table-hover table-bordered w-auto small rounded-md">
                 <thead class="thead-light">
@@ -45,7 +45,7 @@
                         <td>{{ $ingreso->numFactura}}</td>
                         <td>{{ $ingreso->cantidad}}</td>
                         <td>{{ $ingreso->fechaIngreso}}</td>
-                        
+
                     </tr>
                     @php
                     $i = $i+1;
@@ -54,7 +54,7 @@
                 </tbody>
             </table>
             @if ($msj1!="true")
-            <div class="bg-danger p-2 text-white"><b>{{$msj}}</b></div>             
+            <div class="bg-danger p-2 text-white"><b>{{$msj}}</b></div>
             @endif
         </div>
         <div class="col">
@@ -62,11 +62,11 @@
                 <h4 class="bg-warning p-2 text-white bg-opacity-75">SALIDAS</h4>
             </div>
             @php
-                if($salidasReales==null){
-                    $msj = "NO SE REGISTRARON SALIDAS";
-                }else{
-                    $msj="true";
-                }
+            if($salidasReales==null){
+            $msj = "NO SE REGISTRARON SALIDAS";
+            }else{
+            $msj="true";
+            }
             @endphp
             <table class="table table-condensed table-hover table-bordered w-auto small rounded-md">
                 <thead class="thead-light">
@@ -81,21 +81,35 @@
                 $j = 1;
                 @endphp
                 <tbody>
-                @foreach ($salidasReales as $salida)
+                    @foreach ($salidasReales as $salida)
                     <tr>
                         <td>{{ $j}}</td>
+                        @php
+                            if($salida->numSalida == ''){
+                                $salida->numSalida = $salida->guiaInterna;
+                            }
+                        @endphp
                         <td>{{ $salida->numSalida}}</td>
                         <td>{{ $salida->cantidad}}</td>
+                        @php
+                            if($salida->fechaSalida == ''){
+                                $salida->fechaSalida = $salida->created_at;
+                            }
+                            if($salida->destino != ''){
+                                $salida->fechaSalida = $salida->fechaSalida->format('Y-m-d');
+                                $salida->fechaSalida = $salida->fechaSalida . " entrega unitaria a: " . $salida->destino;
+                            }
+                        @endphp
                         <td>{{ $salida->fechaSalida}}</td>
                     </tr>
                     @php
-                    $j = $i+1;
+                    $j = $j+1;
                     @endphp
                     @endforeach
                 </tbody>
             </table>
             @if ($msj!="true")
-            <div class="bg-danger p-2 text-white"><b>{{$msj}}</b></div>             
+            <div class="bg-danger p-2 text-white"><b>{{$msj}}</b></div>
             @endif
         </div>
     </div>

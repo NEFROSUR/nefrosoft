@@ -21,6 +21,9 @@
             <button class="btn btn-outline-success" type="submit">Buscar</button>
         </form>
     </div>
+    <div class="col">
+        <a class="btn btn-outline-primary" href="/exportarFacturas">Exportar Lista de Facturas</a>
+    </div>
 </div>
 @if(!is_null($entradasAll))
 <div class="container border">
@@ -65,7 +68,7 @@
                         {{$estado}}
                     </td>
                     <td>
-                    <form action="{{ url('detalleIngresoAlmacen/show/'.$entradas->id) }}">
+                        <form action="{{ url('detalleIngresoAlmacen/show/'.$entradas->id) }}">
                             <input class="btn btn-outline-primary" type="submit" value="👁️">
                         </form>
                     </td>
@@ -75,7 +78,7 @@
                         </a>
                     </td>
                     <td>
-                    <form action="{{ url('/ingresoAlmacen/'.$entradas->id) }}" method="POST">
+                        <form action="{{ url('/ingresoAlmacen/'.$entradas->id) }}" method="POST">
                             @csrf
                             {{ method_field('DELETE')}}
                             <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea eliminar al Ingreso\n {{ $entradas->id}}?')" value="🗑️">
