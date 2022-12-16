@@ -20,6 +20,8 @@ use App\Http\Controllers\DetalleSalidaAlmacenController;
 use App\Http\Controllers\SalidaAlmacenController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\SalidaUnitaria;
+use App\Http\Controllers\DevolucionAlmacenController;
+use App\Http\Controllers\DetalleDevolucionAlmacenController;
 
 //INICIO
 Route::get('/', function () {
@@ -83,7 +85,11 @@ Route::resource('detalleSalidaAlmacen',DetalleSalidaAlmacenController::class);
 
 Route::get('/salidaUnitaria/create/{id}',[SalidaUnitaria::class, 'create'])->name('salidaUnitaria.crearSalidaUnitaria');
 Route::resource('salidaUnitaria',SalidaUnitaria::class);
+//DEVOLUCIONES AL ALMACEN
 
+Route::resource('devoluciones',DevolucionAlmacenController::class);
+Route::resource('detalleDevoluciones',DetalleDevolucionAlmacenController::class);
+Route::get('/devoluciones/refresh/',[DevolucionAlmacenController::class, 'refresh'])->name('devoluciones.refresh');
 //EXPORTS EN EXCEL
 Route::get('/exportarProductos',[ExcelController::class, 'export']);
 Route::get('/exportarFacturas',[ExcelController::class, 'exportFacturas']);

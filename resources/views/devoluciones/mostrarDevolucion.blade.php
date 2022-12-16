@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 <div class="text-center">
-    <h4 class="bg-info p-2 text-white bg-opacity-75">LISTA DE SALIDAS POR PAQUETE</h4>
+    <h4 class="bg-info p-2 text-white bg-opacity-75">DEVOLUCIONES</h4>
 </div>
 @if($errors->any())
 <div class="alert alert-danger">
@@ -15,28 +15,32 @@
 @endif
 <div class="container">
     <div class="row">
-        <div class="col p-1 m-1 navbar navbar-light float right">
+        <div class="row p-1 m-1 navbar navbar-light float right">
             <form class="d-flex" role="search">
-                <div class="col">
-                    <label for="inputState" class="form-label"><b>Busca por Numero de Salida</b></label>
-                </div>
                 <div class="col p-2.5 m-1">
-                    <input name="numSalida" class="form-control" type="search" placeholder="Codigo de Salida" aria-label="Search">
+                    <label for="inputState" class="form-label"><b>Busca por Numero de Devolucion</b></label>
+                    <input name="numDevolucion" class="form-control" type="search" placeholder="Codigo de Devolucion" aria-label="Search">
                 </div>
-                <div class="col p-2.5 m-1">
+                <div class="col p-3.5 m-1">
                     <button class="btn btn-success" type="submit">Filtrar</button>
                 </div>
             </form>
         </div>
-        <div class="col p-3.5 m-2">
-            <a class="btn btn-primary" href="/exportarSalidas">Exportar Salidas de Almacen</a>
-        </div>
-        <div class="col p-3.5 m-1 right">
-            <a class="btn btn-warning" href="{{url('/devoluciones/show')}}">Devoluciones</a>
+        <div class="row m-2">
+            <h3 class="bg-info p-2 text-white bg-opacity-75">OPCIONES</h3>
+            <div class="col p-3.5 m-2">
+                <a class="btn btn-primary" href="">Exportar Devoluciones</a>
+            </div>
+            <div class="col p-3.5 m-2">
+                <a class="btn btn-primary" href="">+ Nueva Devolucion</a>
+            </div>
+            <div class="col p-3.5 m-2">
+                <a class="btn btn-primary" href="{{url('devoluciones/refresh/')}}">Actualizar</a>
+            </div>
         </div>
     </div>
 </div>
-@if(!is_null($salidasAll))
+@if(!is_null($devolucionesAll))
 <div class="container">
     <table class="table table-condensed table-hover table-bordered w-auto small rounded-md">
         <thead class="thead-light">
@@ -55,15 +59,10 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($salidasAll as $salida)
+            @foreach ($devolucionesAll as $devolucion)
             <tr>
-                <td>{{ $salida->numSalida}}</td>
-                <td>{{ $salida->fechaSalida}}</td>
-                <td>TURNO {{ $salida->turno}}</td>
-                <td>{{ $salida->reponsableA}}: {{$salida->responsable}}</td>
-                <td>{{ $salida->areaRecepcion}}: {{$salida->recepcionista}}</td>
-                <td>{{ $salida->areaDestino}}</td>
-                <td>{{ $salida->detalle}}</td>
+                <td>{{ $devolucion->id}}</td>
+
                 <td>
                     <form action="{{ url('detalleSalidaAlmacen/show/'.$salida->id) }}">
                         <input class="btn btn-outline-primary" type="submit" value="👁️">
@@ -86,6 +85,6 @@
         </tbody>
     </table>
 </div>
-{{ $salidasAll->links() }}
+{{ $devolucionesAll->links() }}
 @endif
 @endsection
