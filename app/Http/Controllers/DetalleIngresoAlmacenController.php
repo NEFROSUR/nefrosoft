@@ -179,7 +179,6 @@ class DetalleIngresoAlmacenController extends Controller
      */
     public function destroy($id)
     {
-        
         $detalleI = detalleIngresoAlmacen::where('id', '=', $id)->first();
         $stockInicial = $detalleI->cantidadIngresada;
         $producto = producto::where('id','=',$detalleI->product_id)->first();

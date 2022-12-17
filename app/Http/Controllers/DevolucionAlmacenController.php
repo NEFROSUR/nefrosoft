@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\devolucionAlmacen;
+use App\Models\producto;
+use App\Models\detalleDevolucionAlmacen;
 use Illuminate\Http\Request;
 
 class DevolucionAlmacenController extends Controller
@@ -64,7 +66,7 @@ class DevolucionAlmacenController extends Controller
     public function edit($id)
     {
         $devolucion = devolucionAlmacen::findOrFail($id);
-        return view ('devoluciones.editDevolucion',['devolucion' => $devolucion]);
+        return view('devoluciones.editDevolucion', ['devolucion' => $devolucion]);
     }
 
     /**
@@ -90,7 +92,19 @@ class DevolucionAlmacenController extends Controller
      */
     public function destroy($id)
     {
-        devolucionAlmacen::destroy($id);
+        $devolucion = detalleDevolucionAlmacen::where('devolucion_id', '=', $id)->get();
+        if (count($devolucion) == 0) {
+            devolucionAlmacen::destroy($id);
+        } else {
+            foreach ($devolucion as $i) {
+                $producto = producto::where('id', '=', $i->product_id)->first();
+                $stock = $producto->stock - $i->cantidadDevuelta;
+                producto::where('id', '=', $i->product_id)->update(['stock' => $stock]);
+
+                detalleDevolucionAlmacen::destroy($i->id);
+            }
+            devolucionAlmacen::destroy($id);
+        }
         $devolucionesAll['devolucionesAll'] = devolucionAlmacen::orderBy('id', 'desc')->paginate(12);
         return view('devoluciones.mostrarDevolucion', $devolucionesAll);
     }

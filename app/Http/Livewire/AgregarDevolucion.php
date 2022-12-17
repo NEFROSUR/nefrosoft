@@ -30,7 +30,15 @@ class AgregarDevolucion extends Component
         $nuevaDevolucion->usuario = $this->usuario;
         $nuevaDevolucion->personalD = $this->personalD;
         $nuevaDevolucion->fechaDevolucion = $this->fechaDevolucion;
-        $nuevaDevolucion->numDevolucion = "D" . substr(str_repeat(0, 6) . devolucionAlmacen::All()->count(), -5);;
+        $devolucioneAll = devolucionAlmacen::All();
+        if($devolucioneAll->isEmpty()==true){
+            $nuevaDevolucion->numDevolucion = "D" . substr(str_repeat(0, 6) . devolucionAlmacen::All()->count()+1, -5);
+        }else{
+            $ultimo = devolucionAlmacen::orderBy('id', 'desc')->first();
+            $nuevo = $ultimo->id + 1;
+            $nuevaDevolucion->numDevolucion = "D" . substr(str_repeat(0, 6) . $nuevo, -5);
+        }
+        //$nuevaDevolucion->numDevolucion = "D" . substr(str_repeat(0, 6) . devolucionAlmacen::All()->count()+1, -5);
         $nuevaDevolucion->detalle = $this->detalle;
         $nuevaDevolucion->save();
         session()->flash('message', 'Se agrego correctamente');

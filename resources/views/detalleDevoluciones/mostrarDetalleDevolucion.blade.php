@@ -154,6 +154,11 @@
     @if (session()->has('error'))
     <div class="alert alert-danger text center">{{session('error')}}</div>
     @endif
+    <div class="col text-center">
+        <a class="btn btn-info" href="{{url('/devoluciones/refresh/')}}">
+            Ver lista de Devoluciones
+        </a>
+    </div>
 </div>
 {{ $detalleDevolucion->links() }}
 

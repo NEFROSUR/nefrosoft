@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\salidaAlmacen;
 use App\Models\producto;
+use App\Models\detalleSalidaAlmacen;
 use Illuminate\Http\Request;
 
 class SalidaAlmacenController extends Controller
@@ -57,7 +58,14 @@ class SalidaAlmacenController extends Controller
         $salidaAlmacen->reponsableA = $request->reponsableA;
         $salidaAlmacen->responsable = $request->responsable;
         $salidaAlmacen->fechaSalida = $request->fechaSalida;
-        $salidaAlmacen->numSalida = "S" . substr(str_repeat(0, 6) . salidaAlmacen::All()->count(), -5);;
+        $ingresosAll = salidaAlmacen::All();
+        if ($ingresosAll->isEmpty() == true) {
+            $salidaAlmacen->numSalida = "S" . substr(str_repeat(0, 6) . salidaAlmacen::All()->count() + 1, -5);
+        } else {
+            $ultimo = salidaAlmacen::orderBy('id', 'desc')->first();
+            $nuevo = $ultimo->id + 1;
+            $salidaAlmacen->numSalida = "S" . substr(str_repeat(0, 6) . $nuevo, -5);
+        }
         $salidaAlmacen->areaRecepcion = $request->areaRecepcion;
         $salidaAlmacen->recepcionista = $request->recepcionista;
         $salidaAlmacen->areaDestino = $request->areaDestino;
@@ -67,8 +75,7 @@ class SalidaAlmacenController extends Controller
 
 
         $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(12);
-        return view('salidaAlmacen.mostrarSalidaAlmacen',$salidasAll);
-
+        return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
     }
 
     /**
@@ -89,7 +96,7 @@ class SalidaAlmacenController extends Controller
                 $salidasAll['salidasAll'] = salidaAlmacen::where('numSalida', '=', $numSalida)->paginate(12);
                 return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
             }
-        }else{
+        } else {
             $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(12);
         }
         $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(12);
@@ -133,8 +140,19 @@ class SalidaAlmacenController extends Controller
      */
     public function destroy($id)
     {
-        
-        salidaAlmacen::destroy($id);
+        $salida = detalleSalidaAlmacen::where('salida_id', '=', $id)->get();
+        if (count($salida) == 0) {
+            salidaAlmacen::destroy($id);
+        } else {
+            foreach ($salida as $i) {
+                $cantidadSalida = $i->cantidad;
+                $producto = producto::where('id', '=', $i->product_id)->first();
+                $stock = $producto->stock + $cantidadSalida;
+                producto::where('id', '=', $i->product_id)->update(['stock' => $stock]);
+                detalleSalidaAlmacen::destroy($i->id);
+            }
+            salidaAlmacen::destroy($id);
+        }
         $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'desc')->paginate(12);
         return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
     }

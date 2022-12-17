@@ -67,7 +67,14 @@ class DetalleSalidaAlmacenController extends Controller
         ]);
         $detalleSalida = new detalleSalidaAlmacen();
 
-        $guia = "S" . substr(str_repeat(0, 6) . detalleSalidaAlmacen::All()->count(), -5);
+        $detalleSalidaAll = detalleSalidaAlmacen::All();
+        if($detalleSalidaAll->isEmpty()==true){
+            $guia = "DS" . substr(str_repeat(0, 6) . detalleSalidaAlmacen::All()->count()+1, -5);
+        }else{
+            $ultimo = detalleSalidaAlmacen::orderBy('id', 'desc')->first();
+            $nuevo = $ultimo->id + 1;
+            $guia = "DS" . substr(str_repeat(0, 6) . $nuevo, -5);
+        }
         $detalleSalida->guiaInterna = $guia;
         $detalleSalida->salida_id = $request->salida_id;
         $detalleSalida->product_id = $request->product_id;

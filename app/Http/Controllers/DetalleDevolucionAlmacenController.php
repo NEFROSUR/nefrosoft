@@ -113,13 +113,14 @@ class DetalleDevolucionAlmacenController extends Controller
         $detalleD = detalleDevolucionAlmacen::where('id', '=', $id)->first();
         $producto = producto::where('id','=',$detalleD->product_id)->first();
         $stock = $producto->stock - $detalleD->cantidadDevuelta;
-        producto::where('id', '=', $detalleD->product_id)->update(['stock'=>$stock,]);
+        producto::where('id', '=', $detalleD->product_id)->update(['stock'=>$stock]);
 
-        
+
+        $devolucionCabera = devolucionAlmacen::where('id', '=', $detalleD->devolucion_id)->first();
+
         detalleDevolucionAlmacen::destroy($id);
-        $devolucion = devolucionAlmacen::where('id', '=', $id)->first();
-        $detalleDevolucion['detalleDevolucion'] = detalleDevolucionAlmacen::where('devolucion_id', '=', $devolucion->id)->paginate(10);
-        return view('detalleDevoluciones.mostrarDetalleDevolucion', $detalleDevolucion, ['devolucion' => $devolucion]);
+        $detalleDevolucion['detalleDevolucion'] = detalleDevolucionAlmacen::where('devolucion_id', '=', $devolucionCabera->id)->paginate(10);
+        return view('detalleDevoluciones.mostrarDetalleDevolucion', $detalleDevolucion, ['devolucion' => $devolucionCabera]);
     }
     public function refresh($id)
     {

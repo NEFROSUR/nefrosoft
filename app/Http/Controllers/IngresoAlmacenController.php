@@ -6,6 +6,7 @@ use App\Models\ingresoAlmacen;
 use Illuminate\Http\Request;
 use App\Models\proveedor;
 use App\Models\producto;
+use App\Models\detalleIngresoAlmacen;
 use Illuminate\Support\Arr;
 
 class IngresoAlmacenController extends Controller
@@ -59,8 +60,17 @@ class IngresoAlmacenController extends Controller
         $ingresoAlmacen->fechaEmision = $request->fechaEmision;
         $ingresoAlmacen->fechaVencimiento = $request->fechaVencimiento;
         $ingresoAlmacen->numFactura = $request->numFactura;
-        $numingreso = "I" . substr(str_repeat(0, 6) . ingresoAlmacen::All()->count(), -5);
+
+        $ingresosAll = ingresoAlmacen::All();
+        if ($ingresosAll->isEmpty() == true) {
+            $numingreso = "I" . substr(str_repeat(0, 6) . ingresoAlmacen::All()->count() + 1, -5);
+        } else {
+            $ultimo = ingresoAlmacen::orderBy('id', 'desc')->first();
+            $nuevo = $ultimo->id + 1;
+            $numingreso = "I" . substr(str_repeat(0, 6) . $nuevo, -5);
+        }
         $ingresoAlmacen->numIngreso = $numingreso;
+
         $ingresoAlmacen->estadoPaga = $request->estadoPaga;
         $ingresoAlmacen->total = 0;
         $ingresoAlmacen->detalle = $request->detalle;
@@ -82,17 +92,17 @@ class IngresoAlmacenController extends Controller
         $numFactura = $request->get('numFactura');
         if ($numFactura != '') {
             $factura = ingresoAlmacen::where('numFactura', '=', $numFactura)->first();
-            if($factura == null){;
+            if ($factura == null) {;
                 $entradasAll['entradasAll'] = null;
                 return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
-            }else{
+            } else {
                 $entradasAll['entradasAll'] = ingresoAlmacen::where('numFactura', '=', $numFactura)->paginate(10);
                 return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
             }
-        }else{
+        } else {
             $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);
         }
-        
+
         return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
     }
 
@@ -106,7 +116,7 @@ class IngresoAlmacenController extends Controller
     {
         $proveedorAll['proveedorAll'] = proveedor::All();
         $ingresoAlmacen = ingresoAlmacen::findOrFail($id);
-        return view('ingresoAlmacen.editIngresoAlmacen', ['ingresoAlmacen' => $ingresoAlmacen],$proveedorAll);
+        return view('ingresoAlmacen.editIngresoAlmacen', ['ingresoAlmacen' => $ingresoAlmacen], $proveedorAll);
     }
 
     /**
@@ -133,7 +143,27 @@ class IngresoAlmacenController extends Controller
      */
     public function destroy($id)
     {
-        ingresoAlmacen::destroy($id);
+
+        $ingreso = detalleIngresoAlmacen::where('factura_id', '=', $id)->get();
+        if (count($ingreso) == 0) {
+            ingresoAlmacen::destroy($id);
+        } else {
+            foreach ($ingreso as $i) {
+
+                $stockInicial = $i->cantidadIngresada;
+                $producto = producto::where('id', '=', $i->product_id)->first();
+                $stock = $producto->stock - $stockInicial;
+                producto::where('id', '=', $producto->id)->update(['stock' => $stock]);
+
+                $factura = ingresoAlmacen::where('id', '=', $i->factura_id)->first();
+                $prodtotal = $factura->total - $i->PrecioTotal;
+                ingresoAlmacen::where('id', '=', $factura->id)->update(['total' => $prodtotal]);
+
+                detalleIngresoAlmacen::destroy($i->id);
+            }
+            ingresoAlmacen::destroy($id);
+        }
+        //ingresoAlmacen::destroy($id);
         $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);
         return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
     }
