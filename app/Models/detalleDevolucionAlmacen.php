@@ -14,6 +14,6 @@ class detalleDevolucionAlmacen extends Model
     }
     public function producto()
     {
-        return $this->belongsTo(devolucionAlmacen::class,'product_id');
+        return $this->belongsTo(producto::class,'product_id');
     }
 }

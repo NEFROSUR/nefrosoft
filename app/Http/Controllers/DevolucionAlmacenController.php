@@ -46,7 +46,12 @@ class DevolucionAlmacenController extends Controller
      */
     public function show(Request $request)
     {
-        $devolucionesAll['devolucionesAll'] = devolucionAlmacen::orderBy('id', 'asc')->paginate(12);
+        $numDevolucion = $request->get('numDevolucion');
+        if ($numDevolucion != '') {
+            $devolucionesAll['devolucionesAll'] = devolucionAlmacen::where('numDevolucion', '=', $numDevolucion)->first();
+        } else {
+            $devolucionesAll['devolucionesAll'] = devolucionAlmacen::orderBy('id', 'desc')->paginate(12);
+        }
         return view('devoluciones.mostrarDevolucion', $devolucionesAll);
     }
 
@@ -56,9 +61,10 @@ class DevolucionAlmacenController extends Controller
      * @param  \App\Models\devolucionAlmacen  $devolucionAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function edit(devolucionAlmacen $devolucionAlmacen)
+    public function edit($id)
     {
-        return view ('devoluciones.editDevolucion');
+        $devolucion = devolucionAlmacen::findOrFail($id);
+        return view ('devoluciones.editDevolucion',['devolucion' => $devolucion]);
     }
 
     /**
@@ -68,9 +74,12 @@ class DevolucionAlmacenController extends Controller
      * @param  \App\Models\devolucionAlmacen  $devolucionAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, devolucionAlmacen $devolucionAlmacen)
+    public function update(Request $request, $id)
     {
-        //
+        $datosDevolucion = request()->except(['_token', '_method']);
+        devolucionAlmacen::where('id', '=', $id)->update($datosDevolucion);
+        $devolucionesAll['devolucionesAll'] = devolucionAlmacen::orderBy('id', 'desc')->paginate(12);
+        return view('devoluciones.mostrarDevolucion', $devolucionesAll);
     }
 
     /**
@@ -79,13 +88,15 @@ class DevolucionAlmacenController extends Controller
      * @param  \App\Models\devolucionAlmacen  $devolucionAlmacen
      * @return \Illuminate\Http\Response
      */
-    public function destroy(devolucionAlmacen $devolucionAlmacen)
+    public function destroy($id)
     {
-        //
+        devolucionAlmacen::destroy($id);
+        $devolucionesAll['devolucionesAll'] = devolucionAlmacen::orderBy('id', 'desc')->paginate(12);
+        return view('devoluciones.mostrarDevolucion', $devolucionesAll);
     }
     public function refresh()
     {
-        $devolucionesAll['devolucionesAll'] = devolucionAlmacen::orderBy('id', 'asc')->paginate(12);
+        $devolucionesAll['devolucionesAll'] = devolucionAlmacen::orderBy('id', 'desc')->paginate(12);
         return view('devoluciones.mostrarDevolucion', $devolucionesAll);
     }
 }

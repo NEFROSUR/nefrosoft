@@ -1,4 +1,4 @@
-<div wire:ignore.self class="modal fade" id="addProducto" tabindex="-1" role="dialog" aria-labelledby="addProductoLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="addDetalleDevolucion" tabindex="-1" role="dialog" aria-labelledby="addDetalleDevolucionLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form wire:submit.prevent="guardarProduct()">
+                <form wire:submit.prevent="guardarDevo()">
                     <div class="form-group">
                         <label for="product_id" class="col-form-label">Producto</label>
                         <select id="product_id" name="product_id" class="form-select p-1 mt-0.5" wire:model="product_id">
@@ -22,8 +22,8 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="cantidadIngresada" class="col-form-label">Cantidad Ingresada:(*)</label>
-                        <input type="number" class="form-control" id="cantidadIngresada" wire:model="cantidadIngresada">
+                        <label for="cantidadDevuelta" class="col-form-label">Cantidad Devuelta:(*)</label>
+                        <input type="number" class="form-control" id="cantidadDevuelta" wire:model="cantidadDevuelta">
                         @error('cantidadIngresada')
                         <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
                         @enderror
@@ -42,29 +42,11 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="PrecioTotal" class="col-form-label">Precio Total del Producto sin IGV:(*)</label>
-                        <input type="text" class="form-control" id="PrecioTotal" wire:model="PrecioTotal">
-                        @error('PrecioTotal')
-                        <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="moneda" class="col-form-label">Moneda:</label>
-                        <select id="inputState" name="moneda" class="form-select p-1 mt-0.5" wire:model="moneda">
-                            <option> </option>
-                            <option value="1">Soles</option>
-                            <option value="2">Dolares</option>
-                        </select>
-                        @error('PrecioTotal')
-                        <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group">
                         <label for="detalle" class="col-form-label">Detalle:</label>
                         <input type="text" class="form-control" id="detalle" wire:model="detalle">
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Agregar</button>
+                        <button type="submit" class="btn btn-primary" onclick="return confirm('Seguro desea devolver\n{{$cantidadDevuelta}} Unidades de {{$producto->nombreProd}} ?')">Agregar</button>
                     </div>
                 </form>
             </div>
@@ -77,7 +59,7 @@
 @push('scripts')
 <script>
     window.addEventListener('close-modal', event => {
-        $('#addProducto').modal('hide');
+        $('#addDetalleDevolucion').modal('hide');
     });
 </script>
 @endpush

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\inventario;
 use App\Models\detalleIngresoAlmacen;
 use App\Models\detalleSalidaAlmacen;
+use App\Models\devolucionAlmacen;
+use App\Models\detalleDevolucionAlmacen;
 use App\Models\producto;
 use App\Models\ingresoAlmacen;
 use App\Models\salidaAlmacen;
@@ -85,9 +87,11 @@ class InventarioController extends Controller
         $ingresos = detalleIngresoAlmacen::where('product_id', '=', $producto->id)->get();
         $salidas = detalleSalidaAlmacen::where('product_id', '=', $producto->id)->where('salida_id', '!=', null)->get();
         $salidasUnitarias = detalleSalidaAlmacen::where('product_id', '=', $producto->id)->where('salida_id', '=', null)->get();
+        $devoluciones = detalleDevolucionAlmacen::where('product_id', '=', $producto->id);
         
         $ingresosReales = array();
         $salidasReales = array();
+        $devolucionesReales = array();
         $salidasU = array();
         foreach($ingresos as $indice){
             $factura = ingresoAlmacen::where('id', '=', $indice->factura_id)->first();
@@ -95,17 +99,20 @@ class InventarioController extends Controller
             array_push($ingresosReales, $factura);
         }
         foreach($salidas as $indice){
-            $factura = salidaAlmacen::where('id', '=', $indice->salida_id)->first();
-            $factura->cantidad = $indice->cantidad;
-            array_push($salidasReales, $factura);
+            $salida = salidaAlmacen::where('id', '=', $indice->salida_id)->first();
+            $salida->cantidad = $indice->cantidad;
+            array_push($salidasReales, $salida);
         }
         foreach($salidasUnitarias as $indice){
             //$factura = salidaAlmacen::where('id', '=', $indice->salida_id)->first();
             //$factura->cantidad = $indice->cantidad;
             array_push($salidasReales, $indice);
         }
-
-
+        foreach($devoluciones as $indice){
+            $devolucion = devolucionAlmacen::where('id', '=', $indice->salida_id)->first();
+            $devolucion->cantidad = $indice->cantidadDevuelta;
+            array_push($devolucionesReales, $factura);
+        }
         return view('almacen.editAlmacen',['ingresosReales' => $ingresosReales], ['salidasReales' => $salidasReales])->with('producto',$producto);
 
     }

@@ -85,20 +85,20 @@
                     <tr>
                         <td>{{ $j}}</td>
                         @php
-                            if($salida->numSalida == ''){
-                                $salida->numSalida = $salida->guiaInterna;
-                            }
+                        if($salida->numSalida == ''){
+                        $salida->numSalida = $salida->guiaInterna;
+                        }
                         @endphp
                         <td>{{ $salida->numSalida}}</td>
                         <td>{{ $salida->cantidad}}</td>
                         @php
-                            if($salida->fechaSalida == ''){
-                                $salida->fechaSalida = $salida->created_at;
-                            }
-                            if($salida->destino != ''){
-                                $salida->fechaSalida = $salida->fechaSalida->format('Y-m-d');
-                                $salida->fechaSalida = $salida->fechaSalida . " entrega unitaria a: " . $salida->destino;
-                            }
+                        if($salida->fechaSalida == ''){
+                        $salida->fechaSalida = $salida->created_at;
+                        }
+                        if($salida->destino != ''){
+                        $salida->fechaSalida = $salida->fechaSalida->format('Y-m-d');
+                        $salida->fechaSalida = $salida->fechaSalida . " entrega unitaria a: " . $salida->destino;
+                        }
                         @endphp
                         <td>{{ $salida->fechaSalida}}</td>
                     </tr>
@@ -112,6 +112,7 @@
             <div class="bg-danger p-2 text-white"><b>{{$msj}}</b></div>
             @endif
         </div>
+
     </div>
 </div>
 

@@ -121,7 +121,7 @@ class SalidaAlmacenController extends Controller
         $datosSalida = request()->except(['_token', '_method']);
         salidaAlmacen::where('id', '=', $id)->update($datosSalida);
         $salidaAlmacen = salidaAlmacen::findOrFail($id);
-        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(12);
+        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'desc')->paginate(12);
         return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
     }
 
@@ -135,7 +135,7 @@ class SalidaAlmacenController extends Controller
     {
         
         salidaAlmacen::destroy($id);
-        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(12);
+        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'desc')->paginate(12);
         return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
     }
 }

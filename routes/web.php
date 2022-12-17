@@ -90,6 +90,8 @@ Route::resource('salidaUnitaria',SalidaUnitaria::class);
 Route::resource('devoluciones',DevolucionAlmacenController::class);
 Route::resource('detalleDevoluciones',DetalleDevolucionAlmacenController::class);
 Route::get('/devoluciones/refresh/',[DevolucionAlmacenController::class, 'refresh'])->name('devoluciones.refresh');
+Route::get('/detalleDevoluciones/show/{id}',[DetalleDevolucionAlmacenController::class, 'showD'])->name('detalleDevoluciones.showD');
+Route::get('/detalleDevoluciones/refresh/{id}',[DetalleDevolucionAlmacenController::class, 'refresh'])->name('detalleDevoluciones.refresh');
 //EXPORTS EN EXCEL
 Route::get('/exportarProductos',[ExcelController::class, 'export']);
 Route::get('/exportarFacturas',[ExcelController::class, 'exportFacturas']);

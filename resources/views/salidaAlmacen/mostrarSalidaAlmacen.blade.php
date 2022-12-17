@@ -78,7 +78,7 @@
                     <form action="{{ url('/salidaAlmacen/'.$salida->id) }}" method="POST">
                         @csrf
                         {{ method_field('DELETE')}}
-                        <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea eliminar al Ingreso\n {{ $salida->id}}?')" value="🗑️">
+                        <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea eliminar la salida:\n {{ $salida->id}}?')" value="🗑️">
                     </form>
                 </td>
             </tr>
