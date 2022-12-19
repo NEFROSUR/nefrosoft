@@ -29,7 +29,7 @@ class FacturaExport implements FromCollection,WithHeadings
             'N° Factura',
             'N° Ingreso',
             'Estado',
-            'Total',
+            'Total en Soles',
             'Observaciones',
         ];
     }

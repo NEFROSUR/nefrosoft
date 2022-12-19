@@ -24,7 +24,7 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDevolucion">+ Nueva Devolucion</button>
             </div>
             <div class="col p-3.5 m-2">
-                <a class="btn btn-primary" href="{{url('devoluciones/refresh/')}}">Actualizar</a>
+                <a class="btn btn-primary" href="{{url('devoluciones/refresh/')}}">↺ Actualizar</a>
             </div>
         </div>
         <div class="row p-1 m-1 navbar navbar-light float right">

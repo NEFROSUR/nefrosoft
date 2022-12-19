@@ -33,7 +33,7 @@
                 <a class="btn btn-primary" href="{{url('/salidaAlmacen/create')}}">+ Nueva Salida</a>
             </div>
             <div class="col p-1 m-2">
-                <a class="btn btn-info" href="{{url('/detalleSalidaAlmacen/back')}}">Actualizar</a>
+                <a class="btn btn-info" href="{{url('/detalleSalidaAlmacen/back')}}">↺ Actualizar</a>
             </div>
             <div class="col p-1 m-2">
                 <a class="btn btn-info" href="/exportarSalidas">Exportar Salidas</a>

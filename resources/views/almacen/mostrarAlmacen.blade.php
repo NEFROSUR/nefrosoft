@@ -77,8 +77,8 @@
                 <th>PRECIO UNITARIO PROMEDIO</th>
                 <th>PRECIO TOTAL EN STOCK</th>
                 <th>ULTIMA ACTUALIZACION</th>
-                <th>MOVIMIENTOS</th>
-                <th>SALIDA UNITARIA</th>
+                <th>E / S</th>
+                <th>SALIDA X UND.</th>
             </tr>
         </thead>
         @php
@@ -101,12 +101,12 @@
                 <td>{{ $producto->updated_at}}</td>
                 <td>
                     <form action="{{ url('almacen/'.$producto->id.'/edit') }}">
-                        <input class="btn btn-outline-success" type="submit" value="Movimientos">
+                        <input class="btn btn-outline-success" type="submit" value="⇅ Movimientos">
                     </form>
                 </td>
                 <td>
                     <form action="{{ url('salidaUnitaria/create/'.$producto->id) }}">
-                        <input class="btn btn-outline-primary" type="submit" value="➡️">
+                        <input class="btn btn-outline-primary" type="submit" value="➪">
                     </form>
                 </td>
             </tr>

@@ -29,13 +29,13 @@
             </form>
         </div>
         <div class="col p-3.5 m-2">
-            <a class="btn btn-info" href="/exportarFacturas">Exportar Lista de Facturas</a>
+            <a class="btn btn-info" href="/exportarFacturas">Exportar Facturas</a>
         </div>
         <div class="col p-3.5 m-2 right">
             <a class="btn btn-info" href="{{url('/ingresoAlmacen/create')}}">+ Agregar Factura</a>
         </div>
         <div class="col p-3.5 m-2 right">
-            <a class="btn btn-info" href="{{url('/ingresoAlmacen/refresh')}}">Actualizar</a>
+            <a class="btn btn-info" href="{{url('/ingresoAlmacen/refresh')}}">↺ Actualizar</a>
         </div>
     </div>
 </div>
