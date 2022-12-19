@@ -16,19 +16,22 @@
 <div class="container">
     <div class="col navbar navbar-light float right">
         <form class="d-flex" role="search">
-            <div class="row p-1 m-0.5">
-                <div class="col">
+            <div class="row">
+                <div class="col p-1.5 m-1.5">
                     <input name="nombreProd" class="form-control me-2" type="search" placeholder="Nombre Producto" aria-label="Search">
                 </div>
-                <div class="col">
+                <div class="col p-1.5 m-1.5">
                     <input name="codigoProd" class="form-control me-2" type="search" placeholder="Código del Producto" aria-label="Search">
                 </div>
             </div>
-            <div class="col">
+            <div class="col p-1.5 m-1.5">
                 <button class="btn btn-success" type="submit">Filtrar</button>
             </div>
-            <div class="col">
+            <div class="col p-1.5 m-1.5">
                 <a class="btn btn-info" href="/exportarProductos">exportar</a>
+            </div>
+            <div class="col p-1.5 m-1.5">
+                <a class="btn btn-info" href="{{ url('/producto/create') }}">Agregar Producto</a>
             </div>
         </form>
     </div>

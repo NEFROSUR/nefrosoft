@@ -36,7 +36,7 @@ class ProveedorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nameProv' => 'required|unique:proveedors',
+            'nameProv' => 'required',
             'rucProv' => 'required|unique:proveedors',
             'direccionProv' => 'nullable',
             'correoProv' => 'nullable|string',
@@ -128,6 +128,10 @@ class ProveedorController extends Controller
     public function destroy($id)
     {
         proveedor::destroy($id);
+        $proveedorAll['proveedorAll'] = proveedor::orderBy('id', 'asc')->paginate(10);
+        return view('proveedores.verProveedor', $proveedorAll);
+    }
+    public function refresh(){
         $proveedorAll['proveedorAll'] = proveedor::orderBy('id', 'asc')->paginate(10);
         return view('proveedores.verProveedor', $proveedorAll);
     }

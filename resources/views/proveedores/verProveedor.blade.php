@@ -20,7 +20,9 @@
             <input name="rucProv" class="form-control me-2" type="search" placeholder="RUC" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Filtrar</button>
         </form>
-
+        <div class="col p-3.5 m-2 right">
+            <a class="btn btn-info" href="{{url('/proveedores/create')}}">+ Nuevo Proveedor</a>
+        </div>
     </div>
 
 

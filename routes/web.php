@@ -65,7 +65,9 @@ Route::get('/datomedico/datomedicoBase', [DatomedicoController::class, 'mdatoBas
 
 //ALMACEN
 Route::resource('proveedores',ProveedorController::class);
+Route::get('/proveedores/refresh',[ProveedorController::class, 'refresh'])->name('proveedores.refresh');
 Route::resource('producto',ProductoController::class);
+Route::get('/producto/refresh',[ProveedorController::class, 'refresh'])->name('producto.refresh');
 Route::resource('ingresoAlmacen',IngresoAlmacenController::class);
 Route::get('/ingresoAlmacen/refresh',[IngresoAlmacenController::class, 'refresh'])->name('ingresoAlmacen.refresh');
 //INGRESOS

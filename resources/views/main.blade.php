@@ -63,10 +63,8 @@
                         Proveedores y Productos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{{url('/proveedores/create')}}">Registrar Proveedores</a>
-                        <a class="dropdown-item" href="{{url('/proveedores/show')}}">Ver Proveedores</a>
-                        <a class="dropdown-item" href="{{url('/producto/create')}}">Registrar Productos</a>
-                        <a class="dropdown-item" href="{{url('/producto/show')}}">Ver Productos</a>
+                        <a class="dropdown-item" href="{{url('/proveedores/show')}}">Proveedores</a>
+                        <a class="dropdown-item" href="{{url('/producto/show')}}">Productos</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

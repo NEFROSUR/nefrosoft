@@ -209,7 +209,7 @@ class DetalleSalidaAlmacenController extends Controller
     }
     public function back()
     {
-        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(12);
+        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'desc')->paginate(12);
         return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
     }
 }

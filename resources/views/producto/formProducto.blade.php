@@ -1,11 +1,7 @@
 <div>
-    
     <div class="text-center">
         <h2 class="bg-dark p-2 ml-0 text-white bg-opacity-10 rounded-pill">DATOS DEL PRODUCTO</h2>
     </div>
-
-
-
     <div class="row p-2">
         <div class="col mt-0.5">
             <input type="text" name="nombreProd" class="p-3 form-control rounded-pill  border-info" placeholder="Nombre" required>
@@ -17,8 +13,6 @@
     </div>
 
     <div class="row p-2">
-
-        
         <div class="col">
             <div class="text-center">
                 <h2 class="bg-secondary p-2 ml-0 text-white bg-opacity-10 rounded-pill">UNIDAD DE MEDIDA (UM)</h2>
@@ -48,14 +42,15 @@
                 <option value="7">SIN CATEGORIA</option>
             </select>
         </div>
-
+    </div>
+    <div class="col">
+        <div class="col text-center p-1 mt-4">
+            <button type="submit" class="text-center btn btn-primary " onclick="return confirm('¿Confirmar guardado de producto?')">Registrar Producto</button>
+        </div>
+        <div class="col text-center p-1 mt-4">
+            <a class="btn btn-info" href="{{ url('/producto/refresh') }}">Volver</a>
+        </div>
     </div>
 
-    <div class="row">
-        
-    </div>
 
-    <div class="text-center p-1 mt-4">
-        <button type="submit" class="text-center btn btn-primary " onclick="return confirm('¿Confirmar guardado de producto?')">Guardar</button>
-    </div>
 </div>

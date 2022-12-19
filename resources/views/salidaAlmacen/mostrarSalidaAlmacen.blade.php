@@ -13,7 +13,7 @@
     </ul>
 </div>
 @endif
-<div class="container">
+<div class="container border">
     <div class="row">
         <div class="col p-1 m-1 navbar navbar-light float right">
             <form class="d-flex" role="search">
@@ -21,7 +21,7 @@
                     <label for="inputState" class="form-label"><b>Busca por Numero de Salida</b></label>
                 </div>
                 <div class="col p-2.5 m-1">
-                    <input name="numSalida" class="form-control" type="search" placeholder="Codigo de Salida" aria-label="Search">
+                    <input name="numSalida" class="form-control me-2" type="search" placeholder="Codigo de Salida" aria-label="Search">
                 </div>
                 <div class="col p-2.5 m-1">
                     <button class="btn btn-success" type="submit">Filtrar</button>

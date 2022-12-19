@@ -57,7 +57,7 @@ class InventarioController extends Controller
         $codigoProd = $request->get('codigoProd');
         $categoria_id = $request->get('categoria_id');
         if ($codigoProd == '' && $categoria_id == '') {
-            $productoAll['productoAll'] = producto::orderBy('id', 'asc')->where('stock', '>', 0)->paginate(10);
+            $productoAll['productoAll'] = producto::orderBy('id', 'desc')->where('stock', '>', 0)->paginate(10);
         } else {
             if ($categoria_id == '') {
                 $productoAll['productoAll'] = producto::where('codigoProd', '=', $codigoProd)->where('stock', '>', 0)->paginate(10);
@@ -140,7 +140,7 @@ class InventarioController extends Controller
     }
     public function back()
     {
-        $productoAll['productoAll'] = producto::orderBy('id', 'asc')->where('stock', '>', 0)->paginate(10);
+        $productoAll['productoAll'] = producto::orderBy('id', 'desc')->where('stock', '>', 0)->paginate(10);
         $productos = producto::where('stock', '>', '0')->get();
         $total = 0;
         foreach ($productos as $indice) {

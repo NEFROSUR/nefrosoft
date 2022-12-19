@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="{{ mix('js/app.js') }}"></script>
 
-<div>
+<div class="bg-info p-2 text-white bg-opacity-75">
     <label for="tittle" class="form-label"><b>GENERANDO SALIDA DEL PRODUCTO</b></label>
 </div>
 <div class="row">
@@ -89,6 +89,6 @@
 <div class="text-center p-1 mt-4">
     <button type="submit" class="text-center btn btn-primary " onclick="return confirm('¿Registrar Salida?')">Generar Salida</button>
 </div>
-<div class="col text-right">
+<div class="text-center p-1 mt-4">
     <a class="btn btn-info" href="{{url('/detalleSalidaAlmacen/back')}}">Volver</a>
 </div>

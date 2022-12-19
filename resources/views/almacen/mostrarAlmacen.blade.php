@@ -13,7 +13,7 @@
     </ul>
 </div>
 @endif
-<div class="container">
+<div class="container border">
     <div class="navbar navbar-light float right">
         <form class="d-flex" role="search">
             <div class="col">
@@ -41,6 +41,9 @@
             <a class="btn btn-info" href="{{url('/almacen/back')}}">Actualizar</a>
         </div>
     </div>
+
+</div>
+<div class="container border w-auto">
     <div class="text-center">
         <h4 class="bg-info p-2 text-white bg-opacity-75">INVENTARIO DETALLE</h4>
     </div>
@@ -64,8 +67,6 @@
         </div>
     </div>
 
-</div>
-<div class="container">
     <table class="table table-condensed table-hover table-bordered w-auto small rounded-md">
         <thead class="thead-light">
             <tr>

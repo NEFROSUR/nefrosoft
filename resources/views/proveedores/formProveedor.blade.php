@@ -61,7 +61,7 @@
     <div class="text-center p-1 mt-3">
         <button type="submit" class="btn btn-primary " onclick="return confirm('¿Confirmar guardado de proveedor?')">Guardar</button>
         <button type="submit" class="btn btn-success" onclick="limpiar()">Limpiar</button>
-
+        <a class="btn btn-info" href="{{url('/proveedores/refresh')}}">Volver</a>
     </div>
 
 </div>

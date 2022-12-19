@@ -167,4 +167,9 @@ class ProductoController extends Controller
         $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(10);
         return view('producto.verProducto', $productoAll);
     }
+    public function refresh()
+    {
+        $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(10);
+        return view('producto.verProducto', $productoAll);
+    }
 }

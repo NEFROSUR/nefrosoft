@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 <div class="text-center">
-    <h4 class="bg-info p-2 text-white bg-opacity-75">REGISTRAR NUEVA SALIDA DE PRODUCTOS A ALMACEN</h4>
+    <h4 class="bg-info p-2 text-white bg-opacity-75"><strong>REGISTRAR NUEVA SALIDA DE PRODUCTOS A ALMACEN</strong></h4>
 </div>
 @if($errors->any())
     <div class="alert alert-danger">
@@ -19,6 +19,5 @@
         @csrf
         @include('salidaAlmacen.formSalidaAlmacen')
     </form>
-
 </div>
 @endsection
