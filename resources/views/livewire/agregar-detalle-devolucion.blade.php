@@ -46,7 +46,7 @@
                         <input type="text" class="form-control" id="detalle" wire:model="detalle">
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary" onclick="return confirm('Seguro desea devolver\n{{$cantidadDevuelta}} Unidades de {{$producto->nombreProd}} ?')">Agregar</button>
+                        <button type="submit" class="btn btn-primary" onclick="return confirm('Seguro desea devolver este producto ?')">Agregar</button>
                     </div>
                 </form>
             </div>

@@ -133,7 +133,7 @@
                 <td>S/. {{ $devolucion->precioDevolucion}} (Nuevos Soles)</td>
                 <td>{{ $devolucion->detalle}}</td>
                 <td>
-                    <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar la cantidad de salida: \n {{ $devolucion->id}}?')" href="{{ url('detalleDevoluciones/'.$devolucion->id.'/edit') }}">
+                    <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar la cantidad de devolucion: \n {{ $devolucion->id}}?')" href="{{ url('detalleDevoluciones/'.$devolucion->id.'/edit') }}">
                         ✏️
                     </a>
                 </td>
@@ -141,7 +141,7 @@
                     <form action="{{ url('/detalleDevoluciones/'.$devolucion->id) }}" method="POST">
                         @csrf
                         {{ method_field('DELETE')}}
-                        <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea eliminar la salida\n {{ $devolucion->producto->nombreProd}}?')" value="🗑️">
+                        <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea eliminar la devolucion\n {{ $devolucion->producto->nombreProd}}?')" value="🗑️">
                     </form>
                 </td>
             </tr>

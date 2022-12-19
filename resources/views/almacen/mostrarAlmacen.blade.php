@@ -20,7 +20,6 @@
                 <label for="inputState" class="form-label">Busca por codigo</label>
                 <input name="codigoProd" class="form-control me-2" type="search" placeholder="Código del Producto" aria-label="Search">
             </div>
-
             <div class="form-group">
                 <div class="col">
                     <label for="inputState" class="form-label">Categoria</label>
@@ -38,12 +37,15 @@
             </div>
             <button class="btn btn-outline-success" type="submit">Filtrar</button>
         </form>
+        <div class="col p-3.5 m-2 right">
+            <a class="btn btn-info" href="{{url('/almacen/back')}}">Actualizar</a>
+        </div>
     </div>
     <div class="text-center">
         <h4 class="bg-info p-2 text-white bg-opacity-75">INVENTARIO DETALLE</h4>
     </div>
     @php
-    $totalC = 0
+    $totalC = 0.0
     @endphp
     @foreach ($productoAll as $producto)
     @php
@@ -87,13 +89,13 @@
                 <td>{{ $i}}</td>
                 <td>{{ $producto->codigoProd}}</td>
                 <td>{{ $producto->nombreProd}}</td>
-                <td>{{ $producto->stock}}</td>
-                <td>{{ $producto->precioProm}}</td>
+                <td>{{ $producto->stock}} Unidades</td>
+                <td>S/.{{ $producto->precioProm}} Soles</td>
                 <td>
                     @php
                     $precioTotalStock = $producto->stock * $producto->precioProm;
                     @endphp
-                    {{$precioTotalStock}}
+                    S/.{{$precioTotalStock}} Soles
                 </td>
                 <td>{{ $producto->updated_at}}</td>
                 <td>

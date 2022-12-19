@@ -74,11 +74,9 @@
                         Almacen
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{{url('/ingresoAlmacen/create')}}">Generar Factura</a>
-                        <a class="dropdown-item" href="{{url('/ingresoAlmacen/show')}}">Ver de Facturas</a>
+                        <a class="dropdown-item" href="{{url('/ingresoAlmacen/show')}}">Facturas</a>
                         <a class="dropdown-item" href="{{url('/almacen/show')}}">Inventario</a>
-                        <a class="dropdown-item" href="{{url('/salidaAlmacen/create')}}">Generar Salida</a>
-                        <a class="dropdown-item" href="{{url('/salidaAlmacen/show')}}">Ver Salidas</a>
+                        <a class="dropdown-item" href="{{url('/salidaAlmacen/show')}}">Salidas</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

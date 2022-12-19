@@ -69,13 +69,16 @@
         </div>
     </div>
     <div class="p-2 row">
-        <div class="col">
+        <div class="col text-left">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductoS">+ Agregar producto</button>
         </div>
-        <div class="col text-right">
-            <a class="btn btn-success" href="{{ url('detalleSalidaAlmacen/refresh/'.$salida->id)}}">
+        <div class="col text-center">
+            <a class="btn btn-info" href="{{ url('detalleSalidaAlmacen/refresh/'.$salida->id)}}">
                 Actualizar cambios
             </a>
+        </div>
+        <div class="col text-right">
+            <a class="btn btn-info" href="{{url('/detalleSalidaAlmacen/back')}}">Volver</a>
         </div>
     </div>
 
@@ -135,10 +138,12 @@
             @endforeach
         </tbody>
     </table>
+
     @if (session()->has('error'))
     <div class="alert alert-danger text center">{{session('error')}}</div>
     @endif
 </div>
+
 {{ $detalleSalidaAlmacen->links() }}
 
 @endif

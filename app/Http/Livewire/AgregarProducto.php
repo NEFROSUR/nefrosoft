@@ -43,6 +43,7 @@ class AgregarProducto extends Component
         $nuevoIngreso->unidadMedida = $this->unidadMedida;
         $nuevoIngreso->PrecioTotal = $this->PrecioTotal;
         $nuevoIngreso->PrecioUnitario = $this->PrecioTotal / $this->cantidadIngresada;
+        //$nuevoIngreso->PrecioUnitario = number_format($this->PrecioTotal / $this->cantidadIngresada, 4, '.');
         $nuevoIngreso->moneda = $this->moneda;
         $nuevoIngreso->detalle = $this->detalle;
 

@@ -78,19 +78,15 @@ class ProveedorController extends Controller
     {
         $nameProv = $request->get('nameProv');
         $rucProv = $request->get('rucProv');
-        $categoriaProv = $request->get('categoriaProv');
-        if ($nameProv == '' && $rucProv == '' && $categoriaProv == '') {
-            $proveedorAll['proveedorAll'] = proveedor::orderBy('id', 'asc')->paginate(5);
+        if ($nameProv == '' && $rucProv == '') {
+            $proveedorAll['proveedorAll'] = proveedor::orderBy('id', 'asc')->paginate(10);
         } else {
-            if ($rucProv == '' && $categoriaProv == '') {
-                $proveedorAll['proveedorAll'] = proveedor::where('primerNombreP', '=', $nameProv)->paginate(5);
+            if ($rucProv == '') {
+                $proveedorAll['proveedorAll'] = proveedor::where('nameProv', '=', $nameProv)->paginate(10);
             }
-            if ($nameProv == '' && $categoriaProv == '') {
-                $proveedorAll['proveedorAll'] = proveedor::where('rucProv', '=', $rucProv)->paginate(5);
+            if ($nameProv == '') {
+                $proveedorAll['proveedorAll'] = proveedor::where('rucProv', '=', $rucProv)->paginate(10);
             }
-            if ($nameProv == '' && $rucProv == '') {
-                $proveedorAll['proveedorAll'] = proveedor::where('categoriaProv', '=', $categoriaProv)->paginate(5);
-            };
         }
         return view('proveedores.verProveedor', $proveedorAll);
     }
@@ -104,7 +100,6 @@ class ProveedorController extends Controller
     public function edit($id)
     {
         $proveedor = proveedor::findOrFail($id);
-
         return view('proveedores.editProveedor', ['proveedor' => $proveedor]);
     }
 
@@ -120,9 +115,8 @@ class ProveedorController extends Controller
         $datosProveedor = request()->except(['_token', '_method']);
         proveedor::where('id', '=', $id)->update($datosProveedor);
         $proveedor = proveedor::findOrFail($id);
-        $proveedorAll['proveedorAll'] = proveedor::orderBy('id', 'asc')->paginate(5);
+        $proveedorAll['proveedorAll'] = proveedor::orderBy('id', 'asc')->paginate(10);
         return view('proveedores.verProveedor',$proveedorAll);
-        //return view('proveedores.proveedores', compact('proveedor'));
     }
 
     /**
@@ -134,6 +128,7 @@ class ProveedorController extends Controller
     public function destroy($id)
     {
         proveedor::destroy($id);
-        return redirect('proveedores');
+        $proveedorAll['proveedorAll'] = proveedor::orderBy('id', 'asc')->paginate(10);
+        return view('proveedores.verProveedor', $proveedorAll);
     }
 }

@@ -67,17 +67,21 @@ Route::get('/datomedico/datomedicoBase', [DatomedicoController::class, 'mdatoBas
 Route::resource('proveedores',ProveedorController::class);
 Route::resource('producto',ProductoController::class);
 Route::resource('ingresoAlmacen',IngresoAlmacenController::class);
+Route::get('/ingresoAlmacen/refresh',[IngresoAlmacenController::class, 'refresh'])->name('ingresoAlmacen.refresh');
 //INGRESOS
 Route::get('/detalleIngresoAlmacen/create/{id}',[DetalleIngresoAlmacenController::class, 'createMedica'])->name('detalleIngresoAlmacen.createMedica');
 Route::resource('detalleIngresoAlmacen',DetalleIngresoAlmacenController::class);
 Route::get('/detalleIngresoAlmacen/show/{id}',[DetalleIngresoAlmacenController::class, 'showN'])->name('detalleSalidaAlmacen.showN');
 Route::get('/detalleIngresoAlmacen/refresh/{id}',[DetalleIngresoAlmacenController::class, 'refresh'])->name('detalleSalidaAlmacen.refresh');
+Route::get('/detalleSaldetalleIngresoAlmacenidaAlmacen/back',[DetalleIngresoAlmacenController::class, 'back'])->name('detalleSalidaAlmacen.back');
 //ALMACEN
 Route::resource('almacen',InventarioController::class);
+Route::get('/almacen/back',[InventarioController::class, 'back'])->name('almacen.back');
 //SALIDAS
 Route::get('/detalleSalidaAlmacen/create/{id}',[DetalleSalidaAlmacenController::class, 'createSalida'])->name('detalleSalidaAlmacen.createSalida');
 Route::get('/detalleSalidaAlmacen/show/{id}',[DetalleSalidaAlmacenController::class, 'showN'])->name('detalleSalidaAlmacen.showN');
 Route::get('/detalleSalidaAlmacen/refresh/{id}',[DetalleSalidaAlmacenController::class, 'refresh'])->name('detalleSalidaAlmacen.refresh');
+Route::get('/detalleSalidaAlmacen/back',[DetalleSalidaAlmacenController::class, 'back'])->name('detalleSalidaAlmacen.back');
 
 Route::resource('salidaAlmacen',SalidaAlmacenController::class);
 Route::resource('detalleSalidaAlmacen',DetalleSalidaAlmacenController::class);

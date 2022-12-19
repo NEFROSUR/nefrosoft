@@ -150,7 +150,9 @@ class ProductoController extends Controller
         $datosProducto = request()->except(['_token', '_method']);
         producto::where('id', '=', $id)->update($datosProducto);
         $producto = producto::findOrFail($id);
-        return view('producto.productos', compact('producto'));
+
+        $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(10);
+        return view('producto.verProducto', $productoAll);
     }
 
     /**
@@ -162,6 +164,7 @@ class ProductoController extends Controller
     public function destroy($id)
     {
         producto::destroy($id);
-        return redirect('producto');
+        $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(10);
+        return view('producto.verProducto', $productoAll);
     }
 }

@@ -14,28 +14,21 @@
 </div>
 @endif
 <div class="container">
-    <div class="navbar navbar-light float right">
+    <div class="col navbar navbar-light float right">
         <form class="d-flex" role="search">
-            <input name="nombreProd" class="form-control me-2" type="search" placeholder="Nombre Producto" aria-label="Search">
-            <input name="codigoProd" class="form-control me-2" type="search" placeholder="Código del Producto" aria-label="Search">
-            <div class="col">
-                <label for="inputState" class="form-label">Categoria</label>
-                <select id="inputState" name="categoria_id" class="form-select p-1 mt-0.5">
-                    <option value=" ">Todos</option>
-                    <option value="1">INSTRUMENTO</option>
-                    <option value="2">MATERIAL DE LIMPIEZA</option>
-                    <option value="3">MEDICAMENTO</option>
-                    <option value="4">SERVICIO</option>
-                    <option value="5">UTILES DE ESCRITORIO</option>
-                    <option value="6">OTROS</option>
-                    <option value="7">SIN CATEGORIA</option>
-                </select>
+            <div class="row p-1 m-0.5">
+                <div class="col">
+                    <input name="nombreProd" class="form-control me-2" type="search" placeholder="Nombre Producto" aria-label="Search">
+                </div>
+                <div class="col">
+                    <input name="codigoProd" class="form-control me-2" type="search" placeholder="Código del Producto" aria-label="Search">
+                </div>
             </div>
             <div class="col">
-                <button class="btn btn-outline-success" type="submit">Filtrar</button>
+                <button class="btn btn-success" type="submit">Filtrar</button>
             </div>
             <div class="col">
-                <a class="btn btn-outline-primary" href="/exportarProductos">exportar</a>
+                <a class="btn btn-info" href="/exportarProductos">exportar</a>
             </div>
         </form>
     </div>
@@ -51,8 +44,6 @@
                 <th>Marca</th>
                 <th>Actualizar</th>
                 <th>Detalle</th>
-                <th>Borrar</th>
-
             </tr>
         </thead>
         <tbody>
@@ -65,20 +56,12 @@
                 <td>{{ $producto->marcaProd}}</td>
                 <td>
                     <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar al Proveedor: \n {{ $producto->nombreProd}}?')" href="{{ url('producto/'.$producto->id.'/edit') }}">
-                        Actualizar
+                        ✏️
                     </a>
                 </td>
                 <td>
                     <form>
-                        <input class="btn btn-outline-primary" type="submit" value="Detalle">
-
-                    </form>
-                </td>
-                <td>
-                    <form action="{{ url('/producto/'.$producto->id) }}" method="POST">
-                        @csrf
-                        {{ method_field('DELETE')}}
-                        <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea eliminar al Proveedor\n {{ $producto->nombreProd}}?')" value="Borrar">
+                        <input class="btn btn-outline-primary" type="submit" value="👁️">
 
                     </form>
                 </td>

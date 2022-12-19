@@ -51,12 +51,12 @@ class AgregarDetalleDevolucion extends Component
         
 
 
-        $detalleDevolucion->devolucion_id = '';
-        $detalleDevolucion->product_id = '';
-        $detalleDevolucion->cantidadDevuelta = '';
-        $detalleDevolucion->unidadMedida = '';
-        $detalleDevolucion->precioDevolucion = '';
-        $detalleDevolucion->detalle = '';
+        $this->devolucion_id = '';
+        $this->product_id = '';
+        $this->cantidadDevuelta = '';
+        $this->unidadMedida = '';
+        $this->precioDevolucion = '';
+        $this->detalle = '';
         $this->dispatchBrowserEvent('close-modal');
 
     }

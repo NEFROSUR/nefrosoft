@@ -46,4 +46,7 @@
     <div class="text-center p-1 mt-4">
         <button type="submit" class="text-center btn btn-primary " onclick="return confirm('¿Registrar Salida?')">Registrar Salida Unitaria</button>
     </div>
+    <div class="text-center p-1 mt-4">
+        <a class="btn btn-info" href="{{url('/almacen/back')}}">Volver</a>
+    </div>
 </div>

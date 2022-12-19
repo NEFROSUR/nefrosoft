@@ -71,9 +71,12 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProducto">+ Agregar producto</button>
         </div>
         <div class="col text-right">
-            <a class="btn btn-success" href="{{ url('detalleIngresoAlmacen/refresh/'.$factura->id)}}">
+            <a class="btn btn-info" href="{{ url('detalleIngresoAlmacen/refresh/'.$factura->id)}}">
                 Actualizar cambios
             </a>
+        </div>
+        <div class="col text-right">
+            <a class="btn btn-info" href="{{url('/detalleSaldetalleIngresoAlmacenidaAlmacen/back')}}">Volver</a>
         </div>
     </div>
 

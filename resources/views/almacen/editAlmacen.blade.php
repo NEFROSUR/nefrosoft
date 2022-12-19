@@ -11,7 +11,9 @@
 </div>
 @endif
 <div class="text-center">
-    <h4 class="bg-info p-2 text-white bg-opacity-75">MOVIMIENTOS DEL PRODUCTO: "{{$producto->nombreProd}}" CON CODIGO: "{{$producto->codigoProd}}"</h4>
+    <h4 class="bg-info p-2 text-white bg-opacity-75">MOVIMIENTOS DEL PRODUCTO: "{{$producto->nombreProd}}" CON CODIGO: "{{$producto->codigoProd}}"
+        <a class="btn btn-dark" href="{{url('/almacen/back')}}">Volver</a>
+    </h4>
 </div>
 <div class="container border">
     <div class="row">
@@ -112,7 +114,6 @@
             <div class="bg-danger p-2 text-white"><b>{{$msj}}</b></div>
             @endif
         </div>
-
     </div>
 </div>
 

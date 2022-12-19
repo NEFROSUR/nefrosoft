@@ -13,16 +13,30 @@
     </ul>
 </div>
 @endif
-<div class="container border w-30 p-4 mt-4">
-    <h4 class="bg-info p-2 text-white bg-opacity-75">BUSQUEDA POR FACTURA</h4>
-    <div class="navbar navbar-light float right">
-        <form class="d-flex" role="search">
-            <input name="numFactura" class="form-control me-2" type="search" placeholder="Numero de Factura" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
-        </form>
-    </div>
-    <div class="col">
-        <a class="btn btn-outline-primary" href="/exportarFacturas">Exportar Lista de Facturas</a>
+<div class="container">
+    <div class="row">
+        <div class="col p-1 m-1 navbar navbar-light float right">
+            <form class="d-flex" role="search">
+                <div class="col">
+                    <label for="inputState" class="form-label"><b>BUSQUEDA POR FACTURA</b></label>
+                </div>
+                <div class="col p-2.5 m-1">
+                    <input name="numFactura" class="form-control me-2" type="search" placeholder="Numero de Factura" aria-label="Search">
+                </div>
+                <div class="col p-2.5 m-1">
+                    <button class="btn btn-success" type="submit">Filtrar</button>
+                </div>
+            </form>
+        </div>
+        <div class="col p-3.5 m-2">
+            <a class="btn btn-info" href="/exportarFacturas">Exportar Lista de Facturas</a>
+        </div>
+        <div class="col p-3.5 m-2 right">
+            <a class="btn btn-info" href="{{url('/ingresoAlmacen/create')}}">+ Agregar Factura</a>
+        </div>
+        <div class="col p-3.5 m-2 right">
+            <a class="btn btn-info" href="{{url('/ingresoAlmacen/refresh')}}">Actualizar</a>
+        </div>
     </div>
 </div>
 @if(!is_null($entradasAll))

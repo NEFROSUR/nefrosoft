@@ -14,7 +14,7 @@
     </div>
 @endif
 
-<div class="container w-30 border p-4 mt-4">
+<div class="container w-50 border p-4 mt-4">
     <form action="{{ url('/salidaAlmacen') }}" method="POST">
         @csrf
         @include('salidaAlmacen.formSalidaAlmacen')

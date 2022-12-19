@@ -207,4 +207,9 @@ class DetalleSalidaAlmacenController extends Controller
         $detalleSalidaAlmacen['detalleSalidaAlmacen'] = detalleSalidaAlmacen::where('salida_id', '=', $salida->id)->paginate(10);
         return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen', $detalleSalidaAlmacen, ['salida' => $salida]);
     }
+    public function back()
+    {
+        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'asc')->paginate(12);
+        return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
+    }
 }

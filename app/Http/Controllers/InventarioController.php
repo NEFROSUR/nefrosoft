@@ -67,12 +67,12 @@ class InventarioController extends Controller
             }
         }
         $productos = producto::where('stock', '>', '0')->get();
-        $total=0;
-        foreach($productos as $indice){
-            $total = $total+($indice->precioProm * $indice->stock);
+        $total = 0;
+        foreach ($productos as $indice) {
+            $total = $total + ($indice->precioProm * $indice->stock);
         }
 
-        return view('almacen.mostrarAlmacen', $productoAll)->with('total',$total);
+        return view('almacen.mostrarAlmacen', $productoAll)->with('total', $total);
     }
 
     /**
@@ -88,33 +88,32 @@ class InventarioController extends Controller
         $salidas = detalleSalidaAlmacen::where('product_id', '=', $producto->id)->where('salida_id', '!=', null)->get();
         $salidasUnitarias = detalleSalidaAlmacen::where('product_id', '=', $producto->id)->where('salida_id', '=', null)->get();
         $devoluciones = detalleDevolucionAlmacen::where('product_id', '=', $producto->id);
-        
+
         $ingresosReales = array();
         $salidasReales = array();
         $devolucionesReales = array();
         $salidasU = array();
-        foreach($ingresos as $indice){
+        foreach ($ingresos as $indice) {
             $factura = ingresoAlmacen::where('id', '=', $indice->factura_id)->first();
             $factura->cantidad = $indice->cantidadIngresada;
             array_push($ingresosReales, $factura);
         }
-        foreach($salidas as $indice){
+        foreach ($salidas as $indice) {
             $salida = salidaAlmacen::where('id', '=', $indice->salida_id)->first();
             $salida->cantidad = $indice->cantidad;
             array_push($salidasReales, $salida);
         }
-        foreach($salidasUnitarias as $indice){
+        foreach ($salidasUnitarias as $indice) {
             //$factura = salidaAlmacen::where('id', '=', $indice->salida_id)->first();
             //$factura->cantidad = $indice->cantidad;
             array_push($salidasReales, $indice);
         }
-        foreach($devoluciones as $indice){
+        foreach ($devoluciones as $indice) {
             $devolucion = devolucionAlmacen::where('id', '=', $indice->salida_id)->first();
             $devolucion->cantidad = $indice->cantidadDevuelta;
             array_push($devolucionesReales, $factura);
         }
-        return view('almacen.editAlmacen',['ingresosReales' => $ingresosReales], ['salidasReales' => $salidasReales])->with('producto',$producto);
-
+        return view('almacen.editAlmacen', ['ingresosReales' => $ingresosReales], ['salidasReales' => $salidasReales])->with('producto', $producto);
     }
 
     /**
@@ -138,5 +137,15 @@ class InventarioController extends Controller
     public function destroy(inventario $inventario)
     {
         //
+    }
+    public function back()
+    {
+        $productoAll['productoAll'] = producto::orderBy('id', 'asc')->where('stock', '>', 0)->paginate(10);
+        $productos = producto::where('stock', '>', '0')->get();
+        $total = 0;
+        foreach ($productos as $indice) {
+            $total = $total + ($indice->precioProm * $indice->stock);
+        }
+        return view('almacen.mostrarAlmacen', $productoAll)->with('total', $total);
     }
 }

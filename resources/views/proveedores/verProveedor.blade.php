@@ -18,18 +18,6 @@
         <form class="d-flex" role="search">
             <input name="nameProv" class="form-control me-2" type="search" placeholder="Nombre Proveedor" aria-label="Search">
             <input name="rucProv" class="form-control me-2" type="search" placeholder="RUC" aria-label="Search">
-            <div class="form-group">
-                <div class="col">
-                    <label for="inputState" class="form-label">Categoria</label>
-                    <select id="inputState" name="categoriaProv" class="form-select p-1 mt-0.5">
-                        <option value=''>Todos</option>
-                        <option>Categoria1</option>
-                        <option>Categoria2</option>
-                        <option>Categoria3</option>
-                        <option>Categoria4</option>
-                    </select>
-                </div>
-            </div>
             <button class="btn btn-outline-success" type="submit">Filtrar</button>
         </form>
 
@@ -48,7 +36,9 @@
                 <th>Correo del Proveedor</th>
                 <th>Telefono</th>
                 <th>Categoria</th>
-                <th>Acciones</th>
+                <th>Actualizar</th>
+                <th>Borrar</th>
+                <th>Detalle</th>
 
             </tr>
         </thead>
@@ -63,18 +53,21 @@
                 <td>{{ $proveedor->telefonoProv}}</td>
                 <td>{{ $proveedor->categoriaProv}}</td>
                 <td>
-                <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar al Proveedor: \n {{ $proveedor->nameProv}}?')" href="{{ url('proveedores/'.$proveedor->id.'/edit') }}">
-                    Actualizar
-                </a>
-                <form action="{{ url('/proveedores/'.$proveedor->id) }}" method="POST">
-                    @csrf
-                    {{ method_field('DELETE')}}
-                    <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea eliminar al Proveedor\n {{ $proveedor->nameProv}}?')" value="Borrar">
+                    <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar al Proveedor: \n {{ $proveedor->nameProv}}?')" href="{{ url('proveedores/'.$proveedor->id.'/edit') }}">
+                    ✏️
+                    </a>
+                </td>
+                <td>
+                    <form action="{{ url('/proveedores/'.$proveedor->id) }}" method="POST">
+                        @csrf
+                        {{ method_field('DELETE')}}
+                        <input class="btn btn-outline-danger" type="submit" onclick="return confirm('Seguro desea eliminar al Proveedor\n {{ $proveedor->nameProv}}?')" value="🗑️">
 
-                </form>
+                    </form>
+                </td>
+                <td>
                     <form>
-                        <input class="btn btn-outline-primary" type="submit" value="Detalle">
-
+                        <input class="btn btn-outline-primary" type="submit" value="👁️">
                     </form>
                 </td>
             </tr>

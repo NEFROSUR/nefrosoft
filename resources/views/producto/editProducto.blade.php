@@ -1,5 +1,15 @@
 @extends('main')
 @section('content')
+@if($errors->any())
+<div class="alert alert-danger">
+    <p><strong>Opps: No se pudo realizar la accion</strong></p>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <div class="text-center">
     <h4 class="bg-info p-2 text-white bg-opacity-75">EDITANDO PRODUCTO : {{$producto->nombreProd}}</h4>
 </div>
@@ -34,17 +44,17 @@
 
             <div class="col p-2 mt-0.5">
                 <label for="tittle" class="form-label">Marca</label>
-                <input type="text" name="marcaProd" class="form-control p-2 rounded-pill  border-info">
+                <input type="text" name="marcaProd" class="form-control p-2 rounded-pill  border-info" value="{{$producto->marcaProd}}">
             </div>
 
             <div class="col p-1 mt-0.5">
                 <label for="tittle" class="form-label">Unidad de medida(UM)</label>
                 </label>
                 <select id="inputState" name="um" class="form-select p-2 mt-0.5 p-2 rounded-pill  border-info">
-                    <option>unidad</option>
-                    <option>galon</option>
-                    <option>caja</option>
-                    <option>blister</option>
+                    <option value="und.">unidad</option>
+                    <option value="gal.">galon</option>
+                    <option value="caj.">caja</option>
+                    <option value="und.">blister</option>
 
                 </select>
             </div>

@@ -28,12 +28,21 @@
                 </div>
             </form>
         </div>
-        <div class="col p-3.5 m-2">
-            <a class="btn btn-primary" href="/exportarSalidas">Exportar Salidas de Almacen</a>
+        <div class="col navbar navbar-light float right">
+            <div class="col p-1 m-2">
+                <a class="btn btn-primary" href="{{url('/salidaAlmacen/create')}}">+ Nueva Salida</a>
+            </div>
+            <div class="col p-1 m-2">
+                <a class="btn btn-info" href="{{url('/detalleSalidaAlmacen/back')}}">Actualizar</a>
+            </div>
+            <div class="col p-1 m-2">
+                <a class="btn btn-info" href="/exportarSalidas">Exportar Salidas</a>
+            </div>
+            <div class="col p-1 m-2">
+                <a class="btn btn-info" href="{{url('/devoluciones/show')}}">Devoluciones</a>
+            </div>
         </div>
-        <div class="col p-3.5 m-1 right">
-            <a class="btn btn-warning" href="{{url('/devoluciones/show')}}">Devoluciones</a>
-        </div>
+
     </div>
 </div>
 @if(!is_null($salidasAll))

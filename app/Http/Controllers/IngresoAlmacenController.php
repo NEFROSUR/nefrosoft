@@ -167,4 +167,8 @@ class IngresoAlmacenController extends Controller
         $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);
         return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
     }
+    public function refresh(){
+        $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);
+        return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
+    }
 }

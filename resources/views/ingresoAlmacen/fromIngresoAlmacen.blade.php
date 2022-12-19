@@ -64,4 +64,6 @@
 <div class="text-center p-1 mt-4">
     <button type="submit" class="text-center btn btn-primary " onclick="return confirm('¿Registrar Factura?')">Registrar Factura</button>
 </div>
+<div class="col text-right">
+    <a class="btn btn-info" href="{{url('/detalleSaldetalleIngresoAlmacenidaAlmacen/back')}}">Volver</a>
 </div>
