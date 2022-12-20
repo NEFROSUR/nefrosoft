@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('numFactura');
             $table->string('numIngreso');
             $table->string('estadoPaga',1);//1=pagado, 0=no pagado
-            $table->decimal('total', 8, 4)->nullable();
+            $table->decimal('total', 8, 5)->nullable();
             $table->string('detalle',250)->nullable();
             $table->timestamps();
             $table->foreign('proveedor_id')->references('id')->on('proveedors');

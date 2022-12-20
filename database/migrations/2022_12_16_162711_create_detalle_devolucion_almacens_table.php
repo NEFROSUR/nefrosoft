@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->integer('cantidadDevuelta');
             $table->string('unidadMedida', 1)->nullable();
-            $table->decimal('precioDevolucion', 8, 2);
+            $table->decimal('precioDevolucion', 8, 5);
             $table->string('detalle',250)->nullable();
             $table->timestamps();
 

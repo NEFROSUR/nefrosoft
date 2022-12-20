@@ -14,6 +14,9 @@
     <h4 class="bg-info p-2 text-white bg-opacity-75">MOVIMIENTOS DEL PRODUCTO: "{{$producto->nombreProd}}" CON CODIGO: "{{$producto->codigoProd}}"
         <a class="btn btn-dark" href="{{url('/almacen/back')}}">Volver</a>
     </h4>
+    <div class="col p-3.5 m-2 right">
+            <a class="btn btn-info" href="{{url('/download/'.$producto->id)}}">Exportar Movimientos</a>
+        </div>
 </div>
 <div class="container border">
     <div class="row">

@@ -102,3 +102,5 @@ Route::get('/detalleDevoluciones/refresh/{id}',[DetalleDevolucionAlmacenControll
 Route::get('/exportarProductos',[ExcelController::class, 'export']);
 Route::get('/exportarFacturas',[ExcelController::class, 'exportFacturas']);
 Route::get('/exportarSalidas',[ExcelController::class, 'exportSalidas']);
+Route::get('/exportarInventario',[ExcelController::class, 'exportarInventario']);
+Route::get('/download/{id}',[InventarioController::class, 'download']);
