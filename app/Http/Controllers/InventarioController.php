@@ -10,6 +10,8 @@ use App\Models\detalleDevolucionAlmacen;
 use App\Models\producto;
 use App\Models\ingresoAlmacen;
 use App\Models\salidaAlmacen;
+use App\Exports\MovimientosExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class InventarioController extends Controller
@@ -147,5 +149,65 @@ class InventarioController extends Controller
             $total = $total + ($indice->precioProm * $indice->stock);
         }
         return view('almacen.mostrarAlmacen', $productoAll)->with('total', $total);
+    }
+    public function download($id)
+    {
+        $data=array(
+            array("NRO","CODIGO INTERNO DE OPERACION","CANTIDAD","FECHA","TIPO DE OPERACION")
+        );
+        $producto = producto::findOrFail($id);
+        $ingresos = detalleIngresoAlmacen::where('product_id', '=', $producto->id)->get();
+        $salidas = detalleSalidaAlmacen::where('product_id', '=', $producto->id)->where('salida_id', '!=', null)->get();
+        $salidasUnitarias = detalleSalidaAlmacen::where('product_id', '=', $producto->id)->where('salida_id', '=', null)->get();
+        $devoluciones = detalleDevolucionAlmacen::where('product_id', '=', $producto->id)->get();
+        $c = 1;
+        foreach ($ingresos as $indice){
+            $factura = ingresoAlmacen::where('id', '=', $indice->factura_id)->first();
+            array_push($data, array(
+                $factura->id = $c,
+                $factura->numFactura = $factura->numFactura,
+                $factura->cantidad = $indice->cantidadIngresada,
+                $factura->fecha = $factura->fechaIngreso,
+                $factura->entrada = "INGRESO"
+            ));
+            $c = $c + 1;
+        }
+        foreach ($salidas as $indice){
+            $salida = salidaAlmacen::where('id', '=', $indice->salida_id)->first();
+            array_push($data, array(
+                $salidas->id = $c,
+                $salidas->numFactura = $salida->numSalida,
+                $salidas->cantidad = $indice->cantidad,
+                $salidas->fecha = $salida->fechaSalida,
+                $salidas->entrada = "SALIDA"
+            ));
+            $c = $c + 1;
+        }
+        foreach ($salidasUnitarias as $indice){
+            $salida = salidaAlmacen::where('id', '=', $indice->salida_id)->first();
+            array_push($data, array(
+                $salidasUnitarias->id = $c,
+                $salidasUnitarias->numFactura = $indice->guiaInterna,
+                $salidasUnitarias->cantidad = $indice->cantidad,
+                $salidasUnitarias->fecha = $indice->updated_at,
+                $salidasUnitarias->entrada = "SALIDA UNITARIA"
+            ));
+            
+            $c = $c + 1;
+        }
+        foreach ($devoluciones as $indice){
+            $devolucion = devolucionAlmacen::where('id', '=', $indice->devolucion_id)->first();
+            array_push($data, array(
+                $devoluciones->id = $c,
+                $devoluciones->numDevolucion = $devolucion->numDevolucion,
+                $devoluciones->cantidad = $indice->cantidadDevuelta,
+                $devoluciones->fecha = $devolucion->fechaDevolucion,
+                $devoluciones->entrada = "DEVOLUCION"
+            ));
+            
+            $c = $c + 1;
+        }
+        $export = new MovimientosExport($data);
+        return Excel::download($export, 'Movimientos '.$producto->nombreProd.'.xlsx');
     }
 }

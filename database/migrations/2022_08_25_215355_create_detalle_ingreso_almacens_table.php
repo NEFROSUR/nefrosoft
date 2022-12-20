@@ -20,8 +20,8 @@ return new class extends Migration
             //ESPECIFICACIONES DEL PRODUCTO COMPRA
             $table->integer('cantidadIngresada');
             $table->string('unidadMedida', 1)->nullable();
-            $table->decimal('PrecioUnitario', 8, 4);
-            $table->decimal('PrecioTotal', 8, 4);
+            $table->decimal('PrecioUnitario', 8, 5);
+            $table->decimal('PrecioTotal', 8, 5);
             $table->string('moneda', 1); //1=Soles 2=Dolares
             $table->string('detalle',250)->nullable();
             $table->timestamps();

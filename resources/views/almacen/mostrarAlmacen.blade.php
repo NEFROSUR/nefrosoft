@@ -40,6 +40,9 @@
         <div class="col p-3.5 m-2 right">
             <a class="btn btn-info" href="{{url('/almacen/back')}}">Actualizar</a>
         </div>
+        <div class="col p-3.5 m-2 right">
+            <a class="btn btn-info" href="/exportarInventario">Exportar Almacen</a>
+        </div>
     </div>
 
 </div>
