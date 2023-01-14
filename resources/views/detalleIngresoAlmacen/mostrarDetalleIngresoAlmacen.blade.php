@@ -98,6 +98,8 @@
                 <th>Cantidad Ingresada</th>
                 <th>Costo Unitario</th>
                 <th>Costo Total Producto</th>
+                <th>Lote del Producto</th>
+                <th>Fecha de Vencimiento</th>
                 <th>Descripcion</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
@@ -152,6 +154,8 @@
                     @endphp
                     {{ $detalle->PrecioTotal}} {{ $moneda}}
                 </td>
+                <td>{{ $detalle->lote}}</td>
+                <td>{{ $detalle->fechaVencimiento}}</td>
                 <td>{{ $detalle->detalle}}</td>
                 <td>
                     <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar al Ingreso: \n {{ $detalle->id}}?')" href="{{ url('detalleIngresoAlmacen/'.$detalle->id.'/edit') }}">

@@ -60,6 +60,14 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="detalle" class="col-form-label">Lote:</label>
+                        <input type="text" class="form-control" id="lote" wire:model="lote">
+                    </div>
+                    <div class="form-group">
+                        <label for="detalle" class="col-form-label">Fecha de Vencimiento del Producto:</label>
+                        <input type="date" class="form-control" id="fechaVencimiento" wire:model="fechaVencimiento">
+                    </div>
+                    <div class="form-group">
                         <label for="detalle" class="col-form-label">Detalle:</label>
                         <input type="text" class="form-control" id="detalle" wire:model="detalle">
                     </div>

@@ -23,6 +23,8 @@ return new class extends Migration
             $table->decimal('PrecioUnitario', 8, 5);
             $table->decimal('PrecioTotal', 8, 5);
             $table->string('moneda', 1); //1=Soles 2=Dolares
+            $table->string('lote',100)->nullable();
+            $table->date('fechaVencimiento')->nullable();
             $table->string('detalle',250)->nullable();
             $table->timestamps();
 

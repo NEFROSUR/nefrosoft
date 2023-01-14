@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="{{ mix('js/app.js') }}"></script>
-<div class="container border-4 p-4 mt-10">
+<div class="container w-50 border-4 p-4 mt-10">
     <form action="{{ url('/detalleSalidaAlmacen/'.$detalle->id) }}" method="POST">
         @csrf
         {{ method_field('PATCH') }}

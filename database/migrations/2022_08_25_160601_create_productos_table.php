@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('nombreProd',50);
             $table->string('categoria_id',1);
             $table->string('categoria',25);
-            $table->string('marcaProd',50);
+            $table->string('marcaProd',50)->nullable();
             $table->string('umedida',10);
             $table->string('um',4);
             $table->integer('stock');

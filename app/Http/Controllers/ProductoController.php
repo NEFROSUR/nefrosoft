@@ -62,7 +62,7 @@ class ProductoController extends Controller
 
         $request->validate([
             'nombreProd' => 'required',
-            'marcaProd' => 'required',
+            'marcaProd' => 'nullable',
             'um' => 'nullable',
         ]);
 

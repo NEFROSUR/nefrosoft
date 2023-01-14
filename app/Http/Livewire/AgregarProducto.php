@@ -9,7 +9,7 @@ use App\Models\detalleIngresoAlmacen;
 
 class AgregarProducto extends Component
 {
-    public $product_id, $cantidadIngresada, $unidadMedida, $PrecioTotal, $moneda, $detalle;
+    public $product_id, $cantidadIngresada, $unidadMedida, $PrecioTotal, $moneda, $detalle, $lote, $fechaVencimiento;
     public $factura_id;
 
     public function update($fields)
@@ -21,6 +21,8 @@ class AgregarProducto extends Component
             'PrecioTotal' => 'required',
             'moneda' => 'required',
             'detalle' => 'nullable',
+            'lote' => 'nullable',
+            'fechaVencimiento' => 'nullable',
         ]);
     }
 
@@ -34,6 +36,8 @@ class AgregarProducto extends Component
             'PrecioTotal' => 'required',
             'moneda' => 'required',
             'detalle' => 'nullable',
+            'lote' => 'nullable',
+            'fechaVencimiento' => 'nullable',
         ]);
 
         $nuevoIngreso = new detalleIngresoAlmacen();
@@ -46,6 +50,8 @@ class AgregarProducto extends Component
         //$nuevoIngreso->PrecioUnitario = number_format($this->PrecioTotal / $this->cantidadIngresada, 4, '.');
         $nuevoIngreso->moneda = $this->moneda;
         $nuevoIngreso->detalle = $this->detalle;
+        $nuevoIngreso->lote = $this->lote;
+        $nuevoIngreso->fechaVencimiento = $this->fechaVencimiento;
 
         $nuevoIngreso->save();
 
@@ -71,6 +77,8 @@ class AgregarProducto extends Component
         $this->PrecioTotal = '';
         $this->moneda = '';
         $this->detalle = '';
+        $this->lote = '';
+        $this->fechaVencimiento = '';
         $this->dispatchBrowserEvent('close-modal');
 
         
