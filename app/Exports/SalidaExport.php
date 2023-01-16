@@ -55,7 +55,7 @@ class SalidaExport implements FromCollection, WithHeadings
         )->get();
         $c = 1;
         foreach ($salidas as $i) {
-            $i->created_at = date('d-m-Y', strtotime($i->created_at));
+            //$i->created_at = date('d-m-Y', strtotime($i->created_at));
             //CONTADOR
             $i->id = $c;
             //CAMBIAR EL ID POR EL NOMBRE DEL PRODUCTO
@@ -65,7 +65,8 @@ class SalidaExport implements FromCollection, WithHeadings
             if ($i->salida_id != null) {
                 $s  = salidaAlmacen::where('id', '=', $i->salida_id)->first();
                 $i->salida_id  = $s->numSalida;
-                $i->created_at = $s->fechaSalida;
+                $i->created_at = substr($s->fechaSalida, 0, 10);
+                //$i->created_at = $s->fechaSalida;
                 $i->areaResponsable = $s->reponsableA ;
                 $i->responsable = $s->responsable;
                 $i->personal = $s->areaRecepcion." : ".$s->recepcionista;
@@ -82,17 +83,6 @@ class SalidaExport implements FromCollection, WithHeadings
             
             $c = $c + 1;
         }
-        /*$c = 1;
-        $Egreso = array();
-        $salida = new salidaFila();
-        foreach ($salidas as $i) {
-            $i->id = $c;
-            $salida->n = $c;
-            $salida->fecha = 12/12/2022;
-            $salida->guiaInterna = $i->guiaInterna;
-            $c = $c + 1;
-            array_push($Egreso, $salida);
-        }*/
         return $salidas;
     }
 }

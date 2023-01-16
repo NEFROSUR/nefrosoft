@@ -62,7 +62,7 @@
                 </tbody>
             </table>
             @if ($msj1!="true")
-            <div class="bg-danger p-2 text-white"><b>{{$msj}}</b></div>
+            <div class="bg-danger p-2 text-white"><b>{{$msj1}}</b></div>
             @endif
         </div>
         <div class="col">

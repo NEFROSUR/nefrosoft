@@ -17,12 +17,17 @@ class ProductoExport implements FromCollection,WithHeadings
     {
         return [
             'id',
-            'codigoProd',
-            'nombreProd',
-            'categoria_id',
-            'marcaProd',
+            'Codigo del Producto',
+            'Nombre del Producto',
+            'Id de Categoria',
+            'Categoria',
+            'Marca',
+            'Unidad de Medida',
             'um',
             'stock',
+            'Precio Unitario Promedio',
+            'Fecha de Creacion',
+            'Fecha de Actualizacion',
         ];
     }
     public function collection()
