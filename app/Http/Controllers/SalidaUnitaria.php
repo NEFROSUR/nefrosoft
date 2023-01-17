@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\detalleSalidaAlmacen;
 use App\Models\salidaAlmacen;
 use App\Models\producto;
-
+//CONTROLADOR DE SALIDA UNITARIA
 class SalidaUnitaria extends Controller
 {
 
@@ -19,7 +19,7 @@ class SalidaUnitaria extends Controller
         $producto = producto::findOrFail($id);
         return view('salidaUnitaria.crearSalidaUnitaria', ['producto' => $producto]);
     }
-
+    //GUARDA LA SALIDA UNITARIA Y COMPLETA ALGUNOS CAMPOS CON NULL POR DEFECTO PARA RECONOCERLO COMO SALIDA UNITARIA
     public function store(Request $request)
     {
         $request->validate([
@@ -52,7 +52,7 @@ class SalidaUnitaria extends Controller
             return view('almacen.mostrarAlmacen', $productoAll)->with('total', $total);
         }
     }
-
+    //CALCULA EL STOCK POR CADA SALIDA UNITARIA
     public function CALCULARSTOCK(){
         //TOTAL DE PRECIO EN EL INVENTARIO
         $productos = producto::where('stock', '>', '0')->get();

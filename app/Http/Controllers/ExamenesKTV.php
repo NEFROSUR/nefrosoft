@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\paciente;
 use App\Models\profesional;
 use App\Models\datomedico;
-
+//CONTROLADOR EN DESARROLLO (NO FUNCIONAL AUN)
 class ExamenesKTV extends Controller
 {
     public function index()

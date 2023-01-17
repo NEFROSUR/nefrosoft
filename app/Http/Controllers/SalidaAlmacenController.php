@@ -6,7 +6,7 @@ use App\Models\salidaAlmacen;
 use App\Models\producto;
 use App\Models\detalleSalidaAlmacen;
 use Illuminate\Http\Request;
-
+//CLASE PARA LA SALIDA DE ALMACEN
 class SalidaAlmacenController extends Controller
 {
     /**
@@ -41,6 +41,7 @@ class SalidaAlmacenController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //GUARDA LA CABECERA DE LA SALIDA
     public function store(Request $request)
     {
         $request->validate([
@@ -58,6 +59,7 @@ class SalidaAlmacenController extends Controller
         $salidaAlmacen->reponsableA = $request->reponsableA;
         $salidaAlmacen->responsable = $request->responsable;
         $salidaAlmacen->fechaSalida = $request->fechaSalida;
+        //GENERA CODIGO INTERNO PERSONALIZADO DE SALIDA
         $ingresosAll = salidaAlmacen::All();
         if ($ingresosAll->isEmpty() == true) {
             $salidaAlmacen->numSalida = "S" . substr(str_repeat(0, 6) . salidaAlmacen::All()->count() + 1, -5);
@@ -84,6 +86,7 @@ class SalidaAlmacenController extends Controller
      * @param  \App\Models\salidaAlmacen  $salidaAlmacen
      * @return \Illuminate\Http\Response
      */
+    //MUESTRA LA LISTA DE SALIDAS
     public function show(Request $request)
     {
         $numSalida = $request->get('numSalida');
@@ -117,6 +120,7 @@ class SalidaAlmacenController extends Controller
      * @param  \App\Models\salidaAlmacen  $salidaAlmacen
      * @return \Illuminate\Http\Response
      */
+    //EDITA DATOS DE LA CABECERA DE SALIDA
     public function update(Request $request, $id)
     {
         $datosSalida = request()->except(['_token', '_method']);
@@ -132,6 +136,7 @@ class SalidaAlmacenController extends Controller
      * @param  \App\Models\salidaAlmacen  $salidaAlmacen
      * @return \Illuminate\Http\Response
      */
+    //ELIMINA LA SALIDA (CUIDADO) ELIMINACION EN CADENA Y ACTUALIZACION DEL STOCK POR CADA PRODUCTO
     public function destroy($id)
     {
         $salida = detalleSalidaAlmacen::where('salida_id', '=', $id)->get();

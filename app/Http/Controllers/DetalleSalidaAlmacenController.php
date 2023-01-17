@@ -66,7 +66,7 @@ class DetalleSalidaAlmacenController extends Controller
             'unidadMedida' => 'required',
         ]);
         $detalleSalida = new detalleSalidaAlmacen();
-
+        //CREACION DEL DETALLE DE LA SALIDA Y CODIGO DE DETALLE SALIDA PERSONALIZADO
         $detalleSalidaAll = detalleSalidaAlmacen::All();
         if($detalleSalidaAll->isEmpty()==true){
             $guia = "DS" . substr(str_repeat(0, 6) . detalleSalidaAlmacen::All()->count()+1, -5);
@@ -75,6 +75,7 @@ class DetalleSalidaAlmacenController extends Controller
             $nuevo = $ultimo->id + 1;
             $guia = "DS" . substr(str_repeat(0, 6) . $nuevo, -5);
         }
+        //REGISTRO DEL DETALLE SALIDA
         $detalleSalida->guiaInterna = $guia;
         $detalleSalida->salida_id = $request->salida_id;
         $detalleSalida->product_id = $request->product_id;
@@ -89,11 +90,6 @@ class DetalleSalidaAlmacenController extends Controller
         $producto = producto::where('id', '=', $request->product_id)->first();
         $stock = $producto->stock - $request->cantidad;
         producto::where('id', '=', $request->product_id)->update(['stock' => $stock,]);
-
-        /*
-        $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'desc')->paginate(10);
-        return view('salidaAlmacen.mostrarSalidaAlmacen', $salidasAll);
-        */
         return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen');
     }
 
@@ -105,7 +101,7 @@ class DetalleSalidaAlmacenController extends Controller
      */
     public function show(Request $request)
     {
-
+        //MOSTRAR EL DETALLE POR CADA SALIDA
         $numSalida = $request->get('numSalida');
         if ($numSalida != '') {
             $salida = salidaAlmacen::where('numSalida', '=', $numSalida)->first();
@@ -150,11 +146,13 @@ class DetalleSalidaAlmacenController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //ACTUALIZACION DEL DETALLE DE LA SALIDA CON ACTUALIZACION DE STOCK
         $datosDetalle = request()->except(['_token', '_method']);
         $nuevaCantidad = $request->cantidad;
         $detalleS = detalleSalidaAlmacen::where('id', '=', $id)->first();
         $cantidadInicial = $detalleS->cantidad;
         $producto = producto::where('id', '=', $detalleS->product_id)->first();
+        //VERIFICACION DEL MOVIMIENTO DEL STOCK EN POSITIVO O NEGATIVO
         $ini = $producto->stock + $cantidadInicial;
         if ($nuevaCantidad <= $ini) {
             $dif = $cantidadInicial - $nuevaCantidad;
@@ -173,6 +171,7 @@ class DetalleSalidaAlmacenController extends Controller
             $detalleSalidaAlmacen['detalleSalidaAlmacen'] = detalleSalidaAlmacen::where('salida_id', '=', $salida->id)->paginate(10);
             return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen', $detalleSalidaAlmacen, ['salida' => $salida]);
         } else {
+            //NO ES POSIBLE EXCEDER EL STOCK MAXIMO
             session()->flash('error', 'RETIRAR: '.$nuevaCantidad.' del producto '.$producto->nombreProd.' excede el Stock maximo: '.$ini);
             $salida = salidaAlmacen::where('id', '=', $detalleS->salida_id)->first();
             $detalleSalidaAlmacen['detalleSalidaAlmacen'] = detalleSalidaAlmacen::where('salida_id', '=', $salida->id)->paginate(10);
@@ -188,6 +187,7 @@ class DetalleSalidaAlmacenController extends Controller
      */
     public function destroy($id)
     {
+        //DESTRUCCION DEL REGISTRO DEL DETALLE DE SALIDA CON ACTUALIZACION DEL STOCK
         $detalleS = detalleSalidaAlmacen::where('id', '=', $id)->first();
         $cantidadSalida = $detalleS->cantidad;
         $producto = producto::where('id', '=', $detalleS->product_id)->first();
@@ -195,18 +195,19 @@ class DetalleSalidaAlmacenController extends Controller
         producto::where('id', '=', $detalleS->product_id)->update(['stock' => $stock,]);
         detalleSalidaAlmacen::destroy($id);
 
-
+        //REDIRECCION A LA VISTA DE DETALLE DE SALIDA
         $salida = salidaAlmacen::where('id', '=', $detalleS->salida_id)->first();
         $detalleSalidaAlmacen['detalleSalidaAlmacen'] = detalleSalidaAlmacen::where('salida_id', '=', $salida->id)->paginate(10);
         return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen', $detalleSalidaAlmacen, ['salida' => $salida]);
     }
-
+    //REFRESH DE LOS PRODUCTOS EN EL DETALLE DE SALIDA
     public function refresh($id)
     {
         $salida = salidaAlmacen::where('id', '=', $id)->first();
         $detalleSalidaAlmacen['detalleSalidaAlmacen'] = detalleSalidaAlmacen::where('salida_id', '=', $salida->id)->paginate(10);
         return view('detalleSalidaAlmacen.mostrarDetalleSalidaAlmacen', $detalleSalidaAlmacen, ['salida' => $salida]);
     }
+    //RETURN A LA VISTA DE SALIDAS
     public function back()
     {
         $salidasAll['salidasAll'] = salidaAlmacen::orderBy('id', 'desc')->paginate(12);

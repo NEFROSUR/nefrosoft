@@ -8,7 +8,7 @@ use App\Models\fua;
 use Carbon\Carbon;
 use PDF;
 use Illuminate\Http\Request;
-
+//CLASE EN DESARROLLO, SE BUSCA QUE ESTA CONTROLA EL GENERADOR DE HISTORIAS CLINICAS
 class HistoriaController extends Controller
 {
     /**

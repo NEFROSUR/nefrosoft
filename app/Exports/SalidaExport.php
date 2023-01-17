@@ -13,7 +13,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-
+//EXPORT DE EXCEL (VIENE DEL CONTROLADOR DE EXCEL DE LA CARPETA  HTTP/CONTROLLERS)
 class SalidaExport implements FromCollection, WithHeadings
 {
     /**

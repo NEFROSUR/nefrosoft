@@ -9,7 +9,7 @@ use App\Exports\SalidaExport;
 use App\Exports\InventarioExport;
 use App\Exports\MovimientosExport;
 use Maatwebsite\Excel\Facades\Excel;
-
+//CONTROLADOR DE LOS BOTONES DE CADA EXPORT DE EXCEL (ESTE REFERENCIA A LA CARPETA "EXPORTS" DONDE SE ESPECIFICA QUE EXPORTA POR CADA EXCEL)
 class ExcelController extends Controller
 {
     public function export(){

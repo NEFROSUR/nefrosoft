@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\proveedor;
 use Illuminate\Http\Request;
-
+//CLASE CONTROLADORA DE PROVEEDORES
 class ProveedorController extends Controller
 {
     /**
@@ -33,6 +33,7 @@ class ProveedorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //GUARDA DATOS DE PROVEEDOR
     public function store(Request $request)
     {
         $request->validate([
@@ -74,6 +75,7 @@ class ProveedorController extends Controller
      * @param  \App\Models\proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
+    //MUESTRA LISTA DE PROVEEDORES
     public function show(Request $request)
     {
         $nameProv = $request->get('nameProv');
@@ -110,6 +112,7 @@ class ProveedorController extends Controller
      * @param  \App\Models\proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
+    //ACTUALIZA DATOS DE PROVEEDORES
     public function update(Request $request, $id)
     {
         $datosProveedor = request()->except(['_token', '_method']);
@@ -125,12 +128,14 @@ class ProveedorController extends Controller
      * @param  \App\Models\proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
+    //DESTRUYE PROVEEDORES (SE RECOMIENDA ELIMINAR LA OPCION EN FRONT)
     public function destroy($id)
     {
         proveedor::destroy($id);
         $proveedorAll['proveedorAll'] = proveedor::orderBy('id', 'asc')->paginate(10);
         return view('proveedores.verProveedor', $proveedorAll);
     }
+    //REFRESCA LA VISTA DE PROVEEDORES
     public function refresh(){
         $proveedorAll['proveedorAll'] = proveedor::orderBy('id', 'asc')->paginate(10);
         return view('proveedores.verProveedor', $proveedorAll);

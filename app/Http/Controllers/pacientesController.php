@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\paciente;
 use Carbon\Carbon;
-
+//CONTROLADOR DE PACIENTES
 class pacientesController extends Controller
 {
     /**
@@ -25,6 +25,7 @@ class pacientesController extends Controller
         
         return view ('pacientes.crearPacientes');
     }
+    //GUARDA PACIENTES CON TODOS SUS DATOS
     public function store(Request $request){
 
         $request->validate([
@@ -72,6 +73,8 @@ class pacientesController extends Controller
         $paciente->save();
         return view ('pacientes'); 
     } 
+    //MUESTRA LISTA DE PACIENTES Y TAMBIEN HACE BUSQUEDA POR FILTRO
+    //TAMBIEN MUESTRA EDADES EN FUNCION DE SU FECHA DE NACIMIENTO
     public function show(Request $request){
 
         //captura de datos
@@ -104,6 +107,7 @@ class pacientesController extends Controller
         }
         return view ('pacientes.mostrarPacientes',$datos,['fechaActual'=>$fechaActual]);
     }
+    //PONE PACIENTES COMO INACTIVOS
     public function destroy($id){
 
         $pacienteInactivo=paciente::findOrFail($id);
@@ -120,6 +124,7 @@ class pacientesController extends Controller
 
         return view('pacientes.editarPacientes', ['paciente'=>$paciente]);
     }
+    //ACTUALIZA DATOS DE PACIENTES
     public function update(Request $request, $id){
 
         $datosPaciente = request()->except(['_token','_method']);

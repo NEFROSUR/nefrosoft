@@ -54,6 +54,7 @@ class InventarioController extends Controller
      * @param  \App\Models\inventario  $inventario
      * @return \Illuminate\Http\Response
      */
+    //MUESTRA LOS PRODUCTOS EN STOCK MAYOR A 0
     public function show(Request $request)
     {
         $codigoProd = $request->get('codigoProd');
@@ -85,6 +86,8 @@ class InventarioController extends Controller
      */
     public function edit($id)
     {
+        //MUESTRA LOS MOVIMIENTOS POR PRODUCTO, HACE UN FILTRADO POR INGRESOS Y SALIDAS INCLUYENDO SALIDAS UNITARIAS
+        //MANDA EL FILTRADO EN 2 ARRAYS DE ENTRADAS Y SALIDAS
         $producto = producto::findOrFail($id);
         $ingresos = detalleIngresoAlmacen::where('product_id', '=', $producto->id)->get();
         $salidas = detalleSalidaAlmacen::where('product_id', '=', $producto->id)->where('salida_id', '!=', null)->get();
@@ -93,6 +96,7 @@ class InventarioController extends Controller
 
         $ingresosReales = array();
         $salidasReales = array();
+        //DENTRO DE LOS FILTRADOS SE AGREGAN DATOS DE LA FACTURA A LA QUE PERTENECEN Y PERSONAL RESPONSABLE
         foreach ($ingresos as $indice) {
             $factura = ingresoAlmacen::where('id', '=', $indice->factura_id)->first();
             $factura->cantidad = $indice->cantidadIngresada;
@@ -140,6 +144,7 @@ class InventarioController extends Controller
     {
         //
     }
+    //REGRESA A LA LISTA DE PRODUCTOS EN INVENTARIO
     public function back()
     {
         $productoAll['productoAll'] = producto::orderBy('id', 'desc')->where('stock', '>', 0)->paginate(10);
@@ -150,11 +155,15 @@ class InventarioController extends Controller
         }
         return view('almacen.mostrarAlmacen', $productoAll)->with('total', $total);
     }
+    //DESCARGA LA LISTA DE MOVIMIENTOS, ESTE NO SE HIZO ENE L CONTROLADOR DEL EXCEL DEBIDO A LAS LIMITACIONES DE LOS EXPORT
+    //Y PORQUE SON DATOS COMBINADOS DE DISTINTAS TABLAS
     public function download($id)
     {
+        //CABECERA DEL EXCEL
         $data=array(
             array("NRO","CODIGO INTERNO DE OPERACION","CANTIDAD","FECHA","TIPO DE OPERACION", "LOTE", "FECHA DE VENCIMIENTO","PERSONAL ENCARGADO", "DESTINO")
         );
+        //CUERPO DEL EXCEL
         $producto = producto::findOrFail($id);
         $ingresos = detalleIngresoAlmacen::where('product_id', '=', $producto->id)->get();
         $salidas = detalleSalidaAlmacen::where('product_id', '=', $producto->id)->where('salida_id', '!=', null)->get();

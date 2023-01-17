@@ -23,7 +23,7 @@ use Carbon\Carbon;
 //use Dompdf\Dompdf;
 //use Barryvdh\DomPdf\Facade as PDF;
 
-
+//CONTROLADOR DEL GENERADOR DE FUAS (EXTREMO CUIDADO)
 class FuaController extends Controller
 {
     /**
@@ -68,6 +68,7 @@ class FuaController extends Controller
     public function createPDF()
     {
     }
+    //IMPRIME UNA SOLA FUA SELECCIONADA PASANDOLE EL ID
     public function createUnitPDF($id)
     {
         $fuas = array();
@@ -88,7 +89,7 @@ class FuaController extends Controller
         $fua->fecha = $fechaT;
         $fua->paciente;
         $fua->profesional;
-        
+        //GENERADOR DE PDF POR PDFMERGE (INEFICIENTE(MEJORAR), GENERA LA CARA Y EL REVERSO Y LOS JUNTA EN UNA SOLO FUA)
         array_push($fuas, $fua);
         $pdfMerger = PDFMerger::init();
         $pdf = PDF::loadView('recepcion.demoIni', ['fuas' => $fuas]);
@@ -116,6 +117,7 @@ class FuaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //GUARDA FUA
     public function store(Request $request)
     {
         $datosFua = request()->except('_token');
@@ -131,6 +133,10 @@ class FuaController extends Controller
      * @param  \App\Models\fua  $fua
      * @return \Illuminate\Http\Response
      */
+    //METODO EXTENSO
+    //MANDA LA LISTA DE LOS PROFESIONALES, PACIENTES Y EL CORRELATIVO USADO
+    //FILTRADO POR TURNO Y FRECUENCIA
+    //GENERADOR DE FUAS MAXIMO
     public function show(Request $request)
     {
         $estado = 'activo';
@@ -165,6 +171,8 @@ class FuaController extends Controller
                 $request->validate([
                     'fechaGenerada' => 'date',
                 ]);
+                //HACE UNA CONSULTA POR CADA PACIENTE QUE SELECCIONASTE, DE AQUI SE EXTRAEN LOS DATOS PARA LA FUA Y SE GUARDAN EN UN ARRAY
+                //AL MISMO TIEMPO SE GUARDAN EN LA BASE DE DATOS CON UN CORRELATIVO DIFERENTE COMO UNA NUEVA ATENCION
                 $fuas = array();
                 foreach ($pacientesEscogidos as $item) {
                     $fua = new Fua();
@@ -192,6 +200,10 @@ class FuaController extends Controller
 
                     array_push($fuas, $fua);
                 }
+                //EL ARRAY GENERADO SE DESLIGA EN HOJA POR HOJA Y GENERA REVERSOS UNO A UNO
+                //POR ULTIMO UNE CADA UNO DE LOS PDFs GENERADOS Y LOS ENVIA COMO UN SOLO PDF
+                //ESTO SE HACE POR LA GENERACION EL GUARDADO EN BD, LA EXTRACCION Y COMBINACION, POR ULTIMO SE ELIMINA LO GUARDADO
+                //ES INEFICIENTE
                 $pdfMerger = PDFMerger::init();
 
                 $pdf = PDF::loadView('recepcion.demo', ['fuas' => $fuas]);
@@ -228,6 +240,7 @@ class FuaController extends Controller
      * @param  \App\Models\fua  $fua
      * @return \Illuminate\Http\Response
      */
+    //DESACTIVA LA FUA
     public function edit($id)
     {
         $FuaInactiva = Fua::findOrFail($id);
@@ -243,9 +256,6 @@ class FuaController extends Controller
      */
     public function update(Request $request, $fua)
     {
-        /*$fuaE = request()->except(['_token','_method']);
-        $totalFuas=Fua::findOrFail($fua);
-        return view('recepcion', compact('totalFuas'));*/
         return redirect('recepcion');
     }
 
@@ -255,12 +265,11 @@ class FuaController extends Controller
      * @param  \App\Models\fua  $fua
      * @return \Illuminate\Http\Response
      */
+    //ELIMINA LA FUA GENERADA
     public function destroy($id)
     {
-        //$FuaInactiva = Fua::findOrFail($id);
         fua::destroy($id);
-        //$pacienteInactivo->update(['estado'=>"inactivo"]);
         return redirect('recepcion');
-        //return view('recepcion.desactivateF', ['FuaInactiva' => $FuaInactiva]);
+
     }
 }

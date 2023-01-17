@@ -78,6 +78,7 @@ class DevolucionAlmacenController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //ACTUALIZACION SENCILLA DE LOS DATOS DE DEVOLUCION
         $datosDevolucion = request()->except(['_token', '_method']);
         devolucionAlmacen::where('id', '=', $id)->update($datosDevolucion);
         $devolucionesAll['devolucionesAll'] = devolucionAlmacen::orderBy('id', 'desc')->paginate(12);
@@ -92,6 +93,7 @@ class DevolucionAlmacenController extends Controller
      */
     public function destroy($id)
     {
+        //DESTRUCCION DE LA DEVOLCUION CON ACTUALIZACION DE STOCK (DESTRUCCION EN CADENA (CUIDADO))
         $devolucion = detalleDevolucionAlmacen::where('devolucion_id', '=', $id)->get();
         if (count($devolucion) == 0) {
             devolucionAlmacen::destroy($id);
@@ -108,6 +110,7 @@ class DevolucionAlmacenController extends Controller
         $devolucionesAll['devolucionesAll'] = devolucionAlmacen::orderBy('id', 'desc')->paginate(12);
         return view('devoluciones.mostrarDevolucion', $devolucionesAll);
     }
+    //FUNCION PARA ACTUALIZAR LOS CAMPOS REGISTRADOS
     public function refresh()
     {
         $devolucionesAll['devolucionesAll'] = devolucionAlmacen::orderBy('id', 'desc')->paginate(12);

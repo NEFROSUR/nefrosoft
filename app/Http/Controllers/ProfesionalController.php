@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\profesional;
 
-
+//CLASE CONTROLADORA PARA EL PERSONAL (MEDICOS YU MULTIDISCIPLINARIOS)
 class ProfesionalController extends Controller
 {
     /**
@@ -33,6 +33,7 @@ class ProfesionalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //GUARDA LOS DATOS DEL PERSONAL
     public function store(Request $request)
     {
         $request->validate([
@@ -79,6 +80,7 @@ class ProfesionalController extends Controller
      * @param  \App\Models\profesional  $profesional
      * @return \Illuminate\Http\Response
      */
+    //MUESTRA LA LISTA DEL PERSONAL Y TIENE UN FILTRADO POR NOMBRE, DNI Y ESPECIALIDAD
     public function show(Request $request)
     {
         $nombre = $request->get('nombre');
@@ -123,6 +125,7 @@ class ProfesionalController extends Controller
      * @param  \App\Models\profesional  $profesional
      * @return \Illuminate\Http\Response
      */
+    //ACTUALIZA LOS DATOS DEL PERSONAL
     public function update(Request $request, $id)
     {
         $datosProfesional = request()->except(['_token','_method']);
@@ -137,6 +140,7 @@ class ProfesionalController extends Controller
      * @param  \App\Models\profesional  $profesional
      * @return \Illuminate\Http\Response
      */
+    //ELIMINA AL PERSONAL (SE RECOMIENDA ELIMINAR LA OPCION EN FRONT)
     public function destroy($id)
     {
         profesional::destroy($id);

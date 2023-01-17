@@ -27,6 +27,7 @@ class DetalleIngresoAlmacenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //PETICION DE LOS DATOS DE INGRESO ALMACEN
     public function createMedica($id)
     {
         $factura = ingresoAlmacen::findOrFail($id);
@@ -48,6 +49,7 @@ class DetalleIngresoAlmacenController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //METODO QUE GUARDA EL DETALLE DE CADA INGRESO
     public function store(Request $request)
     {
         $request->validate([
@@ -70,7 +72,7 @@ class DetalleIngresoAlmacenController extends Controller
         $detalleIngresoAlmacen->detalle = $request->detalle;
 
         $detalleIngresoAlmacen->save();
-
+        //ACTUALIZACION DEL STOCK EN INVENTARIO
         $producto = producto::where('id', '=', $request->product_id)->first();
         $stock = $producto->stock + $request->cantidadIngresada;
         producto::where('id', '=', $request->product_id)->update(['stock' => $stock,]);
@@ -88,6 +90,7 @@ class DetalleIngresoAlmacenController extends Controller
      * @param  \App\Models\detalleIngresoAlmacen  $detalleIngresoAlmacen
      * @return \Illuminate\Http\Response
      */
+    //MOSTRAR EL DETALLE DE CADA FACTURA EN BUSQUEDA POR FACTURA
     public function show(Request $request)
     {
         $numFactura = $request->get('numFactura');
@@ -132,8 +135,10 @@ class DetalleIngresoAlmacenController extends Controller
      * @param  \App\Models\detalleIngresoAlmacen  $detalleIngresoAlmacen
      * @return \Illuminate\Http\Response
      */
+    //ACTUALIZACION DE LOS DATOS DEL DETALLE DE LA FACTURA
     public function update(Request $request, $id)
     {
+        //VERIFICACION DE COMO AFECTA AL STOCK Y ACTUALIZACION EN BASE A ESO
         $datosDetalle = request()->except(['_token', '_method']);
         $stockReal = $request->cantidadIngresada;
         $detalleI = detalleIngresoAlmacen::where('id', '=', $id)->first();
@@ -175,6 +180,7 @@ class DetalleIngresoAlmacenController extends Controller
      * @param  \App\Models\detalleIngresoAlmacen  $detalleIngresoAlmacen
      * @return \Illuminate\Http\Response
      */
+    //DESTRUCCION DEL REGISTRO DEL DETALLE DE FACTURA Y ACTUALIZACION EN STOCK
     public function destroy($id)
     {
         $detalleI = detalleIngresoAlmacen::where('id', '=', $id)->first();
@@ -193,13 +199,14 @@ class DetalleIngresoAlmacenController extends Controller
         return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen', $detalleIngresoAlmacen, ['factura' => $factura]);
     }
 
-
+    //METODO PARA REFRESCAR LOS REGISTROS
     public function refresh($id)
     {
         $factura = ingresoAlmacen::where('id', '=', $id)->first();
         $detalleIngresoAlmacen['detalleIngresoAlmacen'] = detalleIngresoAlmacen::where('factura_id', '=', $factura->id)->paginate(10);
         return view('detalleIngresoAlmacen.mostrarDetalleIngresoAlmacen', $detalleIngresoAlmacen, ['factura' => $factura]);
     }
+    //METODO PARA VOLVER A LA LISTA DE FACTURAS
     public function back()
     {
         $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);

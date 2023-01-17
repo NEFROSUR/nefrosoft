@@ -7,7 +7,7 @@ use App\Models\paciente;
 use App\Models\profesional;
 use App\Models\datomedico;
 
-
+//CLASE EN DESARROLLO NO FUNCIONAL
 class ConsultaNefrologica extends Controller
 {
     /**

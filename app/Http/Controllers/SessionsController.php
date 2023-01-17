@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-
+//REQUIERE DE MAS REVISION ( ES SOLO PARA EL LOGIN)
 class SessionsController extends Controller
 {
     public function create() {
         
         return view('auth.login');
     }
-
+    //CONTROLADOR DE LA SESION
     public function store() {
         
         if(auth()->attempt(request(['email', 'password'])) == false) {

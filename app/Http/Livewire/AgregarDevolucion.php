@@ -26,11 +26,13 @@ class AgregarDevolucion extends Component
             'fechaDevolucion' => 'required',
             'detalle' => 'nullable'
         ]);
+        //RECOPILACION DE DATOS PARA LA DEVOLUCION DE ALGUN PRODUCTO
         $nuevaDevolucion = new devolucionAlmacen();
         $nuevaDevolucion->usuario = $this->usuario;
         $nuevaDevolucion->personalD = $this->personalD;
         $nuevaDevolucion->fechaDevolucion = $this->fechaDevolucion;
         $devolucioneAll = devolucionAlmacen::All();
+        //GENERACION DEL CODIGO DE SALIDA PERSONALIZADO Y GUARDADO
         if($devolucioneAll->isEmpty()==true){
             $nuevaDevolucion->numDevolucion = "D" . substr(str_repeat(0, 6) . devolucionAlmacen::All()->count()+1, -5);
         }else{
@@ -38,10 +40,10 @@ class AgregarDevolucion extends Component
             $nuevo = $ultimo->id + 1;
             $nuevaDevolucion->numDevolucion = "D" . substr(str_repeat(0, 6) . $nuevo, -5);
         }
-        //$nuevaDevolucion->numDevolucion = "D" . substr(str_repeat(0, 6) . devolucionAlmacen::All()->count()+1, -5);
         $nuevaDevolucion->detalle = $this->detalle;
         $nuevaDevolucion->save();
         session()->flash('message', 'Se agrego correctamente');
+        //LIMPIEZA DE LOS CAMPOS DEL MODAL
         $this->usuario = '';
         $this->personalD = '';
         $this->fechaDevolucion = '';
@@ -49,10 +51,9 @@ class AgregarDevolucion extends Component
         $this->dispatchBrowserEvent('close-modal');
 
     }
-
+    //FUNCION QUE INICIALIZA EL LIVEWIRE EN FRONT
     public function render()
     {
-        
         return view('livewire.agregar-devolucion');
     }
     
