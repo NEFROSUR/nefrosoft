@@ -13,7 +13,7 @@ use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Illuminate\Support\Facades\DB;
-
+//EXPORT DE EXCEL (VIENE DEL CONTROLADOR DE EXCEL DE LA CARPETA  HTTP/CONTROLLERS)
 class MovimientosExport implements FromArray
 {
     protected $data;

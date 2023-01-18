@@ -33,10 +33,11 @@ class AgregarProductoS extends Component
             'unidadMedida' => 'required',
             'destino' => 'required',
         ]);
+        //CARGA DE PRODUCTTOS A LA TABLA DETALLE DE SALIDA
         $producto = producto::where('id', '=', $this->product_id)->first();
         if ($this->cantidad <= $producto->stock) {
             $detalleSalida = new detalleSalidaAlmacen();
-
+            //ESPECIFICACION DEL CODIGO DE SALIDA
             $detalleSalidaAll = detalleSalidaAlmacen::All();
             if($detalleSalidaAll->isEmpty()==true){
                 $guia = "DS" . substr(str_repeat(0, 6) . detalleSalidaAlmacen::All()->count()+1, -5);
@@ -45,6 +46,7 @@ class AgregarProductoS extends Component
                 $nuevo = $ultimo->id + 1;
                 $guia = "DS" . substr(str_repeat(0, 6) . $nuevo, -5);
             }
+            //GUARDADO DE DATOS
             $detalleSalida->guiaInterna = $guia;
             $detalleSalida->salida_id = $this->salida_id;
             $detalleSalida->product_id = $this->product_id;
@@ -57,10 +59,10 @@ class AgregarProductoS extends Component
 
             session()->flash('message', 'Se agrego producto');
 
-            //REDUCIR STOCK
+            //REDUCIR STOCK Y ACTUALIZAR EL STOCK
             $stock = $producto->stock - $this->cantidad;
             producto::where('id', '=', $this->product_id)->update(['stock' => $stock,]);
-
+            //LIMPIEZA DE LOS CAMPOS DEL MODAL DE REGISTRO
             $this->product_id = '';
             $this->cantidad = '';
             $this->unidadMedida = '';
@@ -73,7 +75,7 @@ class AgregarProductoS extends Component
             session()->flash('error', 'Excede el Stock');
         }
     }
-
+    //METODO QUE CARGA LOS PRODUCTOS CON STOCK MAYOR A 0
     public function render()
     {
         $productoAll['productoAll'] = producto::orderBy('id', 'asc')->where('stock', '>', 0)->get();

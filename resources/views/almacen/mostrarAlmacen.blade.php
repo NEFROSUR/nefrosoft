@@ -93,7 +93,7 @@
                 <td>{{ $i}}</td>
                 <td>{{ $producto->codigoProd}}</td>
                 <td>{{ $producto->nombreProd}}</td>
-                <td>{{ $producto->stock}} Unidades</td>
+                <td>{{ $producto->stock}} {{ $producto->umedida}}</td>
                 <td>S/.{{ $producto->precioProm}} Soles</td>
                 <td>
                     @php

@@ -15,10 +15,10 @@
         <a class="btn btn-dark" href="{{url('/almacen/back')}}">Volver</a>
     </h4>
     <div class="col p-3.5 m-2 right">
-            <a class="btn btn-info" href="{{url('/download/'.$producto->id)}}">Exportar Movimientos</a>
-        </div>
+        <a class="btn btn-info" href="{{url('/download/'.$producto->id)}}">Exportar Movimientos</a>
+    </div>
 </div>
-<div class="container border">
+<div class="container border w-100 text-center">
     <div class="row">
         <div class="col">
             <div class="text-center">
@@ -38,6 +38,8 @@
                         <th>Numero de Factura</th>
                         <th>Cantidad Entrada</th>
                         <th>Fecha de Ingreso</th>
+                        <th>Costo Total de la Factura</th>
+                        <th>Lote y Vencimiento</th>
                     </tr>
                 </thead>
                 @php
@@ -50,7 +52,8 @@
                         <td>{{ $ingreso->numFactura}}</td>
                         <td>{{ $ingreso->cantidad}}</td>
                         <td>{{ $ingreso->fechaIngreso}}</td>
-
+                        <td>{{ $ingreso->total}}</td>
+                        <td>{{ $ingreso->lote}}: Vence: {{ $ingreso->fechaVencimiento}}</td>
                     </tr>
                     @php
                     $i = $i+1;
@@ -59,7 +62,7 @@
                 </tbody>
             </table>
             @if ($msj1!="true")
-            <div class="bg-danger p-2 text-white"><b>{{$msj}}</b></div>
+            <div class="bg-danger p-2 text-white"><b>{{$msj1}}</b></div>
             @endif
         </div>
         <div class="col">
@@ -80,6 +83,8 @@
                         <th>Guia Interna de Salida</th>
                         <th>Cantidad de Salida</th>
                         <th>Fecha de Salida</th>
+                        <th>Personal Encargado</th>
+                        <th>Destino</th>
                     </tr>
                 </thead>
                 @php
@@ -102,10 +107,12 @@
                         }
                         if($salida->destino != ''){
                         $salida->fechaSalida = $salida->fechaSalida->format('Y-m-d');
-                        $salida->fechaSalida = $salida->fechaSalida . " entrega unitaria a: " . $salida->destino;
+                        $salida->fechaSalida = $salida->fechaSalida . " Entrega unitaria a: " . $salida->destino;
                         }
                         @endphp
                         <td>{{ $salida->fechaSalida}}</td>
+                        <td>{{ $salida->areaRecepcion}} : {{ $salida->recepcionista}}</td>
+                        <td>{{ $salida->des}}</td>
                     </tr>
                     @php
                     $j = $j+1;

@@ -12,7 +12,7 @@ use App\Models\salidaAlmacen;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Illuminate\Support\Facades\DB;
-
+//EXPORT DE EXCEL (VIENE DEL CONTROLADOR DE EXCEL DE LA CARPETA  HTTP/CONTROLLERS)
 class FacturaExport implements FromCollection, WithHeadings
 {
     /**

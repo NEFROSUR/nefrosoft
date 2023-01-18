@@ -8,7 +8,7 @@ use App\Models\proveedor;
 use App\Models\producto;
 use App\Models\detalleIngresoAlmacen;
 use Illuminate\Support\Arr;
-
+//CLASE QUE MANEJA LA CABECERA DE LAS FACTURAS COMO INGRESOS
 class IngresoAlmacenController extends Controller
 {
     /**
@@ -51,7 +51,7 @@ class IngresoAlmacenController extends Controller
             'detalle' => 'nullable'
         ]);
 
-
+        //GUARDADO DE DATOS
         $ingresoAlmacen = new ingresoAlmacen();
 
         $ingresoAlmacen->usuario = $request->usuario;
@@ -60,7 +60,7 @@ class IngresoAlmacenController extends Controller
         $ingresoAlmacen->fechaEmision = $request->fechaEmision;
         $ingresoAlmacen->fechaVencimiento = $request->fechaVencimiento;
         $ingresoAlmacen->numFactura = $request->numFactura;
-
+        //GENERADOR DE CODIGO IDENTIFICADOR DE INGRESO
         $ingresosAll = ingresoAlmacen::All();
         if ($ingresosAll->isEmpty() == true) {
             $numingreso = "I" . substr(str_repeat(0, 6) . ingresoAlmacen::All()->count() + 1, -5);
@@ -88,7 +88,7 @@ class IngresoAlmacenController extends Controller
      */
     public function show(Request $request)
     {
-
+        //MUESTRA LA LISTA DE FACTURAS Y BUSQUEDA DE FACTURAS
         $numFactura = $request->get('numFactura');
         if ($numFactura != '') {
             $factura = ingresoAlmacen::where('numFactura', '=', $numFactura)->first();
@@ -114,6 +114,7 @@ class IngresoAlmacenController extends Controller
      */
     public function edit($id)
     {
+        //ENVIA LA LISTA DE LOS PROVEEDORES PARA EL EDIT
         $proveedorAll['proveedorAll'] = proveedor::All();
         $ingresoAlmacen = ingresoAlmacen::findOrFail($id);
         return view('ingresoAlmacen.editIngresoAlmacen', ['ingresoAlmacen' => $ingresoAlmacen], $proveedorAll);
@@ -128,6 +129,7 @@ class IngresoAlmacenController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //ACTUALIZA LOS DATOS DE LA CABECERA
         $datosIngreso = request()->except(['_token', '_method']);
         ingresoAlmacen::where('id', '=', $id)->update($datosIngreso);
         $ingresoAlmacen = ingresoAlmacen::findOrFail($id);
@@ -143,8 +145,9 @@ class IngresoAlmacenController extends Controller
      */
     public function destroy($id)
     {
-
+        //DESTRUYE LA CABECERA Y LOS DETALLES INGRESADOS (ELIMINACION EN CADENA (CUIDADO))
         $ingreso = detalleIngresoAlmacen::where('factura_id', '=', $id)->get();
+        //ACTUALIZACION DE STOCK CON ELIMINACION EN CADENA
         if (count($ingreso) == 0) {
             ingresoAlmacen::destroy($id);
         } else {
@@ -167,6 +170,7 @@ class IngresoAlmacenController extends Controller
         $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);
         return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);
     }
+    //ACTUALIZA LA FACTURA INGRESADA
     public function refresh(){
         $entradasAll['entradasAll'] = ingresoAlmacen::orderBy('id', 'desc')->paginate(10);
         return view('ingresoAlmacen.mostrarIngresoAlmacen', $entradasAll);

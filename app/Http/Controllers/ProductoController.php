@@ -6,7 +6,7 @@ use App\Models\producto;
 
 use Illuminate\Http\Request;
 use App\Models\proveedor;
-
+//CLASE DE PRODUCTOS ADEMAS ESTA GUARDA EL STOCK ASI QUE SIRVE COMO INVENTARIO COMBINADO
 class ProductoController extends Controller
 {
     
@@ -36,6 +36,7 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //GUARDA NUEVO PRODUCTO
     public function store(Request $request)
     {
         $categorias = [
@@ -62,12 +63,12 @@ class ProductoController extends Controller
 
         $request->validate([
             'nombreProd' => 'required',
-            'marcaProd' => 'required',
+            'marcaProd' => 'nullable',
             'um' => 'nullable',
         ]);
 
         $producto = new producto();
-
+        //GENERACION DEL CODIGO COMBINADO DEL PRODUCTO
         $cparte1 = $request->nombreProd;
         $cparte1 = substr( $cparte1, 0, 2);
         $cparte2 = $request->um;
@@ -75,7 +76,7 @@ class ProductoController extends Controller
         $cparte3 = $request->categoria_id;
         $codigo = $cparte1.$cparte2.$cparte3;
         
-
+        //REGISTRO DE DATOS
         $producto->nombreProd = $request->nombreProd;
         $producto->codigoProd = strtoupper($codigo);
         $producto->marcaProd = $request->marcaProd;
@@ -86,14 +87,6 @@ class ProductoController extends Controller
         $producto->stock = 0;
         $producto->precioProm = 0;
         $producto->save();
-
-        /*
-        $inventario = new inventario();
-        $inventario->producto_id = $codigo;
-        $inventario->stock = 0;
-        $inventario->save();
-        */
-
         return view('producto.crearProducto');
 
     }
@@ -104,6 +97,7 @@ class ProductoController extends Controller
      * @param  \App\Models\producto  $producto
      * @return \Illuminate\Http\Response
      */
+    //FUNCION PARA MOSTRAR TODOS LOS PRODUCTOS Y SOLO ALGUNOS DATOS DE PRODUCTOS ESTO SE MANEJA EN FRONT
     public function show(Request $request)
     {
         $nombreProd = $request->get('nombreProd');
@@ -145,6 +139,7 @@ class ProductoController extends Controller
      * @param  \App\Models\producto  $producto
      * @return \Illuminate\Http\Response
      */
+    //ACTUALIZA DATOS DE PRODUCTOS, PERO NO TODOS, ESTOS DATOS SE FILTRAN EN FRONT
     public function update(Request $request, $id)
     {
         $datosProducto = request()->except(['_token', '_method']);
@@ -161,12 +156,14 @@ class ProductoController extends Controller
      * @param  \App\Models\producto  $producto
      * @return \Illuminate\Http\Response
      */
+    //DESTRUYE PRODUCTOS (ESTA OPCION ESTA INHABILITADA EN FRONT PARA EVITAR QUE SE MALOGRE EL STOCK Y LAS FACTURAS)
     public function destroy($id)
     {
         producto::destroy($id);
         $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(10);
         return view('producto.verProducto', $productoAll);
     }
+    //ACTUALIZA LA VISTA
     public function refresh()
     {
         $productoAll['productoAll'] = producto::orderBy('id', 'asc')->paginate(10);

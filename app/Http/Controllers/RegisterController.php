@@ -10,7 +10,7 @@ class RegisterController extends Controller
         
         return view('auth.register');
     }
-
+    //REGISTRO DE USUARIOS
     public function store() {
 
         $this->validate(request(), [

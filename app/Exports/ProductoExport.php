@@ -7,7 +7,7 @@ use App\Models\producto;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Illuminate\Support\Facades\DB;
-
+//EXPORT DE EXCEL (VIENE DEL CONTROLADOR DE EXCEL DE LA CARPETA  HTTP/CONTROLLERS)
 class ProductoExport implements FromCollection,WithHeadings
 {
     /**
@@ -17,12 +17,17 @@ class ProductoExport implements FromCollection,WithHeadings
     {
         return [
             'id',
-            'codigoProd',
-            'nombreProd',
-            'categoria_id',
-            'marcaProd',
+            'Codigo del Producto',
+            'Nombre del Producto',
+            'Id de Categoria',
+            'Categoria',
+            'Marca',
+            'Unidad de Medida',
             'um',
             'stock',
+            'Precio Unitario Promedio',
+            'Fecha de Creacion',
+            'Fecha de Actualizacion',
         ];
     }
     public function collection()

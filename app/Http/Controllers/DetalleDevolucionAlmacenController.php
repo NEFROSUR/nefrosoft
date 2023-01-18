@@ -50,6 +50,7 @@ class DetalleDevolucionAlmacenController extends Controller
     {
         //
     }
+    //CARGA LA LISTA DE DETALLE DE DEVOLUCIONES
     public function showD($id)
     {
         $devolucion = devolucionAlmacen::where('id', '=', $id)->first();
@@ -75,14 +76,15 @@ class DetalleDevolucionAlmacenController extends Controller
      * @param  \App\Models\detalleDevolucionAlmacen  $detalleDevolucionAlmacen
      * @return \Illuminate\Http\Response
      */
+    //ACTUALIZACION DE DETALLE DEVOLUCION CON ACTUALIZACION DE STOCK
     public function update(Request $request, $id)
     {
         $datosDetalle = request()->except(['_token', '_method']);
         $stockReal = $request->cantidadDevuelta;
         $detalleD = detalleDevolucionAlmacen::where('id', '=', $id)->first();
         $stockInicial = $detalleD->cantidadDevuelta;
-        $dif = $stockInicial - $stockReal;
-
+        $dif = $stockInicial - $stockReal; //verificacion de positividad o negatividad de diferencia del stock 
+        //dependiendo de si el stock es positivo o negativo se suma o se resta del inventario 
         $producto = producto::where('id','=',$detalleD->product_id)->first();
         if($dif>0){
             $dif * -1;
@@ -95,7 +97,7 @@ class DetalleDevolucionAlmacenController extends Controller
             producto::where('id', '=', $detalleD->product_id)->update(['stock'=>$stock,]);
         }
         detalleDevolucionAlmacen::where('id', '=', $id)->update($datosDetalle);
-
+        //retorno a la vista detalle de devolucion
         $devolucion = devolucionAlmacen::where('id', '=', $detalleD->devolucion_id)->first();
         $detalleDevolucion['detalleDevolucion'] = detalleDevolucionAlmacen::where('devolucion_id', '=', $devolucion->id)->paginate(10);
         return view('detalleDevoluciones.mostrarDetalleDevolucion', $detalleDevolucion, ['devolucion' => $devolucion]);
@@ -108,20 +110,23 @@ class DetalleDevolucionAlmacenController extends Controller
      * @param  \App\Models\detalleDevolucionAlmacen  $detalleDevolucionAlmacen
      * @return \Illuminate\Http\Response
      */
+    //METODO PARA ELIMINAR EL REGISTRO DE DETALLE DE DEVOLUCION
     public function destroy($id)
     {
         $detalleD = detalleDevolucionAlmacen::where('id', '=', $id)->first();
         $producto = producto::where('id','=',$detalleD->product_id)->first();
+        //ACTUALIZACION DEL STOCK EN INVENTARIO 
         $stock = $producto->stock - $detalleD->cantidadDevuelta;
         producto::where('id', '=', $detalleD->product_id)->update(['stock'=>$stock]);
 
 
         $devolucionCabera = devolucionAlmacen::where('id', '=', $detalleD->devolucion_id)->first();
 
-        detalleDevolucionAlmacen::destroy($id);
+        detalleDevolucionAlmacen::destroy($id); //DESTRUCCION DEL REGISTRO
         $detalleDevolucion['detalleDevolucion'] = detalleDevolucionAlmacen::where('devolucion_id', '=', $devolucionCabera->id)->paginate(10);
         return view('detalleDevoluciones.mostrarDetalleDevolucion', $detalleDevolucion, ['devolucion' => $devolucionCabera]);
     }
+    //METODO PARA REFRESCAR PAGINA Y ACTUALIZAR DATOS
     public function refresh($id)
     {
         $devolucion = devolucionAlmacen::where('id', '=', $id)->first();

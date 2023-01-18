@@ -54,6 +54,7 @@ class InventarioController extends Controller
      * @param  \App\Models\inventario  $inventario
      * @return \Illuminate\Http\Response
      */
+    //MUESTRA LOS PRODUCTOS EN STOCK MAYOR A 0
     public function show(Request $request)
     {
         $codigoProd = $request->get('codigoProd');
@@ -85,6 +86,8 @@ class InventarioController extends Controller
      */
     public function edit($id)
     {
+        //MUESTRA LOS MOVIMIENTOS POR PRODUCTO, HACE UN FILTRADO POR INGRESOS Y SALIDAS INCLUYENDO SALIDAS UNITARIAS
+        //MANDA EL FILTRADO EN 2 ARRAYS DE ENTRADAS Y SALIDAS
         $producto = producto::findOrFail($id);
         $ingresos = detalleIngresoAlmacen::where('product_id', '=', $producto->id)->get();
         $salidas = detalleSalidaAlmacen::where('product_id', '=', $producto->id)->where('salida_id', '!=', null)->get();
@@ -93,27 +96,28 @@ class InventarioController extends Controller
 
         $ingresosReales = array();
         $salidasReales = array();
-        $devolucionesReales = array();
-        $salidasU = array();
+        //DENTRO DE LOS FILTRADOS SE AGREGAN DATOS DE LA FACTURA A LA QUE PERTENECEN Y PERSONAL RESPONSABLE
         foreach ($ingresos as $indice) {
             $factura = ingresoAlmacen::where('id', '=', $indice->factura_id)->first();
             $factura->cantidad = $indice->cantidadIngresada;
+            $factura->lote = $indice->lote;
+            $factura->fechaVencimiento = $indice->fechaVencimiento;
             array_push($ingresosReales, $factura);
         }
         foreach ($salidas as $indice) {
             $salida = salidaAlmacen::where('id', '=', $indice->salida_id)->first();
             $salida->cantidad = $indice->cantidad;
+            $salida->des = $indice->destino;
             array_push($salidasReales, $salida);
         }
         foreach ($salidasUnitarias as $indice) {
-            //$factura = salidaAlmacen::where('id', '=', $indice->salida_id)->first();
-            //$factura->cantidad = $indice->cantidad;
             array_push($salidasReales, $indice);
         }
         foreach ($devoluciones as $indice) {
-            $devolucion = devolucionAlmacen::where('id', '=', $indice->salida_id)->first();
+            $devolucion = devolucionAlmacen::where('id', '=', $indice->devolucion_id)->first();
+            $devolucion->numFactura = "AAA";
             $devolucion->cantidad = $indice->cantidadDevuelta;
-            array_push($devolucionesReales, $factura);
+            array_push($ingresosReales, $devolucion);
         }
         return view('almacen.editAlmacen', ['ingresosReales' => $ingresosReales], ['salidasReales' => $salidasReales])->with('producto', $producto);
     }
@@ -140,6 +144,7 @@ class InventarioController extends Controller
     {
         //
     }
+    //REGRESA A LA LISTA DE PRODUCTOS EN INVENTARIO
     public function back()
     {
         $productoAll['productoAll'] = producto::orderBy('id', 'desc')->where('stock', '>', 0)->paginate(10);
@@ -150,11 +155,15 @@ class InventarioController extends Controller
         }
         return view('almacen.mostrarAlmacen', $productoAll)->with('total', $total);
     }
+    //DESCARGA LA LISTA DE MOVIMIENTOS, ESTE NO SE HIZO ENE L CONTROLADOR DEL EXCEL DEBIDO A LAS LIMITACIONES DE LOS EXPORT
+    //Y PORQUE SON DATOS COMBINADOS DE DISTINTAS TABLAS
     public function download($id)
     {
+        //CABECERA DEL EXCEL
         $data=array(
-            array("NRO","CODIGO INTERNO DE OPERACION","CANTIDAD","FECHA","TIPO DE OPERACION")
+            array("NRO","CODIGO INTERNO DE OPERACION","CANTIDAD","FECHA","TIPO DE OPERACION", "LOTE", "FECHA DE VENCIMIENTO","PERSONAL ENCARGADO", "DESTINO")
         );
+        //CUERPO DEL EXCEL
         $producto = producto::findOrFail($id);
         $ingresos = detalleIngresoAlmacen::where('product_id', '=', $producto->id)->get();
         $salidas = detalleSalidaAlmacen::where('product_id', '=', $producto->id)->where('salida_id', '!=', null)->get();
@@ -168,7 +177,10 @@ class InventarioController extends Controller
                 $factura->numFactura = $factura->numFactura,
                 $factura->cantidad = $indice->cantidadIngresada,
                 $factura->fecha = $factura->fechaIngreso,
-                $factura->entrada = "INGRESO"
+                $factura->entrada = "INGRESO",
+                $factura->lote = $indice->lote,
+                $factura->fechaVencimiento = $indice->fechaVencimiento,
+                $factura->personal = $factura->usuario
             ));
             $c = $c + 1;
         }
@@ -179,7 +191,11 @@ class InventarioController extends Controller
                 $salidas->numFactura = $salida->numSalida,
                 $salidas->cantidad = $indice->cantidad,
                 $salidas->fecha = $salida->fechaSalida,
-                $salidas->entrada = "SALIDA"
+                $salidas->entrada = "SALIDA",
+                $salidas->lote = 'SL',
+                $salidas->fechaVencimiento = 'SF',
+                $salidas->personal = $salida->recepcionista,
+                $salida->des = $indice->destino
             ));
             $c = $c + 1;
         }
@@ -189,8 +205,14 @@ class InventarioController extends Controller
                 $salidasUnitarias->id = $c,
                 $salidasUnitarias->numFactura = $indice->guiaInterna,
                 $salidasUnitarias->cantidad = $indice->cantidad,
-                $salidasUnitarias->fecha = $indice->updated_at,
-                $salidasUnitarias->entrada = "SALIDA UNITARIA"
+                $salidasUnitarias->fecha = substr($indice->updated_at, 0, 10),
+                //$salidasUnitarias->fecha = $indice->updated_at,
+
+                $salidasUnitarias->entrada = "SALIDA UNITARIA",
+                $salidasUnitarias->lote = 'SL',
+                $salidasUnitarias->fechaVencimiento = 'SF',
+                $salidasUnitarias->personal = '',
+                $salidasUnitarias->des = $indice->destino
             ));
             
             $c = $c + 1;
@@ -202,7 +224,11 @@ class InventarioController extends Controller
                 $devoluciones->numDevolucion = $devolucion->numDevolucion,
                 $devoluciones->cantidad = $indice->cantidadDevuelta,
                 $devoluciones->fecha = $devolucion->fechaDevolucion,
-                $devoluciones->entrada = "DEVOLUCION"
+                $devoluciones->entrada = "DEVOLUCION",
+                $devoluciones->lote = 'SL',
+                $salidasUnitarias->fechaVencimiento = 'SF',
+                $salidasUnitarias->personal = $devolucion->personalD
+
             ));
             
             $c = $c + 1;

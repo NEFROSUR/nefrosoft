@@ -30,6 +30,7 @@ class AgregarDetalleDevolucion extends Component
             'unidadMedida' => 'required',
             'detalle' => 'nullable',
         ]);
+        //GUARDADO DE DETALLE DE DEVOLUCION
         $producto = producto::where('id','=',$this->product_id)->first();
         $detalleDevolucion = new detalleDevolucionAlmacen();
         $detalleDevolucion->devolucion_id = $this->devolucion_id;
@@ -41,26 +42,24 @@ class AgregarDetalleDevolucion extends Component
         $detalleDevolucion->save();
         session()->flash('message', 'Se agrego correctamente');
 
-
         //ACTUALIZACION DE STOCK
         $stock = $producto->stock + $this->cantidadDevuelta;
         producto::where('id', '=', $this->product_id)->update(['stock' => $stock,]);
-        //precioPromedio (PREGUNTAR)
+        //precioPromedio (PREGUNTAR EN DESARROLLO)
         //$precioProm = detalleDevolucionAlmacen::where('product_id', '=', $this->product_id)->avg('PrecioUnitario');
         //producto::where('id', '=', $this->product_id)->update(['precioProm' => $precioProm,]);
         
 
-
+        //LIMPIEZA DE LOS CAMPOS DEL MODAL
         $this->devolucion_id = '';
         $this->product_id = '';
         $this->cantidadDevuelta = '';
         $this->unidadMedida = '';
-        $this->precioDevolucion = '';
         $this->detalle = '';
         $this->dispatchBrowserEvent('close-modal');
 
     }
-
+    //FUNCiON QUE INICIALIZA EL LIVEWIRE EN FRONT CON LA LISTA DE PRODUCTOS
     public function render()
     {
         $productoAll['productoAll'] = producto::orderBy('id', 'asc')->get();

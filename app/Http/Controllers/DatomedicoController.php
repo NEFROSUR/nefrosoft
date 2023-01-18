@@ -8,7 +8,7 @@ use App\Models\paciente;
 use App\Models\profesional;
 use Carbon\Carbon;
 use PDF;
-
+//CLASE EN DESARROLLO SIN FUNCIONAMIENTO AUN
 class DatomedicoController extends Controller
 {
     /**
