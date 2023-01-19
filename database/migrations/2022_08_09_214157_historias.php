@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('historias', function (Blueprint $table) {
             $table->id('id')->autoincrement();
-            $table->unsignedBigInteger('correlativo');
             $table->date('fecha');
 
             
@@ -29,7 +28,6 @@ return new class extends Migration
             $table->string('ocurrencias')->nullable(); //heparinizacion
             $table->timestamps();
 
-            $table->foreign('correlativo')->references('correlativo')->on('fuas');
 
         });
     }
