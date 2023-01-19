@@ -15,8 +15,8 @@ class ProductoSeeder extends Seeder
      */
     public function run()
     {
-        producto::truncate();
-  
+        //producto::truncate(); ESTE NO TIRA ERRORES AL TENER CLAVES FORANEAS, SOLO SIRVE PARA CLASES SIN CLAVES FORANEAS
+        producto::where('id', '>', 0)->delete();
         $csvFile = fopen(base_path("database/data/PRODUCTOS.csv"), "r");
   
         $firstline = true;

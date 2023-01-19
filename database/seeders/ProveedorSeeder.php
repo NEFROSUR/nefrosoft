@@ -15,8 +15,8 @@ class ProveedorSeeder extends Seeder
      */
     public function run()
     {
-        proveedor::truncate();
-  
+        //proveedor::truncate(); ESTE NO TIRA ERRORES AL TENER CLAVES FORANEAS, SOLO SIRVE PARA CLASES SIN CLAVES FORANEAS
+        proveedor::where('id', '>', 0)->delete();
         $csvFile = fopen(base_path("database/data/PROVEEDORES.csv"), "r");
   
         $firstline = true;

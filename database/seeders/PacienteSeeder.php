@@ -15,9 +15,8 @@ class PacienteSeeder extends Seeder
      */
     public function run()
     {
-        //
-        paciente::truncate();
-  
+        //paciente::truncate(); ESTE NO TIRA ERRORES AL TENER CLAVES FORANEAS, SOLO SIRVE PARA CLASES SIN CLAVES FORANEAS
+        paciente::where('id', '>', 0)->delete();
         $csvFile = fopen(base_path("database/data/PACIENTES.csv"), "r");
   
         $firstline = true;
