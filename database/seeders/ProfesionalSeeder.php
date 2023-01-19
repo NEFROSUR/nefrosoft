@@ -15,9 +15,8 @@ class ProfesionalSeeder extends Seeder
      */
     public function run()
     {
-        //
-        profesional::truncate();
-  
+        //profesional::truncate(); ESTE NO TIRA ERRORES AL TENER CLAVES FORANEAS, SOLO SIRVE PARA CLASES SIN CLAVES FORANEAS
+        profesional::where('id', '>', 0)->delete();
         $csvFile = fopen(base_path("database/data/PROFESIONALES.csv"), "r");
   
         $firstline = true;
