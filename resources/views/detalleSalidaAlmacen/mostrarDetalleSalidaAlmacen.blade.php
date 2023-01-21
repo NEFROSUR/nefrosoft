@@ -115,7 +115,7 @@
                 <td>{{ $detalle->um}}</td>
                 <td>{{ $detalle->destino}}</td>
                 <td>S/. {{ $detalle->precioSalida}} (Nuevos Soles)</td>
-                <td>{{ $detalle->detalle}}</td>
+                <td>{{ $detalle->observacion}}</td>
                 <td>
                     <a class="btn btn-outline-warning" onclick="return confirm('¿Esta seguro que quiere editar la cantidad de salida: \n {{ $detalle->id}}?')" href="{{ url('detalleSalidaAlmacen/'.$detalle->id.'/edit') }}">
                         ✏️
