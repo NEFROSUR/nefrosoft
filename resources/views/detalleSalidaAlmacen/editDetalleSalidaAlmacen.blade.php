@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="text-center p-1 mt-4">
-            <button type="submit" class="text-center btn btn-primary " onclick="return confirm('¿Registrar Factura?')">Actualizar Salida</button>
+            <button type="submit" class="text-center btn btn-primary " onclick="return confirm('¿Registrar Salida?')">Actualizar Salida</button>
         </div>
     </form>
 </div>
