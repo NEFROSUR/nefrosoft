@@ -25,13 +25,11 @@
                     <label for="inputState" class="form-label">Categoria</label>
                     <select id="inputState" name="categoria_id" class="form-select p-1 mt-0.5">
                         <option value=" ">Todos</option>
-                        <option value="1">Medicamentos</option>
-                        <option value="2">Desechables médicos</option>
-                        <option value="3">Limpieza</option>
-                        <option value="4">Oficina</option>
-                        <option value="5">Farmacia</option>
-                        <option value="6">Soluciones</option>
-                        <option value="7">Insumos de MH</option>
+                        <option value="1">INSTRUMENTO</option>
+                        <option value="2">MATERIAL DE LIMPIEZA</option>
+                        <option value="3">MEDICAMENTO</option>
+                        <option value="4">SERVICIO</option>
+                        <option value="5">UTILES DE ESCRITORIO</option>
                     </select>
                 </div>
             </div>
