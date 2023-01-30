@@ -45,6 +45,13 @@
             <option>Datos</option>
             <option>Recepcion</option>
             <option>Almacen</option>
+            <option>Modulo 1</option>
+            <option>Modulo 2</option>
+            <option>Pastillero</option>
+            <option>Caja de Emergencia</option>
+            <option>Cebado</option>
+            <option>Cuarto Limpio</option>
+            <option>Mantenimiento</option>
         </select>
     </div>
     <div class="col">
@@ -80,6 +87,13 @@
             <option>Datos</option>
             <option>Recepcion</option>
             <option>Almacen</option>
+            <option>Modulo 1</option>
+            <option>Modulo 2</option>
+            <option>Pastillero</option>
+            <option>Caja de Emergencia</option>
+            <option>Cebado</option>
+            <option>Cuarto Limpio</option>
+            <option>Mantenimiento</option>
         </select>
     </div>
     <div class="col">
