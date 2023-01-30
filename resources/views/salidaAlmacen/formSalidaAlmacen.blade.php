@@ -61,6 +61,7 @@
         <div class="col">
             <label for="tittle" class="form-label">Turno de Entrega</label>
             <select id="inputState" name="turno" class="form-select p-1 mt-0.5">
+                <option value="0">SIN TURNO</option>
                 <option value="1">TURNO 1</option>
                 <option value="2">TURNO 2</option>
                 <option value="3">TURNO 3</option>
